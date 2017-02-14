@@ -134,6 +134,55 @@ public class DnD {
 			}
 		}
 	}
+	public void guardMove()
+	{
+		outer_loop:
+		for(int i = 0; i < row; i++)
+		{
+			for( int j = 0; j < column; j++)
+			{	
+				
+				
+				if(board[i][j] == GUARD){
+					if(i == 1 && j == 8){
+						board[1][8] = BLANK;
+						board[1][7] = GUARD;
+						break outer_loop;
+					} else if(j == 7 && i < 5){
+						if( 0 < i && i <  5){
+							board[i][j] = BLANK;
+							board[i+1][j] = GUARD;
+							break outer_loop;
+						}
+						
+					}
+					else if(i == 5 && j > 1  && j < 8){
+						board[i][j] = BLANK;
+						board[i][j-1] = GUARD;
+						break outer_loop;
+					}
+					else if( j == 1 && i == 5){
+						board[i][j] = BLANK;
+						board[i+1][j]= GUARD;
+						break outer_loop;
+					}
+					else if(i == 6 && j < 8){
+						board[i][j] = BLANK;
+						board[i][j+1] = GUARD;
+						break outer_loop;
+					}
+					else if(j == 8 && i > 1){
+						board[i][j] = BLANK;
+						board[i-1][j] = GUARD;
+						break outer_loop;
+					}
+					
+					
+					
+			}
+		 }
+		}
+	}
 
 
 
