@@ -67,13 +67,14 @@ int x =2;
 					{
 
 						if(i > 0 && i < boardToPlay.length)
-						{
-							if(board[i][j] == boardToPlay[8][7] && boardToPlay[i-1][j] == BLANK)
+						{   
+							if(boardToPlay == board){
+							if(boardToPlay[i][j] == boardToPlay[8][7] && boardToPlay[i-1][j] == BLANK)
 							{
 								boardToPlay[i][j] = LEVER;
 								boardToPlay[i-1][j] = HERO;
 								break outer_loop;
-							}
+							}}
 							if(boardToPlay[i-1][j] == BLANK)
 							{
 
@@ -87,13 +88,14 @@ int x =2;
 								boardToPlay[i+1][j] = HERO;
 								break outer_loop;
 							}
+							if(boardToPlay == board){
 							if(boardToPlay[i-1][j] == LEVER)
 							{
 								boardToPlay[i][j] = BLANK;
 								boardToPlay[i+1][j] = HERO;
 								turnDoorsIntoStairs();
 								break outer_loop;
-							}
+							}}
 					}
 				}
 			}
@@ -111,14 +113,14 @@ int x =2;
 					{
 	
 						if(i > 0 && i < boardToPlay.length)
-						{
+						{if(boardToPlay == board){
 							if(boardToPlay[i][j] == boardToPlay[8][7] && boardToPlay[i+1][j] == BLANK)
 							{
 								boardToPlay[i][j] = LEVER;
 								boardToPlay[i+1][j] = HERO;
 								break outer_loop;
 								
-							}
+							}}
 							if(boardToPlay[i+1][j] == BLANK)
 							{
 								boardToPlay[i][j] = BLANK;
@@ -132,13 +134,14 @@ int x =2;
 								boardToPlay[i+1][j] = HERO;
 								break outer_loop;
 							}
+							if(boardToPlay == board){
 							if(boardToPlay[i+1][j] == LEVER)
 							{
 								boardToPlay[i][j] = BLANK;
 								boardToPlay[i+1][j] = HERO;
 								turnDoorsIntoStairs();
 								break outer_loop;
-							}
+							}}
 						}
 					}
 				}
@@ -156,14 +159,14 @@ int x =2;
 					if(boardToPlay[i][j] == HERO)
 					{
 						if(j > 0 && j < boardToPlay.length)
-						{
+						{if(boardToPlay == board){
 							//reprinting the lever cell after the player steps on it
 							if(boardToPlay[i][j] == boardToPlay[8][7] && boardToPlay[i][j+1] == BLANK)
 							{
 								boardToPlay[i][j] = LEVER;
 								boardToPlay[i][j+1] = HERO;
 								break outer_loop;
-							}
+							}}
 							//if the next cell is blank
 							if(boardToPlay[i][j+1] == BLANK)
 							{
@@ -177,7 +180,7 @@ int x =2;
 								boardToPlay[i][j] = BLANK;
 								boardToPlay[i][j+1] = HERO;
 								break outer_loop;
-							}
+							}if(boardToPlay == board){
 							//if the next cell is a lever
 							if(boardToPlay[i][j+1] == LEVER)
 							{
@@ -186,7 +189,7 @@ int x =2;
 								turnDoorsIntoStairs();
 								break outer_loop;
 
-							}
+							}}
 							
 						}
 					}
@@ -204,13 +207,13 @@ int x =2;
 					if(boardToPlay[i][j] == HERO)
 					{
 						if(j > 0 && j < boardToPlay.length)
-						{
+						{if(boardToPlay == board){
 							if(boardToPlay[i][j] == boardToPlay[8][7] && boardToPlay[i][j-1] == BLANK)
 							{
 								boardToPlay[i][j] = LEVER;
 								boardToPlay[i][j-1] = HERO;
 								break outer_loop;
-							}
+							}}
 							if(boardToPlay[i][j-1] == BLANK)
 							{
 								boardToPlay[i][j] = BLANK;
@@ -222,14 +225,14 @@ int x =2;
                 				boardToPlay[i][j] = BLANK;
                 				boardToPlay[i][j-1] = HERO;
 								break outer_loop;
-							}
+							}if(boardToPlay == board){
 							if(boardToPlay[i][j-1] == LEVER)
 							{
 								boardToPlay[i][j] = BLANK;
 								boardToPlay[i][j-1] = HERO;
 								turnDoorsIntoStairs();
 								break outer_loop;
-							}
+							}}
 								
 						}
 					}
@@ -303,39 +306,48 @@ int x =2;
 		    goTo= rnd.nextInt(4);
 		    switch(goTo){
 		    case 0:
+		    	outer_loop:
 		    	for(int i =0; i < nextLevelBoard.length; i++){
 	    		  for(int j=0;j < nextLevelBoard[i].length; j++){
-	    			  if(nextLevelBoard[i][j]==OGRE && nextLevelBoard[i+1][j] != WALL){
-	    				  if(i == 1 && j == 8){
+	    			  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && nextLevelBoard[i+1][j] != WALL){
+	    				  if(i == 1 && j == 7){
 	    					  nextLevelBoard[i][j] = KEY;
 	    					  nextLevelBoard[i+1][j] = OGRE;
+	    					  break outer_loop;
 	    				  }else{
 	    				  nextLevelBoard[i][j] = BLANK;
 	    				  if(nextLevelBoard[i+1][j] == KEY){	  
 	    					  nextLevelBoard[i+1][j] = CANT;
+	    					  break outer_loop;
 	    					  }
 	    					  else{
 	    				  nextLevelBoard[i+1][j] = OGRE;
+	    				  break outer_loop;
 	    				  }
 	    			  }
 	    		  }
 		    	}
 		    	}
+		    	
 		    	break;
 		    case 1:
+		    	outer_loop:
 		    	for(int i =0; i < nextLevelBoard.length; i++){
 		    		  for(int j=0;j < nextLevelBoard[i].length; j++){
-		    			  if(nextLevelBoard[i][j]==OGRE && nextLevelBoard[i-1][j] != WALL){
-		    				  if(i == 1 && j == 8){
+		    			  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && nextLevelBoard[i-1][j] != WALL){
+		    				  if(i == 1 && j == 7){
 		    					  nextLevelBoard[i][j] = KEY;
 		    					  nextLevelBoard[i-1][j] = OGRE;
+		    					  break outer_loop;
 		    				  }else{
 		    				  nextLevelBoard[i][j] = BLANK;
 		    				  if(nextLevelBoard[i-1][j] == KEY){	  
 		    					  nextLevelBoard[i-1][j] = CANT;
+		    					  break outer_loop;
 		    					  }
 		    					  else{
 		    				  nextLevelBoard[i-1][j] = OGRE;
+		    				  break outer_loop;
 		    				  }
 		    			  }
 		    		  }
@@ -343,19 +355,23 @@ int x =2;
 		    	}
 		    	break;
 		    case 2: 
+		    	outer_loop:
 		    	for(int i =0; i < nextLevelBoard.length; i++){
 	  		        for(int j=0;j < nextLevelBoard[i].length; j++){
-				  if(nextLevelBoard[i][j]==OGRE && nextLevelBoard[i][j+1] != WALL){
-					  if(i == 1 && j == 8){
+				  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && nextLevelBoard[i][j+1] != WALL){
+					  if(i == 1 && j == 7){
 						  nextLevelBoard[i][j] = KEY;
 						  nextLevelBoard[i][j+1] = OGRE;
+						  break outer_loop;
 					  }else{
 					  nextLevelBoard[i][j] = BLANK;
 					  if(nextLevelBoard[i][j+1] == KEY){	  
 					  nextLevelBoard[i][j+1] = CANT;
+					  break outer_loop;
 					  }
 					  else{
 						  nextLevelBoard[i][j+1] = OGRE;
+						  break outer_loop;
 					  }
 				  }
 			  }
@@ -363,19 +379,23 @@ int x =2;
 		    	}
 		    break;
 		    case 3:
+		    	outer_loop:
 		    	for(int i =0; i < nextLevelBoard.length; i++){
 		    		  for(int j=0;j < nextLevelBoard[i].length; j++){
-		    			  if(nextLevelBoard[i][j]==OGRE && nextLevelBoard[i-1][j] != WALL){
-		    				  if(i == 1 && j == 8){
+		    			  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && nextLevelBoard[i-1][j] != WALL){
+		    				  if(i == 1 && j == 7){
 		    					  nextLevelBoard[i][j] = KEY;
 		    					  nextLevelBoard[i][j-1] = OGRE;
+		    					  break outer_loop;
 		    				  }else{
 		    				  nextLevelBoard[i][j] = BLANK;
 		    				  if(nextLevelBoard[i][j-1] == KEY){	  
 		    					  nextLevelBoard[i][j-1] = CANT;
+		    					  break outer_loop;
 		    					  }
 		    					  else{
 		    				  nextLevelBoard[i][j-1] = OGRE;
+		    				  break outer_loop;
 		    				  }
 		    			  }
 		    		  }
