@@ -33,26 +33,26 @@ public class HelloWorld {
 
 			switch (answer) {
 			case "S":
-				game.moveDown();
+				game.moveDown(game.board);
 				game.guardMove();
 				game.printBoard();
 				i++;
 				break;
 			case "W":
-				game.moveUp();
+				game.moveUp(game.board);
 				game.guardMove();
 				game.printBoard();
 				i++;
 				break;
 
 			case "D":
-				game.moveRight();
+				game.moveRight(game.board);
 				game.guardMove();
 				game.printBoard();
 				i++;
 				break;
 			case "A":
-				game.moveLeft();
+				game.moveLeft(game.board);
 				game.guardMove();
 				game.printBoard();
 				i++;
