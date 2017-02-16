@@ -6,7 +6,7 @@
 
 		 int column = 10;
 		 int row = 10;
-
+int x =1;
 		private static final char DOOR = 'I';
 		private static final char WALL = 'X';
 		private static final char HERO = 'H';
