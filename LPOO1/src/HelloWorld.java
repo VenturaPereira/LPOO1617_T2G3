@@ -26,7 +26,7 @@ public class HelloWorld {
 		 int i = 0;
 		 game.newLevel();
 		Scanner scanner = new Scanner(System.in);
-		while (i < 200) {
+		while (!game.analyseOgre()) {
              
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
@@ -58,6 +58,10 @@ public class HelloWorld {
 				i++;
 				break;
 			}
+		}
+		if(game.analyseOgre())
+		{
+			System.out.println("The ogre caught you! Game over.");
 		}
 		
 	}

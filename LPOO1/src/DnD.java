@@ -6,7 +6,7 @@
 
 		 int column = 10;
 		 int row = 10;
-int x =2;
+		 int x =2;
 		private static final char DOOR = 'I';
 		private static final char WALL = 'X';
 		private static final char HERO = 'H';
@@ -456,5 +456,42 @@ int x =2;
 			
 			return inStairs;
 		}
+		
+		public boolean analyseOgre()
+		{
+			boolean gameOver = false;
+			
+			 for(int i = 0; i < nextLevelBoard.length; i++)
+		        {
+		            for(int j = 0; j < nextLevelBoard[i].length; j++)
+		            {
+		                if(nextLevelBoard[i][j] == HERO)
+		                {
+		                    if((i > 0 && i < 8) && (j > 0 && j < 8))
+		                    {
+		                        if(nextLevelBoard[i+1][j] == OGRE || nextLevelBoard[i+1][j] == CANT)
+		                        {
+		                            gameOver = true;
+		                        }
+		                        else if(nextLevelBoard[i-1][j] == OGRE || nextLevelBoard[i-1][j] == CANT)
+		                        {
+		                            gameOver = true;
+		                        }
+		                        else if(nextLevelBoard[i][j+1] == OGRE || nextLevelBoard[i][j+1] == CANT)
+		                        {
+		                            gameOver = true;
+		                        }
+		                        else if(nextLevelBoard[i][j-1] == OGRE || nextLevelBoard[i][j-1] == CANT)
+		                        {
+		                            gameOver = true;
+		                        }
+		                    }
+		                }  
+		            }
+		        }
+			
+			return gameOver;
+		}
 	}
+
 
