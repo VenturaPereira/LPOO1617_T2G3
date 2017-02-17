@@ -26,7 +26,7 @@ public class HelloWorld {
 		 int i = 0;
 		 game.newLevel();
 		Scanner scanner = new Scanner(System.in);
-		while (!game.analyseOgre()) {
+		while (!game.analyseOgre() && !game.analyseStairs(game.nextLevelBoard)) {
              
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
@@ -65,8 +65,6 @@ public class HelloWorld {
 		}else if(game.analyseStairs(game.nextLevelBoard))
 		{
 			System.out.println("You won!!!");
-			if(game.whichBoard(game.nextLevelBoard))
-	        decisionsNextLvl(game);
 		}
 		
 		
@@ -75,7 +73,7 @@ public class HelloWorld {
 	public static void decisions(DnD game) {
 		
 		Scanner scanner = new Scanner(System.in);
-		while (!game.analyseGuard() && (!game.analyseStairs(game.board) || !game.analyseStairs(game.nextLevelBoard))) {
+		while (!game.analyseGuard() && !game.analyseStairs(game.board) ) {
 
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
@@ -115,9 +113,9 @@ public class HelloWorld {
 		else if(game.analyseStairs(game.board))
 		{
 			System.out.println("You've reached the stairs!");
-			if(game.whichBoard(game.board))
+			if(game.whichBoard(game.board)){
 	        decisionsNextLvl(game);
-		}
+		}}
 	}
 	
 	
