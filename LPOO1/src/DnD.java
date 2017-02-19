@@ -17,6 +17,7 @@
 		private static final char KEY = 'k';
 		private static final char CANT = '$';
 		private static final char STAIRS = 'S';
+		private static final char WEAPON = '*';
 		char board[][] = {{WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}, 
 				{WALL, HERO, BLANK, BLANK,DOOR, BLANK, WALL,BLANK, GUARD,WALL},
 				{WALL, WALL, WALL, BLANK, WALL, WALL, WALL, BLANK, BLANK, WALL},
@@ -480,6 +481,186 @@
 		    	
 		}
 		}
+		
+		public void clearWeapon()
+		{
+			for(int i = 0; i < nextLevelBoard.length; i++)
+			{
+				for(int j = 0; j < nextLevelBoard[i].length; j++)
+				{
+					if(nextLevelBoard[i][j] == WEAPON)
+					{
+						nextLevelBoard[i][j] = BLANK;
+					}
+				}
+			}
+		}
+		
+		public void moveWeapon()
+		{
+			int goTo;
+			Random rnd = new Random();
+			goTo = rnd.nextInt(4);
+			
+			outer_loop:
+			
+			if(goTo == 0)
+			{
+				for(int i = 0; i < nextLevelBoard.length; i++)
+				{
+					for(int j = 0; j < nextLevelBoard[i].length; j++)
+					{
+						if(nextLevelBoard[i][j] == OGRE || nextLevelBoard[i][j] == CANT)
+						{
+							if(i < 7)
+							{
+								clearWeapon();
+								if(nextLevelBoard[i+1][j] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i+1][j] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i+1][j] = WEAPON;
+								}
+								break outer_loop;
+							}
+							else
+							{
+								clearWeapon();
+								if(nextLevelBoard[i-1][j] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i-1][j] = CANT;
+								}
+								else
+								{	
+									nextLevelBoard[i-1][j] = WEAPON;
+								}
+								break outer_loop;
+							}
+						}
+					}
+				}
+			}
+			else if(goTo == 1)
+			{
+				for(int i = 0; i < nextLevelBoard.length; i++)
+				{
+					for(int j = 0; j < nextLevelBoard[i].length; j++)
+					{
+						if(nextLevelBoard[i][j] == OGRE || nextLevelBoard[i][j] == CANT)
+						{
+							if(i > 1)
+							{
+								clearWeapon();
+								if(nextLevelBoard[i-1][j] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i-1][j] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i-1][j] = WEAPON;
+								}
+								break outer_loop;
+							}
+							else
+							{
+								clearWeapon();
+								if(nextLevelBoard[i+1][j] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i+1][j] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i+1][j] = WEAPON;
+								}
+								break outer_loop;
+							}
+						}
+					}
+				}
+			}
+			else if(goTo == 2)
+			{
+				for(int i = 0; i < nextLevelBoard.length; i++)
+				{
+					for(int j = 0; j < nextLevelBoard[i].length; j++)
+					{
+						if(nextLevelBoard[i][j] == OGRE || nextLevelBoard[i][j] == CANT)
+						{
+							if(j < 7)
+							{
+								clearWeapon();
+								if(nextLevelBoard[i][j+1] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i][j+1] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i][j+1] = WEAPON;
+								}
+								break outer_loop;
+							}
+							else
+							{
+								clearWeapon();
+								if(nextLevelBoard[i][j-1] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i][j-1] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i][j-1] = WEAPON;
+								}
+								break outer_loop;
+							}
+						}
+					}
+				}
+			}
+			else if(goTo == 3)
+			{
+				for(int i = 0; i < nextLevelBoard.length; i++)
+				{
+					for(int j = 0; j < nextLevelBoard[i].length; j++)
+					{
+						if(nextLevelBoard[i][j] == OGRE || nextLevelBoard[i][j] == CANT)
+						{
+							if(j > 1)
+							{
+								clearWeapon();
+								if(nextLevelBoard[i][j-1] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i][j-1] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i][j-1] = WEAPON;
+								}
+								break outer_loop;
+							}
+							else
+							{
+								clearWeapon();
+								if(nextLevelBoard[i][j+1] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i][j+1] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i][j+1] = WEAPON;
+								}
+								break outer_loop;
+							}
+						}
+					}
+				}
+			}
+			
+			
+			
+		}
+		
 		public boolean analyseGuard()
 	    {  
 	        boolean gameOver = false;

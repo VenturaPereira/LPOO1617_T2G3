@@ -35,12 +35,14 @@ public class HelloWorld {
 			case "S":
 				game.moveDown(game.nextLevelBoard);
 				game.moveOgre();
+				game.moveWeapon();
 				game.newLevel();
 				i++;
 				break;
 			case "W":
 				game.moveUp(game.nextLevelBoard);
 				game.moveOgre();
+				game.moveWeapon();
 				game.newLevel();
 				i++;
 				break;
@@ -48,12 +50,14 @@ public class HelloWorld {
 			case "D":
 				game.moveRight(game.nextLevelBoard);
 				game.moveOgre();
+				game.moveWeapon();
 				game.newLevel();
 				i++;
 				break;
 			case "A":
 				game.moveLeft(game.nextLevelBoard);
 				game.moveOgre();
+				game.moveWeapon();
 				game.newLevel();
 				i++;
 				break;
