@@ -481,6 +481,192 @@
 		    	
 		}
 		}
+		public void clearWeapon()
+		{
+			for(int i = 0; i < nextLevelBoard.length; i++)
+			{
+				for(int j = 0; j < nextLevelBoard[i].length; j++)
+				{
+					if(nextLevelBoard[i][j] == WEAPON)
+					{
+						nextLevelBoard[i][j] = BLANK;
+					}
+					else if(nextLevelBoard[i][j] == CANT && nextLevelBoard[i+1][j] == OGRE)
+					{
+						nextLevelBoard[i][j] = KEY;
+					}
+					else if(nextLevelBoard[i][j] == CANT && nextLevelBoard[i][j-1] == OGRE)
+					{
+						nextLevelBoard[i][j] = KEY;
+					}
+				}
+			}
+		}
+		
+		public void moveWeapon()
+		{
+			int goTo;
+			Random rnd = new Random();
+			goTo = rnd.nextInt(4);
+			
+			outer_loop:
+			
+			if(goTo == 0)
+			{
+				for(int i = 0; i < nextLevelBoard.length; i++)
+				{
+					for(int j = 0; j < nextLevelBoard[i].length; j++)
+					{
+						if(nextLevelBoard[i][j] == OGRE || nextLevelBoard[i][j] == CANT)
+						{
+							if(i < 7)
+							{
+								clearWeapon();
+								if(nextLevelBoard[i+1][j] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i+1][j] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i+1][j] = WEAPON;
+								}
+								break outer_loop;
+							}
+							else
+							{
+								clearWeapon();
+								if(nextLevelBoard[i-1][j] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i-1][j] = CANT;
+								}
+								else
+								{	
+									nextLevelBoard[i-1][j] = WEAPON;
+								}
+								break outer_loop;
+							}
+						}
+					}
+				}
+			}
+			else if(goTo == 1)
+			{
+				for(int i = 0; i < nextLevelBoard.length; i++)
+				{
+					for(int j = 0; j < nextLevelBoard[i].length; j++)
+					{
+						if(nextLevelBoard[i][j] == OGRE || nextLevelBoard[i][j] == CANT)
+						{
+							if(i > 1)
+							{
+								clearWeapon();
+								if(nextLevelBoard[i-1][j] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i-1][j] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i-1][j] = WEAPON;
+								}
+								break outer_loop;
+							}
+							else
+							{
+								clearWeapon();
+								if(nextLevelBoard[i+1][j] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i+1][j] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i+1][j] = WEAPON;
+								}
+								break outer_loop;
+							}
+						}
+					}
+				}
+			}
+			else if(goTo == 2)
+			{
+				for(int i = 0; i < nextLevelBoard.length; i++)
+				{
+					for(int j = 0; j < nextLevelBoard[i].length; j++)
+					{
+						if(nextLevelBoard[i][j] == OGRE || nextLevelBoard[i][j] == CANT)
+						{
+							if(j < 7)
+							{
+								clearWeapon();
+								if(nextLevelBoard[i][j+1] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i][j+1] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i][j+1] = WEAPON;
+								}
+								break outer_loop;
+							}
+							else
+							{
+								clearWeapon();
+								if(nextLevelBoard[i][j-1] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i][j-1] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i][j-1] = WEAPON;
+								}
+								break outer_loop;
+							}
+						}
+					}
+				}
+			}
+			else if(goTo == 3)
+			{
+				for(int i = 0; i < nextLevelBoard.length; i++)
+				{
+					for(int j = 0; j < nextLevelBoard[i].length; j++)
+					{
+						if(nextLevelBoard[i][j] == OGRE || nextLevelBoard[i][j] == CANT)
+						{
+							if(j > 1)
+							{
+								clearWeapon();
+								if(nextLevelBoard[i][j-1] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i][j-1] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i][j-1] = WEAPON;
+								}
+								break outer_loop;
+							}
+							else
+							{
+								clearWeapon();
+								if(nextLevelBoard[i][j+1] == nextLevelBoard[1][7])
+								{
+									nextLevelBoard[i][j+1] = CANT;
+								}
+								else
+								{
+									nextLevelBoard[i][j+1] = WEAPON;
+								}
+								break outer_loop;
+							}
+						}
+					}
+				}
+			}
+			
+			
+			
+		}
 		
 		public boolean analyseGuard()
 	    {  
