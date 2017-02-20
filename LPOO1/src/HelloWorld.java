@@ -72,7 +72,7 @@ public class HelloWorld {
 		}
 		else if(game.analyseWeapon())
 		{
-			System.out.println("The ogre rekt u with his club. GIT GUD");
+			System.out.println("The ogre swings his club and kills you. Game over.");
 		}
 		
 		
