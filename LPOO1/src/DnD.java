@@ -9,7 +9,7 @@
 		 int x =2;
 		private static final char DOOR = 'I';
 		private static final char WALL = 'X';
-		private static final char HERO = 'H';
+		private static  char HERO = 'H';
 		private static final char BLANK = ' ';
 		private static final char GUARD = 'G';
 		private static final char LEVER = 'K';
@@ -79,6 +79,7 @@
 							if(boardToPlay == board){
 							if(boardToPlay[i][j] == boardToPlay[8][7] && boardToPlay[i-1][j] == BLANK)
 							{
+								HERO = 'K';
 								boardToPlay[i][j] = LEVER;
 								boardToPlay[i-1][j] = HERO;
 								break outer_loop;
@@ -86,6 +87,7 @@
 							if(boardToPlay == nextLevelBoard){
 								if(boardToPlay[i][j] == boardToPlay[1][7] && boardToPlay[i-1][j] == BLANK)
 								{
+			                        
 								boardToPlay[i][j] = BLANK;
 								boardToPlay[i-1][j] = HERO;
 								break outer_loop;
@@ -117,7 +119,6 @@
 								{
 									boardToPlay[i][j] = BLANK;
 									boardToPlay[i-1][j] = HERO;
-									turnDoorsIntoStairs(boardToPlay);
 									break outer_loop;
 								}
 							}
@@ -149,6 +150,7 @@
 						if(boardToPlay == nextLevelBoard){
 							if(boardToPlay[i][j] == boardToPlay[1][7] && boardToPlay[i+1][j] == BLANK)
 							{
+								HERO = 'K';
 							boardToPlay[i][j] = BLANK;
 							boardToPlay[i+1][j] = HERO;
 							break outer_loop;
@@ -180,7 +182,6 @@
 								{
 									boardToPlay[i][j] = BLANK;
 									boardToPlay[i+1][j] = HERO;
-									turnDoorsIntoStairs(boardToPlay);
 									break outer_loop;
 								}
 							}
@@ -210,6 +211,7 @@
 								break outer_loop;
 							}}
 						if(boardToPlay == nextLevelBoard){
+							HERO = 'K';
 							if(boardToPlay[i][j] == boardToPlay[1][7] && boardToPlay[i][j+1] == BLANK)
 							{
 							boardToPlay[i][j] = BLANK;
@@ -245,7 +247,6 @@
 								{
 									boardToPlay[i][j] = BLANK;
 									boardToPlay[i][j+1] = HERO;
-									turnDoorsIntoStairs(boardToPlay);
 									break outer_loop;
 								}
 							}
@@ -274,6 +275,7 @@
 								break outer_loop;
 							}}
 						if(boardToPlay == nextLevelBoard){
+							HERO = 'K';
 							if(boardToPlay[i][j] == boardToPlay[1][7] && boardToPlay[i][j-1] == BLANK)
 							{
 							boardToPlay[i][j] = BLANK;
@@ -305,8 +307,12 @@
 								{
 									boardToPlay[i][j] = BLANK;
 									boardToPlay[i][j-1] = HERO;
-									turnDoorsIntoStairs(boardToPlay);
 									break outer_loop;
+								}
+							}
+							if(boardToPlay == nextLevelBoard){
+								if(nextLevelBoard[i][j-1] == nextLevelBoard[1][0]){
+									turnDoorsIntoStairs(nextLevelBoard);
 								}
 							}
 								
