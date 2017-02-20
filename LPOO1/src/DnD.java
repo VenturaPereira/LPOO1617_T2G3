@@ -492,6 +492,14 @@
 					{
 						nextLevelBoard[i][j] = BLANK;
 					}
+					else if(nextLevelBoard[i][j] == CANT && nextLevelBoard[i+1][j] == OGRE)
+					{
+						nextLevelBoard[i][j] = KEY;
+					}
+					else if(nextLevelBoard[i][j] == CANT && nextLevelBoard[i][j-1] == OGRE)
+					{
+						nextLevelBoard[i][j] = KEY;
+					}
 				}
 			}
 		}
