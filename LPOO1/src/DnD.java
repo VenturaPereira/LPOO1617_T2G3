@@ -525,11 +525,11 @@
 					{
 						nextLevelBoard[i][j] = BLANK;
 					}
-					else if(nextLevelBoard[i][j] == CANT && nextLevelBoard[i+1][j] == OGRE)
+					else if(nextLevelBoard[i][j] == CANT && nextLevelBoard[i+1][j] == OGRE && pickedKey() == false)
 					{
 						nextLevelBoard[i][j] = KEY;
 					}
-					else if(nextLevelBoard[i][j] == CANT && nextLevelBoard[i][j-1] == OGRE)
+					else if(nextLevelBoard[i][j] == CANT && nextLevelBoard[i][j-1] == OGRE && pickedKey() == false)
 					{
 						nextLevelBoard[i][j] = KEY;
 					}
