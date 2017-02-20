@@ -211,9 +211,10 @@
 								break outer_loop;
 							}}
 						if(boardToPlay == nextLevelBoard){
-							HERO = 'K';
+							
 							if(boardToPlay[i][j] == boardToPlay[1][7] && boardToPlay[i][j+1] == BLANK)
 							{
+								HERO = 'K';
 							boardToPlay[i][j] = BLANK;
 							boardToPlay[i][j+1] = HERO;
 							break outer_loop;
@@ -275,9 +276,10 @@
 								break outer_loop;
 							}}
 						if(boardToPlay == nextLevelBoard){
-							HERO = 'K';
+							
 							if(boardToPlay[i][j] == boardToPlay[1][7] && boardToPlay[i][j-1] == BLANK)
 							{
+								HERO = 'K';
 							boardToPlay[i][j] = BLANK;
 							boardToPlay[i][j-1] = HERO;
 							break outer_loop;
@@ -386,7 +388,7 @@
 		{
 			boolean picked = false;
 			
-			if(nextLevelBoard[1][0] == STAIRS)
+			if(HERO == 'K')
 			{
 				picked = true;
 			}
@@ -403,7 +405,8 @@
 		    	outer_loop:
 		    	for(int i =0; i < nextLevelBoard.length; i++){
 	    		  for(int j=0;j < nextLevelBoard[i].length; j++){
-	    			  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && nextLevelBoard[i+1][j] != WALL){
+	    			  if( i < 7){
+	    			  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && (nextLevelBoard[i+1][j] != WALL || nextLevelBoard[i+1][j] != DOOR)){
 	    				 if(i == 1 && j == 7 && pickedKey() == false){
 	    					 nextLevelBoard[i][j] = KEY;
 	    					 nextLevelBoard[i+1][j] = OGRE;
@@ -411,7 +414,7 @@
 	    				 }
 	    				  else{
 	    				  nextLevelBoard[i][j] = BLANK;
-	    				  if(nextLevelBoard[i+1][j] == KEY){	  
+	    				  if(nextLevelBoard[i+1][j] == KEY ||  nextLevelBoard[i+1][j] == CANT){	  
 	    					  nextLevelBoard[i+1][j] = CANT;
 	    					  break outer_loop;
 	    					  }
@@ -421,6 +424,7 @@
 	    				  }
 	    			  }
 	    		  }
+	    			  }
 		    	}
 		    	}
 		    	
@@ -429,7 +433,8 @@
 		    	outer_loop:
 		    	for(int i =0; i < nextLevelBoard.length; i++){
 		    		  for(int j=0;j < nextLevelBoard[i].length; j++){
-		    			  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && nextLevelBoard[i-1][j] != WALL){
+		    			  if(i > 1){
+		    			  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && (nextLevelBoard[i-1][j] != WALL || nextLevelBoard[i+1][j] != DOOR)){
 		    				  if(i == 1 && j == 7 && pickedKey() == false){
 		    					  nextLevelBoard[i][j] = KEY;
 		    					  nextLevelBoard[i-1][j] = OGRE;
@@ -437,7 +442,7 @@
 		    					 }
 		    				  else{
 		    				  nextLevelBoard[i][j] = BLANK;
-		    				  if(nextLevelBoard[i-1][j] == KEY){	  
+		    				  if(nextLevelBoard[i-1][j] == KEY || nextLevelBoard[i-1][j] == CANT ){	  
 		    					  nextLevelBoard[i-1][j] = CANT;
 		    					  break outer_loop;
 		    					  }
@@ -448,13 +453,15 @@
 		    			  }
 		    		  }
 			    	}
+		    		  }
 		    	}
 		    	break;
 		    case 2: 
 		    	outer_loop:
 		    	for(int i =0; i < nextLevelBoard.length; i++){
 	  		        for(int j=0;j < nextLevelBoard[i].length; j++){
-				  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && nextLevelBoard[i][j+1] != WALL){
+	  		        	if(j < 7){
+				  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && (nextLevelBoard[i][j+1] != WALL|| nextLevelBoard[i+1][j] != DOOR)){
 					  if(i == 1 && j == 7 && pickedKey() == false){
     						nextLevelBoard[i][j] = KEY;
     						nextLevelBoard[i][j+1] = OGRE;
@@ -463,7 +470,7 @@
     				  }
 					  else{
 					  nextLevelBoard[i][j] = BLANK;
-					  if(nextLevelBoard[i][j+1] == KEY){	  
+					  if(nextLevelBoard[i][j+1] == KEY || nextLevelBoard[i-1][j] == CANT){	  
 					  nextLevelBoard[i][j+1] = CANT;
 					  break outer_loop;
 					  }
@@ -474,13 +481,15 @@
 				  }
 			  }
 	    	}
+	  		        }
 		    	}
 		    break;
 		    case 3:
 		    	outer_loop:
 		    	for(int i =0; i < nextLevelBoard.length; i++){
 		    		  for(int j=0;j < nextLevelBoard[i].length; j++){
-		    			  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && nextLevelBoard[i-1][j] != WALL){
+		    			  if(j > 1){
+		    			  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && (nextLevelBoard[i-1][j] != WALL|| nextLevelBoard[i+1][j] != DOOR)){
 		    				  if(i == 1 && j == 7 && pickedKey() == false)
 		    				  {
 		    				  	nextLevelBoard[i][j] = KEY;
@@ -489,7 +498,7 @@
 		    				  }
 		    				  else{
 		    				  nextLevelBoard[i][j] = BLANK;
-		    				  if(nextLevelBoard[i][j-1] == KEY){	  
+		    				  if(nextLevelBoard[i][j-1] == KEY ||  nextLevelBoard[i-1][j] == CANT){	  
 		    					  nextLevelBoard[i][j-1] = CANT;
 		    					  break outer_loop;
 		    					  }
@@ -499,6 +508,7 @@
 		    				  }
 		    			  }
 		    		  }
+		    			  }
 			    	}
 		    }
 		    	break;
