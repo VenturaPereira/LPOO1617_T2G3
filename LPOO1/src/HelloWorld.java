@@ -26,7 +26,7 @@ public class HelloWorld {
 		 int i = 0;
 		 game.newLevel();
 		Scanner scanner = new Scanner(System.in);
-		while (!game.analyseOgre() && !game.analyseStairs(game.nextLevelBoard)) {
+		while (!game.analyseOgre() && !game.analyseStairs(game.nextLevelBoard) && !game.analyseWeapon()) {
              
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
@@ -69,6 +69,10 @@ public class HelloWorld {
 		}else if(game.analyseStairs(game.nextLevelBoard))
 		{
 			System.out.println("You won!!!");
+		}
+		else if(game.analyseWeapon())
+		{
+			System.out.println("The ogre rekt u with his club. GIT GUD");
 		}
 		
 		

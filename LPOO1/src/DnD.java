@@ -802,6 +802,39 @@
 			return gameOver;
 		}
 		
+		public boolean analyseWeapon()
+		{
+			boolean gameOver = false;
+			
+			for(int i = 0; i < nextLevelBoard.length; i++)
+			{
+				for(int j = 0; j < nextLevelBoard[i].length; j++)
+				{
+					if(nextLevelBoard[i][j] == WEAPON)
+					{
+						if(nextLevelBoard[i-1][j] == HERO)
+						{
+							gameOver = true;
+						}
+						else if(nextLevelBoard[i+1][j] == HERO)
+						{
+							gameOver = true;
+						}
+						else if(nextLevelBoard[i][j-1] == HERO)
+						{
+							gameOver = true;
+						}
+						else if(nextLevelBoard[i][j+1] == HERO)
+						{
+							gameOver = true;
+						}
+					}
+				}
+			}
+			
+			return gameOver;
+		}
+		
 		
 	}
 
