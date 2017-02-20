@@ -398,7 +398,7 @@
 		    	for(int i =0; i < nextLevelBoard.length; i++){
 	    		  for(int j=0;j < nextLevelBoard[i].length; j++){
 	    			  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && nextLevelBoard[i+1][j] != WALL){
-	    				 if(i == 1 && j == 7){
+	    				 if(i == 1 && j == 7 && pickedKey() == false){
 	    					 nextLevelBoard[i][j] = KEY;
 	    					 nextLevelBoard[i+1][j] = OGRE;
 	    					 break outer_loop;
@@ -424,7 +424,7 @@
 		    	for(int i =0; i < nextLevelBoard.length; i++){
 		    		  for(int j=0;j < nextLevelBoard[i].length; j++){
 		    			  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && nextLevelBoard[i-1][j] != WALL){
-		    				  if(i == 1 && j == 7){
+		    				  if(i == 1 && j == 7 && pickedKey() == false){
 		    					  nextLevelBoard[i][j] = KEY;
 		    					  nextLevelBoard[i-1][j] = OGRE;
 		    					  break outer_loop;
@@ -449,7 +449,7 @@
 		    	for(int i =0; i < nextLevelBoard.length; i++){
 	  		        for(int j=0;j < nextLevelBoard[i].length; j++){
 				  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && nextLevelBoard[i][j+1] != WALL){
-					  if(i == 1 && j == 7){
+					  if(i == 1 && j == 7 && pickedKey() == false){
     						nextLevelBoard[i][j] = KEY;
     						nextLevelBoard[i][j+1] = OGRE;
     						break outer_loop;
@@ -475,7 +475,7 @@
 		    	for(int i =0; i < nextLevelBoard.length; i++){
 		    		  for(int j=0;j < nextLevelBoard[i].length; j++){
 		    			  if((nextLevelBoard[i][j]==OGRE || nextLevelBoard[i][j] == CANT) && nextLevelBoard[i-1][j] != WALL){
-		    				  if(i == 1 && j == 7)
+		    				  if(i == 1 && j == 7 && pickedKey() == false)
 		    				  {
 		    				  	nextLevelBoard[i][j] = KEY;
 		    				  	nextLevelBoard[i][j-1] = OGRE;
@@ -540,7 +540,7 @@
 							if(i < 7)
 							{
 								clearWeapon();
-								if(nextLevelBoard[i+1][j] == nextLevelBoard[1][7])
+								if(nextLevelBoard[i+1][j] == nextLevelBoard[1][7] && pickedKey() == false)
 								{
 									nextLevelBoard[i+1][j] = CANT;
 								}
@@ -553,7 +553,7 @@
 							else
 							{
 								clearWeapon();
-								if(nextLevelBoard[i-1][j] == nextLevelBoard[1][7])
+								if(nextLevelBoard[i-1][j] == nextLevelBoard[1][7] && pickedKey() == false)
 								{
 									nextLevelBoard[i-1][j] = CANT;
 								}
@@ -578,7 +578,7 @@
 							if(i > 1)
 							{
 								clearWeapon();
-								if(nextLevelBoard[i-1][j] == nextLevelBoard[1][7])
+								if(nextLevelBoard[i-1][j] == nextLevelBoard[1][7] && pickedKey() == false)
 								{
 									nextLevelBoard[i-1][j] = CANT;
 								}
@@ -591,7 +591,7 @@
 							else
 							{
 								clearWeapon();
-								if(nextLevelBoard[i+1][j] == nextLevelBoard[1][7])
+								if(nextLevelBoard[i+1][j] == nextLevelBoard[1][7] && pickedKey() == false)
 								{
 									nextLevelBoard[i+1][j] = CANT;
 								}
@@ -616,7 +616,7 @@
 							if(j < 7)
 							{
 								clearWeapon();
-								if(nextLevelBoard[i][j+1] == nextLevelBoard[1][7])
+								if(nextLevelBoard[i][j+1] == nextLevelBoard[1][7] && pickedKey() == false)
 								{
 									nextLevelBoard[i][j+1] = CANT;
 								}
@@ -629,7 +629,7 @@
 							else
 							{
 								clearWeapon();
-								if(nextLevelBoard[i][j-1] == nextLevelBoard[1][7])
+								if(nextLevelBoard[i][j-1] == nextLevelBoard[1][7] && pickedKey() == false)
 								{
 									nextLevelBoard[i][j-1] = CANT;
 								}
@@ -654,7 +654,7 @@
 							if(j > 1)
 							{
 								clearWeapon();
-								if(nextLevelBoard[i][j-1] == nextLevelBoard[1][7])
+								if(nextLevelBoard[i][j-1] == nextLevelBoard[1][7] && pickedKey() == false)
 								{
 									nextLevelBoard[i][j-1] = CANT;
 								}
@@ -667,7 +667,7 @@
 							else
 							{
 								clearWeapon();
-								if(nextLevelBoard[i][j+1] == nextLevelBoard[1][7])
+								if(nextLevelBoard[i][j+1] == nextLevelBoard[1][7] && pickedKey() == false)
 								{
 									nextLevelBoard[i][j+1] = CANT;
 								}
