@@ -7,6 +7,7 @@ package gameLogic;
 
 		 int column = 10;
 		 int row = 10;
+		 int x =1; 
 		private  final char DOOR = 'I';
 		private  final char WALL = 'X';
 		private   char HERO = 'H';

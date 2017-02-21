@@ -5,6 +5,7 @@ import gameLogic.DnD;
 public class ClientInt {
 	public static void game(DnD game) {
 		String answer;
+		int x=1;
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Here's the initial board! If you dare to play press Y, otherwise, press N.");
 		game.printBoard();
