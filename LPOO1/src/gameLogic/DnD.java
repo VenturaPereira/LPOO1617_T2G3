@@ -1,23 +1,23 @@
+package gameLogic;
 
 	import java.util.Random;
 
 	public class DnD {
-		
+	
 
 		 int column = 10;
 		 int row = 10;
-		 int x =2;
-		private static final char DOOR = 'I';
-		private static final char WALL = 'X';
-		private static  char HERO = 'H';
-		private static final char BLANK = ' ';
-		private static final char GUARD = 'G';
-		private static final char LEVER = 'K';
-		private static final char OGRE = 'O';
-		private static final char KEY = 'k';
-		private static final char CANT = '$';
-		private static final char STAIRS = 'S';
-		private static final char WEAPON = '*';
+		private  final char DOOR = 'I';
+		private  final char WALL = 'X';
+		private   char HERO = 'H';
+		private  final char BLANK = ' ';
+		private  final char GUARD = 'G';
+		private  final char LEVER = 'K';
+		private  final char OGRE = '0';
+		private  final char KEY = 'k';
+		private  final char CANT = '$';
+		private  final char STAIRS = 'S';
+		private  final char WEAPON = '*';
 		char board[][] = {{WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}, 
 				{WALL, HERO, BLANK, BLANK,DOOR, BLANK, WALL,BLANK, GUARD,WALL},
 				{WALL, WALL, WALL, BLANK, WALL, WALL, WALL, BLANK, BLANK, WALL},
@@ -38,6 +38,16 @@
 				{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
 				{WALL, HERO, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
 				{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}};
+		
+		
+		public char[][] getFirstMap(){
+			return board;
+		}
+		
+		public char[][] getSecondMap(){
+			return nextLevelBoard;
+		}
+		
 		
 		public void printBoard(){
 		  
