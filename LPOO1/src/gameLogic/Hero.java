@@ -24,7 +24,7 @@ public class Hero extends Character {
     }
     
     
-    public void commandMove(char direction){
+    public void commandMove( MapGame map,char direction){
     	int i, j;
     	
     	switch(direction){
@@ -32,15 +32,31 @@ public class Hero extends Character {
     	
     	case 'w':
     		i =-1;
+    		int testUp = hi+i;
+    		if(!move(map, testUp, hj ) == true){
+    			setHi(hi+i);
+    		}
            break;
     	case 's':
     		i = 1;
+    		int testDown = hi+i;
+    		if(!move(map, testDown, hj) == true){
+    			setHi(hi+i);
+    		}
     		break;
     	case 'a':
     		j = -1;
+    		int testLeft = hj+j;
+    		if(!move(map, hi, testLeft) == true){
+    			setHi(hj+j);
+    		}
     		break;
     	case 'd':
     		j = 1;
+    		int testRight = hj+j;
+    		if(move(map, hi, testRight) == true){
+    			setHi(hi+j);
+    		}
     		break;
     	}
     	

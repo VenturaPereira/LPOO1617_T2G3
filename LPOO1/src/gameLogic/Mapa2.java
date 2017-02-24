@@ -14,7 +14,7 @@ public class Mapa2 extends MapGame {
 			{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}};
 	
 	
-	public char[][] getSecondMap(){
+	public char[][] getMap(){
 		return nextLevelBoard;
 	}
 	

@@ -16,7 +16,7 @@ public class Mapa1 extends MapGame {
 			{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}};
 	
 	
-	public char[][] getFirstMap(){
+	public char[][] getMap(){
 		return board;
 	}
 	

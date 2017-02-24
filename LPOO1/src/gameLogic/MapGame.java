@@ -15,7 +15,7 @@ public abstract class MapGame {
 	protected  final char WEAPON = '*';
 	
 	public abstract void printBoard();
-
+    public abstract char[][] getMap(); 
 	
 	
 	
