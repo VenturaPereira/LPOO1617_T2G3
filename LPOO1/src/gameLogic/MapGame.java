@@ -14,7 +14,8 @@ public abstract class MapGame {
 	protected  final char STAIRS = 'S';
 	protected  final char WEAPON = '*';
 	
-	
+	public abstract void printBoard();
+
 	
 	
 	
