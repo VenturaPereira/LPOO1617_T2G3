@@ -20,7 +20,7 @@ package gameLogic;
 		private  final char STAIRS = 'S';
 		private  final char WEAPON = '*';
 		char board[][] = {{WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}, 
-				{WALL, HERO, BLANK, BLANK,DOOR, BLANK, WALL,BLANK, GUARD,WALL},
+				{WALL, BLANK, BLANK, BLANK,DOOR, BLANK, WALL,BLANK, BLANK,WALL},
 				{WALL, WALL, WALL, BLANK, WALL, WALL, WALL, BLANK, BLANK, WALL},
 				{WALL, BLANK, DOOR, BLANK, DOOR, BLANK, WALL, BLANK, BLANK, WALL},
 				{WALL, WALL, WALL, BLANK, WALL, WALL, WALL, BLANK, BLANK, WALL},
@@ -114,14 +114,14 @@ package gameLogic;
 							if(boardToPlay[i-1][j] == STAIRS)
 							{
 								boardToPlay[i][j] = BLANK;
-								boardToPlay[i+1][j] = HERO;
+								boardToPlay[i-1][j] = HERO;
 								break outer_loop;
 							}
 							if(boardToPlay == board){
 							if(boardToPlay[i-1][j] == LEVER)
 							{
 								boardToPlay[i][j] = BLANK;
-								boardToPlay[i+1][j] = HERO;
+								boardToPlay[i-1][j] = HERO;
 								turnDoorsIntoStairs(boardToPlay);
 								break outer_loop;
 							}}

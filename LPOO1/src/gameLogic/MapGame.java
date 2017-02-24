@@ -1,50 +1,24 @@
 package gameLogic;
 
-public class MapGame {
+public abstract class MapGame {
 	
-	 int column = 10;
-	 int row = 10;
-	private  final char DOOR = 'I';
-	private  final char WALL = 'X';
-	private   char HERO = 'H';
-	private  final char BLANK = ' ';
-	private  final char GUARD = 'G';
-	private  final char LEVER = 'K';
-	private  final char OGRE = '0';
-	private  final char KEY = 'k';
-	private  final char CANT = '$';
-	private  final char STAIRS = 'S';
-	private  final char WEAPON = '*';
-	char board[][] = {{WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}, 
-			{WALL, HERO, BLANK, BLANK,DOOR, BLANK, WALL,BLANK, GUARD,WALL},
-			{WALL, WALL, WALL, BLANK, WALL, WALL, WALL, BLANK, BLANK, WALL},
-			{WALL, BLANK, DOOR, BLANK, DOOR, BLANK, WALL, BLANK, BLANK, WALL},
-			{WALL, WALL, WALL, BLANK, WALL, WALL, WALL, BLANK, BLANK, WALL},
-			{DOOR, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
-			{DOOR, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
-			{WALL, WALL, WALL, BLANK, WALL, WALL, WALL, WALL, BLANK, WALL},
-			{WALL, BLANK, DOOR, BLANK, DOOR, BLANK, WALL, LEVER, BLANK, WALL},
-			{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}};
-	
-	char nextLevelBoard[][] = {{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}, 
-			{DOOR, BLANK, BLANK, BLANK, OGRE,BLANK,BLANK,KEY, WALL},
-			{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
-			{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
-			{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
-			{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
-			{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
-			{WALL, HERO, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
-			{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}};
+	protected  final char DOOR = 'I';
+	protected  final char WALL = 'X';
+	protected   char HERO = 'H';
+	protected  final char BLANK = ' ';
+	protected  final char GUARD = 'G';
+	protected  final char LEVER = 'K';
+	protected  final char OGRE = '0';
+	protected  final char KEY = 'k';
+	protected  final char CANT = '$';
+	protected  final char STAIRS = 'S';
+	protected  final char WEAPON = '*';
 	
 	
-	public char[][] getFirstMap(){
-		return board;
-	}
 	
-	public char[][] getSecondMap(){
-		return nextLevelBoard;
-	}
-	public void turnDoorsIntoStairs(char[][] boardToPlay)
+	
+	
+	/*public void turnDoorsIntoStairs(char[][] boardToPlay)
 	{
 		if(boardToPlay == board){
 			
@@ -55,8 +29,8 @@ public class MapGame {
 		boardToPlay[1][0] = STAIRS;
 	}
 		
-	}
-	public boolean pickedKey()
+	}*/
+	/*public boolean pickedKey()
 	{
 		boolean picked = false;
 		
@@ -67,17 +41,17 @@ public class MapGame {
 		
 		return picked;
 	}
-	
-	  public boolean whichBoard(char[][] boardToPlay){
+	*/
+	/*  public boolean whichBoard(char[][] boardToPlay){
     	  boolean which = false;
     	  if(boardToPlay == board){
     		  return true;
     	  }else{
     		  return false;
     	  }
-      }
+      }*/
 	
-	  public boolean analyseOgre()
+	  /*public boolean analyseOgre()
 		{
 			boolean gameOver = false;
 			
@@ -112,8 +86,8 @@ public class MapGame {
 			
 			return gameOver;
 		}
-		
-		public boolean analyseWeapon()
+		*/
+		/*public boolean analyseWeapon()
 		{
 			boolean gameOver = false;
 			
@@ -144,8 +118,8 @@ public class MapGame {
 			}
 			
 			return gameOver;
-		}
-		public boolean analyseStairs(char[][] boardToPlay)
+		}*/
+		/*public boolean analyseStairs(char[][] boardToPlay)
 		{
 			boolean inStairs = false;
 			if(boardToPlay == board){
@@ -163,8 +137,8 @@ public class MapGame {
 				}
 			}
 			return inStairs;
-		}
-		public boolean analyseGuard()
+		}*/
+		/*public boolean analyseGuard()
 	    {  
 	        boolean gameOver = false;
 	       
@@ -198,5 +172,8 @@ public class MapGame {
 	        }
 	       
 	        return gameOver;
-	    }
+	    }*/
+	  
+	 
+	  
 }
