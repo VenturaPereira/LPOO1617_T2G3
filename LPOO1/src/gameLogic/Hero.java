@@ -33,17 +33,15 @@ public class Hero extends Character {
     	case 'w':
     		i =-1;
            break;
-    	case 'd':
+    	case 's':
     		i = 1;
-    		
-    		
-    		
-    	
-    	
-    	
-    	
-    	
-    	
+    		break;
+    	case 'a':
+    		j = -1;
+    		break;
+    	case 'd':
+    		j = 1;
+    		break;
     	}
     	
     	
