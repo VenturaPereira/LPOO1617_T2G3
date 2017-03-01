@@ -5,7 +5,7 @@ public abstract class Character {
 	
 	
 	
-	//so esta feito para o Hero. Falta acrescentar para o guarda e ogre. Diferença é que para o guarda temos que acrescentar a condiçao do hero (apenas fazer um "ou" na linha 19) e para o ogre além do ou há que tratar do $ quando vai para cima da chave)
+	//so esta feito para o Hero. Falta acrescentar para o guarda e ogre.Diferença é que para o guarda temos que acrescentar a condiçao do hero (apenas fazer um "ou" na linha 19) e para o ogre além do ou há que tratar do $ quando vai para cima da chave)
 	public boolean move(MapGame map, int di, int dj){
 		boolean gameOver = false;
 		boolean victory = false;
