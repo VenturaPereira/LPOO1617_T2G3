@@ -2,7 +2,11 @@ package userInt;
 
 import java.util.Scanner;
 import gameLogic.DnD;
+import gameLogic.Hero;
+import gameLogic.MapGame;
+import gameLogic.Mapa1;
 public class ClientInt {
+	/*
 	public static void game(DnD game) {
 		String answer;
 		int x=1;
@@ -78,61 +82,51 @@ public class ClientInt {
 		
 		
 	}
-
-	public static void decisions(DnD game) {
-		
+*/
+	public static void decisions(Hero hero, Mapa1 map1) {
+		int i =0;
 		Scanner scanner = new Scanner(System.in);
-		while (!game.analyseGuard() && !game.analyseStairs(game.getFirstMap()) ) {
+		while (i < 5000 ) {
 
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
 
 			switch (answer) {
 			case "S":
-				game.moveDown(game.getFirstMap());
-				game.guardMove();
-				game.printBoard();
 				
+				hero.commandMove(map1, 's');
+				map1.printBoard(hero);
+				i++;
 				break;
 			case "W":
-				game.moveUp(game.getFirstMap());
-				game.guardMove();
-				game.printBoard();
-				
+				hero.commandMove(map1, 'w');
+				map1.printBoard(hero);
+				i++;
 				break;
 
 			case "D":
-				game.moveRight(game.getFirstMap());
-				game.guardMove();
-				game.printBoard();
-				
+				hero.commandMove(map1, 'd');
+				map1.printBoard(hero);
+				i++;
 				break;
 			case "A":
-				game.moveLeft(game.getFirstMap());
-				game.guardMove();
-				game.printBoard();
-				
+				hero.commandMove(map1, 'a');
+				map1.printBoard(hero);
+				i++;
 				break;
 			}
 		}
-		if(game.analyseGuard())
-		{
-			System.out.println("The guard caught you! Game over.");
-		}
-		else if(game.analyseStairs(game.getFirstMap()))
-		{
-			System.out.println("You've reached the stairs!");
-			if(game.whichBoard(game.getFirstMap())){
-	        decisionsNextLvl(game);
-		}}
+		
 	}
 	
 	
 
 	public static void main(String[] args) {
 
-		DnD game = new DnD();
-		game(game);
+		Mapa1 map1= new Mapa1();
+		Hero hero = new Hero();
+		map1.printBoard(hero);
+		decisions(hero, map1);
 
 	}
 

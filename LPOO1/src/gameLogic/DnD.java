@@ -3,7 +3,7 @@ package gameLogic;
 	import java.util.Random;
 
 	public class DnD {
-	
+	/*
 
 		 int column = 10;
 		 int row = 10;
@@ -847,7 +847,8 @@ package gameLogic;
 		}
 		
 		
+	
+
+
+*/
 	}
-
-
-

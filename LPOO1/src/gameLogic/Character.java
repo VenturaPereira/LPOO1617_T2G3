@@ -16,15 +16,17 @@ public abstract class Character {
 				
 			} else if(map.getMap()[di][dj] == 'I'){
 				return false;
-			}else if(map.getMap()[di][dj] == 'G'){
+			}else if(map.getMap()[di][dj] == 'G' || map.getMap()[di][dj] == 'H'){
 				gameOver = true;
 				return gameOver;
 			}else if(map.getMap()[di][dj] == 'S'){
 				victory = true;
 				return victory;
-			}else if(map.getMap()[di][dj] == 'k'){
-				//por escadas em s
+			}else if(map.getMap()[di][dj] == 'K'){ 
+				((Mapa1) map).setDoors();
 			    return true;
+			}else if(map.getMap()[di][dj] == ' '){
+				return true;
 			}
 		} else if(map instanceof Mapa2){
 			
@@ -32,7 +34,7 @@ public abstract class Character {
 				return false;
 			} else if(map.getMap()[di][dj] == 'I'){
 				return false;
-			}else if(map.getMap()[di][dj] == '0' || map.getMap()[di][dj] == '*'){
+			}else if(map.getMap()[di][dj] == '0' || map.getMap()[di][dj] == '*' || map.getMap()[di][dj] == 'H' ){
 				gameOver = true;
 				return gameOver;
 			}

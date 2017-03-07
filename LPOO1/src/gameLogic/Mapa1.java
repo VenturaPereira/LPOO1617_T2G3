@@ -19,22 +19,37 @@ public class Mapa1 extends MapGame {
 	public char[][] getMap(){
 		return board;
 	}
-	
-	
-public void printBoard(Hero hero, Guard guard){
-		int hx, hy, gx, gy;  
+	public void setDoors(){
+		board[5][0]= STAIRS;
+		board[6][0]=STAIRS;
+	}
+	//acrescentar guarda
+	public void printBoard(Hero hero){
+	int hx=hero.getHi();
+	int hy = hero.getHj();
+	//gx, gy;  
 		
 		for (int i = 0; i < board.length; i++) {
 		    for (int j = 0; j < board[i].length; j++) {
 		    	if(i == hx && j == hy){
-		    		board[i][j]= HERO;
-		    	}else if(i == gx && j == gy){
-		    		board[i][j] = GUARD;
-		    	}
+		    		//board[i][j]= HERO;
+		    		System.out.print("H|");
+		    		j++;
+		    	}//else if(i == gx && j == gy){
+		    		//board[i][j] = GUARD;
+		    	//}
 		        System.out.print(board[i][j] + "|");
 		    }
 		    System.out.println(" ");
 		}
 	}
+
+	@Override
+	public void printBoard() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 }
