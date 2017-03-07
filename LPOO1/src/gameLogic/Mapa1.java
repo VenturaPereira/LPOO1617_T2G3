@@ -4,7 +4,7 @@ public class Mapa1 extends MapGame {
 	
 	
 	
-	char board[][] = {{WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}, 
+	private char board[][] = {{WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}, 
 			{WALL, BLANK, BLANK, BLANK,BLANK, BLANK, WALL,BLANK, BLANK,WALL},
 			{WALL, WALL, WALL, BLANK, WALL, WALL, WALL, BLANK, BLANK, WALL},
 			{WALL, BLANK, DOOR, BLANK, DOOR, BLANK, WALL, BLANK, BLANK, WALL},
@@ -24,9 +24,11 @@ public class Mapa1 extends MapGame {
 		board[6][0]=STAIRS;
 	}
 	//acrescentar guarda
-	public void printBoard(Hero hero){
+	public void printBoard(Hero hero, Guard guard){
 	int hx=hero.getHi();
 	int hy = hero.getHj();
+	int gx = guard.getGx();
+	int gj= guard.getGj();
 	//gx, gy;  
 		
 		for (int i = 0; i < board.length; i++) {
@@ -38,6 +40,10 @@ public class Mapa1 extends MapGame {
 		    	}//else if(i == gx && j == gy){
 		    		//board[i][j] = GUARD;
 		    	//}
+		    	if(i == gx && j == gj){
+		    		System.out.print("G|");
+		    		j++;
+		    	}
 		        System.out.print(board[i][j] + "|");
 		    }
 		    System.out.println(" ");

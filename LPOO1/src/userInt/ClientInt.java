@@ -2,6 +2,7 @@ package userInt;
 
 import java.util.Scanner;
 import gameLogic.DnD;
+import gameLogic.Guard;
 import gameLogic.Hero;
 import gameLogic.MapGame;
 import gameLogic.Mapa1;
@@ -83,7 +84,7 @@ public class ClientInt {
 		
 	}
 */
-	public static void decisions(Hero hero, Mapa1 map1) {
+	public static void decisions(Hero hero, Mapa1 map1, Guard guard) {
 		int i =0;
 		Scanner scanner = new Scanner(System.in);
 		while (i < 5000 ) {
@@ -95,23 +96,27 @@ public class ClientInt {
 			case "S":
 				
 				hero.commandMove(map1, 's');
-				map1.printBoard(hero);
+				guard.guardMove(map1);
+				map1.printBoard(hero, guard);
 				i++;
 				break;
 			case "W":
 				hero.commandMove(map1, 'w');
-				map1.printBoard(hero);
+				guard.guardMove(map1);
+				map1.printBoard(hero, guard);
 				i++;
 				break;
 
 			case "D":
 				hero.commandMove(map1, 'd');
-				map1.printBoard(hero);
+				guard.guardMove(map1);
+				map1.printBoard(hero, guard);
 				i++;
 				break;
 			case "A":
 				hero.commandMove(map1, 'a');
-				map1.printBoard(hero);
+				guard.guardMove(map1);
+				map1.printBoard(hero, guard);
 				i++;
 				break;
 			}
@@ -125,8 +130,9 @@ public class ClientInt {
 
 		Mapa1 map1= new Mapa1();
 		Hero hero = new Hero();
-		map1.printBoard(hero);
-		decisions(hero, map1);
+		Guard guard = new Guard();
+		map1.printBoard(hero, guard);
+		decisions(hero, map1, guard);
 
 	}
 
