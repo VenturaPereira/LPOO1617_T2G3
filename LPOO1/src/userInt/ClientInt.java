@@ -6,6 +6,7 @@ import gameLogic.Guard;
 import gameLogic.Hero;
 import gameLogic.MapGame;
 import gameLogic.Mapa1;
+import gameLogic.Message;
 public class ClientInt {
 	/*
 	public static void game(DnD game) {
@@ -85,41 +86,50 @@ public class ClientInt {
 	}
 */
 	public static void decisions(Hero hero, Mapa1 map1, Guard guard) {
-		int i =0;
+		Message msg = new Message();
 		Scanner scanner = new Scanner(System.in);
-		while (i < 5000 ) {
+		while (!hero.getGameOver() && !hero.getVictory()){
 
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
 
 			switch (answer) {
 			case "S":
-				
-				hero.commandMove(map1, 's');
 				guard.guardMove(map1);
+				hero.commandMove(map1, 's');
 				map1.printBoard(hero, guard);
-				i++;
+				//i++;
 				break;
 			case "W":
-				hero.commandMove(map1, 'w');
 				guard.guardMove(map1);
+				hero.commandMove(map1, 'w');
 				map1.printBoard(hero, guard);
-				i++;
+				//i++;
 				break;
 
 			case "D":
-				hero.commandMove(map1, 'd');
 				guard.guardMove(map1);
+				hero.commandMove(map1, 'd');
 				map1.printBoard(hero, guard);
-				i++;
+				//i++;
 				break;
 			case "A":
-				hero.commandMove(map1, 'a');
 				guard.guardMove(map1);
+				hero.commandMove(map1, 'a');
 				map1.printBoard(hero, guard);
-				i++;
+				//i++;
 				break;
 			}
+		}
+		
+		if(hero.getGameOver())
+		{
+			msg.gameOverMsgMap1();
+		}
+		
+		if(hero.getVictory())
+		{
+			msg.victoryMsgMap1();
 		}
 		
 	}
