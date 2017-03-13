@@ -3,10 +3,11 @@ package gameLogic;
 public class Hero extends Character {
 	private int hi, hj;
 	
-	
 	public Hero(){
+	
 	this.hi=1;
 	this.hj=1;
+	
 	}
     
     
@@ -55,6 +56,7 @@ public class Hero extends Character {
     		int testLeft = hj+j;
     		if(move(map, hi, testLeft) == true){
     			setHj(hj+j);
+    			
     		}
     		break;
     	case 'd':
@@ -69,6 +71,11 @@ public class Hero extends Character {
     	
     	
     }
+
+
+
+
+	
 	
 	
 }
