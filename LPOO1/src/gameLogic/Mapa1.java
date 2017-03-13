@@ -23,8 +23,10 @@ public class Mapa1 extends MapGame {
 		board[5][0]= STAIRS;
 		board[6][0]=STAIRS;
 	}
-	//acrescentar guarda
+	
 	public void printBoard(Hero hero, Guard guard){
+	
+	
 	int hx=hero.getHi();
 	int hy = hero.getHj();
 	int gx = guard.getGx();

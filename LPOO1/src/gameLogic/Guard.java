@@ -21,14 +21,14 @@ public class Guard extends Character {
 		return this.gj;
 	}
 	public void guardMove(MapGame map){
-		{
-			if(this.index == (this.addMovement.length-1)){
-				this.index=0;
-			}
-			this.gx =this.addMovement[index][0];
-			this.gj = this.addMovement[index][1];
-			index++;
+	{
+		if(this.index == (this.addMovement.length-1)){
+			this.index=0;
 		}
+		this.gx =this.addMovement[index][0];
+		this.gj = this.addMovement[index][1];
+		index++;
+	}
 	
 		
 		/*

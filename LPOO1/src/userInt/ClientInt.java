@@ -6,7 +6,10 @@ import gameLogic.Guard;
 import gameLogic.Hero;
 import gameLogic.MapGame;
 import gameLogic.Mapa1;
+import gameLogic.Mapa2;
 import gameLogic.Message;
+import gameLogic.Ogre;
+import gameLogic.Weapon;
 public class ClientInt {
 	/*
 	public static void game(DnD game) {
@@ -141,9 +144,13 @@ public class ClientInt {
 		Mapa1 map1= new Mapa1();
 		Hero hero = new Hero();
 		Guard guard = new Guard();
+		Ogre ogre = new Ogre();
+		Weapon weapon = new Weapon();
 		map1.printBoard(hero, guard);
 		decisions(hero, map1, guard);
-
+		Mapa2 map2 = new Mapa2();
+		map2.initialize(hero, ogre);
+		map2.printBoard(hero, ogre, weapon);
 	}
 
 }
