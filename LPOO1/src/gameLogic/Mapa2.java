@@ -10,20 +10,14 @@ public class Mapa2 extends MapGame {
 			{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
 			{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
 			{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
-			{WALL, HERO, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
+			{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
 			{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}};
 	
 	
 	public char[][] getMap(){
 		return nextLevelBoard;
 	}
-	public void initialize(Hero hero, Ogre ogre)
-	{
-		hero.setHi(7);
-		hero.setHj(1);
-		ogre.setOi(1);
-		ogre.setOj(4);
-	}
+	
 	public void printBoard(Hero hero, Ogre ogre, Weapon weapon){
 		
 		
@@ -38,10 +32,12 @@ public class Mapa2 extends MapGame {
 		for (int i = 0; i < nextLevelBoard.length; i++) {
 		    for (int j = 0; j < nextLevelBoard[i].length; j++) {
 		    	if(i == hx && j == hy){
-		    		nextLevelBoard[i][j]= HERO;
+		    		System.out.print("H|");
+		    		j++;
 		    	}
 		    	else if(i == oi && j == oj){
-		    		nextLevelBoard[i][j] = OGRE;
+		    		System.out.print("0|");
+		    		j++;
 		    	} //else if(i == wx && j == wy){
 		    		//nextLevelBoard[i][j] = WEAPON;
 		    	//}
