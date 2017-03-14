@@ -2,7 +2,6 @@ package gameLogic;
 
 public abstract class Character {
 	
-	private boolean gameOver;
 	private boolean victory;
 	
 	
@@ -10,7 +9,7 @@ public abstract class Character {
 	//so esta feito para o Hero. Falta acrescentar para o guarda e ogre.Diferença é que para o guarda temos que acrescentar a condiçao do hero (apenas fazer um "ou" na linha 19) e para o ogre além do ou há que tratar do $ quando vai para cima da chave)
 	public boolean move(MapGame map, int di, int dj){
 		
-		this.gameOver = false;
+		//this.gameOver = false;
 		this.victory = false;
 		
 		if(map instanceof Mapa1 ){
@@ -21,7 +20,6 @@ public abstract class Character {
 			} else if(map.getMap()[di][dj] == 'I'){
 				return false;
 			}else if(map.getMap()[di][dj] == 'G' || map.getMap()[di][dj] == 'H'){
-				this.gameOver = true;
 				return false;
 			}else if(map.getMap()[di][dj] == 'S'){
 				this.victory = true;
@@ -39,8 +37,8 @@ public abstract class Character {
 			}else if(map.getMap()[di][dj] == 'I'){
 				return false;
 			}else if(map.getMap()[di][dj] == '0' || map.getMap()[di][dj] == '*' || map.getMap()[di][dj] == 'H' ){
-				gameOver = true;
-				return gameOver;
+				
+				return false;
 			}
 			
 		}
@@ -51,11 +49,11 @@ public abstract class Character {
 		return true;
 		}
 		
-		public boolean getGameOver()
+		/*public boolean getGameOver()
 		{
 			return gameOver;
 		}
-	
+	*/
 		public boolean getVictory()
 		{
 			return victory;

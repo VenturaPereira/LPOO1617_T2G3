@@ -2,6 +2,7 @@ package userInt;
 
 import java.util.Scanner;
 import gameLogic.DnD;
+import gameLogic.GameOver;
 import gameLogic.Guard;
 import gameLogic.Hero;
 import gameLogic.MapGame;
@@ -88,10 +89,11 @@ public class ClientInt {
 		
 	}
 */
-	public static void decisions(Hero hero, Mapa1 map1, Guard guard) {
+	public static void decisions(Hero hero, Mapa1 map1, Guard guard, GameOver game) {
+		
 		Message msg = new Message();
 		Scanner scanner = new Scanner(System.in);
-		while (!hero.getGameOver() && !hero.getVictory()){
+		while (!game.getGame()&& !hero.getVictory()){
 
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
@@ -107,6 +109,7 @@ public class ClientInt {
 				guard.guardMove(map1);
 				hero.commandMove(map1, 'w');
 				map1.printBoard(hero, guard);
+			
 				//i++;
 				break;
 
@@ -125,7 +128,7 @@ public class ClientInt {
 			}
 		}
 		
-		if(hero.getGameOver())
+		if(game.getGame() == true)
 		{
 			msg.gameOverMsgMap1();
 		}
@@ -134,6 +137,7 @@ public class ClientInt {
 		{
 			msg.victoryMsgMap1();
 		}
+		
 		
 	}
 	
@@ -144,13 +148,21 @@ public class ClientInt {
 		Mapa1 map1= new Mapa1();
 		Hero hero = new Hero();
 		Guard guard = new Guard();
-		Ogre ogre = new Ogre();
 		Weapon weapon = new Weapon();
+		Ogre ogre = new Ogre();
+
+		GameOver game= new GameOver(hero, guard);
 		map1.printBoard(hero, guard);
-		decisions(hero, map1, guard);
+		decisions(hero, map1, guard, game);
+		
+		
+		
 		Mapa2 map2 = new Mapa2();
 		map2.initialize(hero, ogre);
 		map2.printBoard(hero, ogre, weapon);
+	
+		
+
 	}
 
 }
