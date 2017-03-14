@@ -2,6 +2,7 @@ package userInt;
 
 import java.util.Scanner;
 import gameLogic.DnD;
+import gameLogic.Enemy;
 import gameLogic.GameOver;
 import gameLogic.Guard;
 import gameLogic.Hero;
@@ -34,7 +35,7 @@ public class ClientInt {
 		}
 
 	}*/
-	public static void decisionsNextLvl(Mapa2 map, Hero hero, Ogre ogre, boolean advance, Weapon weapon){
+	public static void decisionsNextLvl(Mapa2 map, Hero hero, Enemy ogre, boolean advance, Weapon weapon){
 		if(advance == true){
 		 int i = 14854151;
 		 hero.setHi(7);
@@ -48,26 +49,26 @@ public class ClientInt {
 
 			switch (answer) {
 			case "S":
-				ogre.ogreMove(map);;
+				ogre.enemyMove(map);
 				hero.commandMove(map, 's');
 				map.printBoard(hero, ogre, weapon);
 				i++;
 				break;
 			case "W":
-				ogre.ogreMove(map);;
+				ogre.enemyMove(map);
 				hero.commandMove(map, 'w');
 				map.printBoard(hero, ogre, weapon);
 				i++;
 				break;
 
 			case "D":
-				ogre.ogreMove(map);;
+				ogre.enemyMove(map);
 				hero.commandMove(map, 'd');
 				map.printBoard(hero, ogre, weapon);
 				i++;
 				break;
 			case "A":
-				ogre.ogreMove(map);;
+				ogre.enemyMove(map);
 				hero.commandMove(map, 'a');
 				map.printBoard(hero, ogre, weapon);
 				i++;
@@ -77,7 +78,7 @@ public class ClientInt {
 	}
 	}
 
-	public static boolean decisions(Hero hero, Mapa1 map1, Guard guard, GameOver game, WinGame win) {
+	public static boolean decisions(Hero hero, Mapa1 map1, Enemy guard, GameOver game, WinGame win) {
 	
 		Message msg = new Message();
 		Scanner scanner = new Scanner(System.in);
@@ -89,13 +90,13 @@ public class ClientInt {
 
 			switch (answer) {
 			case "S":
-				guard.guardMove(map1);
+				guard.enemyMove(map1);
 				hero.commandMove(map1, 's');
 				map1.printBoard(hero, guard);
 				//i++;
 				break;
 			case "W":
-				guard.guardMove(map1);
+				guard.enemyMove(map1);
 				hero.commandMove(map1, 'w');
 				map1.printBoard(hero, guard);
 			
@@ -103,13 +104,13 @@ public class ClientInt {
 				break;
 
 			case "D":
-				guard.guardMove(map1);
+				guard.enemyMove(map1);
 				hero.commandMove(map1, 'd');
 				map1.printBoard(hero, guard);
 				//i++;
 				break;
 			case "A":
-				guard.guardMove(map1);
+				guard.enemyMove(map1);
 				hero.commandMove(map1, 'a');
 				map1.printBoard(hero, guard);
 				//i++;
@@ -143,9 +144,9 @@ public class ClientInt {
 
 		Mapa1 map1= new Mapa1();
 		Hero hero = new Hero();
-		Guard guard = new Guard();
+		Enemy guard = new Guard();
 		Weapon weapon = new Weapon();
-		Ogre ogre = new Ogre();
+		Enemy ogre = new Ogre();
 		GameOver game= new GameOver(hero, guard);
 		WinGame win = new WinGame(hero);
 		map1.printBoard(hero, guard);

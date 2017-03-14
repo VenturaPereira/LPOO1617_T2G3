@@ -18,17 +18,18 @@ public class Mapa2 extends MapGame {
 		return nextLevelBoard;
 	}
 	
-	public void printBoard(Hero hero, Ogre ogre, Weapon weapon){
+	public void printBoard(Hero hero, Enemy ogre, Weapon weapon){
 		
 		
 		
 		int hx=hero.getHi();
 		int hy = hero.getHj();
-		int oi = ogre.getOi();
-		int oj = ogre.getOj();
+		int oi = ogre.getI();
+		int oj = ogre.getJ();
 		
 		//, ox, oy, wx, wy;  
-		
+		System.out.println(oi);
+		System.out.println(oj);
 		for (int i = 0; i < nextLevelBoard.length; i++) {
 		    for (int j = 0; j < nextLevelBoard[i].length; j++) {
 		    	if(i == hx && j == hy){
