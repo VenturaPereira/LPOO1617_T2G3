@@ -48,26 +48,30 @@ public class ClientInt {
 
 			switch (answer) {
 			case "S":
-				ogre.ogreMove(map);;
+				ogre.ogreMove(map);
+				weapon.weaponMove(map);
 				hero.commandMove(map, 's');
 				map.printBoard(hero, ogre, weapon);
 				i++;
 				break;
 			case "W":
-				ogre.ogreMove(map);;
+				ogre.ogreMove(map);
 				hero.commandMove(map, 'w');
+				weapon.weaponMove(map);
 				map.printBoard(hero, ogre, weapon);
 				i++;
 				break;
 
 			case "D":
-				ogre.ogreMove(map);;
+				ogre.ogreMove(map);
+				weapon.weaponMove(map);
 				hero.commandMove(map, 'd');
 				map.printBoard(hero, ogre, weapon);
 				i++;
 				break;
 			case "A":
-				ogre.ogreMove(map);;
+				ogre.ogreMove(map);
+				weapon.weaponMove(map);
 				hero.commandMove(map, 'a');
 				map.printBoard(hero, ogre, weapon);
 				i++;
@@ -144,8 +148,8 @@ public class ClientInt {
 		Mapa1 map1= new Mapa1();
 		Hero hero = new Hero();
 		Guard guard = new Guard();
-		Weapon weapon = new Weapon();
 		Ogre ogre = new Ogre();
+		Weapon weapon = new Weapon(ogre);
 		GameOver game= new GameOver(hero, guard);
 		WinGame win = new WinGame(hero);
 		map1.printBoard(hero, guard);
