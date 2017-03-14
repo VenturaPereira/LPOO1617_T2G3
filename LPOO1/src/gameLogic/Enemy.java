@@ -1,6 +1,8 @@
 package gameLogic;
 
-public class Enemy extends Character
+public abstract class Enemy extends Character
 {
+	
+	
 	
 }

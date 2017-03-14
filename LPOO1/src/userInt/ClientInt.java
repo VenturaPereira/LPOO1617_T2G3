@@ -11,6 +11,7 @@ import gameLogic.Mapa2;
 import gameLogic.Message;
 import gameLogic.Ogre;
 import gameLogic.Weapon;
+import gameLogic.WinGame;
 public class ClientInt {
 	/*
 	public static void game(DnD game) {
@@ -32,68 +33,59 @@ public class ClientInt {
 			break;
 		}
 
-	}
-	public static void decisionsNextLvl(DnD game){
-		 int i = 0;
-		 game.newLevel();
+	}*/
+	public static void decisionsNextLvl(Mapa2 map, Hero hero, Ogre ogre, boolean advance, Weapon weapon){
+		if(advance == true){
+		 int i = 14854151;
+		 map.initialize(hero, ogre);
+			map.printBoard(hero, ogre, weapon);
 		Scanner scanner = new Scanner(System.in);
-		while (!game.analyseOgre() && !game.analyseStairs(game.getSecondMap()) && !game.analyseWeapon()) {
+		while (i < 500) {
              
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
 
 			switch (answer) {
 			case "S":
-				game.moveDown(game.getSecondMap());
-				game.moveOgre();
-				game.moveWeapon();
-				game.newLevel();
+				
 				i++;
 				break;
 			case "W":
-				game.moveUp(game.getSecondMap());
-				game.moveOgre();
-				game.moveWeapon();
-				game.newLevel();
+				
 				i++;
 				break;
 
 			case "D":
-				game.moveRight(game.getSecondMap());
-				game.moveOgre();
-				game.moveWeapon();
-				game.newLevel();
 				i++;
 				break;
 			case "A":
-				game.moveLeft(game.getSecondMap());
-				game.moveOgre();
-				game.moveWeapon();
-				game.newLevel();
+				
 				i++;
 				break;
 			}
 		}
-		if(game.analyseOgre())
-		{
-			System.out.println("The ogre caught you! Game over.");
-		}else if(game.analyseStairs(game.getSecondMap()))
-		{
-			System.out.println("You won!!!");
-		}
-		else if(game.analyseWeapon())
-		{
-			System.out.println("The ogre swings his club and kills you. Game over.");
-		}
+		//if(game.analyseOgre())
+		//{
+		//	System.out.println("The ogre caught you! Game over.");
+		//}else if(game.analyseStairs(game.getSecondMap()))
+		//{
+		//	System.out.println("You won!!!");
+	//	}
+	//	else if(game.analyseWeapon())
+	//	{
+		//	System.out.println("The ogre swings his club and kills you. Game over.");
+		//}
 		
 		
 	}
-*/
-	public static void decisions(Hero hero, Mapa1 map1, Guard guard, GameOver game) {
-		
+	}
+
+	public static boolean decisions(Hero hero, Mapa1 map1, Guard guard, GameOver game, WinGame win) {
+	
 		Message msg = new Message();
 		Scanner scanner = new Scanner(System.in);
-		while (!game.getGame()&& !hero.getVictory()){
+		while (!game.getGame()&& !win.getWin()){
+			
 
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
@@ -131,12 +123,19 @@ public class ClientInt {
 		if(game.getGame() == true)
 		{
 			msg.gameOverMsgMap1();
+		
 		}
 		
-		if(hero.getVictory())
+		if(win.getWin() == true)
 		{
 			msg.victoryMsgMap1();
+			
+			
+			return true;
+			
+			
 		}
+		return false;
 		
 		
 	}
@@ -152,14 +151,11 @@ public class ClientInt {
 		Ogre ogre = new Ogre();
 
 		GameOver game= new GameOver(hero, guard);
+		WinGame win = new WinGame(hero);
 		map1.printBoard(hero, guard);
-		decisions(hero, map1, guard, game);
-		
-		
-		
-		Mapa2 map2 = new Mapa2();
-		map2.initialize(hero, ogre);
-		map2.printBoard(hero, ogre, weapon);
+		boolean next =decisions(hero, map1, guard, game, win);	
+		Mapa2 map2 = new Mapa2();		
+		decisionsNextLvl( map2, hero, ogre, next, weapon);
 	
 		
 
