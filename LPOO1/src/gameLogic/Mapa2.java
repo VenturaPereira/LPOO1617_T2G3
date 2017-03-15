@@ -44,11 +44,11 @@ public class Mapa2 extends MapGame {
 		    		System.out.print("H|");
 		    		j++;
 		    	}
-		    	else if(i ==oi && j == oj){
+		    	 if(i ==oi && j == oj){
 		    		System.out.print("0|");
 		    		j++;
 		    	}
-		    	else if(i == ogre.getWeaponI() && j == ogre.getWeaponJ())
+		    	 if(i == ogre.getWeaponI() && j == ogre.getWeaponJ())
 		    	{
 		    		System.out.print("*|");
 		    		j++;
