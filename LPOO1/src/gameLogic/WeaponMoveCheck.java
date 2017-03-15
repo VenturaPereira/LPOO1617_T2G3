@@ -17,12 +17,12 @@ public class WeaponMoveCheck {
 			}
 		}
 		else if(dir == 1){
-			if(ogre.getI() < map.getSizeI()-1){
+			if(ogre.getI() < map.getSizeI()-2){
 				return true;
 			}
 		}
 		else if(dir == 2){
-			if(ogre.getJ() < map.getSizeJ()-1){
+			if(ogre.getJ() < map.getSizeJ()-2){
 				return true;
 			}
 		}
