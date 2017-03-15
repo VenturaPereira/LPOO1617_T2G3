@@ -114,8 +114,8 @@ public class Ogre extends Enemy {
 			{
 				weaponI = getI();
 				weaponJ = getJ()+1;
-				System.out.println(getI() + "," + getJ());
-				System.out.println(weaponI + "," + weaponJ);
+			//	System.out.println(getI() + "," + getJ());
+				//System.out.println(weaponI + "," + weaponJ);
 				break;
 			}
 			else
@@ -123,7 +123,7 @@ public class Ogre extends Enemy {
 				weaponI = getI();
 				weaponJ = getJ()-1;
 				System.out.println(getI() + "," + getJ());
-				System.out.println(weaponI + "," + weaponJ);
+				//System.out.println(weaponI + "," + weaponJ);
 				break;
 			}
 		case 3:
@@ -131,16 +131,16 @@ public class Ogre extends Enemy {
 			{
 				weaponI = getI();
 				weaponJ = getJ()-1;
-				System.out.println(getI() + "," + getJ());
-				System.out.println(weaponI + "," + weaponJ);
+				//System.out.println(getI() + "," + getJ());
+				//System.out.println(weaponI + "," + weaponJ);
 				break;
 			}
 			else
 			{
 				weaponI = getI();
 				weaponJ = getJ()+1;
-				System.out.println(getI() + "," + getJ());
-				System.out.println(weaponI + "," + weaponJ);
+				//System.out.println(getI() + "," + getJ());
+				//System.out.println(weaponI + "," + weaponJ);
 				break;
 			}
 		}
