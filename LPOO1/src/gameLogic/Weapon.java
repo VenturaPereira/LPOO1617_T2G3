@@ -1,4 +1,4 @@
-package gameLogic;
+/*package gameLogic;
 
 import java.util.Random;
 
@@ -93,3 +93,4 @@ public class Weapon extends Enemy {
 	
 }
 
+*/

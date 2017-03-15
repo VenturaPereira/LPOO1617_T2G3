@@ -4,11 +4,7 @@ public abstract class Enemy extends Character
 {
 	
 	private  int i, j;
-	
-	public Enemy(int i, int j){
-		this.setI(i);
-		this.setJ(j);
-	}
+	private boolean sleeping=false;
 
 	public int getI() {
 		return i;
@@ -28,7 +24,15 @@ public abstract class Enemy extends Character
 	
 	
 	public abstract void enemyMove(MapGame map);
-	
+
+	public boolean isSleeping() {
+		return sleeping;
+	}
+
+	public void setSleeping(boolean sleeping) {
+		this.sleeping = sleeping;
+	}
+
 	
 	
 	

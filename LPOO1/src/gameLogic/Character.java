@@ -28,7 +28,11 @@ public abstract class Character {
 				return false;
 			}else if(map.getMap()[di][dj] == 'I'){
 				return false;
-			} 
+			}
+			else if(map.getMap()[di][dj] == ' ')
+			{
+				return true;
+			}
 			
 		}
 		

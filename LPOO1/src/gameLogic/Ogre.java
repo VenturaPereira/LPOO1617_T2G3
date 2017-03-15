@@ -3,12 +3,27 @@ package gameLogic;
 import java.util.Random;
 
 public class Ogre extends Enemy {
+	WeaponMoveCheck w = new WeaponMoveCheck(this);
+	private int weaponI;
+	private int weaponJ;
 	
 	public Ogre()
 	{
-		super(1,4);
+		setI(1);
+		setJ(4);
+		this.weaponI = 1;
+		this.weaponJ = 5;
 	}
 
+	public int getWeaponI()
+	{
+		return this.weaponI;
+	}
+	
+	public int getWeaponJ()
+	{
+		return this.weaponJ;
+	}
 	
 	public void enemyMove(MapGame map){
 		int goTo;
@@ -20,9 +35,7 @@ public class Ogre extends Enemy {
 			testdown = getI() + 1;
 			if(move(map, testdown, getJ()) == true){
 				setI(testdown);
-				System.out.println("i get here0");
 			}
-			System.out.println("i get here0");
 			break;
 		case 1:
 			int testup;
@@ -54,6 +67,83 @@ public class Ogre extends Enemy {
 		}
 		
 		
+	}
+	
+	public void ogreAttack(Mapa2 map)
+	{
+		int goTo;
+		Random rnd = new Random();
+		goTo= rnd.nextInt(4);
+		switch(goTo){
+		case 0:
+			if(w.checkMove(0, map))
+			{
+				weaponI = getI()-1;
+				weaponJ = getJ();
+				System.out.println(getI() + "," + getJ());
+				System.out.println(weaponI + "," + weaponJ);
+				break;
+			}	
+			else
+			{
+				weaponI = getI()+1;
+				weaponJ = getJ();
+				System.out.println(getI() + "," + getJ());
+				System.out.println(weaponI + "," + weaponJ);
+				break;
+			}
+		case 1:
+			if(w.checkMove(1, map))
+			{
+				weaponI = getI()+1;
+				weaponJ = getJ();
+				System.out.println(getI() + "," + getJ());
+				System.out.println(weaponI + "," + weaponJ);
+				break;
+			}
+			else
+			{
+				weaponI = getI()-1;
+				weaponJ = getJ();
+				System.out.println(getI() + "," + getJ());
+				System.out.println(weaponI + "," + weaponJ);
+				break;
+			}
+		case 2:
+			if(w.checkMove(2, map))
+			{
+				weaponI = getI();
+				weaponJ = getJ()+1;
+				System.out.println(getI() + "," + getJ());
+				System.out.println(weaponI + "," + weaponJ);
+				break;
+			}
+			else
+			{
+				weaponI = getI();
+				weaponJ = getJ()-1;
+				System.out.println(getI() + "," + getJ());
+				System.out.println(weaponI + "," + weaponJ);
+				break;
+			}
+		case 3:
+			if(w.checkMove(3, map))
+			{
+				weaponI = getI();
+				weaponJ = getJ()-1;
+				System.out.println(getI() + "," + getJ());
+				System.out.println(weaponI + "," + weaponJ);
+				break;
+			}
+			else
+			{
+				weaponI = getI();
+				weaponJ = getJ()+1;
+				System.out.println(getI() + "," + getJ());
+				System.out.println(weaponI + "," + weaponJ);
+				break;
+			}
+		}
 	}
 	
 	
