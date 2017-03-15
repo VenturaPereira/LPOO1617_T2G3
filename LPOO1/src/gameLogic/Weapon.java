@@ -2,59 +2,94 @@ package gameLogic;
 
 import java.util.Random;
 
-public class Weapon extends Ogre {
-	private int wi, wj;
-	Ogre ogre;
+public class Weapon extends Enemy {
+	Enemy ogre;
+	WeaponMoveCheck check;
 	
-	public Weapon(Ogre ogre)
+	public Weapon(Enemy ogre)
 	{
-		ogre = this.ogre;
+		super(ogre.getI(), ogre.getJ());
+		this.ogre=ogre;
+		this.check= new WeaponMoveCheck(ogre, this);
 	};
 	
-	
-	public void weaponMove(MapGame map)
+
+	public void enemyMove(MapGame map)
 	{
+		
 		int goTo;
 		Random rnd = new Random();
 		goTo = rnd.nextInt(4);
 		switch(goTo) {
 		case 0:
 			int testdown;
-			testdown = ogre.getOi()+1;
-			if(move(map, testdown, ogre.getOj()))
+			System.out.println(ogre.getI());
+			testdown = ogre.getI()+1;
+			if(move(map, testdown, ogre.getJ()) && !check.checkMove())
 			{
-				this.wi = testdown;
-				this.wj = ogre.getOj();
+				setI(ogre.getI()-1);
+				setJ(ogre.getJ());
 			}
+			else
+			{
+				enemyMove(map);
+			}
+			System.out.println(getI());
+			System.out.println(getJ());
 			break;
 		case 1:
 			int testup;
-			testup = ogre.getOi()-1;
-			if(move(map, testup, ogre.getOj()))
+			testup = ogre.getI()-1;
+			System.out.println(ogre.getI());
+			if(move(map, testup, ogre.getJ()) && !check.checkMove())
 			{
-				this.wi = testup;
-				this.wj = ogre.getOj();
+				setI(testup);
+				setJ(ogre.getJ());
 			}
+			else
+			{
+				setI(ogre.getI()+1);
+				setJ(ogre.getJ());
+			}
+			System.out.println(getI());
+			System.out.println(getJ());
 			break;
 		case 2:
 			int testright;
-			testright = ogre.getOj()+1;
-			if(move(map, ogre.getOi(), testright))
+			System.out.println(ogre.getJ());
+			testright = ogre.getJ()+1;
+			if(move(map, ogre.getI(), testright) && !check.checkMove())
 			{
-				this.wi = ogre.getOi();
-				this.wj = testright;
+				setI(ogre.getI());
+				setJ(testright);
 			}
+			else
+			{
+				setI(ogre.getI());
+				setJ(ogre.getJ()-1);
+			}
+			System.out.println(getI());
+			System.out.println(getJ());
 			break;
 		case 3:
 			int testleft;
-			testleft = ogre.getOj()-1;
-			if(move(map, ogre.getOi(), testleft))
+			System.out.println(ogre.getJ());
+			testleft = ogre.getJ()-1;
+			if(move(map, ogre.getI(), testleft) && !check.checkMove())
 			{
-				this.wi = ogre.getOi();
-				this.wj = testleft;
+				setI(ogre.getI());
+				setJ(ogre.getJ()+1);
 			}
+			else
+			{
+				enemyMove(map);
+			}
+			System.out.println(getI());
+			System.out.println(getJ());
 			break;
 		}
 	}
 	
+	
 }
+

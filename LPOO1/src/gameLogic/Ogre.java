@@ -2,69 +2,54 @@ package gameLogic;
 
 import java.util.Random;
 
-public class Ogre extends Character {
-	private int oi, oj;
+public class Ogre extends Enemy {
 	
 	public Ogre()
 	{
-		this.oi = 1;
-		this.oj = 4;
-		
+		super(1,4);
 	}
+
 	
-	public int getOi()
-	{
-		return this.oi;
-	}
-	
-	public int getOj()
-	{
-		return this.oj;
-	}
-	
-	public void setOi(int a)
-	{
-		this.oi = a;
-	}
-	
-	public void setOj(int a)
-	{
-		this.oj = a;
-	}
-	
-	
-	public void ogreMove(MapGame map){
+	public void enemyMove(MapGame map){
 		int goTo;
 		Random rnd = new Random();
 		goTo= rnd.nextInt(4);
 		switch(goTo){
 		case 0:
 			int testdown;
-			testdown = this.oi + 1;
-			if(move(map, testdown, this.oj) == true){
-				setOi(testdown);
+			testdown = getI() + 1;
+			if(move(map, testdown, getJ()) == true){
+				setI(testdown);
+				System.out.println("i get here0");
 			}
+			System.out.println("i get here0");
 			break;
 		case 1:
 			int testup;
-			testup = this.oi - 1;
-			if(move(map, testup, this.oj) == true){
-				setOi(testup);
+			testup = getI() - 1;
+			if(move(map, testup, getJ()) == true){
+				setI(testup);
+				System.out.println("i get here1");
 			}
+			System.out.println("i get here1");		
 			break;
 		case 2:
 			int testRight;
-			testRight = this.oj + 1;
-			if(move(map, this.oi, testRight) == true){
-				setOj(testRight);
+			testRight = getJ()+ 1;
+			if(move(map, getI(), testRight) == true){
+				setJ(testRight);
+				System.out.println("i get here2");
 			}
+			System.out.println("i get here2");
 			break;
 		case 3:
 			int testLeft;
-			testLeft = this.oj - 1;
-			if(move(map, this.oi, testLeft) == true){
-				setOj(testLeft);
+			testLeft = getJ() - 1;
+			if(move(map, getI(), testLeft) == true){
+				setJ(testLeft);
+				System.out.println("i get here3");
 			}
+			System.out.println("i get here3");
 			break;
 		}
 		

@@ -1,34 +1,21 @@
 package gameLogic;
 
-public class Guard extends Character {
-	private int gx, gj, index;
+public class Guard extends Enemy {
+	private int index;
 	
 	private int[][] addMovement= {{1,7},{2,7},{3,7}, {4,7} ,{5,7},{5,6},{5,5},{5,4},{5,3},{5,2},{5,1},{6,1},{6,2},{6,3},{6,4},{6,5},{6,6},{6,7},{6,8},{5,8},{4,8},{3,8},{2,8},{1,8}};
 	public Guard(){
-		this.gx =1;
-		this.gj =8;
+		super(1,8);
 		this.index=0;
 		
 	}
-	public void setGx(int i){
-		this.gx=i;
-	}
-	public void setGj(int j){
-		this.gj=j;
-	}
-	public int getGx(){
-		return this.gx;
-	}
-	public int getGj(){
-		return this.gj;
-	}
-	public void guardMove(MapGame map){
+	public void enemyMove(MapGame map){
 	{
 		if(this.index == (this.addMovement.length-1)){
 			this.index=0;
 		}
-		this.gx =this.addMovement[index][0];
-		this.gj = this.addMovement[index][1];
+		setI(this.addMovement[index][0]);
+		setJ(this.addMovement[index][1]);
 		index++;
 	}
 	

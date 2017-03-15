@@ -24,13 +24,13 @@ public class Mapa1 extends MapGame {
 		board[6][0]=STAIRS;
 	}
 	
-	public void printBoard(Hero hero, Guard guard){
+	public void printBoard(Hero hero, Enemy guard){
 	
 	
 	int hx=hero.getHi();
 	int hy = hero.getHj();
-	int gx = guard.getGx();
-	int gj= guard.getGj();
+	int gx = guard.getI();
+	int gj= guard.getJ();
 	//gx, gy;  
 		
 		for (int i = 0; i < board.length; i++) {

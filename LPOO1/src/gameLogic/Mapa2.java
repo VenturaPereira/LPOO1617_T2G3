@@ -18,29 +18,33 @@ public class Mapa2 extends MapGame {
 		return nextLevelBoard;
 	}
 	
-	public void printBoard(Hero hero, Ogre ogre, Weapon weapon){
+	public void printBoard(Hero hero, Enemy ogre, Enemy weapon){
 		
 		
 		
 		int hx=hero.getHi();
 		int hy = hero.getHj();
-		int oi = ogre.getOi();
-		int oj = ogre.getOj();
+		int oi = ogre.getI();
+		int oj = ogre.getJ();
+		int wi = weapon.getI();
+		int wj = weapon.getJ();
 		
 		//, ox, oy, wx, wy;  
-		
+		System.out.println(oi);
+		System.out.println(oj);
 		for (int i = 0; i < nextLevelBoard.length; i++) {
 		    for (int j = 0; j < nextLevelBoard[i].length; j++) {
 		    	if(i == hx && j == hy){
 		    		System.out.print("H|");
 		    		j++;
 		    	}
-		    	else if(i == oi && j == oj){
+		    	else if(i ==oi && j == oj){
 		    		System.out.print("0|");
 		    		j++;
-		    	} //else if(i == wx && j == wy){
-		    		//nextLevelBoard[i][j] = WEAPON;
-		    	//}
+		    	} else if(i == wi && j == wj){
+		    		System.out.print("*|");
+		    		j++;
+		    	}
 		        System.out.print(nextLevelBoard[i][j] + "|");
 		    }
 		    System.out.println(" ");
