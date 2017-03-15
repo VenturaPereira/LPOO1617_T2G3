@@ -6,7 +6,8 @@ public class Ogre extends Enemy {
 	
 	public Ogre()
 	{
-		super(1,4);
+		setI(1);
+		setJ(4);
 	}
 
 	

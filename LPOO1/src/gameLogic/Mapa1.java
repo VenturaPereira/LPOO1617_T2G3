@@ -42,8 +42,14 @@ public class Mapa1 extends MapGame {
 		    	}//else if(i == gx && j == gy){
 		    		//board[i][j] = GUARD;
 		    	//}
-		    	if(i == gx && j == gj){
+		    	if((i == gx && j == gj) && guard instanceof Drunken && guard.isSleeping()){
+		    		System.out.print("g|");
+		    		j++;
+		    	} else if((i == gx && j == gj) && guard instanceof Drunken && !guard.isSleeping()){
 		    		System.out.print("G|");
+		    		j++;
+		    	}else if((i == gx && j == gj) && guard instanceof Suspicious){
+		    		System.out.print("S|");
 		    		j++;
 		    	}
 		        System.out.print(board[i][j] + "|");
