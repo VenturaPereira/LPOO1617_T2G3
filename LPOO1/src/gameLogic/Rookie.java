@@ -5,6 +5,7 @@ public class Rookie extends Guard{
 	public Rookie() {
 		setI(super.getI());
 		setJ(super.getJ());
+		setSleeping(false);
 		
 	}
 

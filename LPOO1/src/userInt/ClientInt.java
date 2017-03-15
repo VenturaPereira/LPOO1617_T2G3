@@ -2,7 +2,8 @@ package userInt;
 
 import java.util.Random;
 import java.util.Scanner;
-import gameLogic.DnD;
+
+import gameLogic.ChooseGuard;
 import gameLogic.Drunken;
 import gameLogic.Enemy;
 import gameLogic.GameOver;
@@ -94,7 +95,6 @@ public class ClientInt{
 
 			switch (answer) {
 			case "S":
-				
 				guard.enemyMove(map1);
 				hero.commandMove(map1, 's');
 				map1.printBoard(hero, guard);
@@ -149,7 +149,9 @@ public class ClientInt{
 
 		Mapa1 map1= new Mapa1();
 		Hero hero = new Hero();
-		Enemy guard = new Suspicious();
+		Enemy guard = new Rookie();
+		ChooseGuard which = new ChooseGuard(guard);
+		guard = which.setGuard();
 		Weapon weapon = new Weapon();
 		Enemy ogre = new Ogre();
 		GameOver game= new GameOver(hero, guard);

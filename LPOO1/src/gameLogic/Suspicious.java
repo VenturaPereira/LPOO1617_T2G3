@@ -7,6 +7,7 @@ public class Suspicious extends Guard{
 	public Suspicious(){
 		setI(super.getI());
 		setJ(super.getJ());
+		setSleeping(false);
 	}
 
 	@Override

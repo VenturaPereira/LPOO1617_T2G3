@@ -51,6 +51,9 @@ public class Mapa1 extends MapGame {
 		    	}else if((i == gx && j == gj) && guard instanceof Suspicious){
 		    		System.out.print("S|");
 		    		j++;
+		    	}else if((i == gx && j == gj) && guard instanceof Rookie){
+		    		System.out.print("R|");
+		    		j++;
 		    	}
 		        System.out.print(board[i][j] + "|");
 		    }
