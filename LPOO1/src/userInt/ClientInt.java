@@ -9,6 +9,7 @@ import gameLogic.Enemy;
 import gameLogic.GameOver;
 import gameLogic.Guard;
 import gameLogic.Hero;
+import gameLogic.Levels;
 import gameLogic.MapGame;
 import gameLogic.Mapa1;
 import gameLogic.Mapa2;
@@ -89,7 +90,7 @@ public class ClientInt{
 	}
 
 	public static boolean decisions(Hero hero, Mapa1 map1, Enemy guard, GameOver game, WinGame win) {
-	
+	   map1.setRunning(true);
 		Message msg = new Message();
 		Scanner scanner = new Scanner(System.in);
 		while (!game.getGame()&& !win.getWin()){
@@ -151,8 +152,10 @@ public class ClientInt{
 	
 
 	public static void main(String[] args) {
-
-		Mapa1 map1= new Mapa1();
+       Levels leveling = new Levels();
+       System.out.println(leveling.getLevels().size());
+		Mapa1 map1= new Mapa1(leveling);
+		System.out.println(leveling.getLevels().size());
 		Hero hero = new Hero();
 		Enemy guard = new Rookie();
 		ChooseGuard which = new ChooseGuard(guard);
@@ -162,7 +165,8 @@ public class ClientInt{
 		WinGame win = new WinGame(hero);
 		map1.printBoard(hero, guard);
 		boolean next =decisions(hero, map1, guard, game, win);	
-		Mapa2 map2 = new Mapa2();		
+		Mapa2 map2 = new Mapa2(leveling);		
+		System.out.println(leveling.getLevels().size());
 		decisionsNextLvl( map2, hero, ogre, next);
 	
 		

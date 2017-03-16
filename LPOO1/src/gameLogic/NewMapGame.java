@@ -3,9 +3,12 @@ package gameLogic;
 public class NewMapGame extends MapGame {
 
 	private char[][] map;
+	private Levels level;
 	
-	public NewMapGame(char[][] map){
+	public NewMapGame(char[][] map, Levels level){
 		this.map=map;
+		this.level=level;
+		this.level.addLevel(this);
 	}
 	
 	public void setDoors(){

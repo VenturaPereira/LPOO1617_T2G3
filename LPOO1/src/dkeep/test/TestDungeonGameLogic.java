@@ -7,6 +7,7 @@ import gameLogic.Enemy;
 import gameLogic.GameOver;
 import gameLogic.Guard;
 import gameLogic.Hero;
+import gameLogic.Levels;
 import gameLogic.NewMapGame;
 import gameLogic.Rookie;
 
@@ -17,14 +18,15 @@ import gameLogic.Rookie;
 public class TestDungeonGameLogic {
 
 	char [][] map = {{'X','X','X','X','X'},
-			         {'X','H',' ','G','X'},
+			         {'X',' ',' ',' ','X'},
 			         {'I',' ',' ',' ','X'},
 			         {'I','K',' ',' ','X'},
 			         {'X','X','X','X','X'}};
 	
 	@Test
 	public void testMoveHeroIntoFreeCell(){
-		NewMapGame maptest = new NewMapGame(map);
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(map, leveling);
 		Hero hero = new Hero();
 		Enemy guard = new Rookie();
 		guard.setI(1);
@@ -39,7 +41,8 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testHeroIsCapturedByGuard(){
-	    NewMapGame maptest = new NewMapGame(map);
+		Levels leveling = new Levels();
+	    NewMapGame maptest = new NewMapGame(map, leveling);
 	    Hero hero = new Hero();
 	    Enemy guard = new Rookie();
 	    guard.setI(1);
@@ -53,7 +56,8 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testHeroVsWall(){
-		NewMapGame maptest = new NewMapGame(map);
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(map, leveling);
 	    Hero hero = new Hero();
 	    Enemy guard = new Rookie();
 	    guard.setI(1);
@@ -66,7 +70,8 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testLeverWorking(){
-		NewMapGame maptest = new NewMapGame(map);
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(map, leveling);
 	    Hero hero = new Hero();
 	    Enemy guard = new Rookie();
 	    guard.setI(1);

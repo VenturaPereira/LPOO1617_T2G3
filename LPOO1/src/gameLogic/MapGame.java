@@ -1,6 +1,6 @@
 package gameLogic;
 
-public abstract class MapGame {
+public abstract class MapGame extends Levels {
 	
 	protected  final char DOOR = 'I';
 	protected  final char WALL = 'X';
@@ -13,7 +13,14 @@ public abstract class MapGame {
 	protected  final char CANT = '$';
 	protected  final char STAIRS = 'S';
 	protected  final char WEAPON = '*';
+	protected boolean running;
 	
+	public void setRunning(boolean gameState){
+		this.running=gameState;
+	};
+	public boolean getRunning(){
+		return running;
+	}
 	public abstract void printBoard();
     public abstract char[][] getMap(); 
     public abstract void setDoors();

@@ -3,7 +3,7 @@ package gameLogic;
 public class Mapa1 extends MapGame {
 	
 	
-	
+	private Levels level;
 	private char board[][] = {{WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}, 
 			{WALL, BLANK, BLANK, BLANK,BLANK, BLANK, WALL,BLANK, BLANK,WALL},
 			{WALL, WALL, WALL, BLANK, WALL, WALL, WALL, BLANK, BLANK, WALL},
@@ -15,6 +15,11 @@ public class Mapa1 extends MapGame {
 			{WALL, BLANK, DOOR, BLANK, DOOR, BLANK, WALL, LEVER, BLANK, WALL},
 			{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}};
 	
+	
+	public Mapa1(Levels level){	
+		this.level=level;
+		this.level.addLevel(this);
+	}
 	
 	public char[][] getMap(){
 		return board;
