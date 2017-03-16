@@ -48,9 +48,9 @@ public class ClientInt{
 		 hero.setHj(1);
 		 map.printBoard(hero, ogre);
 		Scanner scanner = new Scanner(System.in);
-		GameOver gameOver = new GameOver(hero, ogre);
+		GameOver gameOver = new GameOver(hero, ogre, map);
 		Message msg = new Message();
-		while (!gameOver.getGameOver()) {
+		while (!gameOver.getGameOver(map)) {
              
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
@@ -89,7 +89,7 @@ public class ClientInt{
 			}
 		}
 		
-		if(gameOver.getGameOver())
+		if(gameOver.getGameOver(map))
 		{
 			msg.gameOverMsgMap2();
 		}
@@ -100,7 +100,7 @@ public class ClientInt{
 	   map1.setRunning(true);
 		Message msg = new Message();
 		Scanner scanner = new Scanner(System.in);
-		while (!game.getGame()&& !win.getWin()){
+		while (!game.getGameOver(map1)&& !win.getWin()){
 			
 
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
@@ -136,7 +136,7 @@ public class ClientInt{
 			}
 		}
 		
-		if(game.getGame() == true)
+		if(game.getGameOver(map1) == true)
 		{
 			msg.gameOverMsgMap1();
 		
@@ -161,7 +161,7 @@ public class ClientInt{
 	public static void main(String[] args) {
        Levels leveling = new Levels();
 		Mapa1 map1= new Mapa1(leveling);
-		GameOver game= new GameOver(map1.getHero(), map1.getGuard());
+		GameOver game= new GameOver(map1.getHero(), map1.getGuard(), map1);
 		WinGame win = new WinGame(map1.getHero());
 		map1.printBoard(map1.getHero(), map1.getGuard());
 		boolean next =decisions(map1.getHero(), map1,  map1.getGuard(), game, win);	

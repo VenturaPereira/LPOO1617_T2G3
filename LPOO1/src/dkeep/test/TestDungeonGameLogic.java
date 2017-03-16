@@ -41,15 +41,15 @@ public class TestDungeonGameLogic {
 		Levels leveling = new Levels();
 	    NewMapGame maptest = new NewMapGame(map, leveling);
 	    if(maptest.isHasGuard()){
-	    	 GameOver gameOver = new GameOver(maptest.getHero(), maptest.getGuard()); 	
-	    	 assertFalse(gameOver.getGame());	    
+	    	 GameOver gameOver = new GameOver(maptest.getHero(), maptest.getGuard(), maptest); 	
+	    	 assertFalse(gameOver.getGameOver(maptest));	    
 	    	 maptest.getHero().commandMove(maptest, 'd');
-	    	 assertTrue(gameOver.getGame());
+	    	 assertTrue(gameOver.getGameOver(maptest));
 	    } else {
-	    	 GameOver gameOver = new GameOver(maptest.getHero(), maptest.getOgre());
-	    	 assertFalse(gameOver.getGame());
+	    	 GameOver gameOver = new GameOver(maptest.getHero(), maptest.getOgre(), maptest);
+	    	 assertFalse(gameOver.getGameOver(maptest));
 	    	 maptest.getHero().commandMove(maptest, 'd');
-	    	 assertTrue(gameOver.getGame());
+	    	 assertTrue(gameOver.getGameOver(maptest));
 	    }
 	}
 	
