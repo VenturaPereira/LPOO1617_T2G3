@@ -73,5 +73,11 @@ public class Mapa2 extends MapGame {
 		
 	}
 
+	@Override
+	public void setDoors() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

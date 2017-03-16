@@ -16,4 +16,6 @@ public abstract class MapGame {
 	
 	public abstract void printBoard();
     public abstract char[][] getMap(); 
+    public abstract void setDoors();
+    
 }
