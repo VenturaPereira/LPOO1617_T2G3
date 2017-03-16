@@ -23,6 +23,7 @@ public abstract class Character {
 				return true;
 			}else if(map.getMap()[di][dj] == 'S'){
 				map.setRunning(false);
+				
 				return true;
 			}
 		} else if(map instanceof Mapa2){
