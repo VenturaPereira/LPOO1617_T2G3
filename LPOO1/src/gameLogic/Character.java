@@ -22,9 +22,9 @@ public abstract class Character {
 			}else if(map.getMap()[di][dj] == ' '){
 				return true;
 			}else if(map.getMap()[di][dj] == 'S'){
-				map.setRunning(false);
+				  map.setArrived(true);				   
+				  return true;
 				
-				return true;
 			}
 		} else if(map instanceof Mapa2){
 			
@@ -36,6 +36,10 @@ public abstract class Character {
 			else if(map.getMap()[di][dj] == ' ')
 			{
 				return true;
+			}else if(map.getMap()[di][dj] == 'S'){
+				  map.setArrived(true);				   
+				  return true;
+				
 			}
 			
 		}else if(map instanceof NewMapGame){
@@ -52,6 +56,10 @@ public abstract class Character {
 			}else if(map.getMap()[di][dj] == 'K'){ 
 				((NewMapGame) map).setDoors();
 			    return true;
+			}else if(map.getMap()[di][dj] == 'S'){
+				  map.setArrived(true);				   
+				  return true;
+				
 			}
 			
 		}

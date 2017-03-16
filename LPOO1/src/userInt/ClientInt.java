@@ -164,7 +164,7 @@ public class ClientInt{
        Levels leveling = new Levels();
 		Mapa1 map1= new Mapa1(leveling);
 		GameOver game= new GameOver(map1.getHero(), map1.getGuard(), map1);
-		WinGame win = new WinGame(map1.getHero());
+		WinGame win = new WinGame(map1);
 		map1.printBoard(map1.getHero(), map1.getGuard());
 		boolean next =decisions(map1.getHero(), map1,  map1.getGuard(), game, win);	
 		Mapa2 map2 = new Mapa2(leveling);		

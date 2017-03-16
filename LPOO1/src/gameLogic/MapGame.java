@@ -18,6 +18,7 @@ public abstract class MapGame extends Levels {
 	protected  final char STAIRS = 'S';
 	protected  final char WEAPON = '*';
 	protected boolean running;
+	private boolean arrived=false;
 	
 	public void setRunning(boolean gameState){
 		this.running=gameState;
@@ -45,6 +46,12 @@ public abstract class MapGame extends Levels {
 	}
 	public void setGuard(Enemy guard) {
 		this.guard = guard;
+	}
+	public boolean isArrived() {
+		return arrived;
+	}
+	public void setArrived(boolean arrived) {
+		this.arrived = arrived;
 	}
     
 }
