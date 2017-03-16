@@ -47,7 +47,9 @@ public class ClientInt{
 		 hero.setHj(1);
 		 map.printBoard(hero, ogre);
 		Scanner scanner = new Scanner(System.in);
-		while (i > 500) {
+		GameOver gameOver = new GameOver(hero, ogre);
+		Message msg = new Message();
+		while (!gameOver.getGameOver()) {
              
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
@@ -84,6 +86,11 @@ public class ClientInt{
 				i++;
 				break;
 			}
+		}
+		
+		if(gameOver.getGameOver())
+		{
+			msg.gameOverMsgMap2();
 		}
 	}
 	}

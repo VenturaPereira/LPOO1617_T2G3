@@ -14,4 +14,9 @@ public class Message {
 	{
 		System.out.println("The guard caught you. Game Over!");
 	}
+	
+	public void gameOverMsgMap2()
+	{
+		System.out.println("The ogre strikes his club and kills you. Game Over!");
+	}
 }
