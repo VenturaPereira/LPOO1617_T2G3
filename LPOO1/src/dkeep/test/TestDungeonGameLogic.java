@@ -18,7 +18,7 @@ import gameLogic.Rookie;
 public class TestDungeonGameLogic {
 
 	char [][] map = {{'X','X','X','X','X'},
-			         {'X',' ',' ',' ','X'},
+			         {'X','H',' ','G','X'},
 			         {'I',' ',' ',' ','X'},
 			         {'I','K',' ',' ','X'},
 			         {'X','X','X','X','X'}};
@@ -27,44 +27,39 @@ public class TestDungeonGameLogic {
 	public void testMoveHeroIntoFreeCell(){
 		Levels leveling = new Levels();
 		NewMapGame maptest = new NewMapGame(map, leveling);
-		Hero hero = new Hero();
-		Enemy guard = new Rookie();
-		guard.setI(1);
-		guard.setJ(3);
-		assertEquals(1, hero.getHi());
-		assertEquals(1, hero.getHj());
-		hero.commandMove(maptest, 's');
-		assertEquals(2, hero.getHi());
-		assertEquals(1, hero.getHj());
+		assertEquals(1, maptest.getHero().getHi());
+		assertEquals(1, maptest.getHero().getHj());
+		maptest.getHero().commandMove(maptest, 's');
+		assertEquals(2, maptest.getHero().getHi());
+		assertEquals(1, maptest.getHero().getHj());
 		
 	}
 	
 	@Test
 	public void testHeroIsCapturedByGuard(){
+		
 		Levels leveling = new Levels();
 	    NewMapGame maptest = new NewMapGame(map, leveling);
-	    Hero hero = new Hero();
-	    Enemy guard = new Rookie();
-	    guard.setI(1);
-		guard.setJ(3);
-	    GameOver gameOver = new GameOver(hero, guard);
-	    assertFalse(gameOver.getGame());
-	 	hero.commandMove(maptest, 'd');
-	 	assertTrue(gameOver.getGame());
-		
+	    if(maptest.isHasGuard()){
+	    	 GameOver gameOver = new GameOver(maptest.getHero(), maptest.getGuard()); 	
+	    	 assertFalse(gameOver.getGame());	    
+	    	 maptest.getHero().commandMove(maptest, 'd');
+	    	 assertTrue(gameOver.getGame());
+	    } else {
+	    	 GameOver gameOver = new GameOver(maptest.getHero(), maptest.getOgre());
+	    	 assertFalse(gameOver.getGame());
+	    	 maptest.getHero().commandMove(maptest, 'd');
+	    	 assertTrue(gameOver.getGame());
+	    }
 	}
 	
 	@Test
 	public void testHeroVsWall(){
 		Levels leveling = new Levels();
 		NewMapGame maptest = new NewMapGame(map, leveling);
-	    Hero hero = new Hero();
-	    Enemy guard = new Rookie();
-	    guard.setI(1);
-		guard.setJ(3);
-		hero.commandMove(maptest, 'w');
-		assertEquals(1, hero.getHi());
-		assertEquals(1, hero.getHj());
+		maptest.getHero().commandMove(maptest, 'w');
+		assertEquals(1, maptest.getHero().getHi());
+		assertEquals(1, maptest.getHero().getHj());
 		
 	}
 	
@@ -72,12 +67,8 @@ public class TestDungeonGameLogic {
 	public void testLeverWorking(){
 		Levels leveling = new Levels();
 		NewMapGame maptest = new NewMapGame(map, leveling);
-	    Hero hero = new Hero();
-	    Enemy guard = new Rookie();
-	    guard.setI(1);
-		guard.setJ(3);
-		hero.commandMove(maptest, 's');
-		hero.commandMove(maptest, 's');
+		maptest.getHero().commandMove(maptest, 's');
+		maptest.getHero().commandMove(maptest, 's');
 		assertTrue(maptest.getMap()[2][0] == 'S' && maptest.getMap()[3][0] == 'S');	
 	}
 	
