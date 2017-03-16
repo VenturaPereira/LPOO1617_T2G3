@@ -153,21 +153,14 @@ public class ClientInt{
 
 	public static void main(String[] args) {
        Levels leveling = new Levels();
-       System.out.println(leveling.getLevels().size());
 		Mapa1 map1= new Mapa1(leveling);
-		System.out.println(leveling.getLevels().size());
-		Hero hero = new Hero();
-		Enemy guard = new Rookie();
-		ChooseGuard which = new ChooseGuard(guard);
-		guard = which.setGuard();
-		Ogre ogre = new Ogre();
-		GameOver game= new GameOver(hero, guard);
-		WinGame win = new WinGame(hero);
-		map1.printBoard(hero, guard);
-		boolean next =decisions(hero, map1, guard, game, win);	
+		GameOver game= new GameOver(map1.getHero(), map1.getGuard());
+		WinGame win = new WinGame(map1.getHero());
+		map1.printBoard(map1.getHero(), map1.getGuard());
+		boolean next =decisions(map1.getHero(), map1,  map1.getGuard(), game, win);	
 		Mapa2 map2 = new Mapa2(leveling);		
 		System.out.println(leveling.getLevels().size());
-		decisionsNextLvl( map2, hero, ogre, next);
+		decisionsNextLvl( map2, map2.getHero(), map2.getOgre(), next);
 	
 		
 

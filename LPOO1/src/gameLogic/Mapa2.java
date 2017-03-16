@@ -16,6 +16,12 @@ public class Mapa2 extends MapGame {
 	 public Mapa2(Levels level){
 		 this.level= level;
 		 this.level.addLevel(this);
+		 Hero hero = new Hero();
+		 hero.setHi(7);
+		 hero.setHj(1);
+	   	this.setHero(hero);
+		Ogre ogre = new Ogre();
+		this.setOgre(ogre);
 	 }
 	 
 	
@@ -37,12 +43,12 @@ public class Mapa2 extends MapGame {
 		
 		
 		
-		int hx=hero.getHi();
-		int hy = hero.getHj();
-		int oi = ogre.getI();
-		int oj = ogre.getJ();
-		int wi = ogre.getWeaponI();
-		int wj =  ogre.getWeaponJ();
+		int hx=this.getHero().getHi();
+		int hy = this.getHero().getHj();
+		int oi = this.getOgre().getI();
+		int oj = this.getOgre().getJ();
+		int wi = this.getOgre().getWeaponI();
+		int wj =  this.getOgre().getWeaponJ();
 	
 		for (int i = 0; i < nextLevelBoard.length; i++) {
 		    for (int j = 0; j < nextLevelBoard[i].length; j++) {
