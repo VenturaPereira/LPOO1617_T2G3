@@ -3,7 +3,6 @@ package gameLogic;
 public class NewMapGame extends MapGame {
 
 	private char[][] map;
-	private Levels level;
 	private Ogre ogre;
 	private Hero hero;
 	private Enemy guard;
@@ -41,8 +40,8 @@ public class NewMapGame extends MapGame {
 				}
 			}
 		}
-		this.level=level;
-		this.level.addLevel(this);
+		this.levels=level;
+		this.levels.addLevel(this);
 	}
 	
 	public void setDoors(){

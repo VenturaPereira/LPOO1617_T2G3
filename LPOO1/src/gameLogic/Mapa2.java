@@ -2,7 +2,6 @@ package gameLogic;
 
 public class Mapa2 extends MapGame {
 	
-     private Levels level;
 	 private char nextLevelBoard[][] = {{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}, 
 			{DOOR, BLANK, BLANK, BLANK, BLANK,BLANK,BLANK,KEY, WALL},
 			{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
@@ -14,8 +13,8 @@ public class Mapa2 extends MapGame {
 			{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}};
 	
 	 public Mapa2(Levels level){
-		 this.level= level;
-		 this.level.addLevel(this);
+		 this.levels= level;
+		 this.levels.addLevel(this);
 		 Hero hero = new Hero();
 		 hero.setHi(7);
 		 hero.setHj(1);

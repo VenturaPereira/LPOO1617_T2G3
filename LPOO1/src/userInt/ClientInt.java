@@ -43,8 +43,9 @@ public class ClientInt{
 	}*/
 	public static void decisionsNextLvl(MapGame map, Hero hero, Ogre ogre, boolean advance){
 		if(advance == true){
+			
 			Mapa2 map2 = (Mapa2)map;
-		 int i = 14854151;
+			int i = 14854151;
 		 hero.setHi(7);
 		 hero.setHj(1);
 		 map2.printBoard(hero, ogre);
@@ -99,12 +100,11 @@ public class ClientInt{
 
 	public static boolean decisions(Hero hero, MapGame map, Enemy guard, GameOver game, WinGame win) {
 		Mapa1 map1= (Mapa1)map;
-	   map1.setRunning(true);
 		Message msg = new Message();
 		Scanner scanner = new Scanner(System.in);
 		while (!game.getGameOver(map1)&& !win.getWin()){
 			
-
+			
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
 
@@ -148,7 +148,6 @@ public class ClientInt{
 		{
 			msg.victoryMsgMap1();
 			
-			
 			return true;
 			
 			
@@ -161,22 +160,33 @@ public class ClientInt{
 	
 
 	public static void main(String[] args) {
-       Levels leveling = new Levels();
+      // Levels leveling = new Levels();
+		//Mapa1 map1= new Mapa1(leveling);
+		
+		//GameOver game= new GameOver(map1.getHero(), map1.getGuard(), map1);
+		//WinGame win = new WinGame(map1);
+		//map1.printBoard(map1.getHero(), map1.getGuard());
+		//boolean next =decisions(map1.getHero(), map1,  map1.getGuard(), game, win);	
+		//Mapa2 map2 = new Mapa2(leveling);	
+		//System.out.println(map2.getRunning());
+		//System.out.println(leveling.getLevels().size());
+		//decisionsNextLvl( map2, map2.getHero(), map2.getOgre(), next);
+		
+		Levels leveling = new Levels();
 		Mapa1 map1= new Mapa1(leveling);
+		map1.setRunning(true);
+		Mapa2 map2 = new Mapa2(leveling);
+		System.out.println(leveling.getLevels().size());
+		System.out.println(map1.getRunning());
+		System.out.println(map2.getRunning());
 		GameOver game= new GameOver(map1.getHero(), map1.getGuard(), map1);
 		WinGame win = new WinGame(map1);
 		map1.printBoard(map1.getHero(), map1.getGuard());
-		boolean next =decisions(map1.getHero(), map1,  map1.getGuard(), game, win);	
-		Mapa2 map2 = new Mapa2(leveling);		
-		System.out.println(leveling.getLevels().size());
-		decisionsNextLvl( map2, map2.getHero(), map2.getOgre(), next);
-		
-	//	Levels leveling = new Levels();
-		
-		
+		boolean next =decisions(map1.getHero(), map1,  map1.getGuard(), game, win);
 	
-		
-
+		System.out.println(map1.getRunning());
+		System.out.println(map2.getRunning());
+		decisionsNextLvl( map2, map2.getHero(), map2.getOgre(), next);
 	}
 
 	

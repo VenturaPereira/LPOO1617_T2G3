@@ -13,6 +13,7 @@ public class WinGame {
 	
 	public boolean getWin(){
 		if(this.map.isArrived()){
+			
 			return true;
 		}else {
 			return false;

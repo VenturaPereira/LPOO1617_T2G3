@@ -3,7 +3,6 @@ package gameLogic;
 public class Mapa1 extends MapGame {
 	
 	
-	private Levels level;
 	private char board[][] = {{WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}, 
 			{WALL, BLANK, BLANK, BLANK,BLANK, BLANK, WALL,BLANK, BLANK,WALL},
 			{WALL, WALL, WALL, BLANK, WALL, WALL, WALL, BLANK, BLANK, WALL},
@@ -17,8 +16,8 @@ public class Mapa1 extends MapGame {
 	
 	
 	public Mapa1(Levels level){	
-		this.level=level;
-		this.level.addLevel(this);
+		this.levels=level;
+		this.levels.addLevel(this);
 		Hero hero = new Hero();
 		this.setHero(hero);
 		Enemy guard = new Rookie();

@@ -1,12 +1,13 @@
 package gameLogic;
 
-public abstract class MapGame extends Levels {
+public abstract class MapGame {
 	
 	protected  final char DOOR = 'I';
 	protected  final char WALL = 'X';
-	private   Hero hero;
-	private Ogre ogre;
-	private Enemy guard;
+	protected   Hero hero;
+	protected Ogre ogre;
+	protected Enemy guard;
+	protected Levels levels;
 	protected boolean hasOgre = false;
 	protected boolean hasGuard = false;
 	protected  final char BLANK = ' ';
@@ -17,7 +18,7 @@ public abstract class MapGame extends Levels {
 	protected  final char CANT = '$';
 	protected  final char STAIRS = 'S';
 	protected  final char WEAPON = '*';
-	protected boolean running;
+	protected boolean running=false;
 	private boolean arrived=false;
 	
 	public void setRunning(boolean gameState){
@@ -52,6 +53,12 @@ public abstract class MapGame extends Levels {
 	}
 	public void setArrived(boolean arrived) {
 		this.arrived = arrived;
+	}
+	public Levels getLevels() {
+		return levels;
+	}
+	public void setLevels(Levels levels) {
+		this.levels = levels;
 	}
     
 }
