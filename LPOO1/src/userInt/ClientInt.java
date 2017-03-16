@@ -41,12 +41,13 @@ public class ClientInt{
 		}
 
 	}*/
-	public static void decisionsNextLvl(Mapa2 map, Hero hero, Ogre ogre, boolean advance){
+	public static void decisionsNextLvl(MapGame map, Hero hero, Ogre ogre, boolean advance){
 		if(advance == true){
+			Mapa2 map2 = (Mapa2)map;
 		 int i = 14854151;
 		 hero.setHi(7);
 		 hero.setHj(1);
-		 map.printBoard(hero, ogre);
+		 map2.printBoard(hero, ogre);
 		Scanner scanner = new Scanner(System.in);
 		while (i > 500) {
              
@@ -56,32 +57,32 @@ public class ClientInt{
 			switch (answer) {
 			case "S":
 
-				ogre.enemyMove(map);
-				ogre.ogreAttack(map);
-				hero.commandMove(map, 's');
-				map.printBoard(hero, ogre);
+				ogre.enemyMove(map2);
+				ogre.ogreAttack(map2);
+				hero.commandMove(map2, 's');
+				map2.printBoard(hero, ogre);
 				i++;
 				break;
 			case "W":
-				ogre.enemyMove(map);
-				ogre.ogreAttack(map);
-				hero.commandMove(map, 'w');
-				map.printBoard(hero, ogre);
+				ogre.enemyMove(map2);
+				ogre.ogreAttack(map2);
+				hero.commandMove(map2, 'w');
+				map2.printBoard(hero, ogre);
 				i++;
 				break;
 
 			case "D":
-				ogre.enemyMove(map);
-				ogre.ogreAttack(map);
-				hero.commandMove(map, 'd');
-				map.printBoard(hero, ogre);
+				ogre.enemyMove(map2);
+				ogre.ogreAttack(map2);
+				hero.commandMove(map2, 'd');
+				map2.printBoard(hero, ogre);
 				i++;
 				break;
 			case "A":
-				ogre.enemyMove(map);
-				ogre.ogreAttack(map);
-				hero.commandMove(map, 'a');
-				map.printBoard(hero, ogre);
+				ogre.enemyMove(map2);
+				ogre.ogreAttack(map2);
+				hero.commandMove(map2, 'a');
+				map2.printBoard(hero, ogre);
 				i++;
 				break;
 			}
@@ -89,7 +90,8 @@ public class ClientInt{
 	}
 	}
 
-	public static boolean decisions(Hero hero, Mapa1 map1, Enemy guard, GameOver game, WinGame win) {
+	public static boolean decisions(Hero hero, MapGame map, Enemy guard, GameOver game, WinGame win) {
+		Mapa1 map1= (Mapa1)map;
 	   map1.setRunning(true);
 		Message msg = new Message();
 		Scanner scanner = new Scanner(System.in);
@@ -161,6 +163,10 @@ public class ClientInt{
 		Mapa2 map2 = new Mapa2(leveling);		
 		System.out.println(leveling.getLevels().size());
 		decisionsNextLvl( map2, map2.getHero(), map2.getOgre(), next);
+		
+	//	Levels leveling = new Levels();
+		
+		
 	
 		
 
