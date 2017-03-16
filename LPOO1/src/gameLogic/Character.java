@@ -21,6 +21,9 @@ public abstract class Character {
 			    return true;
 			}else if(map.getMap()[di][dj] == ' '){
 				return true;
+			}else if(map.getMap()[di][dj] == 'S'){
+				map.setRunning(false);
+				return true;
 			}
 		} else if(map instanceof Mapa2){
 			
@@ -34,11 +37,24 @@ public abstract class Character {
 				return true;
 			}
 			
+		}else if(map instanceof NewMapGame){
+			if(map.getMap()[di][dj] == 'X'){
+				return false;
+			}else if(map.getMap()[di][dj] == 'I'){
+				return false;
+			}
+			else if(map.getMap()[di][dj] == ' ')
+			{
+				return true;
+			}else if(map.getMap()[di][dj] == 'G' || map.getMap()[di][dj] == 'H'){
+				return false;
+			}else if(map.getMap()[di][dj] == 'K'){ 
+				((NewMapGame) map).setDoors();
+			    return true;
+			}
+			
 		}
-		
-		
-		
-		
+			
 		return true;
 		}
 		

@@ -3,7 +3,7 @@ package gameLogic;
 public class Mapa1 extends MapGame {
 	
 	
-	
+	private Levels level;
 	private char board[][] = {{WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}, 
 			{WALL, BLANK, BLANK, BLANK,BLANK, BLANK, WALL,BLANK, BLANK,WALL},
 			{WALL, WALL, WALL, BLANK, WALL, WALL, WALL, BLANK, BLANK, WALL},
@@ -16,6 +16,17 @@ public class Mapa1 extends MapGame {
 			{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}};
 	
 	
+	public Mapa1(Levels level){	
+		this.level=level;
+		this.level.addLevel(this);
+		Hero hero = new Hero();
+		this.setHero(hero);
+		Enemy guard = new Rookie();
+		ChooseGuard which = new ChooseGuard(guard);
+		guard = which.setGuard();
+		this.setGuard(guard);
+	}
+	
 	public char[][] getMap(){
 		return board;
 	}
@@ -27,10 +38,10 @@ public class Mapa1 extends MapGame {
 	public void printBoard(Hero hero, Enemy guard){
 	
 	
-	int hx=hero.getHi();
-	int hy = hero.getHj();
-	int gx = guard.getI();
-	int gj= guard.getJ();
+	int hx=this.getHero().getHi();
+	int hy = this.getHero().getHj();
+	int gx = this.getGuard().getI();
+	int gj= this.getGuard().getJ();
 	//gx, gy;  
 		
 		for (int i = 0; i < board.length; i++) {
@@ -66,6 +77,7 @@ public class Mapa1 extends MapGame {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 
 
