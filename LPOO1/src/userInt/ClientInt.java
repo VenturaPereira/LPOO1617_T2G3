@@ -176,14 +176,10 @@ public class ClientInt{
 		Mapa1 map1= new Mapa1(leveling);
 		map1.setRunning(true);
 		Mapa2 map2 = new Mapa2(leveling);
-		System.out.println(leveling.getLevels().size());
-		System.out.println(map1.getRunning());
-		System.out.println(map2.getRunning());
 		GameOver game= new GameOver(map1.getHero(), map1.getGuard(), map1);
 		WinGame win = new WinGame(map1);
-		map1.printBoard(map1.getHero(), map1.getGuard());
-		boolean next =decisions(map1.getHero(), map1,  map1.getGuard(), game, win);
-	
+		System.out.println(map1.printBoard(map1.getHero(), map1.getGuard()));
+		boolean next =decisions(map1.getHero(), map1,  map1.getGuard(), game, win);	
 		System.out.println(map1.getRunning());
 		System.out.println(map2.getRunning());
 		decisionsNextLvl( map2, map2.getHero(), map2.getOgre(), next);

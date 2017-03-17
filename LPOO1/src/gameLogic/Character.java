@@ -24,7 +24,6 @@ public abstract class Character {
 			}else if(map.getMap()[di][dj] == 'S'){
 				  map.setArrived(true);
 				  map.setRunning(false);
-				  System.out.println(map.getLevels().getLevels().size());
 					for(int i=0; i < map.getLevels().getLevels().size(); i++){
 						if(map.getLevels().getLevels().get(i) == map){
 							System.out.println("hi");
@@ -67,7 +66,15 @@ public abstract class Character {
 				((NewMapGame) map).setDoors();
 			    return true;
 			}else if(map.getMap()[di][dj] == 'S'){
-				  map.setArrived(true);				   
+				 map.setArrived(true);
+				  map.setRunning(false);
+					for(int i=0; i < map.getLevels().getLevels().size(); i++){
+						if(map.getLevels().getLevels().get(i) == map){
+							System.out.println("hi");
+							int a= i+1;
+							map.getLevels().getLevels().get(a).setRunning(true);
+						}
+					}
 				  return true;
 				
 			}

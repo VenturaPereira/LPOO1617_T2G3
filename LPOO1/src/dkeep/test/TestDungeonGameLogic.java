@@ -8,6 +8,7 @@ import gameLogic.GameOver;
 import gameLogic.Guard;
 import gameLogic.Hero;
 import gameLogic.Levels;
+import gameLogic.Mapa2;
 import gameLogic.NewMapGame;
 import gameLogic.Rookie;
 
@@ -70,6 +71,29 @@ public class TestDungeonGameLogic {
 		maptest.getHero().commandMove(maptest, 's');
 		maptest.getHero().commandMove(maptest, 's');
 		assertTrue(maptest.getMap()[2][0] == 'S' && maptest.getMap()[3][0] == 'S');	
+	}
+	
+	@Test
+	public void failsToLeave(){
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(map,leveling);
+		NewMapGame mapPassed = new NewMapGame(map,leveling);
+		maptest.getHero().commandMove(maptest, 's');
+		maptest.getHero().commandMove(maptest, 'a');
+		assertEquals(1, maptest.getHero().getHj());
+	    assertFalse(mapPassed.getRunning());	
+	}
+	
+	
+	@Test
+	public void entersTheKeep(){
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(map,leveling);
+		Mapa2 map2 = new Mapa2(leveling);
+		maptest.getHero().commandMove(maptest, 's');
+		maptest.getHero().commandMove(maptest, 's');
+		maptest.getHero().commandMove(maptest, 'a');
+		assertTrue(map2.getRunning());
 	}
 	
 	
