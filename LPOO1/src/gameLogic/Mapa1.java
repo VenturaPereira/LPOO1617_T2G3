@@ -3,7 +3,6 @@ package gameLogic;
 public class Mapa1 extends MapGame {
 	
 	
-	private Levels level;
 	private char board[][] = {{WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}, 
 			{WALL, BLANK, BLANK, BLANK,BLANK, BLANK, WALL,BLANK, BLANK,WALL},
 			{WALL, WALL, WALL, BLANK, WALL, WALL, WALL, BLANK, BLANK, WALL},
@@ -17,8 +16,8 @@ public class Mapa1 extends MapGame {
 	
 	
 	public Mapa1(Levels level){	
-		this.level=level;
-		this.level.addLevel(this);
+		this.levels=level;
+		this.levels.addLevel(this);
 		Hero hero = new Hero();
 		this.setHero(hero);
 		Enemy guard = new Rookie();
@@ -35,9 +34,9 @@ public class Mapa1 extends MapGame {
 		board[6][0]=STAIRS;
 	}
 	
-	public void printBoard(Hero hero, Enemy guard){
+	public String printBoard(Hero hero, Enemy guard){
 	
-	
+	String mapa = "";
 	int hx=this.getHero().getHi();
 	int hy = this.getHero().getHj();
 	int gx = this.getGuard().getI();
@@ -48,28 +47,29 @@ public class Mapa1 extends MapGame {
 		    for (int j = 0; j < board[i].length; j++) {
 		    	if(i == hx && j == hy){
 		    		//board[i][j]= HERO;
-		    		System.out.print("H|");
+		    		mapa = mapa + ("H|");
 		    		j++;
 		    	}//else if(i == gx && j == gy){
 		    		//board[i][j] = GUARD;
 		    	//}
 		    	if((i == gx && j == gj) && guard instanceof Drunken && guard.isSleeping()){
-		    		System.out.print("g|");
+		    		mapa = mapa + ("g|");
 		    		j++;
 		    	} else if((i == gx && j == gj) && guard instanceof Drunken && !guard.isSleeping()){
-		    		System.out.print("G|");
+		    		mapa = mapa + ("G|");
 		    		j++;
 		    	}else if((i == gx && j == gj) && guard instanceof Suspicious){
-		    		System.out.print("S|");
+		    		mapa = mapa + ("S|");
 		    		j++;
 		    	}else if((i == gx && j == gj) && guard instanceof Rookie){
-		    		System.out.print("R|");
+		    		mapa = mapa + ("R|");
 		    		j++;
 		    	}
-		        System.out.print(board[i][j] + "|");
+		        mapa = mapa + board[i][j] + "|";
 		    }
-		    System.out.println(" ");
+		    mapa = mapa + (" ") + "\n";
 		}
+		return mapa;
 	}
 
 	@Override

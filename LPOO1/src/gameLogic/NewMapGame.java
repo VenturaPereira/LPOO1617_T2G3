@@ -1,10 +1,11 @@
 package gameLogic;
 
+import java.util.Vector;
+
 public class NewMapGame extends MapGame {
 
 	private char[][] map;
-	private Levels level;
-	private Ogre ogre;
+	private Orde orde;
 	private Hero hero;
 	private Enemy guard;
 	private boolean hasOgre = false;
@@ -30,19 +31,23 @@ public class NewMapGame extends MapGame {
 					getGuard().setI(i);
 					getGuard().setJ(j);
 				}else if(map[i][i] == '0'){
+					Ogre o = new Ogre();
 					setHasOgre(true);
 					this.getMap()[i][j] = ' ';
-					setOgre(new Ogre());
+					o.setI(i);
+					o.setJ(j);
+					this.orde.getOrde().add(o);
+					/*setOgre(new Ogre());
 					getOgre().setI(i);
-					getOgre().setJ(j);
+					getOgre().setJ(j);*/
 				}
 				else{
 					this.map[i][j]=map[i][j];
 				}
 			}
 		}
-		this.level=level;
-		this.level.addLevel(this);
+		this.levels=level;
+		this.levels.addLevel(this);
 	}
 	
 	public void setDoors(){
@@ -74,11 +79,14 @@ public class NewMapGame extends MapGame {
 		    		j++;
 		    	} 
 		    	}else if(this.isHasOgre()){
+		    		for(int k = 0; k < orde.getOrde().size(); k++)
+		    		{
+		    			if(i == orde.getOrde().get(k).getI() && j == orde.getOrde().get(k).getJ()){
+				    		System.out.print("0|");
+				    		j++;
+				    	} 
+		    		}
 		    		
-		    		if(i == this.getOgre().getI() && j == this.getOgre().getJ()){
-			    		System.out.print("0|");
-			    		j++;
-			    	} 
 		    		
 		    	}
 		        System.out.print(getMap()[i][j] + "|");
@@ -105,14 +113,14 @@ public class NewMapGame extends MapGame {
 		this.map = map;
 	}
 
-	public Ogre getOgre() {
-		return ogre;
+	public Orde getOrde() {
+		return orde;
 	}
-
-	public void setOgre(Ogre ogre) {
-		this.ogre = ogre;
+	
+	public void setOrde(Orde orde) {
+		this.orde = orde;
 	}
-
+	
 	public Hero getHero() {
 		return hero;
 	}

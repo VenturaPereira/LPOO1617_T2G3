@@ -15,6 +15,7 @@ import gameLogic.Mapa1;
 import gameLogic.Mapa2;
 import gameLogic.Message;
 import gameLogic.Ogre;
+import gameLogic.Orde;
 import gameLogic.Rookie;
 import gameLogic.Suspicious;
 
@@ -41,15 +42,21 @@ public class ClientInt{
 		}
 
 	}*/
-	public static void decisionsNextLvl(MapGame map, Hero hero, Ogre ogre, boolean advance){
+	public static void decisionsNextLvl(MapGame map, Hero hero, boolean advance){
 		if(advance == true){
+			Scanner scanner2 = new Scanner(System.in);
+			System.out.println("How many ogres do you want?");
+			int choice = scanner2.nextInt();
+			Orde orde = new Orde(choice);
 			Mapa2 map2 = (Mapa2)map;
-		 int i = 14854151;
+			map2.setOrde(orde);
+			System.out.println(map2.getOrde().getOrde().size());
+			int i = 14854151;
 		 hero.setHi(7);
 		 hero.setHj(1);
-		 map2.printBoard(hero, ogre);
+		 map2.printBoard(hero, orde);
 		Scanner scanner = new Scanner(System.in);
-		GameOver gameOver = new GameOver(hero, ogre, map2);
+		GameOver gameOver = new GameOver(hero, orde, map2);
 		Message msg = new Message();
 		while (!gameOver.getGameOver(map2)) {
              
@@ -58,33 +65,32 @@ public class ClientInt{
 
 			switch (answer) {
 			case "S":
-
-				ogre.enemyMove(map2);
-				ogre.ogreAttack(map2);
+				System.out.println(map2.getOrde().getOrde().size());
+				orde.moveOrde(map);
 				hero.commandMove(map2, 's');
-				map2.printBoard(hero, ogre);
+				map2.printBoard(hero, orde);
 				i++;
 				break;
 			case "W":
-				ogre.enemyMove(map2);
-				ogre.ogreAttack(map2);
+				System.out.println(map2.getOrde().getOrde().size());
+				orde.moveOrde(map);
 				hero.commandMove(map2, 'w');
-				map2.printBoard(hero, ogre);
+				map2.printBoard(hero, orde);
 				i++;
 				break;
 
 			case "D":
-				ogre.enemyMove(map2);
-				ogre.ogreAttack(map2);
+				System.out.println(map2.getOrde().getOrde().size());
+				orde.moveOrde(map);
 				hero.commandMove(map2, 'd');
-				map2.printBoard(hero, ogre);
+				map2.printBoard(hero, orde);
 				i++;
 				break;
 			case "A":
-				ogre.enemyMove(map2);
-				ogre.ogreAttack(map2);
+				System.out.println(map2.getOrde().getOrde().size());
+				orde.moveOrde(map);;
 				hero.commandMove(map2, 'a');
-				map2.printBoard(hero, ogre);
+				map2.printBoard(hero, orde);
 				i++;
 				break;
 			}
@@ -99,26 +105,25 @@ public class ClientInt{
 
 	public static boolean decisions(Hero hero, MapGame map, Enemy guard, GameOver game, WinGame win) {
 		Mapa1 map1= (Mapa1)map;
-	   map1.setRunning(true);
 		Message msg = new Message();
 		Scanner scanner = new Scanner(System.in);
 		while (!game.getGameOver(map1)&& !win.getWin()){
 			
-
+			
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
 
 			switch (answer) {
 			case "S":
 				guard.enemyMove(map1);
-				hero.commandMove(map1, 's');
-				map1.printBoard(hero, guard);
+				hero.commandMove(map, 's');
+				System.out.println(map1.printBoard(hero, guard));
 				//i++;
 				break;
 			case "W":
 				guard.enemyMove(map1);
 				hero.commandMove(map1, 'w');
-				map1.printBoard(hero, guard);
+				System.out.println(map1.printBoard(hero, guard));
 			
 				//i++;
 				break;
@@ -126,13 +131,13 @@ public class ClientInt{
 			case "D":
 				guard.enemyMove(map1);
 				hero.commandMove(map1, 'd');
-				map1.printBoard(hero, guard);
+				System.out.println(map1.printBoard(hero, guard));
 				//i++;
 				break;
 			case "A":
 				guard.enemyMove(map1);
 				hero.commandMove(map1, 'a');
-				map1.printBoard(hero, guard);
+				System.out.println(map1.printBoard(hero, guard));
 				//i++;
 				break;
 			}
@@ -148,7 +153,6 @@ public class ClientInt{
 		{
 			msg.victoryMsgMap1();
 			
-			
 			return true;
 			
 			
@@ -161,22 +165,29 @@ public class ClientInt{
 	
 
 	public static void main(String[] args) {
-       Levels leveling = new Levels();
+      // Levels leveling = new Levels();
+		//Mapa1 map1= new Mapa1(leveling);
+		
+		//GameOver game= new GameOver(map1.getHero(), map1.getGuard(), map1);
+		//WinGame win = new WinGame(map1);
+		//map1.printBoard(map1.getHero(), map1.getGuard());
+		//boolean next =decisions(map1.getHero(), map1,  map1.getGuard(), game, win);	
+		//Mapa2 map2 = new Mapa2(leveling);	
+		//System.out.println(map2.getRunning());
+		//System.out.println(leveling.getLevels().size());
+		//decisionsNextLvl( map2, map2.getHero(), map2.getOgre(), next);
+		
+		Levels leveling = new Levels();
 		Mapa1 map1= new Mapa1(leveling);
+		map1.setRunning(true);
+		Mapa2 map2 = new Mapa2(leveling);
 		GameOver game= new GameOver(map1.getHero(), map1.getGuard(), map1);
-		WinGame win = new WinGame(map1.getHero());
-		map1.printBoard(map1.getHero(), map1.getGuard());
+		WinGame win = new WinGame(map1);
+		System.out.println(map1.printBoard(map1.getHero(), map1.getGuard()));
 		boolean next =decisions(map1.getHero(), map1,  map1.getGuard(), game, win);	
-		Mapa2 map2 = new Mapa2(leveling);		
-		System.out.println(leveling.getLevels().size());
-		decisionsNextLvl( map2, map2.getHero(), map2.getOgre(), next);
-		
-	//	Levels leveling = new Levels();
-		
-		
-	
-		
-
+		System.out.println(map1.getRunning());
+		System.out.println(map2.getRunning());
+		decisionsNextLvl( map2, map2.getHero(), next);
 	}
 
 	

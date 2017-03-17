@@ -10,7 +10,7 @@ public class WeaponMoveCheck {
 	}
 	
 	
-	public boolean checkMove(int dir, Mapa2 map){
+	public boolean checkMove(int dir, MapGame map){
 		if(dir == 0){
 			if(ogre.getI() > 1){
 				return true;

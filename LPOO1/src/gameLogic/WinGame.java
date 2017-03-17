@@ -2,17 +2,18 @@ package gameLogic;
 
 public class WinGame {
 
-	private Hero hero;
+	private MapGame map;
 
 	
-	public WinGame(Hero hero){
-		this.hero=hero;
+	public WinGame(MapGame map){
+		this.map=map;
 
 	}
 	
 	
 	public boolean getWin(){
-		if(this.hero.getHj()== 0 && ( this.hero.getHi()== 5 || this.hero.getHi() == 6) ){
+		if(this.map.isArrived()){
+			
 			return true;
 		}else {
 			return false;

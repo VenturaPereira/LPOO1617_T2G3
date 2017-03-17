@@ -3,7 +3,7 @@ package gameLogic;
 public class GameOver {
 	private Hero hero;
 	private Enemy guard;
-	private Ogre ogre;
+	private Orde orde;
 	private MapGame map;
 
 	
@@ -14,10 +14,10 @@ public class GameOver {
 		
 	}
 	
-	public GameOver(Hero hero, Ogre ogre, MapGame map)
+	public GameOver(Hero hero, Orde orde, MapGame map)
 	{
 		this.hero = hero;
-		this.ogre = ogre;
+		this.orde = orde;
 		this.map = map;
 	}
 	
@@ -37,18 +37,25 @@ public class GameOver {
 		}
 		else if(map instanceof Mapa2) 
 		{
-			if((this.hero.getHi() == this.ogre.getI() && this.hero.getHj() == this.ogre.getJ()) || (this.hero.getHi() == this.ogre.getI()-1 && this.hero.getHj() == this.ogre.getJ()) || (this.hero.getHi() == this.ogre.getI()+1 && this.hero.getHj() == this.ogre.getJ()) || (this.hero.getHi() == this.ogre.getI() && this.hero.getHj() == this.ogre.getJ()+1) || (this.hero.getHi() == this.ogre.getI() && this.hero.getHj() == this.ogre.getJ()-1))
+			for(int k = 0; k < this.orde.getOrde().size(); k++)
 			{
-				return true;
+				
+				int oi = this.orde.getOrde().get(k).getI();
+				int oj = this.orde.getOrde().get(k).getJ();
+				int wi = this.orde.getOrde().get(k).getWeaponI();
+				int wj = this.orde.getOrde().get(k).getWeaponJ();
+				
+				if((this.hero.getHi() == oi && this.hero.getHj() == oj) || (this.hero.getHi() == oi-1 && this.hero.getHj() == oj) || (this.hero.getHi() == oi+1 && this.hero.getHj() == oj) || (this.hero.getHi() == oi && this.hero.getHj() == oj+1) || (this.hero.getHi() == oi && this.hero.getHj() == oj-1))
+				{
+					return true;
+				}
+				else if((this.hero.getHi() == wi && this.hero.getHj() == wj) || (this.hero.getHi() == wi-1 && this.hero.getHj() == wj) || (this.hero.getHi() == wi+1 && this.hero.getHj() == wj) || (this.hero.getHi() == wi && this.hero.getHj() == wj-1) || (this.hero.getHi() == wi && this.hero.getHj() == wj+1))
+				{
+					return true;
+				}
+				
 			}
-			else if((this.hero.getHi() == this.ogre.getWeaponI() && this.hero.getHj() == this.ogre.getWeaponJ()) || (this.hero.getHi() == this.ogre.getWeaponI()-1 && this.hero.getHj() == this.ogre.getWeaponJ()) || (this.hero.getHi() == this.ogre.getWeaponI()+1 && this.hero.getHj() == this.ogre.getWeaponJ()) || (this.hero.getHi() == this.ogre.getWeaponI() && this.hero.getHj() == this.ogre.getWeaponJ()-1) || (this.hero.getHi() == this.ogre.getWeaponI() && this.hero.getHj() == this.ogre.getWeaponJ()+1))
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			
 		}
 		else
 		{
@@ -62,6 +69,8 @@ public class GameOver {
 			}
 		
 		}
+		
+		return false;
 	}
 	
 	

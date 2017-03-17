@@ -69,7 +69,7 @@ public class Ogre extends Enemy {
 		
 	}
 	
-	public void ogreAttack(Mapa2 map)
+	public void ogreAttack(MapGame map)
 	{
 		int goTo;
 		Random rnd = new Random();
