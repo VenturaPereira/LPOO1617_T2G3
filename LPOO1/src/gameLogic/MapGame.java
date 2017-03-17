@@ -46,5 +46,19 @@ public abstract class MapGame extends Levels {
 	public void setGuard(Enemy guard) {
 		this.guard = guard;
 	}
+	
+	public void pickKey()
+	{
+		this.hero.setPickedKey(true);
+		
+		for (int i = 0; i < getMap().length; i++) {
+		    for (int j = 0; j < getMap().length; j++) {
+		    	if(getMap()[i][j] == KEY)
+		    	{
+		    		getMap()[i][j] = BLANK;
+		    	}
+		    }
+		}
+	}
     
 }

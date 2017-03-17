@@ -2,11 +2,13 @@ package gameLogic;
 
 public class Hero extends Character {
 	private int hi, hj;
+	private boolean pickedKey;
 	
 	public Hero(){
 	
 	this.hi=1;
 	this.hj=1;
+	this.pickedKey = false;
 	
 	}
     
@@ -30,6 +32,15 @@ public class Hero extends Character {
     	this.hj=Hj;
     }
     
+    public boolean getPickedKey()
+    {
+    	return this.pickedKey;
+    }
+    
+    public void setPickedKey(boolean k)
+    {
+    	this.pickedKey = k;
+    }
     
     public void commandMove( MapGame map,char direction){
     	int i, j;

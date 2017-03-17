@@ -38,6 +38,7 @@ public abstract class Character {
 				return true;
 			}
 			
+			
 		}else if(map instanceof NewMapGame){
 			if(map.getMap()[di][dj] == 'X'){
 				return false;

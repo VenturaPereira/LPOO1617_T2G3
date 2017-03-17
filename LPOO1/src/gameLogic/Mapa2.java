@@ -53,8 +53,18 @@ public class Mapa2 extends MapGame {
 		for (int i = 0; i < nextLevelBoard.length; i++) {
 		    for (int j = 0; j < nextLevelBoard[i].length; j++) {
 		    	if(i == hx && j == hy){
-		    		System.out.print("H|");
-		    		j++;
+		    		if(hx == 1 && hy == 7 || hero.getPickedKey())
+		    		{
+		    			pickKey();
+		    			System.out.print("K|");
+		    			j++;
+		    		}
+		    		else
+		    		{
+		    			System.out.print("H|");
+			    		j++;
+		    		}
+		    		
 		    	}
 		    	if(i ==wi && j == wj && wj < oj){
 		    		System.out.print("*|");
@@ -108,6 +118,6 @@ public class Mapa2 extends MapGame {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	
 }
