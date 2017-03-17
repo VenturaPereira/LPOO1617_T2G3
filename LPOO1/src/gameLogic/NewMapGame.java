@@ -54,8 +54,8 @@ public class NewMapGame extends MapGame {
 		}
 	}
 	
-	
-	public void printBoard(Hero hero, Enemy guard) {
+	@Override
+	public String printBoard(Hero hero, Enemy guard) {
 	  int hi = this.getHero().getHi();
 	  int hj = this.getHero().getHj();
 	 
@@ -84,6 +84,7 @@ public class NewMapGame extends MapGame {
 		    }
 		    System.out.println(" ");
 		}
+	  return " ";
 	  }
 		
 
@@ -94,11 +95,7 @@ public class NewMapGame extends MapGame {
 		return map;
 	}
 
-	@Override
-	public void printBoard() {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 	public void setMap(char[][] map) {
 		this.map = map;

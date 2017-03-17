@@ -97,9 +97,9 @@ public class Mapa2 extends MapGame {
 	}
 
 	@Override
-	public void printBoard() {
+	public String printBoard(Hero hero, Enemy enemy) {
 		// TODO Auto-generated method stub
-		
+		return " ";
 	}
 
 	@Override
