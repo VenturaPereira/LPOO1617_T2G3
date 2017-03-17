@@ -21,6 +21,7 @@ public abstract class MapGame {
 	protected  final char WEAPON = '*';
 	protected boolean running=false;
 	private boolean arrived=false;
+	private GameOver gameOver;
 	
 	public void setRunning(boolean gameState){
 		this.running=gameState;
@@ -28,7 +29,7 @@ public abstract class MapGame {
 	public boolean getRunning(){
 		return running;
 	}
-	public abstract void printBoard();
+	public abstract String printBoard(Hero hero, Enemy  enemy);
     public abstract char[][] getMap(); 
     public abstract void setDoors();
 	/*public Ogre getOgre() {
@@ -97,6 +98,12 @@ public abstract class MapGame {
 	public int getSizeJ() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	public GameOver getGameOver() {
+		return gameOver;
+	}
+	public void setGameOver(GameOver gameOver) {
+		this.gameOver = gameOver;
 	}
     
 }
