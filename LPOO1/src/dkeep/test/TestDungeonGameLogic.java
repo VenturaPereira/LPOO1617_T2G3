@@ -24,6 +24,12 @@ public class TestDungeonGameLogic {
 			         {'I','K',' ',' ','X'},
 			         {'X','X','X','X','X'}};
 	
+	char [][] keepmap = {{'X','X','X','X','X'},
+	         {'X','H',' ','0','X'},
+	         {'I',' ',' ',' ','X'},
+	         {'I','K',' ',' ','X'},
+	         {'X','X','X','X','X'}};
+	
 	@Test
 	public void testMoveHeroIntoFreeCell(){
 		Levels leveling = new Levels();
@@ -96,6 +102,13 @@ public class TestDungeonGameLogic {
 		assertTrue(map2.getRunning());
 	}
 	
+	@Test
+	public void ogreKills(){
+		
+		
+		
+		
+	}
 	
 	
 	

@@ -71,7 +71,7 @@ public class Mapa2 extends MapGame {
 		    		int wi = orde.getOrde().get(k).getWeaponI();
 		    		int wj = orde.getOrde().get(k).getWeaponJ();
 		    		if(i ==wi && j == wj && wj < oj){
-		    			if((i ==wi && j == wj && wj < oj) && oi == 1 && oj == 7){
+		    			if( oi == 1 && oj == 7){
 	    					System.out.print("*|");
 	    					System.out.print("$|");
 	    					j++;
