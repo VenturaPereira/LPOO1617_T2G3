@@ -6,6 +6,7 @@ public class Ogre extends Enemy {
 	WeaponMoveCheck w = new WeaponMoveCheck(this);
 	private int weaponI;
 	private int weaponJ;
+	private int stunned;
 	
 	public Ogre()
 	{
@@ -13,6 +14,7 @@ public class Ogre extends Enemy {
 		setJ(4);
 		this.weaponI = 1;
 		this.weaponJ = 5;
+		this.stunned = 0;
 	}
 
 	public int getWeaponI()
@@ -26,6 +28,11 @@ public class Ogre extends Enemy {
 	}
 	
 	public void enemyMove(MapGame map){
+		if(stunned > 0)
+		{
+			stun(stunned-1);
+			return;
+		}
 		int goTo;
 		Random rnd = new Random();
 		goTo= rnd.nextInt(4);
@@ -71,6 +78,11 @@ public class Ogre extends Enemy {
 	
 	public void ogreAttack(MapGame map)
 	{
+		if(stunned > 0)
+		{
+			stun(stunned-1);
+			return;
+		}
 		int goTo;
 		Random rnd = new Random();
 		goTo= rnd.nextInt(4);
@@ -146,6 +158,15 @@ public class Ogre extends Enemy {
 		}
 	}
 	
+	public int getStunned()
+	{
+		return this.stunned;
+	}
+	
+	public void stun(int i)
+	{
+		this.stunned = i;
+	}
 	
 	
 	

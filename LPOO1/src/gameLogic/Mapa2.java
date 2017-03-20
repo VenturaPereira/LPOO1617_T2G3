@@ -59,7 +59,7 @@ public class Mapa2 extends MapGame {
 		    		}
 		    		else
 		    		{
-		    			System.out.print("H|");
+		    			System.out.print("A|");
 			    		j++;
 		    		}
 		    		
@@ -77,10 +77,21 @@ public class Mapa2 extends MapGame {
 	    					j++;
 	    					j++;
 	    				}else{
-			    		System.out.print("*|");
-			    		System.out.print("0|");
-			    		j++;
-			    		j++;
+	    					if(orde.getOrde().get(k).getStunned() > 0)
+	    					{
+	    						System.out.print("*|");
+	    			    		System.out.print("8|");
+	    			    		j++;
+	    			    		j++;
+	    					}
+	    					else
+	    					{
+	    						System.out.print("*|");
+	    			    		System.out.print("0|");
+	    			    		j++;
+	    			    		j++;
+	    					}
+			    		
 	    				}
 		    		}
 		    	
@@ -95,8 +106,16 @@ public class Mapa2 extends MapGame {
 		    				}
 		    				else
 		    				{
-		    					System.out.print("0|");
-		    					j++;
+		    					if(orde.getOrde().get(k).getStunned() > 0)
+		    					{
+		    						System.out.print("8|");
+		    						j++;
+		    					}
+		    					else
+		    					{
+		    						System.out.print("0|");
+		    						j++;
+		    					}
 		    				}
 		    		
 		    			}
@@ -132,6 +151,7 @@ public class Mapa2 extends MapGame {
 	@Override
 	public void setDoors() {
 		// TODO Auto-generated method stub
+		nextLevelBoard[1][0]=STAIRS;
 		
 	}
 	

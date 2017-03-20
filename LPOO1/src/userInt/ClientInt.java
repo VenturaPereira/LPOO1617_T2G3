@@ -17,6 +17,7 @@ import gameLogic.Message;
 import gameLogic.Ogre;
 import gameLogic.Orde;
 import gameLogic.Rookie;
+import gameLogic.Stun;
 import gameLogic.Suspicious;
 
 import gameLogic.WinGame;
@@ -57,8 +58,10 @@ public class ClientInt{
 		 map2.printBoard(hero, orde);
 		Scanner scanner = new Scanner(System.in);
 		GameOver gameOver = new GameOver(hero, orde, map2);
+		WinGame winGame = new WinGame(map);
+		Stun stun = new Stun(map);
 		Message msg = new Message();
-		while (!gameOver.getGameOver(map2)) {
+		while (/*!gameOver.getGameOver(map2) &&*/ !winGame.getWin()) {
              
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
@@ -68,6 +71,7 @@ public class ClientInt{
 				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);
 				hero.commandMove(map2, 's');
+				stun.stun();
 				map2.printBoard(hero, orde);
 				i++;
 				break;
@@ -75,6 +79,7 @@ public class ClientInt{
 				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);
 				hero.commandMove(map2, 'w');
+				stun.stun();
 				map2.printBoard(hero, orde);
 				i++;
 				break;
@@ -83,6 +88,7 @@ public class ClientInt{
 				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);
 				hero.commandMove(map2, 'd');
+				stun.stun();
 				map2.printBoard(hero, orde);
 				i++;
 				break;
@@ -90,6 +96,7 @@ public class ClientInt{
 				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);;
 				hero.commandMove(map2, 'a');
+				stun.stun();
 				map2.printBoard(hero, orde);
 				i++;
 				break;
@@ -99,6 +106,11 @@ public class ClientInt{
 		if(gameOver.getGameOver(map2))
 		{
 			msg.gameOverMsgMap2();
+		}
+		
+		if(winGame.getWin())
+		{
+			msg.victoryMsgMap2();
 		}
 	}
 	}

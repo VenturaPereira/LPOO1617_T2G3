@@ -39,6 +39,10 @@ public abstract class Character {
 			if(map.getMap()[di][dj] == 'X'){
 				return false;
 			}else if(map.getMap()[di][dj] == 'I'){
+				if(map.hero.getPickedKey())
+				{
+					((Mapa2) map).setDoors();
+				}
 				return false;
 			}
 			else if(map.getMap()[di][dj] == ' ')
