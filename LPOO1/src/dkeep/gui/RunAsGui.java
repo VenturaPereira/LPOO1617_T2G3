@@ -65,7 +65,6 @@ public class RunAsGui {
 		
 		
 		
-		
 		JLabel lblPressNewGame = new JLabel("Press New Game to play");
 		lblPressNewGame.setBounds(10, 236, 194, 14);
 		frame.getContentPane().add(lblPressNewGame);
@@ -95,12 +94,19 @@ public class RunAsGui {
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.setBounds(323, 227, 89, 23);
+		btnExit.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.exit(0);
+				
+			}
+		});
 		frame.getContentPane().add(btnExit);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setFont(new Font("Courier New", Font.PLAIN, 13));
 		textArea.setBounds(20, 76, 246, 161);
 		frame.getContentPane().add(textArea);
+		
 		
 		JButton btnLeft = new JButton("Left");
 		btnLeft.addActionListener(new ActionListener() {
@@ -375,6 +381,7 @@ public class RunAsGui {
 		frame.getContentPane().add(btnNewGame);
 	}
 
+	
 	public Levels getMaps() {
 		return leveling;
 	}
