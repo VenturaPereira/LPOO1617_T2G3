@@ -37,9 +37,10 @@ public class Mapa2 extends MapGame {
 		return nextLevelBoard[0].length;
 	}
 	
-	public void printBoard(Hero hero, Orde orde){
-		
-		
+	@Override
+	public String printBoard(Hero hero, Enemy ord){
+		String mapa= "";
+		Orde orde = (Orde)ord;
 		
 		int hx=this.getHero().getHi();
 		int hy = this.getHero().getHj();
@@ -54,12 +55,12 @@ public class Mapa2 extends MapGame {
 		    		if(hx == 1 && hy == 7 || hero.getPickedKey())
 		    		{
 		    			pickKey();
-		    			System.out.print("K|");
+		    			mapa = mapa + "K|";
 		    			j++;
 		    		}
 		    		else
 		    		{
-		    			System.out.print("A|");
+		    			mapa = mapa + "A|";
 			    		j++;
 		    		}
 		    		
@@ -71,23 +72,24 @@ public class Mapa2 extends MapGame {
 		    		int wi = orde.getOrde().get(k).getWeaponI();
 		    		int wj = orde.getOrde().get(k).getWeaponJ();
 		    		if(i ==wi && j == wj && wj < oj){
-		    			if((i ==wi && j == wj && wj < oj) && oi == 1 && oj == 7){
-	    					System.out.print("*|");
-	    					System.out.print("$|");
+		    			if( oi == 1 && oj == 7){
+	    					mapa = mapa + "*|";
+	    					mapa = mapa + "$|";
 	    					j++;
 	    					j++;
 	    				}else{
+
 	    					if(orde.getOrde().get(k).getStunned() > 0)
 	    					{
-	    						System.out.print("*|");
-	    			    		System.out.print("8|");
+	    						mapa = mapa + "*|";
+	    			    		mapa = mapa + "8|";
 	    			    		j++;
 	    			    		j++;
 	    					}
 	    					else
 	    					{
-	    						System.out.print("*|");
-	    			    		System.out.print("0|");
+	    						mapa = mapa + "*|";
+	    			    		mapa = mapa + "0|";
 	    			    		j++;
 	    			    		j++;
 	    					}
@@ -99,23 +101,25 @@ public class Mapa2 extends MapGame {
 		    			if(i ==oi && j == oj){
 		    				if(i == 1 && j == 7)
 		    				{
-		    					System.out.print("$|");
+		    					mapa = mapa +"$|";
 		    					j++;
 		    				
 		    				
 		    				}
 		    				else
 		    				{
+
 		    					if(orde.getOrde().get(k).getStunned() > 0)
 		    					{
-		    						System.out.print("8|");
-		    						j++;
+		    						mapa = mapa + "8|";
+			    					j++;
 		    					}
 		    					else
 		    					{
-		    						System.out.print("0|");
-		    						j++;
+		    						mapa = mapa + "0|";
+			    					j++;
 		    					}
+
 		    				}
 		    		
 		    			}
@@ -124,29 +128,26 @@ public class Mapa2 extends MapGame {
 		    			{
 		    				if(i == 1 && j == 7)
 		    				{
-		    					System.out.print("$|");
+		    					mapa = mapa +"$|";
 		    					j++;
 		    				}
 		    				else
 		    				{
-		    					System.out.print("*|");
+		    					mapa = mapa + "*|";
 		    					j++;
 		    				}
 		    		 
 		    			}
 		    		}
 		    	}
-		        System.out.print(nextLevelBoard[i][j] + "|");
+		        mapa = mapa + nextLevelBoard[i][j] + "|";
 		    }
-		    System.out.println(" ");
+		    mapa = mapa +"\n";
 		}
+		return mapa;
 	}
 
-	@Override
-	public String printBoard(Hero hero, Enemy enemy) {
-		// TODO Auto-generated method stub
-		return " ";
-	}
+	
 
 	@Override
 	public void setDoors() {

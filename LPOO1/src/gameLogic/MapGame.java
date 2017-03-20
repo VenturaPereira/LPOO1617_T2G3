@@ -21,7 +21,6 @@ public abstract class MapGame {
 	protected  final char WEAPON = '*';
 	protected boolean running=false;
 	private boolean arrived=false;
-	private GameOver gameOver;
 	
 	public void setRunning(boolean gameState){
 		this.running=gameState;
@@ -99,11 +98,6 @@ public abstract class MapGame {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	public GameOver getGameOver() {
-		return gameOver;
-	}
-	public void setGameOver(GameOver gameOver) {
-		this.gameOver = gameOver;
-	}
+	
     
 }

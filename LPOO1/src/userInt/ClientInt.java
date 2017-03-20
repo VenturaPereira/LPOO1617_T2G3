@@ -22,29 +22,8 @@ import gameLogic.Suspicious;
 
 import gameLogic.WinGame;
 public class ClientInt{
-	/*
-	public static void game(DnD game) {
-		String answer;
-		int x=1;
-		Scanner scan = new Scanner(System.in);
-		System.out.println("Here's the initial board! If you dare to play press Y, otherwise, press N.");
-		game.printBoard();
-		answer = scan.next().toUpperCase();
-		switch (answer) {
-		case "Y":
-			decisions(game);
-
-			break;
-		case "N":
-			break;
-
-		default:
-			break;
-		}
-
-	}*/
-	public static void decisionsNextLvl(MapGame map, Hero hero, boolean advance){
-		if(advance == true){
+	
+	public static void decisionsNextLvl(MapGame map, Hero hero){
 			Scanner scanner2 = new Scanner(System.in);
 			System.out.println("How many ogres do you want?");
 			int choice = scanner2.nextInt();
@@ -55,13 +34,13 @@ public class ClientInt{
 			int i = 14854151;
 		 hero.setHi(7);
 		 hero.setHj(1);
-		 map2.printBoard(hero, orde);
+		System.out.println(map2.printBoard(hero, orde)); 
 		Scanner scanner = new Scanner(System.in);
 		GameOver gameOver = new GameOver(hero, orde, map2);
 		WinGame winGame = new WinGame(map);
 		Stun stun = new Stun(map);
 		Message msg = new Message();
-		while (/*!gameOver.getGameOver(map2) &&*/ !winGame.getWin()) {
+		while (!gameOver.getGameOver(map2) && !winGame.getWin()) {
              
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
@@ -71,16 +50,16 @@ public class ClientInt{
 				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);
 				hero.commandMove(map2, 's');
-				stun.stun();
-				map2.printBoard(hero, orde);
+				stun.stun();	
+				System.out.println(map2.printBoard(hero, orde)); 
 				i++;
 				break;
 			case "W":
 				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);
 				hero.commandMove(map2, 'w');
-				stun.stun();
-				map2.printBoard(hero, orde);
+				stun.stun();	
+				System.out.println(map2.printBoard(hero, orde)); 
 				i++;
 				break;
 
@@ -88,16 +67,16 @@ public class ClientInt{
 				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);
 				hero.commandMove(map2, 'd');
-				stun.stun();
-				map2.printBoard(hero, orde);
+				stun.stun();	
+				System.out.println(map2.printBoard(hero, orde)); 
 				i++;
 				break;
 			case "A":
 				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);;
 				hero.commandMove(map2, 'a');
-				stun.stun();
-				map2.printBoard(hero, orde);
+				stun.stun();	
+				System.out.println(map2.printBoard(hero, orde)); 
 				i++;
 				break;
 			}
@@ -113,9 +92,8 @@ public class ClientInt{
 			msg.victoryMsgMap2();
 		}
 	}
-	}
 
-	public static boolean decisions(Hero hero, MapGame map, Enemy guard, GameOver game, WinGame win) {
+	public static void decisions(Hero hero, MapGame map, Enemy guard, GameOver game, WinGame win) {
 		Mapa1 map1= (Mapa1)map;
 		Message msg = new Message();
 		Scanner scanner = new Scanner(System.in);
@@ -158,18 +136,18 @@ public class ClientInt{
 		if(game.getGameOver(map1) == true)
 		{
 			msg.gameOverMsgMap1();
+			map1.setRunning(false);
+			
 		
 		}
 		
 		if(win.getWin() == true)
 		{
 			msg.victoryMsgMap1();
-			
-			return true;
+
 			
 			
 		}
-		return false;
 		
 		
 	}
@@ -196,10 +174,12 @@ public class ClientInt{
 		GameOver game= new GameOver(map1.getHero(), map1.getGuard(), map1);
 		WinGame win = new WinGame(map1);
 		System.out.println(map1.printBoard(map1.getHero(), map1.getGuard()));
-		boolean next =decisions(map1.getHero(), map1,  map1.getGuard(), game, win);	
-		System.out.println(map1.getRunning());
-		System.out.println(map2.getRunning());
-		decisionsNextLvl( map2, map2.getHero(), next);
+		if(map1.getRunning()){
+		decisions(map1.getHero(), map1,  map1.getGuard(), game, win);	
+		}
+		if(map2.getRunning()){
+		decisionsNextLvl( map2, map2.getHero());
+		}
 	}
 
 	

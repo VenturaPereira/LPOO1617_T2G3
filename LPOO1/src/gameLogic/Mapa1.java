@@ -24,7 +24,6 @@ public class Mapa1 extends MapGame {
 		ChooseGuard which = new ChooseGuard(guard);
 		guard = which.setGuard();
 		this.setGuard(guard);
-		setGameOver(new GameOver(this.getHero(), this.getGuard(), this));
 	}
 	
 	public char[][] getMap(){

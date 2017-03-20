@@ -30,6 +30,7 @@ public class GameOver {
 				return false;
 			}
 			else if((this.hero.getHi() == guard.getI()+1 && this.hero.getHj() == this.guard.getJ()) || (this.hero.getHi()== guard.getI()-1) && (this.hero.getHj() == this.guard.getJ()) || (this.hero.getHi() == this.guard.getI() && (this.hero.getHj() == this.guard.getJ()+1 ||this.hero.getHj() == this.guard.getJ()-1 ) || (this.hero.getHi() == this.guard.getI() && this.hero.getHj() == this.guard.getJ()))){
+				map.setRunning(false);
 				return true;
 			} else{
 				return false;
@@ -45,9 +46,11 @@ public class GameOver {
 				int wi = this.orde.getOrde().get(k).getWeaponI();
 				int wj = this.orde.getOrde().get(k).getWeaponJ();
 				
-				
+
 				if((this.hero.getHi() == wi && this.hero.getHj() == wj) || (this.hero.getHi() == wi-1 && this.hero.getHj() == wj) || (this.hero.getHi() == wi+1 && this.hero.getHj() == wj) || (this.hero.getHi() == wi && this.hero.getHj() == wj-1) || (this.hero.getHi() == wi && this.hero.getHj() == wj+1))
+
 				{
+					map.setRunning(false);
 					return true;
 				}
 				
@@ -60,6 +63,7 @@ public class GameOver {
 				return false;
 			}
 			else if((this.hero.getHi() == guard.getI()+1 && this.hero.getHj() == this.guard.getJ()) || (this.hero.getHi()== guard.getI()-1) && (this.hero.getHj() == this.guard.getJ()) || (this.hero.getHi() == this.guard.getI() && (this.hero.getHj() == this.guard.getJ()+1 ||this.hero.getHj() == this.guard.getJ()-1 ) || (this.hero.getHi() == this.guard.getI() && this.hero.getHj() == this.guard.getJ()))){
+				map.setRunning(false);
 				return true;
 			} else{
 				return false;

@@ -15,6 +15,7 @@ import gameLogic.GameOver;
 import gameLogic.Levels;
 import gameLogic.Mapa1;
 import gameLogic.Mapa2;
+import gameLogic.Orde;
 import gameLogic.Rookie;
 import gameLogic.Suspicious;
 import gameLogic.WinGame;
@@ -29,6 +30,24 @@ public class RunAsGui {
     
 	private JFrame frame;
 	private Levels leveling;
+	public boolean lost = false;
+	JButton btnNewGame = new JButton("New Game");
+	JButton btnRight = new JButton("Right");
+	JLabel lblPressNewGame = new JLabel("Press New Game to play");
+	JButton btnLeft = new JButton("Left");
+	JLabel lblEnt = new JLabel("Number Of Ogres");
+	JTextPane textPane = new JTextPane();
+	JButton btnExit = new JButton("Exit");
+	JButton btnDown = new JButton("Down");
+	JButton btnUp = new JButton("Up");
+	JTextArea textArea = new JTextArea();
+
+
+
+
+
+
+
 
 	/**
 	 * Launch the application.
@@ -45,7 +64,62 @@ public class RunAsGui {
 			}
 		});
 	}
+	
+	
+	
+	public void checkState(char direction){
+		for(int i =0; i < leveling.getLevels().size(); i++){
+			if(leveling.getLevels().get(i).getRunning()){
+				WinGame win = new WinGame(leveling.getLevels().get(i));
 
+				
+				if(leveling.getLevels().get(i) instanceof Mapa1){
+					GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
+				leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), direction);
+				leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
+				if(gmae.getGameOver(leveling.getLevels().get(i))){	
+					lost = true;
+					btnRight.setEnabled(false);
+					btnLeft.setEnabled(false);
+					btnUp.setEnabled(false);
+					btnDown.setEnabled(false);
+					textArea.setText("You looooost, noob");
+					lblPressNewGame.setText("You were defeated");
+				}
+					else if(win.getWin()){
+						int a = i+1;
+						textArea.setText(leveling.getLevels().get(a).printBoard(leveling.getLevels().get(a).getHero(), leveling.getLevels().get(a).getOrde()));					
+					}else{
+						textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
+		}
+				}else if( leveling.getLevels().get(i) instanceof Mapa2){
+					GameOver lvltwo = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getOrde(), leveling.getLevels().get(i));
+					leveling.getLevels().get(i).getOrde().moveOrde(leveling.getLevels().get(i));
+					leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), direction);
+					if(lvltwo.getGameOver(leveling.getLevels().get(i))){	
+						lost = true;
+						btnRight.setEnabled(false);
+						btnLeft.setEnabled(false);
+						btnUp.setEnabled(false);
+						btnDown.setEnabled(false);
+						textArea.setText("You looooost, noob");
+						lblPressNewGame.setText("You were defeated");
+					}
+						else if(win.getWin()){
+							int a = i+1;			           
+							textArea.setText(leveling.getLevels().get(a).printBoard(leveling.getLevels().get(a).getHero(), leveling.getLevels().get(a).getOrde()));	
+
+						}
+						else{
+							textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getOrde()));
+							}
+
+					}
+			}
+			
+	}
+
+	}
 	/**
 	 * Create the application.
 	 */
@@ -64,15 +138,13 @@ public class RunAsGui {
 		
 		
 		
+		lblPressNewGame.setBounds(10, 236, 194, 14);
+		frame.getContentPane().add(lblPressNewGame);
 		
 		
-		
-		
-		JLabel lblEnt = new JLabel("Number Of Ogres");
 		lblEnt.setBounds(10, 11, 102, 14);
 		frame.getContentPane().add(lblEnt);
 		
-		JTextPane textPane = new JTextPane();
 		textPane.setBounds(122, 5, 21, 20);
 		frame.getContentPane().add(textPane);
 		
@@ -90,35 +162,25 @@ public class RunAsGui {
 		frame.getContentPane().add(comboBox);
 		
 		
-		JButton btnExit = new JButton("Exit");
 		btnExit.setBounds(323, 227, 89, 23);
+		btnExit.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.exit(0);
+				
+			}
+		});
 		frame.getContentPane().add(btnExit);
 		
-		JTextArea textArea = new JTextArea();
 		textArea.setFont(new Font("Courier New", Font.PLAIN, 13));
 		textArea.setBounds(20, 76, 246, 161);
 		frame.getContentPane().add(textArea);
 		
-		JButton btnLeft = new JButton("Left");
+		
+		
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-					for(int i =0; i < leveling.getLevels().size(); i++){
-						if(leveling.getLevels().get(i).getRunning()){
-							if(!(leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
-						}
-							leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'a');
-							leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
-							if((leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
-								textArea.setText("You looooost, noob");
-							}else{
-							textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
-							}
-							break;
-						}
-						
-					}
-				
+				checkState('a');
 				
 			}
 		});
@@ -127,74 +189,38 @@ public class RunAsGui {
 		frame.getContentPane().add(btnLeft);
 		
 		
-		JButton btnRight = new JButton("Right");
+		
 		btnRight.setEnabled(false);
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				for(int i =0; i < leveling.getLevels().size(); i++){
-					if(leveling.getLevels().get(i).getRunning()){
-						if(!(leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
-						leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'd');
-						leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
-						 if((leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
-								textArea.setText("You looooost, noob");
-							}else{
-						textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
-							}
-						break;
-					}
-
+				
+			checkState('d');
+				
 				}
-				}
-			}
 		});
 		btnRight.setBounds(357, 118, 67, 23);
 		frame.getContentPane().add(btnRight);
 		
 		
-		JButton btnDown = new JButton("Down");
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					for(int i =0; i < leveling.getLevels().size(); i++){
-						if(leveling.getLevels().get(i).getRunning()){
-							if(!(leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
-							leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 's');
-							leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
-							 if((leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
-									textArea.setText("You looooost, noob");
-								}else{
-							textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
-								}
-							break;
-						}
-					}
-					}
 			
-			}
+				 checkState('s');
+				
+					}
 		});
 		btnDown.setEnabled(false);
 		btnDown.setBounds(322, 152, 72, 23);
 		frame.getContentPane().add(btnDown);
 		
 		
-		JButton btnUp = new JButton("Up");
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-							for(int i =0; i < leveling.getLevels().size(); i++){
-								if(leveling.getLevels().get(i).getRunning()){
-									if(!(leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
-									leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'w');
-									leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
-									 if((leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
-											textArea.setText("You looooost, noob");
-										}else{
-									textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
-										}
-									 break;
-								}
-								}
+				
+				 checkState('w');
+		
 							}
-					}
+					
 		});
 		btnUp.setEnabled(false);
 		btnUp.setBounds(323, 84, 60, 23);
@@ -203,11 +229,8 @@ public class RunAsGui {
 		
 		
 		
-		JLabel lblPressNewGame = new JLabel("Press New Game to play");
-		lblPressNewGame.setBounds(10, 236, 194, 14);
-		frame.getContentPane().add(lblPressNewGame);
-		JButton btnNewGame = new JButton("New Game");
-		btnNewGame.addActionListener(new ActionListener() {
+		
+				btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				lblPressNewGame.setText("You can now play");
@@ -233,7 +256,11 @@ public class RunAsGui {
 					break;
 				
 				}
+				
 				Mapa2 map2 = new Mapa2(leveling);
+				int number = Integer.parseInt(textPane.getText());
+				Orde orde = new Orde(number);
+				map2.setOrde(orde);
 				map1.setRunning(true);
 				textArea.setText(map1.printBoard(map1.getHero(), map1.getGuard()));
 				
@@ -243,6 +270,7 @@ public class RunAsGui {
 		frame.getContentPane().add(btnNewGame);
 	}
 
+	
 	public Levels getMaps() {
 		return leveling;
 	}
