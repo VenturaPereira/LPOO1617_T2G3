@@ -15,6 +15,7 @@ import gameLogic.GameOver;
 import gameLogic.Levels;
 import gameLogic.Mapa1;
 import gameLogic.Mapa2;
+import gameLogic.Orde;
 import gameLogic.Rookie;
 import gameLogic.Suspicious;
 import gameLogic.WinGame;
@@ -65,7 +66,9 @@ public class RunAsGui {
 		
 		
 		
-		
+		JLabel lblPressNewGame = new JLabel("Press New Game to play");
+		lblPressNewGame.setBounds(10, 236, 194, 14);
+		frame.getContentPane().add(lblPressNewGame);
 		
 		
 		JLabel lblEnt = new JLabel("Number Of Ogres");
@@ -105,13 +108,21 @@ public class RunAsGui {
 				
 					for(int i =0; i < leveling.getLevels().size(); i++){
 						if(leveling.getLevels().get(i).getRunning()){
+							WinGame win = new WinGame(leveling.getLevels().get(i));
 							GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
 							leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'a');
 							leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
 						
 							if(gmae.getGameOver(leveling.getLevels().get(i))){	
 								textArea.setText("You looooost, noob");
-							}else{
+								lblPressNewGame.setText("You were defeated");
+
+							}else if(win.getWin()){
+								int a = i+1;
+								textArea.setText(leveling.getLevels().get(a).printBoard(leveling.getLevels().get(a).getHero(), leveling.getLevels().get(a).getOrde()));
+							}
+							
+							else{
 							textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
 							}
 							break;
@@ -141,6 +152,8 @@ public class RunAsGui {
 			
 						if(gmae.getGameOver(leveling.getLevels().get(i))){	
 						textArea.setText("You looooost, noob");
+						lblPressNewGame.setText("You were defeated");
+
 							}else{
 						textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
 							}
@@ -164,6 +177,8 @@ public class RunAsGui {
 							leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
 							if(gmae.getGameOver(leveling.getLevels().get(i))){
 									textArea.setText("You looooost, noob");
+									lblPressNewGame.setText("You were defeated");
+
 								}else{
 							textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
 								}
@@ -188,6 +203,7 @@ public class RunAsGui {
 									if(gmae.getGameOver(leveling.getLevels().get(i))){
 	
 									textArea.setText("You looooost, noob");
+									lblPressNewGame.setText("You were defeated");
 										}else{
 									textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
 										}
@@ -204,9 +220,7 @@ public class RunAsGui {
 		
 		
 		
-		JLabel lblPressNewGame = new JLabel("Press New Game to play");
-		lblPressNewGame.setBounds(10, 236, 194, 14);
-		frame.getContentPane().add(lblPressNewGame);
+		
 		JButton btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -236,6 +250,8 @@ public class RunAsGui {
 				}
 				
 				Mapa2 map2 = new Mapa2(leveling);
+				Orde orde = new Orde(1);
+				map2.setOrde(orde);
 				map1.setRunning(true);
 				textArea.setText(map1.printBoard(map1.getHero(), map1.getGuard()));
 				

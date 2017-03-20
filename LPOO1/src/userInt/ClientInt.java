@@ -33,7 +33,7 @@ public class ClientInt{
 			int i = 14854151;
 		 hero.setHi(7);
 		 hero.setHj(1);
-		 map2.printBoard(hero, orde);
+		System.out.println(map2.printBoard(hero, orde)); 
 		Scanner scanner = new Scanner(System.in);
 		GameOver gameOver = new GameOver(hero, orde, map2);
 		Message msg = new Message();
@@ -47,14 +47,14 @@ public class ClientInt{
 				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);
 				hero.commandMove(map2, 's');
-				map2.printBoard(hero, orde);
+				System.out.println(map2.printBoard(hero, orde)); 
 				i++;
 				break;
 			case "W":
 				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);
 				hero.commandMove(map2, 'w');
-				map2.printBoard(hero, orde);
+				System.out.println(map2.printBoard(hero, orde)); 
 				i++;
 				break;
 
@@ -62,14 +62,14 @@ public class ClientInt{
 				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);
 				hero.commandMove(map2, 'd');
-				map2.printBoard(hero, orde);
+				System.out.println(map2.printBoard(hero, orde)); 
 				i++;
 				break;
 			case "A":
 				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);;
 				hero.commandMove(map2, 'a');
-				map2.printBoard(hero, orde);
+				System.out.println(map2.printBoard(hero, orde)); 
 				i++;
 				break;
 			}
