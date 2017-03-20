@@ -105,11 +105,11 @@ public class RunAsGui {
 				
 					for(int i =0; i < leveling.getLevels().size(); i++){
 						if(leveling.getLevels().get(i).getRunning()){
-							if(!(leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
-						}
+							GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
 							leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'a');
 							leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
-							if((leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
+						
+							if(gmae.getGameOver(leveling.getLevels().get(i))){	
 								textArea.setText("You looooost, noob");
 							}else{
 							textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
@@ -131,13 +131,16 @@ public class RunAsGui {
 		btnRight.setEnabled(false);
 		btnRight.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				for(int i =0; i < leveling.getLevels().size(); i++){
 					if(leveling.getLevels().get(i).getRunning()){
-						if(!(leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
+						GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
+						
 						leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'd');
 						leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
-						 if((leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
-								textArea.setText("You looooost, noob");
+			
+						if(gmae.getGameOver(leveling.getLevels().get(i))){	
+						textArea.setText("You looooost, noob");
 							}else{
 						textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
 							}
@@ -146,7 +149,6 @@ public class RunAsGui {
 
 				}
 				}
-			}
 		});
 		btnRight.setBounds(357, 118, 67, 23);
 		frame.getContentPane().add(btnRight);
@@ -157,10 +159,10 @@ public class RunAsGui {
 			public void actionPerformed(ActionEvent arg0) {
 					for(int i =0; i < leveling.getLevels().size(); i++){
 						if(leveling.getLevels().get(i).getRunning()){
-							if(!(leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
+							GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
 							leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 's');
 							leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
-							 if((leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
+							if(gmae.getGameOver(leveling.getLevels().get(i))){
 									textArea.setText("You looooost, noob");
 								}else{
 							textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
@@ -169,8 +171,6 @@ public class RunAsGui {
 						}
 					}
 					}
-			
-			}
 		});
 		btnDown.setEnabled(false);
 		btnDown.setBounds(322, 152, 72, 23);
@@ -182,11 +182,12 @@ public class RunAsGui {
 			public void actionPerformed(ActionEvent e) {
 							for(int i =0; i < leveling.getLevels().size(); i++){
 								if(leveling.getLevels().get(i).getRunning()){
-									if(!(leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
+									GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
 									leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'w');
 									leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
-									 if((leveling.getLevels().get(i).getGameOver().getGameOver(leveling.getLevels().get(i)))){
-											textArea.setText("You looooost, noob");
+									if(gmae.getGameOver(leveling.getLevels().get(i))){
+	
+									textArea.setText("You looooost, noob");
 										}else{
 									textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
 										}
@@ -194,7 +195,7 @@ public class RunAsGui {
 								}
 								}
 							}
-					}
+					
 		});
 		btnUp.setEnabled(false);
 		btnUp.setBounds(323, 84, 60, 23);
@@ -233,6 +234,7 @@ public class RunAsGui {
 					break;
 				
 				}
+				
 				Mapa2 map2 = new Mapa2(leveling);
 				map1.setRunning(true);
 				textArea.setText(map1.printBoard(map1.getHero(), map1.getGuard()));
