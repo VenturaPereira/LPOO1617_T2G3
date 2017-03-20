@@ -109,22 +109,45 @@ public class RunAsGui {
 					for(int i =0; i < leveling.getLevels().size(); i++){
 						if(leveling.getLevels().get(i).getRunning()){
 							WinGame win = new WinGame(leveling.getLevels().get(i));
-							GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
+
+							
+							if(leveling.getLevels().get(i) instanceof Mapa1){
+								GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
 							leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'a');
 							leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
-						
 							if(gmae.getGameOver(leveling.getLevels().get(i))){	
 								textArea.setText("You looooost, noob");
 								lblPressNewGame.setText("You were defeated");
+							}
+								else if(win.getWin()){
+									int a = i+1;
+									textArea.setText(leveling.getLevels().get(a).printBoard(leveling.getLevels().get(a).getHero(), leveling.getLevels().get(a).getOrde()));
+								}
+								else{
+									textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
+									}
 
-							}else if(win.getWin()){
-								int a = i+1;
-								textArea.setText(leveling.getLevels().get(a).printBoard(leveling.getLevels().get(a).getHero(), leveling.getLevels().get(a).getOrde()));
 							}
+							else if( leveling.getLevels().get(i) instanceof Mapa2){
+								GameOver lvltwo = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getOrde(), leveling.getLevels().get(i));
+								leveling.getLevels().get(i).getOrde().moveOrde(leveling.getLevels().get(i));
+								leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'a');
+								if(lvltwo.getGameOver(leveling.getLevels().get(i))){	
+									textArea.setText("You looooost, noob");
+									lblPressNewGame.setText("You were defeated");
+								}
+									else if(win.getWin()){
+										int a = i+1;
+										textArea.setText(leveling.getLevels().get(a).printBoard(leveling.getLevels().get(a).getHero(), leveling.getLevels().get(a).getOrde()));
+									}
+									else{
+										textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getOrde()));
+										}
+
+								}
 							
-							else{
-							textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
-							}
+							
+							
 							break;
 						}
 						
@@ -145,21 +168,49 @@ public class RunAsGui {
 				
 				for(int i =0; i < leveling.getLevels().size(); i++){
 					if(leveling.getLevels().get(i).getRunning()){
-						GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
+						WinGame win = new WinGame(leveling.getLevels().get(i));
+
 						
+						if(leveling.getLevels().get(i) instanceof Mapa1){
+							GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
 						leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'd');
 						leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
-			
 						if(gmae.getGameOver(leveling.getLevels().get(i))){	
-						textArea.setText("You looooost, noob");
-						lblPressNewGame.setText("You were defeated");
-
-							}else{
-						textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
+							textArea.setText("You looooost, noob");
+							lblPressNewGame.setText("You were defeated");
+						}
+							else if(win.getWin()){
+								int a = i+1;
+								textArea.setText(leveling.getLevels().get(a).printBoard(leveling.getLevels().get(a).getHero(), leveling.getLevels().get(a).getOrde()));
 							}
+							else{
+								textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
+								}
+
+						}
+						else if( leveling.getLevels().get(i) instanceof Mapa2){
+							GameOver lvltwo = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getOrde(), leveling.getLevels().get(i));
+							leveling.getLevels().get(i).getOrde().moveOrde(leveling.getLevels().get(i));
+							leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'd');
+							if(lvltwo.getGameOver(leveling.getLevels().get(i))){	
+								textArea.setText("You looooost, noob");
+								lblPressNewGame.setText("You were defeated");
+							}
+								else if(win.getWin()){
+									int a = i+1;
+									textArea.setText(leveling.getLevels().get(a).printBoard(leveling.getLevels().get(a).getHero(), leveling.getLevels().get(a).getOrde()));
+								}
+								else{
+									textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getOrde()));
+									}
+
+							}
+						
+						
+						
 						break;
 					}
-
+					
 				}
 				}
 		});
@@ -170,21 +221,52 @@ public class RunAsGui {
 		JButton btnDown = new JButton("Down");
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-					for(int i =0; i < leveling.getLevels().size(); i++){
-						if(leveling.getLevels().get(i).getRunning()){
-							GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
-							leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 's');
-							leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
-							if(gmae.getGameOver(leveling.getLevels().get(i))){
-									textArea.setText("You looooost, noob");
-									lblPressNewGame.setText("You were defeated");
+				for(int i =0; i < leveling.getLevels().size(); i++){
+					if(leveling.getLevels().get(i).getRunning()){
+						WinGame win = new WinGame(leveling.getLevels().get(i));
 
-								}else{
-							textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
-								}
-							break;
+						
+						if(leveling.getLevels().get(i) instanceof Mapa1){
+							GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
+						leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 's');
+						leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
+						if(gmae.getGameOver(leveling.getLevels().get(i))){	
+							textArea.setText("You looooost, noob");
+							lblPressNewGame.setText("You were defeated");
 						}
+							else if(win.getWin()){
+								int a = i+1;
+								textArea.setText(leveling.getLevels().get(a).printBoard(leveling.getLevels().get(a).getHero(), leveling.getLevels().get(a).getOrde()));
+							}
+							else{
+								textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
+								}
+
+						}
+						else if( leveling.getLevels().get(i) instanceof Mapa2){
+							GameOver lvltwo = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getOrde(), leveling.getLevels().get(i));
+							leveling.getLevels().get(i).getOrde().moveOrde(leveling.getLevels().get(i));
+							leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 's');
+							if(lvltwo.getGameOver(leveling.getLevels().get(i))){	
+								textArea.setText("You looooost, noob");
+								lblPressNewGame.setText("You were defeated");
+							}
+								else if(win.getWin()){
+									int a = i+1;
+									textArea.setText(leveling.getLevels().get(a).printBoard(leveling.getLevels().get(a).getHero(), leveling.getLevels().get(a).getOrde()));
+								}
+								else{
+									textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getOrde()));
+									}
+
+							}
+						
+						
+						
+						break;
 					}
+					
+				}
 					}
 		});
 		btnDown.setEnabled(false);
@@ -195,21 +277,52 @@ public class RunAsGui {
 		JButton btnUp = new JButton("Up");
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-							for(int i =0; i < leveling.getLevels().size(); i++){
-								if(leveling.getLevels().get(i).getRunning()){
-									GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
-									leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'w');
-									leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
-									if(gmae.getGameOver(leveling.getLevels().get(i))){
-	
-									textArea.setText("You looooost, noob");
-									lblPressNewGame.setText("You were defeated");
-										}else{
-									textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
-										}
-									 break;
+				for(int i =0; i < leveling.getLevels().size(); i++){
+					if(leveling.getLevels().get(i).getRunning()){
+						WinGame win = new WinGame(leveling.getLevels().get(i));
+
+						
+						if(leveling.getLevels().get(i) instanceof Mapa1){
+							GameOver gmae = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard(), leveling.getLevels().get(i));
+						leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'w');
+						leveling.getLevels().get(i).getGuard().enemyMove(leveling.getLevels().get(i));
+						if(gmae.getGameOver(leveling.getLevels().get(i))){	
+							textArea.setText("You looooost, noob");
+							lblPressNewGame.setText("You were defeated");
+						}
+							else if(win.getWin()){
+								int a = i+1;
+								textArea.setText(leveling.getLevels().get(a).printBoard(leveling.getLevels().get(a).getHero(), leveling.getLevels().get(a).getOrde()));
+							}
+							else{
+								textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getGuard()));
 								}
+
+						}
+						else if( leveling.getLevels().get(i) instanceof Mapa2){
+							GameOver lvltwo = new GameOver(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getOrde(), leveling.getLevels().get(i));
+							leveling.getLevels().get(i).getOrde().moveOrde(leveling.getLevels().get(i));
+							leveling.getLevels().get(i).getHero().commandMove(leveling.getLevels().get(i), 'w');
+							if(lvltwo.getGameOver(leveling.getLevels().get(i))){	
+								textArea.setText("You looooost, noob");
+								lblPressNewGame.setText("You were defeated");
+							}
+								else if(win.getWin()){
+									int a = i+1;
+									textArea.setText(leveling.getLevels().get(a).printBoard(leveling.getLevels().get(a).getHero(), leveling.getLevels().get(a).getOrde()));
 								}
+								else{
+									textArea.setText(leveling.getLevels().get(i).printBoard(leveling.getLevels().get(i).getHero(), leveling.getLevels().get(i).getOrde()));
+									}
+
+							}
+						
+						
+						
+						break;
+					}
+					
+				}
 							}
 					
 		});
