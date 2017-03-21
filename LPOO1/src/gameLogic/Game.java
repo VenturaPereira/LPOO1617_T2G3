@@ -35,6 +35,14 @@ public class Game {
          map2.setOrde(this.orde);	
 		 this.setChooseGuard(chooseGuard);
 	}
+	public MapGame getCurrentMap(){
+		for(int i = 0; i < leveling.getLevels().size(); i++){
+			if(leveling.getLevels().get(i).getRunning()){
+				return leveling.getLevels().get(i);
+			}
+		}
+		return null;
+	}
 	public Levels getLeveling() {
 		return leveling;
 	}
