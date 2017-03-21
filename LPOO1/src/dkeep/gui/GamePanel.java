@@ -89,13 +89,18 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 			for(int j = 0; j < gamemap.getMap()[i].length; j++){
         		if(i ==  gamemap.getHero().getHi() && j == gamemap.getHero().getHj()){
         			System.out.println(gamemap.getHero().getPickedKey());
-        			if(!gamemap.getHero().getPickedKey()){
         			g.drawImage(hero, j*offsetH, i * offsetW, this);
-        			}
-        			else if(gamemap instanceof Mapa2){
+        			 if(gamemap instanceof Mapa2){
+        				if(gamemap.getHero().getHi() == 1 && gamemap.getHero().getHj() == 7){
+        					gamemap.pickKey();
+        				}
+        				if(gamemap.getHero().getPickedKey()){
         				g.drawImage(pickedHero, j*offsetH, i * offsetW, this);
+        			} else{
+        				g.drawImage(hero, j*offsetH, i * offsetW, this);
         			}
         		} 
+        		}
         		if(gamemap instanceof Mapa1){
         		if(i == gamemap.getGuard().getI() && j == gamemap.getGuard().getJ()){
         			g.drawImage(guard,  j*offsetH, i * offsetW, this);
