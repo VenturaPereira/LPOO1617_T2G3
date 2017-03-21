@@ -1,6 +1,7 @@
 package dkeep.gui;
 
 import java.awt.EventQueue;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 
@@ -27,23 +28,31 @@ public class GraphicalView{
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
 	 */
-	public GraphicalView() {
+	public GraphicalView() throws IOException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
-	private void initialize() {
+	private void initialize() throws IOException {
 		frame = new JFrame();
+		frame.setTitle("World of Warcraft : Legion");
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.getContentPane().setLayout(null);
 		frame.setBounds(300, 25, 700, 700);
 		frame.setResizable(false);
-		 panel = new GamePanel(700,700);
+		panel = new GamePanel(700,700);
+		panel.setBounds(0, 0, 700,700);
+		frame.getContentPane().add(panel);
+		//panel.addKeyListener(panel);
+		panel.setFocusable(true);
+		panel.requestFocusInWindow();
 		 
 		
 	}

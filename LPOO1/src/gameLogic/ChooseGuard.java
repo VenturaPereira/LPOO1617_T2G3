@@ -12,6 +12,7 @@ public class ChooseGuard {
 	
 	
 	public Enemy setGuard(){
+
 		Random rnd = new Random();
 		int goTo = rnd.nextInt(3);
 		switch(goTo){
