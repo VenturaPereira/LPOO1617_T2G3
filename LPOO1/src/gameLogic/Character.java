@@ -39,7 +39,7 @@ public abstract class Character {
 			if(map.getMap()[di][dj] == 'X'){
 				return false;
 			}else if(map.getMap()[di][dj] == 'I'){
-				if(map.hero.getPickedKey())
+				if(map.hero.getPickedKey() && map.getHero().getHj() == dj+1)
 				{
 					((Mapa2) map).setDoors();
 				}
@@ -50,7 +50,6 @@ public abstract class Character {
 				return true;
 			}else if(map.getMap()[di][dj] == 'S'){
 				  map.setArrived(true);
-				  
 				  return true;
 				
 			}
