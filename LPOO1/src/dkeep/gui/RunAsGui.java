@@ -106,8 +106,7 @@ public class RunAsGui {
 						lblPressNewGame.setText("You were defeated");
 					}
 						else if(win.getWin()){
-							int a = i+1;			           
-							textArea.setText(leveling.getLevels().get(a).printBoard(leveling.getLevels().get(a).getHero(), leveling.getLevels().get(a).getOrde()));	
+						textArea.setText("You won");	
 
 						}
 						else{

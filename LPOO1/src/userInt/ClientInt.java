@@ -6,6 +6,7 @@ import java.util.Scanner;
 import gameLogic.ChooseGuard;
 import gameLogic.Drunken;
 import gameLogic.Enemy;
+import gameLogic.Game;
 import gameLogic.GameOver;
 import gameLogic.Guard;
 import gameLogic.Hero;
@@ -23,22 +24,15 @@ import gameLogic.Suspicious;
 import gameLogic.WinGame;
 public class ClientInt{
 	
-	public static void decisionsNextLvl(MapGame map, Hero hero){
-			Scanner scanner2 = new Scanner(System.in);
-			System.out.println("How many ogres do you want?");
-			int choice = scanner2.nextInt();
-			Orde orde = new Orde(choice);
+	public static void decisionsNextLvl(MapGame map, Hero hero, Orde orde){
+	
 			Mapa2 map2 = (Mapa2)map;
-			map2.setOrde(orde);
-			System.out.println(map2.getOrde().getOrde().size());
-			int i = 14854151;
-		 hero.setHi(7);
-		 hero.setHj(1);
+
 		System.out.println(map2.printBoard(hero, orde)); 
 		Scanner scanner = new Scanner(System.in);
 		GameOver gameOver = new GameOver(hero, orde, map2);
 		WinGame winGame = new WinGame(map);
-		Stun stun = new Stun(map);
+		Stun stun = new Stun(map2);
 		Message msg = new Message();
 		while (!gameOver.getGameOver(map2) && !winGame.getWin()) {
              
@@ -47,37 +41,30 @@ public class ClientInt{
 
 			switch (answer) {
 			case "S":
-				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);
 				hero.commandMove(map2, 's');
 				stun.stun();	
 				System.out.println(map2.printBoard(hero, orde)); 
-				i++;
+
 				break;
 			case "W":
-				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);
 				hero.commandMove(map2, 'w');
 				stun.stun();	
 				System.out.println(map2.printBoard(hero, orde)); 
-				i++;
 				break;
 
 			case "D":
-				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);
 				hero.commandMove(map2, 'd');
 				stun.stun();	
 				System.out.println(map2.printBoard(hero, orde)); 
-				i++;
 				break;
 			case "A":
-				System.out.println(map2.getOrde().getOrde().size());
 				orde.moveOrde(map);;
 				hero.commandMove(map2, 'a');
 				stun.stun();	
 				System.out.println(map2.printBoard(hero, orde)); 
-				i++;
 				break;
 			}
 		}
@@ -167,18 +154,28 @@ public class ClientInt{
 		//System.out.println(leveling.getLevels().size());
 		//decisionsNextLvl( map2, map2.getHero(), map2.getOgre(), next);
 		
-		Levels leveling = new Levels();
+	/*Levels leveling = new Levels();
 		Mapa1 map1= new Mapa1(leveling);
 		map1.setRunning(true);
 		Mapa2 map2 = new Mapa2(leveling);
 		GameOver game= new GameOver(map1.getHero(), map1.getGuard(), map1);
 		WinGame win = new WinGame(map1);
-		System.out.println(map1.printBoard(map1.getHero(), map1.getGuard()));
-		if(map1.getRunning()){
-		decisions(map1.getHero(), map1,  map1.getGuard(), game, win);	
+		*/
+		Scanner scan = new Scanner(System.in);
+		
+		Scanner guard = new Scanner(System.in);
+		 
+		System.out.println("How many ogres do you want?");
+		int goTo= scan.nextInt();
+		System.out.println("What guard do you want?");
+		String name = guard.next();
+		Game game = new Game(goTo, name);
+		System.out.println(game.getMap1().printBoard(game.getMap1().getHero(), game.getMap1().getGuard()));
+		if(game.getMap1().getRunning()){
+		decisions(game.getMap1().getHero(), game.getMap1(),  game.getMap1().getGuard(), game.getGameOver(), game.getWinning());	
 		}
-		if(map2.getRunning()){
-		decisionsNextLvl( map2, map2.getHero());
+		if(game.getMap2().getRunning()){
+		decisionsNextLvl( game.getMap2(), game.getMap2().getHero(), game.getOrde());
 		}
 	}
 
