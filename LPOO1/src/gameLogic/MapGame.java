@@ -99,5 +99,21 @@ public abstract class MapGame {
 		return 0;
 	}
 	
+	public boolean isHasOgre() {
+		return hasOgre;
+	}
+
+	public void setHasOgre(boolean hasOgre) {
+		this.hasOgre = hasOgre;
+	}
+
+	public boolean isHasGuard() {
+		return hasGuard;
+	}
+
+	public void setHasGuard(boolean hasGuard) {
+		this.hasGuard = hasGuard;
+	}
+	
     
 }
