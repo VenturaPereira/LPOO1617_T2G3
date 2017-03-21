@@ -30,12 +30,13 @@ public class NewMapGame extends MapGame {
 					setGuard(which.setGuard());
 					getGuard().setI(i);
 					getGuard().setJ(j);
-				}else if(map[i][i] == '0'){
+				}else if(map[i][j] == '0'){
 					Ogre o = new Ogre();
 					setHasOgre(true);
 					this.getMap()[i][j] = ' ';
 					o.setI(i);
 					o.setJ(j);
+					setOrde(new Orde(0));
 					this.orde.getOrde().add(o);
 					/*setOgre(new Ogre());
 					getOgre().setI(i);
