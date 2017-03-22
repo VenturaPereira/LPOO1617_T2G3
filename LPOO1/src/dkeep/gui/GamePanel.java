@@ -31,8 +31,8 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addKeyListener(this);
-		gridH = game.getMap1().getMap()[0].length;
-		gridW = game.getMap1().getMap().length;
+		gridH = getGame().getMap1().getMap()[0].length;
+		gridW = getGame().getMap1().getMap().length;
 		offsetW = Math.round(width / gridW);
 		offsetH = Math.round(height/gridH);
 		
@@ -55,7 +55,7 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 	public void paintComponent(Graphics g){
 		super.paintComponent(g); //limpa fundo
 		
-		MapGame gamemap = game.getCurrentMap();
+		MapGame gamemap = getGame().getCurrentMap();
 	
 			
 		
@@ -133,13 +133,13 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 			}
 		}
 		if(gamemap instanceof Mapa1){
-			if(game.getGameOver().getGameOver(gamemap)){
+			if(getGame().getGameOver().getGameOver(gamemap)){
 					g.drawImage(defeat,gridH, gridW, this);
 					
 				}
 			}else if(gamemap instanceof Mapa2){
 				System.out.println(gamemap.getOrde().getOrde().size());
-				if(game.getGameOverlvl2().getGameOver(gamemap)){
+				if(getGame().getGameOverlvl2().getGameOver(gamemap)){
 					System.out.println("bug");
 					g.drawImage(defeat,gridH, gridW, this);
 				}
@@ -152,23 +152,23 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_LEFT: 
-			game.getCurrentMap().getHero().commandMove(game.getCurrentMap(), 'a');
+			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'a');
 			System.out.println("what");
 			break;
 		case KeyEvent.VK_RIGHT: 
-			game.getCurrentMap().getHero().commandMove(game.getCurrentMap(), 'd');  
+			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'd');  
 			break;
 		case KeyEvent.VK_UP:  
-			game.getCurrentMap().getHero().commandMove(game.getCurrentMap(), 'w');
+			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'w');
 			break;
 		case KeyEvent.VK_DOWN: 
-			game.getCurrentMap().getHero().commandMove(game.getCurrentMap(), 's');
+			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 's');
 			break;
 		}
-		if(game.getCurrentMap() instanceof Mapa1){
-		game.getCurrentMap().getGuard().enemyMove(game.getCurrentMap());
-		}else if(game.getCurrentMap() instanceof Mapa2){
-			game.getCurrentMap().getOrde().moveOrde(game.getCurrentMap());
+		if(getGame().getCurrentMap() instanceof Mapa1){
+		getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
+		}else if(getGame().getCurrentMap() instanceof Mapa2){
+			getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
 		}
 		repaint();
 		}
@@ -230,6 +230,14 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
 	}
 	
 	
