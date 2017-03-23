@@ -36,6 +36,7 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		offsetW = Math.round(width / gridW);
 		offsetH = Math.round(height/gridH);
 		
+		
 		this.hero = Scalr.resize(ImageIO.read(new File("images/Anduin_wrynn_Cata.png")), offsetW);
 		this.floor = Scalr.resize(ImageIO.read(new File("images/floor.jpg")), Scalr.Mode.FIT_EXACT, offsetW);
 		this.wall = Scalr.resize(ImageIO.read(new File("images/images.jpg")), Scalr.Mode.FIT_EXACT, offsetW);
@@ -48,6 +49,8 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		this.weapon = Scalr.resize(ImageIO.read(new File("images/weapon.png")), offsetW);
 		this.key = Scalr.resize(ImageIO.read(new File("images/TWW_Boss_Key.png")), offsetW);
 		this.pickedHero = Scalr.resize(ImageIO.read(new File("images/picked_Key.png")), offsetW);
+		
+		
 	}
 	
 	//redraws the panel, only when requested by SWING

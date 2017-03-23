@@ -20,7 +20,7 @@ public class TestKeep {
 	
 	@Test
 	
-	public void ogreKillsHero()
+	public void heroIsKilled()
 	{
 		Levels leveling = new Levels();
 	    NewMapGame maptest = new NewMapGame(keepmap, leveling);
@@ -94,6 +94,109 @@ public class TestKeep {
 			
 		}
 	}
+	
+	@Test(timeout=1000)
+	public void ogreKillsHero()
+	{
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(keepmap, leveling);
+		GameOver gameOver = new GameOver(maptest.getHero(), maptest.getOrde(), maptest);
+	
+		
+		while(!gameOver.getGameOver(maptest))
+		{
+			maptest.getHero().commandMove(maptest, 'd');
+			maptest.getOrde().moveOrde(maptest);
+			for(int i = 0; i < maptest.getOrde().getOrde().size(); i++)
+			{
+				if(maptest.getOrde().getOrde().get(i).getI() == maptest.getHero().getHi() && maptest.getOrde().getOrde().get(i).getJ() == maptest.getHero().getHj()+1)
+				{
+					assertTrue(gameOver.getGameOver(maptest));
+				}
+				else if(maptest.getOrde().getOrde().get(i).getWeaponI() == maptest.getHero().getHi() && maptest.getOrde().getOrde().get(i).getWeaponJ() == maptest.getHero().getHj()+1)
+				{
+					assertTrue(gameOver.getGameOver(maptest));
+				}
+			
+			}
+			
+			
+		}
+	}
+	
+	@Test(timeout=1000)
+	public void cantPickKey()
+	{
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(keepmap, leveling);
+		boolean cantPick = false;
+		
+		while(!cantPick)
+		{
+			maptest.getOrde().moveOrde(maptest);
+			
+			if(maptest.getMap()[3][1] == '$')
+			{
+				cantPick = true;
+				assertTrue(cantPick);
+			}
+			
+		}
+	}
+	
+	
+	@Test
+	public void heroCoordenates()
+	{
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(keepmap, leveling);
+		boolean yup = false;
+		
+		if(maptest.getHero().getHi() == 1 && maptest.getHero().getHj() == 1)
+		{
+			yup = true;
+		}
+		
+		assertTrue(yup);
+	}
+	
+	
+	@Test
+	public void ogreCoordenates()
+	{
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(keepmap, leveling);
+		boolean yup = false;
+		
+		
+		for(int i = 0; i < maptest.getOrde().getOrde().size(); i++)
+		{
+			if(maptest.getOrde().getOrde().get(i).getI() == 1 && maptest.getOrde().getOrde().get(i).getJ() == 3)
+			{
+				yup = true;
+			}
+		}
+		
+		assertTrue(yup);
+	}
+	
+	@Test(timeout=1000)
+	public void ogreVsWall()
+	{
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(keepmap, leveling);
+		boolean encountersWall = false;
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
 	
 	
 }

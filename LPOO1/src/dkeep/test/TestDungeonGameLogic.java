@@ -88,6 +88,15 @@ public class TestDungeonGameLogic {
 	
 	
 	@Test
+	public void arrivesDoor(){
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(map,leveling);
+		maptest.getHero().commandMove(maptest, 's');
+		maptest.getHero().commandMove(maptest, 's');
+		assertTrue(maptest.isArrived());
+	}
+	
+	@Test
 	public void entersTheKeep(){
 		Levels leveling = new Levels();
 		NewMapGame maptest = new NewMapGame(map,leveling);
@@ -97,6 +106,22 @@ public class TestDungeonGameLogic {
 		maptest.getHero().commandMove(maptest, 'a');
 		assertTrue(map2.getRunning());
 	}
+	
+	
+	@Test
+	public void guardIsSleeping()
+	{
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(map,leveling);
+		GameOver gameOver = new GameOver(maptest.getHero(), maptest.getGuard(), maptest); 
+		maptest.getGuard().setSleeping(true);
+		maptest.getHero().commandMove(maptest, 'd');
+		assertFalse(gameOver.getGameOver(maptest));
+	
+		
+	}
+	
+
 	
 	
 	
