@@ -37,6 +37,8 @@ public class Mapa2 extends MapGame {
 		return nextLevelBoard[0].length;
 	}
 	
+	
+	
 	@Override
 	public String printBoard(Hero hero, Enemy ord){
 		String mapa= "";

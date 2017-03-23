@@ -24,15 +24,15 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 	private int x1 = 0, y1 = 0, x2 =0, y2=0;
 	private Game game = new Game(2,"Rookie");
 	private int offsetW, offsetH, gridH, gridW;
-	private BufferedImage pickedHero, key, weapon, guard, hero, sleepyGuard, ogre, wall ,floor, door, openDoor, pulledLever, notPulledLever;
+	private BufferedImage defeat, pickedHero, key, weapon, guard, hero, sleepyGuard, ogre, wall ,floor, door, openDoor, pulledLever, notPulledLever;
 	//construtor que adiciona listeners para o rato e teclado
 	
 	public GamePanel(int width, int height) throws IOException{
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addKeyListener(this);
-		gridH = game.getMap1().getMap()[0].length;
-		gridW = game.getMap1().getMap().length;
+		gridH = getGame().getMap1().getMap()[0].length;
+		gridW = getGame().getMap1().getMap().length;
 		offsetW = Math.round(width / gridW);
 		offsetH = Math.round(height/gridH);
 		
@@ -49,16 +49,20 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		this.weapon = Scalr.resize(ImageIO.read(new File("images/weapon.png")), offsetW);
 		this.key = Scalr.resize(ImageIO.read(new File("images/TWW_Boss_Key.png")), offsetW);
 		this.pickedHero = Scalr.resize(ImageIO.read(new File("images/picked_Key.png")), offsetW);
-		
-		
+		this.defeat = Scalr.resize(ImageIO.read(new File("images/gameover.jpg")), Scalr.Mode.FIT_EXACT, 700, 700);
 	}
 	
 	//redraws the panel, only when requested by SWING
 	public void paintComponent(Graphics g){
 		super.paintComponent(g); //limpa fundo
-		MapGame gamemap = game.getCurrentMap();
-		//g.fillOval(x1, y1, x2-x1 +1, y2 - y1 +1);
+		
+		MapGame gamemap = getGame().getCurrentMap();
+	
+			
+		
+		
 		//drawing floor
+		
 		for(int i = 0; i < gridH; i++){
 			for(int j = 0; j < gridH; j++){
 				g.drawImage(floor, i * offsetW, j * offsetH, this);
@@ -91,14 +95,19 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		for(int i = 0; i < gamemap.getMap().length; i++){
 			for(int j = 0; j < gamemap.getMap()[i].length; j++){
         		if(i ==  gamemap.getHero().getHi() && j == gamemap.getHero().getHj()){
-        			System.out.println(gamemap.getHero().getPickedKey());
-        			if(!gamemap.getHero().getPickedKey()){
+        			System.out.println(gamemap.isArrived());
         			g.drawImage(hero, j*offsetH, i * offsetW, this);
-        			}
-        			else if(gamemap instanceof Mapa2){
+        			 if(gamemap instanceof Mapa2){
+        				if(gamemap.getHero().getHi() == 1 && gamemap.getHero().getHj() == 7){
+        					gamemap.pickKey();
+        				}
+        				if(gamemap.getHero().getPickedKey()){
         				g.drawImage(pickedHero, j*offsetH, i * offsetW, this);
+        			} else{
+        				g.drawImage(hero, j*offsetH, i * offsetW, this);
         			}
         		} 
+        		}
         		if(gamemap instanceof Mapa1){
         		if(i == gamemap.getGuard().getI() && j == gamemap.getGuard().getJ()){
         			g.drawImage(guard,  j*offsetH, i * offsetW, this);
@@ -124,8 +133,18 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
         		}
 			}
 		}
-		
-		
+		if(gamemap instanceof Mapa1){
+			if(getGame().getGameOver().getGameOver(gamemap)){
+					g.drawImage(defeat,gridH, gridW, this);
+					
+				}
+			}else if(gamemap instanceof Mapa2){
+				System.out.println(gamemap.getOrde().getOrde().size());
+				if(getGame().getGameOverlvl2().getGameOver(gamemap)){
+					System.out.println("bug");
+					g.drawImage(defeat,gridH, gridW, this);
+				}
+			}
 		
 	}
 
@@ -134,23 +153,23 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_LEFT: 
-			game.getCurrentMap().getHero().commandMove(game.getCurrentMap(), 'a');
+			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'a');
 			System.out.println("what");
 			break;
 		case KeyEvent.VK_RIGHT: 
-			game.getCurrentMap().getHero().commandMove(game.getCurrentMap(), 'd');  
+			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'd');  
 			break;
 		case KeyEvent.VK_UP:  
-			game.getCurrentMap().getHero().commandMove(game.getCurrentMap(), 'w');
+			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'w');
 			break;
 		case KeyEvent.VK_DOWN: 
-			game.getCurrentMap().getHero().commandMove(game.getCurrentMap(), 's');
+			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 's');
 			break;
 		}
-		if(game.getCurrentMap() instanceof Mapa1){
-		game.getCurrentMap().getGuard().enemyMove(game.getCurrentMap());
-		}else if(game.getCurrentMap() instanceof Mapa2){
-			game.getCurrentMap().getOrde().moveOrde(game.getCurrentMap());
+		if(getGame().getCurrentMap() instanceof Mapa1){
+		getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
+		}else if(getGame().getCurrentMap() instanceof Mapa2){
+			getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
 		}
 		repaint();
 		}
@@ -212,6 +231,14 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
 	}
 	
 	

@@ -37,6 +37,7 @@ public class Hero extends Character {
     	return this.pickedKey;
     }
     
+    
     public void setPickedKey(boolean k)
     {
     	this.pickedKey = k;
@@ -60,6 +61,7 @@ public class Hero extends Character {
     		int testDown = hi+i;
     		if(move(map, testDown, hj) == true){
     			setHi(hi+i);
+    			
     		}
     		break;
     	case 'a':

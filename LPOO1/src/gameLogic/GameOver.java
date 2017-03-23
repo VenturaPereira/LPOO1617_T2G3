@@ -38,6 +38,7 @@ public class GameOver {
 		}
 		else if(map instanceof Mapa2) 
 		{
+			
 			for(int k = 0; k < this.orde.getOrde().size(); k++)
 			{
 				
@@ -58,7 +59,7 @@ public class GameOver {
 			}
 			
 		}
-		else
+		else if(map instanceof NewMapGame){
 		{
 			if(map.isHasGuard())
 			{
@@ -96,7 +97,7 @@ public class GameOver {
 				
 			}
 		}
-		
+		}
 		return false;
 	}
 	

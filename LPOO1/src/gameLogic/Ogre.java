@@ -76,6 +76,12 @@ public class Ogre extends Enemy {
 		
 	}
 	
+	public void aux(int i, int j)
+	{
+		this.weaponI = getI()+i;
+		this.weaponJ = getJ()+j;
+	}
+	
 	public void ogreAttack(MapGame map)
 	{
 		if(stunned > 0)
@@ -90,69 +96,45 @@ public class Ogre extends Enemy {
 		case 0:
 			if(w.checkMove(0, map))
 			{
-				weaponI = getI()-1;
-				weaponJ = getJ();
-				System.out.println(getI() + "," + getJ());
-				System.out.println(weaponI + "," + weaponJ);
+				aux(-1,0);
 				break;
 			}	
 			else
 			{
-				weaponI = getI()+1;
-				weaponJ = getJ();
-				System.out.println(getI() + "," + getJ());
-				System.out.println(weaponI + "," + weaponJ);
+				aux(1,0);
 				break;
 			}
 		case 1:
 			if(w.checkMove(1, map))
 			{
-				weaponI = getI()+1;
-				weaponJ = getJ();
-				System.out.println(getI() + "," + getJ());
-				System.out.println(weaponI + "," + weaponJ);
+				aux(1,0);
 				break;
 			}
 			else
 			{
-				weaponI = getI()-1;
-				weaponJ = getJ();
-				System.out.println(getI() + "," + getJ());
-				System.out.println(weaponI + "," + weaponJ);
+				aux(-1,0);
 				break;
 			}
 		case 2:
 			if(w.checkMove(2, map))
 			{
-				weaponI = getI();
-				weaponJ = getJ()+1;
-			//	System.out.println(getI() + "," + getJ());
-				//System.out.println(weaponI + "," + weaponJ);
+				aux(0,1);
 				break;
 			}
 			else
 			{
-				weaponI = getI();
-				weaponJ = getJ()-1;
-				System.out.println(getI() + "," + getJ());
-				//System.out.println(weaponI + "," + weaponJ);
+				aux(0,-1);
 				break;
 			}
 		case 3:
 			if(w.checkMove(3, map))
 			{
-				weaponI = getI();
-				weaponJ = getJ()-1;
-				//System.out.println(getI() + "," + getJ());
-				//System.out.println(weaponI + "," + weaponJ);
+				aux(0,-1);
 				break;
 			}
 			else
-			{
-				weaponI = getI();
-				weaponJ = getJ()+1;
-				//System.out.println(getI() + "," + getJ());
-				//System.out.println(weaponI + "," + weaponJ);
+			{				
+				aux(0,1);
 				break;
 			}
 		}
