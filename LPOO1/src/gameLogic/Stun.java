@@ -19,7 +19,7 @@ public class Stun {
 			int oj = this.map.getOrde().getOrde().get(k).getJ();
 			if((this.map.getHero().getHi() == oi && this.map.getHero().getHj() == oj) || (this.map.getHero().getHi() == oi-1 && this.map.getHero().getHj() == oj) || (this.map.getHero().getHi() == oi+1 && this.map.getHero().getHj() == oj) || (this.map.getHero().getHi() == oi && this.map.getHero().getHj() == oj+1) || (this.map.getHero().getHi() == oi && this.map.getHero().getHj() == oj-1))
 			{
-				this.map.getOrde().getOrde().get(k).stun(3);
+				this.map.getOrde().getOrde().get(k).stun(4);
 			}
 		}
 		

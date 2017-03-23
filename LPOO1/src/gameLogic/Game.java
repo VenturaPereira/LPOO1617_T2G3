@@ -6,10 +6,11 @@ public class Game {
 	private Mapa1 map1;
 	private Mapa2 map2;
 	private GameOver gameOver, gameOverlvl2;
-	private WinGame winning;
+	private WinGame winning, winlvl2;
 	private int numberOfOgres;
 	private String chooseGuard;
 	private Orde orde;
+	private Stun stun;
 	public Game(int numberOfOgres, String chooseGuard){
 		
 		 setLeveling(new Levels());
@@ -34,6 +35,8 @@ public class Game {
 		 setOrde(new Orde(numberOfOgres));
          map2.setOrde(this.orde);	
          setGameOverlvl2(new GameOver(getMap2().getHero(), getMap2().getOrde(), getMap2()));
+         setStun(new Stun(map2));
+         setWinlvl2(new WinGame(map2));
 		 this.setChooseGuard(chooseGuard);
 	}
 	public MapGame getCurrentMap(){
@@ -92,6 +95,18 @@ public class Game {
 	}
 	public void setGameOverlvl2(GameOver gameOverlvl2) {
 		this.gameOverlvl2 = gameOverlvl2;
+	}
+	public Stun getStun() {
+		return stun;
+	}
+	public void setStun(Stun stun) {
+		this.stun = stun;
+	}
+	public WinGame getWinlvl2() {
+		return winlvl2;
+	}
+	public void setWinlvl2(WinGame winlvl2) {
+		this.winlvl2 = winlvl2;
 	}
 	
 	

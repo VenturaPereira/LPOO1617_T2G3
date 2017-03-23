@@ -4,10 +4,13 @@ import javax.swing.JPanel;
 
 import org.imgscalr.Scalr;
 
+import gameLogic.Drunken;
 import gameLogic.Game;
 import gameLogic.MapGame;
 import gameLogic.Mapa1;
 import gameLogic.Mapa2;
+import gameLogic.Rookie;
+import gameLogic.Suspicious;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -24,7 +27,7 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 	private int x1 = 0, y1 = 0, x2 =0, y2=0;
 	private Game game = new Game(2,"Rookie");
 	private int offsetW, offsetH, gridH, gridW;
-	private BufferedImage defeat, pickedHero, key, weapon, guard, hero, sleepyGuard, ogre, wall ,floor, door, openDoor, pulledLever, notPulledLever;
+	private BufferedImage win, stunnedOgre, suspicious, defeat, pickedHero, key, weapon, guard, hero, sleepyGuard, ogre, wall ,floor, door, openDoor, pulledLever, notPulledLever;
 	//construtor que adiciona listeners para o rato e teclado
 	
 	public GamePanel(int width, int height) throws IOException{
@@ -49,7 +52,11 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		this.weapon = Scalr.resize(ImageIO.read(new File("images/weapon.png")), offsetW);
 		this.key = Scalr.resize(ImageIO.read(new File("images/TWW_Boss_Key.png")), offsetW);
 		this.pickedHero = Scalr.resize(ImageIO.read(new File("images/picked_Key.png")), offsetW);
-		this.defeat = Scalr.resize(ImageIO.read(new File("images/gameover.jpg")), Scalr.Mode.FIT_EXACT, 700, 700);
+		this.defeat = Scalr.resize(ImageIO.read(new File("images/newGameover.jpg")), Scalr.Mode.FIT_TO_WIDTH, 600, 100);
+		this.sleepyGuard = Scalr.resize(ImageIO.read(new File("images/sleepGuard.png")), offsetW);
+		this.suspicious = Scalr.resize(ImageIO.read(new File("images/Voljin_MoP.png")), offsetW);
+		this.stunnedOgre =Scalr.resize(ImageIO.read(new File("images/stunnedOgre.png")), offsetW);
+		this.win = Scalr.resize(ImageIO.read(new File("images/win1.png")), Scalr.Mode.FIT_TO_WIDTH, 600, 600);
 	}
 	
 	//redraws the panel, only when requested by SWING
@@ -109,8 +116,22 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
         		} 
         		}
         		if(gamemap instanceof Mapa1){
+        		if(gamemap.getGuard() instanceof Rookie){	
         		if(i == gamemap.getGuard().getI() && j == gamemap.getGuard().getJ()){
         			g.drawImage(guard,  j*offsetH, i * offsetW, this);
+        		}
+        		}else if(gamemap.getGuard() instanceof Suspicious){
+            		if(i == gamemap.getGuard().getI() && j == gamemap.getGuard().getJ()){
+            			g.drawImage(suspicious,  j*offsetH, i * offsetW, this);		
+        		}
+        		}else if(gamemap.getGuard() instanceof Drunken){
+        			if(i == gamemap.getGuard().getI() && j == gamemap.getGuard().getJ()){
+        				if(gamemap.getGuard().isSleeping()){
+            			g.drawImage(sleepyGuard,  j*offsetH, i * offsetW, this);		
+        				}else{
+        					g.drawImage(guard,  j*offsetH, i * offsetW, this);
+        				}
+        		}
         		}
         		if(i == 8 && j == 7 && gamemap.getMap()[5][0] == 'I'){
         			
@@ -124,7 +145,11 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
         		else if(gamemap instanceof Mapa2){
         		 for(int a =0; a < gamemap.getOrde().getOrde().size(); a++){
         			 if(gamemap.getOrde().getOrde().get(a).getI() == i && j ==gamemap.getOrde().getOrde().get(a).getJ() ){
+        				 if(gamemap.getOrde().getOrde().get(a).getStunned() == 0){
         				 g.drawImage(ogre, j* offsetH, i* offsetW, this);
+        				 }else{
+        					 g.drawImage(stunnedOgre, j* offsetH, i* offsetW, this);
+        				 }
         			 }
         			 if(gamemap.getOrde().getOrde().get(a).getWeaponI() == i && gamemap.getOrde().getOrde().get(a).getWeaponJ() == j){
         				 g.drawImage(weapon, j* offsetH, i* offsetW, this);
@@ -145,6 +170,11 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 					g.drawImage(defeat,gridH, gridW, this);
 				}
 			}
+		if(gamemap instanceof Mapa2){
+			if(getGame().getWinlvl2().getWin()){
+				g.drawImage(win,gridH, gridW, this);
+			}
+		}
 		
 	}
 
@@ -170,6 +200,7 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
 		}else if(getGame().getCurrentMap() instanceof Mapa2){
 			getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
+			getGame().getStun().stun();
 		}
 		repaint();
 		}
