@@ -22,6 +22,9 @@ public class Mapa2 extends MapGame {
 		
 	 }
 	 
+	 public void setMap(char[][] newBoard){
+		 this.nextLevelBoard = newBoard;
+		 }
 	
 	public char[][] getMap(){
 		return nextLevelBoard;

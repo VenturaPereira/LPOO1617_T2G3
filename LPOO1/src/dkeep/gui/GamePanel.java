@@ -184,24 +184,42 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_LEFT: 
 			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'a');
-			System.out.println("what");
+			if(getGame().getCurrentMap() instanceof Mapa1){
+				getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
+				}else if(getGame().getCurrentMap() instanceof Mapa2){
+					getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
+					getGame().getStun().stun();
+				}
 			break;
 		case KeyEvent.VK_RIGHT: 
 			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'd');  
+			if(getGame().getCurrentMap() instanceof Mapa1){
+				getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
+				}else if(getGame().getCurrentMap() instanceof Mapa2){
+					getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
+					getGame().getStun().stun();
+				}
 			break;
 		case KeyEvent.VK_UP:  
 			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'w');
+			if(getGame().getCurrentMap() instanceof Mapa1){
+				getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
+				}else if(getGame().getCurrentMap() instanceof Mapa2){
+					getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
+					getGame().getStun().stun();
+				}
 			break;
 		case KeyEvent.VK_DOWN: 
 			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 's');
+			if(getGame().getCurrentMap() instanceof Mapa1){
+				getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
+				}else if(getGame().getCurrentMap() instanceof Mapa2){
+					getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
+					getGame().getStun().stun();
+				}
 			break;
 		}
-		if(getGame().getCurrentMap() instanceof Mapa1){
-		getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
-		}else if(getGame().getCurrentMap() instanceof Mapa2){
-			getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
-			getGame().getStun().stun();
-		}
+		
 		repaint();
 		}
 
