@@ -70,7 +70,8 @@ public class GraphicalView{
 			public void actionPerformed(ActionEvent e){
 				final String[] mapSizes = {"5", "6", "7" ,"8" ,"9" , "10" , "11" , "12"};
 				int number = Integer.parseInt((String)(JOptionPane.showInputDialog(editLevel, "Choose the squared map sizes", "Size?", JOptionPane.QUESTION_MESSAGE, null ,mapSizes, null)));
-
+                char newmap[][] = new char[number][number];
+                editPanel.getGame().getMap2().setMap(newmap);
 				editLevel = new JFrame("Edit this level");	
 				editLevel.setTitle("Editing");
 				editLevel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

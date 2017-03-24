@@ -42,8 +42,8 @@ public class EditGame extends JPanel implements MouseListener {
 		super.paintComponent(g); //limpa fundo
 		MapGame gamemap = getGame().getMap2();
 		
-		for(int i = 0; i < gridH; i++){
-			for(int j = 0; j < gridH; j++){
+		for(int i = 0; i < gamemap.getMap().length; i++){
+			for(int j = 0; j < gamemap.getMap()[i].length; j++){
 				g.drawImage(floor, i * offsetW, j * offsetH, this);
 			}
 		}
