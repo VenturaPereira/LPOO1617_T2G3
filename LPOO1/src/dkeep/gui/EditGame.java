@@ -19,7 +19,8 @@ import gameLogic.MapGame;
 public class EditGame extends JPanel implements MouseListener {
 	private int offsetW, offsetH, gridH, gridW;
 	private Game game = new Game(0,"Rookie");
-	private BufferedImage wall, floor, door, ogre, weapon, key;
+	private BufferedImage wall, floor, door, ogre, weapon, key, hero;
+	private char toAdd;
 
 	
 	public EditGame(int height, int width) throws IllegalArgumentException, ImagingOpException, IOException{
@@ -28,6 +29,7 @@ public class EditGame extends JPanel implements MouseListener {
 		gridW = getGame().getMap2().getMap().length;
 		offsetW = Math.round(width / gridW);
 		offsetH = Math.round(height/gridH);
+		this.hero = Scalr.resize(ImageIO.read(new File("images/Anduin_wrynn_Cata.png")), offsetW);
 		this.floor = Scalr.resize(ImageIO.read(new File("images/floor.jpg")), Scalr.Mode.FIT_EXACT, offsetW);
 		this.wall = Scalr.resize(ImageIO.read(new File("images/images.jpg")), Scalr.Mode.FIT_EXACT, offsetW);
 		this.door = Scalr.resize(ImageIO.read(new File("images/door.png")), Scalr.Mode.FIT_TO_HEIGHT, offsetW);
@@ -39,7 +41,7 @@ public class EditGame extends JPanel implements MouseListener {
 	
 	
 	public void paintComponent(Graphics g){
-		super.paintComponent(g); //limpa fundo
+	
 		MapGame gamemap = getGame().getMap2();
 		
 		for(int i = 0; i < gamemap.getMap().length; i++){
@@ -62,7 +64,14 @@ public class EditGame extends JPanel implements MouseListener {
 					if(!gamemap.getHero().getPickedKey()){
 					g.drawImage(key , j* offsetH, i* offsetW,this);
 					}
-				}
+					break;
+				case 'H':
+					g.drawImage(hero , j* offsetH, i* offsetW,this);
+				    break;
+				case '0':
+					g.drawImage(ogre , j* offsetH, i* offsetW,this);
+					break;
+			}
 			}
 		}
 	}
@@ -86,8 +95,11 @@ public class EditGame extends JPanel implements MouseListener {
 	}
 
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	public void mousePressed(MouseEvent e) {
+		int i = (e.getX())/offsetW;
+		int j =   (e.getY())/offsetH;
+		game.getMap2().getMap()[j][i] = getToAdd();
+		repaint();
 		
 	}
 
@@ -107,6 +119,18 @@ public class EditGame extends JPanel implements MouseListener {
 
 	public void setGame(Game game) {
 		this.game = game;
+	}
+
+
+
+	public char getToAdd() {
+		return toAdd;
+	}
+
+
+
+	public void setToAdd(char toAdd) {
+		this.toAdd = toAdd;
 	}
 
 }
