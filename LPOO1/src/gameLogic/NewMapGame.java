@@ -110,21 +110,13 @@ public class NewMapGame extends MapGame {
 		return orde;
 	}
 	
-	public void setOrde(Orde orde) {
-		this.orde = orde;
-	}
+	public void setOrde(Orde orde) {this.orde = orde;}
 	
-	public Hero getHero() {
-		return hero;
-	}
+	public Hero getHero() {return hero;}
 
-	public void setHero(Hero hero) {
-		this.hero = hero;
-	}
+	public void setHero(Hero hero) {this.hero = hero;}
 
-	public Enemy getGuard() {
-		return guard;
-	}
+	public Enemy getGuard() {return guard;}
 
 	public void setGuard(Enemy guard) {
 		this.guard = guard;

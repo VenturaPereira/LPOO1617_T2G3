@@ -78,21 +78,15 @@ public class EditGame extends JPanel implements MouseListener {
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		
-		
+	public void mouseClicked(MouseEvent arg0) {	
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		
-		
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		
-		
 	}
 
 	@Override
@@ -101,13 +95,10 @@ public class EditGame extends JPanel implements MouseListener {
 		int j =   (e.getY())/offsetH;
 		game.getMap2().getMap()[j][i] = getToAdd();
 		repaint();
-		
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-	
-		
 	}
 
 

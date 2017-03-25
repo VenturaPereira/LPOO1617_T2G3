@@ -31,13 +31,6 @@ public abstract class MapGame {
 	public abstract String printBoard(Hero hero, Enemy  enemy);
     public abstract char[][] getMap(); 
     public abstract void setDoors();
-	/*public Ogre getOgre() {
-		return ogre;
-	}
-	public void setOgre(Ogre ogre) {
-		this.ogre = ogre;
-	}
-	*/
     
     public Orde getOrde()
     {
