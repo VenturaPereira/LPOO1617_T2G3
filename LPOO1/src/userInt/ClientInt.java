@@ -25,8 +25,7 @@ import gameLogic.WinGame;
 public class ClientInt{
 	
 	public static void decisionsNextLvl(MapGame map, Hero hero, Orde orde){
-	
-			Mapa2 map2 = (Mapa2)map;
+		Mapa2 map2 = (Mapa2)map;
 
 		System.out.println(map2.printBoard(hero, orde)); 
 		Scanner scanner = new Scanner(System.in);
@@ -35,17 +34,14 @@ public class ClientInt{
 		Stun stun = new Stun(map2);
 		Message msg = new Message();
 		while (!gameOver.getGameOver(map2) && !winGame.getWin()) {
-             
-			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
+             System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
-
 			switch (answer) {
 			case "S":
 				orde.moveOrde(map);
 				hero.commandMove(map2, 's');
 				stun.stun();	
 				System.out.println(map2.printBoard(hero, orde)); 
-
 				break;
 			case "W":
 				orde.moveOrde(map);
@@ -53,7 +49,6 @@ public class ClientInt{
 				stun.stun();	
 				System.out.println(map2.printBoard(hero, orde)); 
 				break;
-
 			case "D":
 				orde.moveOrde(map);
 				hero.commandMove(map2, 'd');
@@ -68,16 +63,10 @@ public class ClientInt{
 				break;
 			}
 		}
-		
 		if(gameOver.getGameOver(map2))
-		{
-			msg.gameOverMsgMap2();
-		}
-		
+		{msg.gameOverMsgMap2();}
 		if(winGame.getWin())
-		{
-			msg.victoryMsgMap2();
-		}
+		{msg.victoryMsgMap2();}
 	}
 
 	public static void decisions(Hero hero, MapGame map, Enemy guard, GameOver game, WinGame win) {
@@ -85,8 +74,6 @@ public class ClientInt{
 		Message msg = new Message();
 		Scanner scanner = new Scanner(System.in);
 		while (!game.getGameOver(map1)&& !win.getWin()){
-			
-			
 			System.out.println("Where do you wish to move?  S - down  W - up  D - right  A - left");
 			String answer = scanner.next().toUpperCase();
 
@@ -95,72 +82,38 @@ public class ClientInt{
 				guard.enemyMove(map1);
 				hero.commandMove(map, 's');
 				System.out.println(map1.printBoard(hero, guard));
-				//i++;
 				break;
 			case "W":
 				guard.enemyMove(map1);
 				hero.commandMove(map1, 'w');
 				System.out.println(map1.printBoard(hero, guard));
-			
-				//i++;
 				break;
-
 			case "D":
 				guard.enemyMove(map1);
 				hero.commandMove(map1, 'd');
 				System.out.println(map1.printBoard(hero, guard));
-				//i++;
 				break;
 			case "A":
 				guard.enemyMove(map1);
 				hero.commandMove(map1, 'a');
 				System.out.println(map1.printBoard(hero, guard));
-				//i++;
 				break;
 			}
 		}
-		
 		if(game.getGameOver(map1) == true)
 		{
 			msg.gameOverMsgMap1();
 			map1.setRunning(false);
-			
-		
 		}
-		
 		if(win.getWin() == true)
 		{
 			msg.victoryMsgMap1();
-
-			
-			
 		}
-		
-		
-	}
+}
 	
 	
 
 	public static void main(String[] args) {
-      // Levels leveling = new Levels();
-		//Mapa1 map1= new Mapa1(leveling);
-		
-		//GameOver game= new GameOver(map1.getHero(), map1.getGuard(), map1);
-		//WinGame win = new WinGame(map1);
-		//map1.printBoard(map1.getHero(), map1.getGuard());
-		//boolean next =decisions(map1.getHero(), map1,  map1.getGuard(), game, win);	
-		//Mapa2 map2 = new Mapa2(leveling);	
-		//System.out.println(map2.getRunning());
-		//System.out.println(leveling.getLevels().size());
-		//decisionsNextLvl( map2, map2.getHero(), map2.getOgre(), next);
-		
-	/*Levels leveling = new Levels();
-		Mapa1 map1= new Mapa1(leveling);
-		map1.setRunning(true);
-		Mapa2 map2 = new Mapa2(leveling);
-		GameOver game= new GameOver(map1.getHero(), map1.getGuard(), map1);
-		WinGame win = new WinGame(map1);
-		*/
 		Scanner scan = new Scanner(System.in);
 		
 		Scanner guard = new Scanner(System.in);

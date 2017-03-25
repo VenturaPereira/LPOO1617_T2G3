@@ -135,11 +135,8 @@ public class RunAsGui {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		
-		
 		lblPressNewGame.setBounds(10, 236, 194, 14);
 		frame.getContentPane().add(lblPressNewGame);
-		
 		
 		lblEnt.setBounds(10, 11, 102, 14);
 		frame.getContentPane().add(lblEnt);
@@ -160,13 +157,9 @@ public class RunAsGui {
 		
 		frame.getContentPane().add(comboBox);
 		
-		
 		btnExit.setBounds(323, 227, 89, 23);
 		btnExit.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				System.exit(0);
-				
-			}
+			public void actionPerformed(ActionEvent e){System.exit(0);}
 		});
 		frame.getContentPane().add(btnExit);
 		
@@ -174,62 +167,35 @@ public class RunAsGui {
 		textArea.setBounds(20, 76, 246, 161);
 		frame.getContentPane().add(textArea);
 		
-		
-		
 		btnLeft.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				checkState('a');
-				
-			}
+			public void actionPerformed(ActionEvent e) {checkState('a');}
 		});
 		btnLeft.setEnabled(false);
 		btnLeft.setBounds(287, 118, 60, 23);
 		frame.getContentPane().add(btnLeft);
 		
-		
-		
 		btnRight.setEnabled(false);
 		btnRight.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			checkState('d');
-				
-				}
+			public void actionPerformed(ActionEvent e) {checkState('d');}
 		});
 		btnRight.setBounds(357, 118, 67, 23);
 		frame.getContentPane().add(btnRight);
 		
-		
 		btnDown.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			
-				 checkState('s');
-				
-					}
+			public void actionPerformed(ActionEvent arg0) {checkState('s');}
 		});
 		btnDown.setEnabled(false);
 		btnDown.setBounds(322, 152, 72, 23);
 		frame.getContentPane().add(btnDown);
 		
-		
 		btnUp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				 checkState('w');
-		
-							}
-					
+			public void actionPerformed(ActionEvent e) {checkState('w');}
 		});
 		btnUp.setEnabled(false);
 		btnUp.setBounds(323, 84, 60, 23);
 		frame.getContentPane().add(btnUp);
 		
-		
-		
-		
-		
-				btnNewGame.addActionListener(new ActionListener() {
+		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				lblPressNewGame.setText("You can now play");
@@ -253,7 +219,6 @@ public class RunAsGui {
 					Enemy guard2 = new Rookie();
 					map1.setGuard(guard2);
 					break;
-				
 				}
 				
 				Mapa2 map2 = new Mapa2(leveling);
@@ -262,8 +227,7 @@ public class RunAsGui {
 				map2.setOrde(orde);
 				map1.setRunning(true);
 				textArea.setText(map1.printBoard(map1.getHero(), map1.getGuard()));
-				
-			}
+				}
 		});
 		btnNewGame.setBounds(305, 32, 119, 23);
 		frame.getContentPane().add(btnNewGame);

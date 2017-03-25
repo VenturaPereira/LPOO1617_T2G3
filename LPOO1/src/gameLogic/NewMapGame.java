@@ -16,12 +16,8 @@ public class NewMapGame extends MapGame {
 		this.setMap(new char[map.length][map[0].length]);
 		for(int i = 0; i < map.length; i++){
 			for(int j = 0; j < map[i].length; j++){
-				if(map[i][j] == 'H'){
-					this.getMap()[i][j] = ' ';
-					setHero(new Hero());
-					getHero().setHi(i);
-					getHero().setHj(j);		
-				}
+				if(map[i][j] == 'H'){this.getMap()[i][j] = ' '; setHero(new Hero());
+					getHero().setHi(i);getHero().setHj(j);	}
 				if(map[i][j] == 'G'){
 					setHasGuard(true);
 					this.getMap()[i][j]=' ';
@@ -39,13 +35,9 @@ public class NewMapGame extends MapGame {
 					setOrde(new Orde(0));
 					this.orde.getOrde().add(o);
 				}
-				else{
-					this.map[i][j]=map[i][j];
-				}
+				else{this.map[i][j]=map[i][j];}
 			}
-		}
-		this.levels=level;
-		this.levels.addLevel(this);
+		}this.levels=level; this.levels.addLevel(this);
 	}
 	
 	public void setDoors(){

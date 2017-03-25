@@ -42,13 +42,9 @@ public class Mapa1 extends MapGame {
 	int gx = this.getGuard().getI();
 	int gj= this.getGuard().getJ();
 	 
-		
 		for (int i = 0; i < board.length; i++) {
 		    for (int j = 0; j < board[i].length; j++) {
-		    	if(i == hx && j == hy){
-		    		mapa = mapa + ("H|");
-		    		j++;
-		    	}
+		    	if(i == hx && j == hy){mapa = mapa + ("H|"); j++;}
 		    	if((i == gx && j == gj) && guard instanceof Drunken && guard.isSleeping()){
 		    		mapa = mapa + ("g|");
 		    		j++;
@@ -68,7 +64,4 @@ public class Mapa1 extends MapGame {
 		}
 		return mapa;
 	}
-
-
-
 }
