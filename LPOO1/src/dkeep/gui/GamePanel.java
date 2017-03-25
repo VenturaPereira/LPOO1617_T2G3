@@ -34,8 +34,8 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addKeyListener(this);
-		gridH = getGame().getMap1().getMap()[0].length;
-		gridW = getGame().getMap1().getMap().length;
+		gridH = getGame().getCurrentMap().getMap()[0].length;
+		gridW = getGame().getCurrentMap().getMap().length;
 		offsetW = Math.round(width / gridW);
 		offsetH = Math.round(height/gridH);
 		
@@ -70,8 +70,8 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		
 		//drawing floor
 		
-		for(int i = 0; i < gridH; i++){
-			for(int j = 0; j < gridH; j++){
+		for(int i = 0; i < gamemap.getMap().length; i++){
+			for(int j = 0; j < gamemap.getMap()[0].length; j++){
 				g.drawImage(floor, i * offsetW, j * offsetH, this);
 			}
 		}
@@ -153,6 +153,8 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
         			 }
         			 if(gamemap.getOrde().getOrde().get(a).getWeaponI() == i && gamemap.getOrde().getOrde().get(a).getWeaponJ() == j){
         				 g.drawImage(weapon, j* offsetH, i* offsetW, this);
+        				 System.out.println(i +"," + j);
+  
         			 }
         		 }
         		}
@@ -184,24 +186,42 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_LEFT: 
 			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'a');
-			System.out.println("what");
+			if(getGame().getCurrentMap() instanceof Mapa1){
+				getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
+				}//else if(getGame().getCurrentMap() instanceof Mapa2){
+					//getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
+					//getGame().getStun().stun();
+				//}
 			break;
 		case KeyEvent.VK_RIGHT: 
 			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'd');  
+			if(getGame().getCurrentMap() instanceof Mapa1){
+				getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
+				}else if(getGame().getCurrentMap() instanceof Mapa2){
+					getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
+					getGame().getStun().stun();
+				}
 			break;
 		case KeyEvent.VK_UP:  
 			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'w');
+			if(getGame().getCurrentMap() instanceof Mapa1){
+				getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
+				}else if(getGame().getCurrentMap() instanceof Mapa2){
+					getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
+					getGame().getStun().stun();
+				}
 			break;
 		case KeyEvent.VK_DOWN: 
 			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 's');
+			if(getGame().getCurrentMap() instanceof Mapa1){
+				getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
+				}else if(getGame().getCurrentMap() instanceof Mapa2){
+					getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
+					getGame().getStun().stun();
+				}
 			break;
 		}
-		if(getGame().getCurrentMap() instanceof Mapa1){
-		getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
-		}else if(getGame().getCurrentMap() instanceof Mapa2){
-			getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
-			getGame().getStun().stun();
-		}
+		
 		repaint();
 		}
 

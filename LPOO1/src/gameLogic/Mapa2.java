@@ -22,6 +22,25 @@ public class Mapa2 extends MapGame {
 		
 	 }
 	 
+	 public void setMap(char[][] newBoard){
+		 for(int i = 0; i < newBoard.length; i++){
+			 for(int j= 0; j < newBoard[0].length;j++){
+				 if(i == 0){
+					 newBoard[i][j]= WALL;
+				 }
+				 if(j == 0){
+					 newBoard[i][j] = WALL;
+				 }
+				 if (i == 1 && j == 0){
+					 newBoard[i][j] = DOOR;
+				 }
+				 if(j == newBoard[0].length-1 || i == newBoard.length -1){
+					 newBoard[i][j]= WALL;
+				 }
+			 }
+		 }
+		 this.nextLevelBoard = newBoard;
+		 }
 	
 	public char[][] getMap(){
 		return nextLevelBoard;
