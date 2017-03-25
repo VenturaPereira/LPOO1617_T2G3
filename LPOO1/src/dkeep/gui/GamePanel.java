@@ -70,8 +70,8 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		
 		//drawing floor
 		
-		for(int i = 0; i < gridH; i++){
-			for(int j = 0; j < gridH; j++){
+		for(int i = 0; i < gamemap.getMap().length; i++){
+			for(int j = 0; j < gamemap.getMap()[0].length; j++){
 				g.drawImage(floor, i * offsetW, j * offsetH, this);
 			}
 		}
