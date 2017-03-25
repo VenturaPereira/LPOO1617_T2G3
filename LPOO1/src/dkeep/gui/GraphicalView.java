@@ -22,7 +22,11 @@ import javax.swing.JPanel;
 import org.imgscalr.Scalr;
 
 import gameLogic.Game;
+import gameLogic.GameOver;
+import gameLogic.Hero;
 import gameLogic.Mapa2;
+import gameLogic.Ogre;
+import gameLogic.Orde;
 
 public class GraphicalView{
 
@@ -103,6 +107,7 @@ public class GraphicalView{
 		saving.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				map2 = editPanel.getGame().getMap2();
+				System.out.println(map2.printBoard(map2.getHero(), map2.getOrde()));
 				editLevel.setVisible(false);
 			}
 			});
@@ -125,7 +130,7 @@ public class GraphicalView{
 			public void actionPerformed(ActionEvent e){
 				final String[] mapSizes = {"5", "6", "7" ,"8" ,"9" , "10" , "11" , "12"};
 				int number = Integer.parseInt((String)(JOptionPane.showInputDialog(editLevel, "Choose the squared map sizes", "Size?", JOptionPane.QUESTION_MESSAGE, null ,mapSizes, null)));
-                char newmap[][] = new char[number][number];
+                char newmap[][] = new char[number+1][number+1];
                 editPanel.getGame().getMap2().setMap(newmap);
 				editLevel = new JFrame("Edit this level");	
 				editLevel.setTitle("Editing");
@@ -209,10 +214,71 @@ public class GraphicalView{
 					e1.printStackTrace();
 				}
 				panel.setBounds(0, 0, 700,700);
-				panel.setGame(new Game(number, name));
+				
+			//	panel.setGame(new Game(number, name));
 				if(map2 != null){
-					panel.getGame().getMap2().setMap(map2.getMap());
+					Orde orde= new Orde(0);
+					 Hero heroo= new Hero();
+					for(int i = 0; i < map2.getMap().length; i++){
+						for(int j=0; j < map2.getMap()[0].length; j++){
+							if(map2.getMap()[i][j] == '0'){
+								editPanel.getGame().getMap2().getMap()[i][j] = ' ';
+								Ogre ogre= new Ogre();
+								ogre.setI(i);
+								ogre.setJ(j);
+								if(i == map2.getMap().length-2 && j == map2.getMap()[1].length-2){
+									ogre.setWeaponI(i-1);
+									ogre.setWeaponJ(j);
+								}else if(i == 1 && j ==1){
+									ogre.setWeaponI(i);
+									ogre.setWeaponJ(j+1);
+								}else if(i == 1 && j == map2.getMap()[1].length-2){
+									ogre.setWeaponI(i+1);
+									ogre.setWeaponJ(j);
+								}else if(i == map2.getMap().length-2 && j == 1){
+									ogre.setWeaponI(i);
+									ogre.setWeaponJ(j+1);
+								}else if(i == map2.getMap().length-2 || i == 1){
+									ogre.setWeaponI(i);
+									ogre.setWeaponJ(j+1);
+								}else if(j == map2.getMap()[1].length-1 || j == 1){
+									ogre.setWeaponI(i+1);
+									ogre.setWeaponJ(j);
+								}else{
+									ogre.setWeaponI(i+1);
+									ogre.setWeaponJ(j);
+								}
+							//	System.out.println(i);
+								//System.out.println(j);
+								orde.getOrde().add(ogre);
+							}
+							if(map2.getMap()[i][j] == 'H'){
+								editPanel.getGame().getMap2().getMap()[i][j] = ' ';
+                                
+								  heroo.setHi(i);
+								
+								  heroo.setHj(j);
+								
+								
+							}
+						}
+					}
+				
+					editPanel.getGame().setOrde(orde);
+					for(int b =0; b < orde.getOrde().size(); b++){
+						System.out.println(editPanel.getGame().getOrde().getOrde().get(b).getI() +" , "+ editPanel.getGame().getOrde().getOrde().get(b).getJ());
+					}
+				    panel.setGame(new Game(orde.getOrde().size(), name));
+					panel.getGame().getMap2().setMap(editPanel.getGame().getMap2().getMap());
+					panel.getGame().getMap2().setHero(heroo);
+					panel.getGame().getMap2().setOrde(orde);
+					panel.getGame().setGameOverlvl2(new GameOver(panel.getGame().getMap2().getHero(),  panel.getGame().getMap2().getOrde(), panel.getGame().getMap2()));
+					
 				}
+				else{
+					panel.setGame(new Game(number, name));
+				}
+				//System.out.println(panel.getGame().getMap2().printBoard(panel.getGame().getMap2().getHero(), panel.getGame().getOrde()));
 				frame.getContentPane().add(panel);
 				panel.setFocusable(true);
 				panel.requestFocusInWindow();

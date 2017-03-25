@@ -21,6 +21,7 @@ public class EditGame extends JPanel implements MouseListener {
 	private Game game = new Game(0,"Rookie");
 	private BufferedImage wall, floor, door, ogre, weapon, key, hero;
 	private char toAdd;
+	private int a, b;
 
 	
 	public EditGame(int height, int width) throws IllegalArgumentException, ImagingOpException, IOException{
@@ -131,6 +132,30 @@ public class EditGame extends JPanel implements MouseListener {
 
 	public void setToAdd(char toAdd) {
 		this.toAdd = toAdd;
+	}
+
+
+
+	public int getB() {
+		return b;
+	}
+
+
+
+	public void setB(int b) {
+		this.b = b;
+	}
+
+
+
+	public int getA() {
+		return a;
+	}
+
+
+
+	public void setA(int a) {
+		this.a = a;
 	}
 
 }

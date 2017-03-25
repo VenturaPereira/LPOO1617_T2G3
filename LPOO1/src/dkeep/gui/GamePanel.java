@@ -34,8 +34,8 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addKeyListener(this);
-		gridH = getGame().getMap1().getMap()[0].length;
-		gridW = getGame().getMap1().getMap().length;
+		gridH = getGame().getCurrentMap().getMap()[0].length;
+		gridW = getGame().getCurrentMap().getMap().length;
 		offsetW = Math.round(width / gridW);
 		offsetH = Math.round(height/gridH);
 		
@@ -153,6 +153,8 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
         			 }
         			 if(gamemap.getOrde().getOrde().get(a).getWeaponI() == i && gamemap.getOrde().getOrde().get(a).getWeaponJ() == j){
         				 g.drawImage(weapon, j* offsetH, i* offsetW, this);
+        				 System.out.println(i +"," + j);
+  
         			 }
         		 }
         		}
@@ -186,10 +188,10 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'a');
 			if(getGame().getCurrentMap() instanceof Mapa1){
 				getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
-				}else if(getGame().getCurrentMap() instanceof Mapa2){
-					getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
-					getGame().getStun().stun();
-				}
+				}//else if(getGame().getCurrentMap() instanceof Mapa2){
+					//getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
+					//getGame().getStun().stun();
+				//}
 			break;
 		case KeyEvent.VK_RIGHT: 
 			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'd');  

@@ -17,6 +17,12 @@ public class Ogre extends Enemy {
 		this.stunned = 0;
 	}
 
+	public void setWeaponI(int i ){
+		this.weaponI = i;
+	}
+	public void setWeaponJ(int j ){
+		this.weaponJ = j;
+	}
 	public int getWeaponI()
 	{
 		return this.weaponI;
