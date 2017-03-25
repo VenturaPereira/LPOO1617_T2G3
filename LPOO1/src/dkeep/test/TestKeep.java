@@ -8,6 +8,8 @@ import org.junit.Test;
 import gameLogic.GameOver;
 import gameLogic.Levels;
 import gameLogic.NewMapGame;
+import gameLogic.Orde;
+import gameLogic.Stun;
 import gameLogic.WinGame;
 
 public class TestKeep {
@@ -68,13 +70,13 @@ public class TestKeep {
 	{
 		Levels leveling = new Levels();
 		NewMapGame maptest = new NewMapGame(keepmap, leveling);
-		if(maptest.getHero().getPickedKey())
-		{
-			maptest.getHero().commandMove(maptest, 's');
-			maptest.getHero().commandMove(maptest, 'a');
-			assertTrue(maptest.getMap()[2][0] == 'S');
-			assertEquals(1, maptest.getHero().getHi());
-		}
+		NewMapGame mapPassed = new NewMapGame(keepmap, leveling);
+		maptest.getHero().commandMove(maptest, 's');	
+		maptest.getHero().commandMove(maptest, 's');
+		maptest.getHero().commandMove(maptest, 'a');
+		assertTrue(maptest.getMap()[2][0] == 'S');
+		assertEquals(3, maptest.getHero().getHi());
+		
 	}
 	
 	@Test
@@ -82,17 +84,15 @@ public class TestKeep {
 	{
 		Levels leveling = new Levels();
 		NewMapGame maptest = new NewMapGame(keepmap, leveling);
+		NewMapGame mapPassed = new NewMapGame(keepmap, leveling);
 		WinGame win = new WinGame(maptest);
-		if(maptest.getHero().getPickedKey())
-		{
-			maptest.getHero().commandMove(maptest, 's');
-			maptest.getHero().commandMove(maptest, 'a');
-			assertTrue(maptest.getMap()[2][0] == 'S');
-			maptest.getHero().commandMove(maptest, 's');
-			assertEquals(0, maptest.getHero().getHi());
-			assertTrue(win.getWin());
+		maptest.getHero().commandMove(maptest, 's');
+		maptest.getHero().commandMove(maptest, 's');
+		maptest.getHero().commandMove(maptest, 'a');
+		assertTrue(maptest.getMap()[2][0] == 'S');
+		assertEquals(0, maptest.getHero().getHj());
+		assertTrue(win.getWin());
 			
-		}
 	}
 	
 	@Test(timeout=1000)
@@ -105,44 +105,17 @@ public class TestKeep {
 		
 		while(!gameOver.getGameOver(maptest))
 		{
-			maptest.getHero().commandMove(maptest, 'd');
 			maptest.getOrde().moveOrde(maptest);
-			for(int i = 0; i < maptest.getOrde().getOrde().size(); i++)
+			if(maptest.getOrde().getOrde().get(0).getI() == 1 && maptest.getOrde().getOrde().get(0).getJ() == 2)
 			{
-				if(maptest.getOrde().getOrde().get(i).getI() == maptest.getHero().getHi() && maptest.getOrde().getOrde().get(i).getJ() == maptest.getHero().getHj()+1)
-				{
-					assertTrue(gameOver.getGameOver(maptest));
-				}
-				else if(maptest.getOrde().getOrde().get(i).getWeaponI() == maptest.getHero().getHi() && maptest.getOrde().getOrde().get(i).getWeaponJ() == maptest.getHero().getHj()+1)
-				{
-					assertTrue(gameOver.getGameOver(maptest));
-				}
-			
+				assertTrue(gameOver.getGameOver(maptest));
 			}
+			
 			
 			
 		}
 	}
 	
-	@Test(timeout=1000)
-	public void cantPickKey()
-	{
-		Levels leveling = new Levels();
-		NewMapGame maptest = new NewMapGame(keepmap, leveling);
-		boolean cantPick = false;
-		
-		while(!cantPick)
-		{
-			maptest.getOrde().moveOrde(maptest);
-			
-			if(maptest.getMap()[3][1] == '$')
-			{
-				cantPick = true;
-				assertTrue(cantPick);
-			}
-			
-		}
-	}
 	
 	
 	@Test
@@ -180,19 +153,18 @@ public class TestKeep {
 		assertTrue(yup);
 	}
 	
-	@Test(timeout=1000)
-	public void ogreVsWall()
+	@Test
+	public void stunOgre()
 	{
 		Levels leveling = new Levels();
 		NewMapGame maptest = new NewMapGame(keepmap, leveling);
-		boolean encountersWall = false;
+		Stun stun = new Stun(maptest);
 		
-		
-		
-		
-		
-		
+		maptest.getHero().commandMove(maptest, 'd');
+		stun.stun();
+		assertTrue(maptest.getOrde().getOrde().get(0).getStunned() > 0);
 	}
+	
 	
 	
 	

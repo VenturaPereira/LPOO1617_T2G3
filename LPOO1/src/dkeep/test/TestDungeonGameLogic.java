@@ -3,6 +3,7 @@ package dkeep.test;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import gameLogic.Drunken;
 import gameLogic.Enemy;
 import gameLogic.GameOver;
 import gameLogic.Guard;
@@ -11,6 +12,7 @@ import gameLogic.Levels;
 import gameLogic.Mapa2;
 import gameLogic.NewMapGame;
 import gameLogic.Rookie;
+import gameLogic.WinGame;
 
 
 
@@ -72,7 +74,8 @@ public class TestDungeonGameLogic {
 		NewMapGame maptest = new NewMapGame(map, leveling);
 		maptest.getHero().commandMove(maptest, 's');
 		maptest.getHero().commandMove(maptest, 's');
-		assertTrue(maptest.getMap()[2][0] == 'S' && maptest.getMap()[3][0] == 'S');	
+		assertEquals(maptest.getMap()[2][0],'S');
+		assertEquals(maptest.getMap()[3][0],'S');	
 	}
 	
 	@Test
@@ -91,8 +94,10 @@ public class TestDungeonGameLogic {
 	public void arrivesDoor(){
 		Levels leveling = new Levels();
 		NewMapGame maptest = new NewMapGame(map,leveling);
+		NewMapGame mapPassed = new NewMapGame(map,leveling);
 		maptest.getHero().commandMove(maptest, 's');
 		maptest.getHero().commandMove(maptest, 's');
+		maptest.getHero().commandMove(maptest, 'a');
 		assertTrue(maptest.isArrived());
 	}
 	
@@ -107,18 +112,43 @@ public class TestDungeonGameLogic {
 		assertTrue(map2.getRunning());
 	}
 	
+
+	@Test
+	public void winsGame(){
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(map,leveling);
+		NewMapGame mapPassed = new NewMapGame(map, leveling);
+		WinGame win = new WinGame(maptest);
+		maptest.getHero().commandMove(maptest, 's');
+		maptest.getHero().commandMove(maptest, 's');
+		maptest.getHero().commandMove(maptest, 'a');
+		assertTrue(win.getWin());
+	}
+	
 	
 	@Test
 	public void guardIsSleeping()
 	{
 		Levels leveling = new Levels();
 		NewMapGame maptest = new NewMapGame(map,leveling);
-		GameOver gameOver = new GameOver(maptest.getHero(), maptest.getGuard(), maptest); 
-		maptest.getGuard().setSleeping(true);
+		Enemy guard = new Drunken();
+		maptest.setGuard(guard);
+		GameOver gameOver = new GameOver(maptest.getHero(), guard, maptest); 
+		guard.setSleeping(true);
 		maptest.getHero().commandMove(maptest, 'd');
 		assertFalse(gameOver.getGameOver(maptest));
+	}
 	
-		
+	@Test
+	public void guardMoves()
+	{
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(map,leveling);
+		Enemy guard = new Rookie();
+		maptest.setGuard(guard);
+		GameOver gameOver = new GameOver(maptest.getHero(), guard, maptest);
+		maptest.getGuard().enemyMove(maptest);
+		assertEquals(maptest.getGuard().getI(), 1);
 	}
 	
 
