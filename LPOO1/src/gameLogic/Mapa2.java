@@ -65,23 +65,14 @@ public class Mapa2 extends MapGame {
 		
 		int hx=this.getHero().getHi();
 		int hy = this.getHero().getHj();
-
-	
+		
 		for (int i = 0; i < nextLevelBoard.length; i++) {
 		    for (int j = 0; j < nextLevelBoard[i].length; j++) {
 		    	if(i == hx && j == hy){
 		    		if(hx == 1 && hy == 7 || hero.getPickedKey())
-		    		{
-		    			pickKey();
-		    			mapa = mapa + "K|";
-		    			j++;
-		    		}
+		    		{pickKey() ;mapa = mapa + "K|"; j++;}
 		    		else
-		    		{
-		    			mapa = mapa + "A|";
-			    		j++;
-		    		}
-		    		
+		    		{mapa = mapa + "A|"; j++;}
 		    	}
 		    	for(int k = 0; k < orde.getOrde().size(); k++)
 		    	{
@@ -96,66 +87,24 @@ public class Mapa2 extends MapGame {
 	    					j++;
 	    					j++;
 	    				}else{
-
-	    					if(orde.getOrde().get(k).getStunned() > 0)
-	    					{
-	    						mapa = mapa + "*|";
-	    			    		mapa = mapa + "8|";
-	    			    		j++;
-	    			    		j++;
-	    					}
-	    					else
-	    					{
-	    						mapa = mapa + "*|";
-	    			    		mapa = mapa + "0|";
-	    			    		j++;
-	    			    		j++;
-	    					}
-			    		
-	    				}
+	    					if(orde.getOrde().get(k).getStunned() > 0){mapa = mapa + "*|"; mapa = mapa + "8|"; j++; j++;}
+	    					else{mapa = mapa + "*|"; mapa = mapa + "0|"; j++; j++;}
+			    		}
 		    		}
-		    	
 		    		else{
 		    			if(i ==oi && j == oj){
-		    				if(i == 1 && j == 7)
-		    				{
-		    					mapa = mapa +"$|";
-		    					j++;
-		    				
-		    				
+		    				if(i == 1 && j == 7){mapa = mapa +"$|";j++;}
+		    				else{
+		    					if(orde.getOrde().get(k).getStunned() > 0){mapa = mapa + "8|";j++;}
+		    					else{mapa = mapa + "0|";j++;}
 		    				}
-		    				else
-		    				{
-
-		    					if(orde.getOrde().get(k).getStunned() > 0)
-		    					{
-		    						mapa = mapa + "8|";
-			    					j++;
-		    					}
-		    					else
-		    					{
-		    						mapa = mapa + "0|";
-			    					j++;
-		    					}
-
-		    				}
-		    		
 		    			}
-
-		    			if(i == wi && j == wj)
-		    			{
+		    			if(i == wi && j == wj){
 		    				if(i == 1 && j == 7)
-		    				{
-		    					mapa = mapa +"$|";
-		    					j++;
-		    				}
+		    				{mapa = mapa +"$|";j++;}
 		    				else
-		    				{
-		    					mapa = mapa + "*|";
-		    					j++;
-		    				}
-		    		 
-		    			}
+		    				{mapa = mapa + "*|";j++;}
+		    		 }
 		    		}
 		    	}
 		        mapa = mapa + nextLevelBoard[i][j] + "|";

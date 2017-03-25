@@ -8,31 +8,18 @@ public abstract class Character {
 	public boolean move(MapGame map, int di, int dj){
 		
 		if(map instanceof Mapa1 ){
-			
-			if(map.getMap()[di][dj] == 'X' ){
-				return false;
-				
-			} else if(map.getMap()[di][dj] == 'I'){
-				return false;
-			}else if(map.getMap()[di][dj] == 'G' || map.getMap()[di][dj] == 'H'){
-				return false;
-			}else if(map.getMap()[di][dj] == 'K'){ 
-				((Mapa1) map).setDoors();
-			    return true;
-			}else if(map.getMap()[di][dj] == ' '){
-				return true;
-			}else if(map.getMap()[di][dj] == 'S'){
-				  map.setArrived(true);
-				  map.setRunning(false);
+			if(map.getMap()[di][dj] == 'X' ){return false;} 
+			else if(map.getMap()[di][dj] == 'I'){return false;}
+			else if(map.getMap()[di][dj] == 'G' || map.getMap()[di][dj] == 'H'){return false;}
+			else if(map.getMap()[di][dj] == 'K'){((Mapa1) map).setDoors();return true;}
+			else if(map.getMap()[di][dj] == ' '){return true;}
+			else if(map.getMap()[di][dj] == 'S'){map.setArrived(true);map.setRunning(false);
 					for(int i=0; i < map.getLevels().getLevels().size(); i++){
 						if(map.getLevels().getLevels().get(i) == map)
 						{int a= i+1;map.getLevels().getLevels().get(a).setRunning(true);}
 					}
-				  return true;
-				
-			}
+				  return true;}
 		} else if(map instanceof Mapa2){
-			
 			if(map.getMap()[di][dj] == 'X'){
 				return false;
 			}else if(map.getMap()[di][dj] == 'I'){
@@ -48,11 +35,8 @@ public abstract class Character {
 			}else if(map.getMap()[di][dj] == 'S'){
 				  map.setArrived(true);
 				  return true;
-				
-			}
-			
-			
-		}else if(map instanceof NewMapGame){
+				}
+			}else if(map instanceof NewMapGame){
 			if(map.getMap()[di][dj] == 'X'){
 				return false;
 			}else if(map.getMap()[di][dj] == 'I'){
@@ -74,12 +58,9 @@ public abstract class Character {
 						{int a= i+1;map.getLevels().getLevels().get(a).setRunning(true);}
 					}
 				  return true;
-				
+				}
 			}
-			
-		}
-			
-		return true;
+			return true;
 		}
 		
 
