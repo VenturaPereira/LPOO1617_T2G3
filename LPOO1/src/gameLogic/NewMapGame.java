@@ -38,9 +38,6 @@ public class NewMapGame extends MapGame {
 					o.setJ(j);
 					setOrde(new Orde(0));
 					this.orde.getOrde().add(o);
-					/*setOgre(new Ogre());
-					getOgre().setI(i);
-					getOgre().setJ(j);*/
 				}
 				else{
 					this.map[i][j]=map[i][j];
@@ -69,7 +66,6 @@ public class NewMapGame extends MapGame {
 	  for (int i = 0; i < getMap().length; i++) {
 		    for (int j = 0; j < getMap()[i].length; j++) {
 		    	if(i == hi && j == hj){
-		    		//board[i][j]= HERO;
 		    		System.out.print("H|");
 		    		j++;
 		    	}if(this.isHasGuard()){
@@ -101,7 +97,6 @@ public class NewMapGame extends MapGame {
 
 	@Override
 	public char[][] getMap() {
-		// TODO Auto-generated method stub
 		return map;
 	}
 

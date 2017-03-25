@@ -65,10 +65,7 @@ public class Mapa2 extends MapGame {
 		
 		int hx=this.getHero().getHi();
 		int hy = this.getHero().getHj();
-		/*int oi = this.getOgre().getI();
-		int oj = this.getOgre().getJ();
-		int wi = this.getOgre().getWeaponI();
-		int wj =  this.getOgre().getWeaponJ();*/
+
 	
 		for (int i = 0; i < nextLevelBoard.length; i++) {
 		    for (int j = 0; j < nextLevelBoard[i].length; j++) {
@@ -172,7 +169,6 @@ public class Mapa2 extends MapGame {
 
 	@Override
 	public void setDoors() {
-		// TODO Auto-generated method stub
 		nextLevelBoard[1][0]=STAIRS;
 		
 	}

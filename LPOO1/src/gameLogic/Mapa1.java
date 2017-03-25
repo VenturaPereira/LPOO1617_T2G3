@@ -41,17 +41,14 @@ public class Mapa1 extends MapGame {
 	int hy = this.getHero().getHj();
 	int gx = this.getGuard().getI();
 	int gj= this.getGuard().getJ();
-	//gx, gy;  
+	 
 		
 		for (int i = 0; i < board.length; i++) {
 		    for (int j = 0; j < board[i].length; j++) {
 		    	if(i == hx && j == hy){
-		    		//board[i][j]= HERO;
 		    		mapa = mapa + ("H|");
 		    		j++;
-		    	}//else if(i == gx && j == gy){
-		    		//board[i][j] = GUARD;
-		    	//}
+		    	}
 		    	if((i == gx && j == gj) && guard instanceof Drunken && guard.isSleeping()){
 		    		mapa = mapa + ("g|");
 		    		j++;

@@ -36,8 +36,5 @@ public class Orde extends Enemy{
 	}
 
 	@Override
-	public void enemyMove(MapGame map) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void enemyMove(MapGame map) {}
 }
