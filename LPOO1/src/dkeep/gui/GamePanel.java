@@ -226,16 +226,10 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		}
 
 	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyReleased(KeyEvent e) {}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void keyTyped(KeyEvent e) {}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
@@ -247,28 +241,16 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 	}
 
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseMoved(MouseEvent arg0) {}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseClicked(MouseEvent arg0) {}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent arg0) {}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent arg0) {}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -291,9 +273,4 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 	public void setGame(Game game) {
 		this.game = game;
 	}
-	
-	
-	
-	
-	
 }

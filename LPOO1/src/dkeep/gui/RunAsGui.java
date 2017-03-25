@@ -102,7 +102,7 @@ public class RunAsGui {
 						btnLeft.setEnabled(false);
 						btnUp.setEnabled(false);
 						btnDown.setEnabled(false);
-						textArea.setText("You looooost, noob");
+						textArea.setText("You lost, noob");
 						lblPressNewGame.setText("You were defeated");
 					}
 						else if(win.getWin()){

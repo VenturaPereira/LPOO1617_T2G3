@@ -25,11 +25,8 @@ public abstract class Character {
 				  map.setArrived(true);
 				  map.setRunning(false);
 					for(int i=0; i < map.getLevels().getLevels().size(); i++){
-						if(map.getLevels().getLevels().get(i) == map){
-							System.out.println("hi");
-							int a= i+1;
-							map.getLevels().getLevels().get(a).setRunning(true);
-						}
+						if(map.getLevels().getLevels().get(i) == map)
+						{int a= i+1;map.getLevels().getLevels().get(a).setRunning(true);}
 					}
 				  return true;
 				
@@ -73,11 +70,8 @@ public abstract class Character {
 				 map.setArrived(true);
 				  map.setRunning(false);
 					for(int i=0; i < map.getLevels().getLevels().size(); i++){
-						if(map.getLevels().getLevels().get(i) == map){
-							System.out.println("hi");
-							int a= i+1;
-							map.getLevels().getLevels().get(a).setRunning(true);
-						}
+						if(map.getLevels().getLevels().get(i) == map)
+						{int a= i+1;map.getLevels().getLevels().get(a).setRunning(true);}
 					}
 				  return true;
 				
