@@ -22,6 +22,10 @@ public class EditGame extends JPanel implements MouseListener {
 	private BufferedImage wall, floor, door, ogre, weapon, key, hero;
 	private char toAdd;
 	private int a, b;
+	private boolean doorExists = false;
+	private boolean heroExists = false;
+	private boolean ogreExists = false;
+	private boolean keyExists = false;
 
 	
 	public EditGame(int height, int width) throws IllegalArgumentException, ImagingOpException, IOException{
@@ -93,6 +97,18 @@ public class EditGame extends JPanel implements MouseListener {
 	public void mousePressed(MouseEvent e) {
 		int i = (e.getX())/offsetW;
 		int j =   (e.getY())/offsetH;
+		if(getToAdd() == 'H'){
+			this.setHeroExists(true);
+		}
+		if(getToAdd() == 'k'){
+			this.setKeyExists(true);
+		}
+		if(getToAdd() == '0'){
+			this.setOgreExists(true);
+		}
+		if(getToAdd() == 'I'){
+			this.setDoorExists(true);
+		}
 		game.getMap2().getMap()[j][i] = getToAdd();
 		repaint();
 	}
@@ -147,6 +163,54 @@ public class EditGame extends JPanel implements MouseListener {
 
 	public void setA(int a) {
 		this.a = a;
+	}
+
+
+
+	public boolean isDoorExists() {
+		return doorExists;
+	}
+
+
+
+	public void setDoorExists(boolean doorExists) {
+		this.doorExists = doorExists;
+	}
+
+
+
+	public boolean isHeroExists() {
+		return heroExists;
+	}
+
+
+
+	public void setHeroExists(boolean heroExists) {
+		this.heroExists = heroExists;
+	}
+
+
+
+	public boolean isOgreExists() {
+		return ogreExists;
+	}
+
+
+
+	public void setOgreExists(boolean ogreExists) {
+		this.ogreExists = ogreExists;
+	}
+
+
+
+	public boolean isKeyExists() {
+		return keyExists;
+	}
+
+
+
+	public void setKeyExists(boolean keyExists) {
+		this.keyExists = keyExists;
 	}
 
 }

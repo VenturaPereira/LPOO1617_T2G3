@@ -42,6 +42,7 @@ public class GraphicalView{
     private JButton wallToPress = new JButton();
     private JButton saving = new JButton("Save");
     private Mapa2 map2 = null;
+    private boolean clicked = false;
 	/**
 	 * Launch the application.
 	 */
@@ -83,8 +84,7 @@ public class GraphicalView{
 		wallToPress.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){toAdd= 'X';editPanel.setToAdd(toAdd);}});
 		
-		saving.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){map2 = editPanel.getGame().getMap2();System.out.println(map2.printBoard(map2.getHero(), map2.getOrde()));editLevel.setVisible(false);}});
+		saving.addActionListener(new ActionListener() {public void actionPerformed(ActionEvent e){if(editPanel.isDoorExists() && editPanel.isOgreExists() && editPanel.isHeroExists() && editPanel.isKeyExists()){clicked = true;	map2 = editPanel.getGame().getMap2();	System.out.println(map2.printBoard(map2.getHero(), map2.getOrde()));		editLevel.setVisible(false);	}else {			JOptionPane.showConfirmDialog(editLevel, "Components missing");}	}});
 		initialFrame = new JFrame("Welcome");
 		
 		initialFrame.setContentPane(new JPanel(){
@@ -163,7 +163,10 @@ public class GraphicalView{
 				final String[] guards = {"Suspicious", "Rookie", "Drunken"};
 				String name = (String)JOptionPane.showInputDialog(frame, "Choose the Guard", "What Guard?",JOptionPane.QUESTION_MESSAGE, null, guards, null);
 				JFrame infoNext  = new JFrame("info");
-				int number = Integer.parseInt(JOptionPane.showInputDialog(infoNext, "Choose the number of Ogres.", "Number of Ogres?", JOptionPane.WARNING_MESSAGE));
+				int number = 0;
+				while(number ==0&& number > 5 && clicked == false ){
+				 number = Integer.parseInt(JOptionPane.showInputDialog(infoNext, "Choose the number of Ogres.", "Number of Ogres?", JOptionPane.WARNING_MESSAGE));
+				}
 				frame = new JFrame();
 				frame.setTitle("World of Warcraft : Legion");
 				frame.setBounds(100, 100, 450, 300);

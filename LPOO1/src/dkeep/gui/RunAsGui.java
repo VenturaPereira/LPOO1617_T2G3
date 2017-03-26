@@ -223,10 +223,14 @@ public class RunAsGui {
 				
 				Mapa2 map2 = new Mapa2(leveling);
 				int number = Integer.parseInt(textPane.getText());
+				if(number == 0 || number > 5){
+					lblPressNewGame.setText("Insert a valid number for ogres");
+				}else{
 				Orde orde = new Orde(number);
 				map2.setOrde(orde);
 				map1.setRunning(true);
 				textArea.setText(map1.printBoard(map1.getHero(), map1.getGuard()));
+				}
 				}
 		});
 		btnNewGame.setBounds(305, 32, 119, 23);
