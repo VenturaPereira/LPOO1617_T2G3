@@ -3,6 +3,7 @@ package dkeep.test;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import gameLogic.Drunken;
 import gameLogic.Enemy;
 import gameLogic.GameOver;
 import gameLogic.Guard;
@@ -26,11 +27,23 @@ public class OtherTests {
 	
 	String map2 = "X|X|X|X|X|X|X|X|X|\nI| | | |0|*| |k|X|\nX| | | | | | | |X|\nX| | | | | | | |X|\nX| | | | | | | |X|\nX| | | | | | | |X|\nX| | | | | | | |X|\nX|A| | | | | | |X|\nX|X|X|X|X|X|X|X|X|\n";
 	
+	char nextLevelBoard[][] = {{'X','X','X','X','X','X','X','X','X'}, 
+				{'I', ' ', ' ', ' ', ' ',' ',' ','K', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
+				{'X','X','X','X','X','X','X','X','X'}};
+	
 	char [][] keepmap = {{'X','X','X','X','X'},
 			 {'X','H',' ','0','X'},
 			 {'I',' ',' ',' ','X'},
 			 {'I','K',' ',' ','X'},
 			 {'X','X','X','X','X'}};
+	
+	String map3 = "X|X|X|X|X|\nI| | | |X|\nI|K| | |X|\nX|X|X|X|X|";
 	
 	@Test
 	public void testHeroVsWall(){
@@ -81,6 +94,23 @@ public class OtherTests {
 		
 		
 		assertEquals(map.printBoard(hero, guard),map1);
+	}
+	
+	@Test
+	public void heroGetsCaughtByDrunken()
+	{
+		Levels leveling = new Levels();
+		Mapa1 map = new Mapa1(leveling);
+		Enemy guard = new Drunken();
+		map.setGuard(guard);
+		GameOver gameOver = new GameOver(map.getHero(), guard, map);
+		
+		map.getGuard().enemyMove(map);
+		map.getHero().commandMove(map, 'd');
+		map.getHero().commandMove(map, 'd');
+		map.getHero().commandMove(map, 's');
+
+		assertFalse(gameOver.getGameOver(map));
 	}
 	
 	@Test
@@ -316,6 +346,26 @@ public class OtherTests {
 		map.getHero().commandMove(map, 'w');
 		map.getHero().commandMove(map, 'w');
 		assertTrue(gameOver.getGameOver(map));
+	}
+	
+	@Test
+	public void setMapa2()
+	{
+		Levels leveling = new Levels();
+		Mapa2 map = new Mapa2(leveling);
+		map.setMap(nextLevelBoard);
+		boolean lmao = true;
+		assertTrue(lmao);
+	}
+	
+	@Test
+	public void printNewMapGame()
+	{
+		Levels leveling = new Levels();
+		NewMapGame map = new NewMapGame(keepmap, leveling);
+		Orde orde = new Orde(1);
+		assertEquals(map.printBoard(map.getHero(), orde), " ");
+		
 	}
 	
 	
