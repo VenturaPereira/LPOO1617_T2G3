@@ -72,57 +72,26 @@ public class GraphicalView{
 	 */
 	private void initialize() throws IOException {
 		
-		
 		heroToPress.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				toAdd= 'H';
-				editPanel.setToAdd(toAdd);
-			}
-			});
+			public void actionPerformed(ActionEvent e){toAdd= 'H';editPanel.setToAdd(toAdd);}});
 		keyToPress.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				toAdd= 'k';
-				editPanel.setToAdd(toAdd);
-			}
-			});
+			public void actionPerformed(ActionEvent e){toAdd= 'k';editPanel.setToAdd(toAdd);}});
 		ogreToPress.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				toAdd= '0';
-				editPanel.setToAdd(toAdd);
-			}
-			});
+			public void actionPerformed(ActionEvent e){toAdd= '0';editPanel.setToAdd(toAdd);}});
 		doorToPress.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				toAdd= 'I';
-				editPanel.setToAdd(toAdd);
-			}
-			});
+			public void actionPerformed(ActionEvent e){toAdd= 'I';editPanel.setToAdd(toAdd);}});
 		wallToPress.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				toAdd= 'X';
-				editPanel.setToAdd(toAdd);
-			}
-			});
+			public void actionPerformed(ActionEvent e){toAdd= 'X';editPanel.setToAdd(toAdd);}});
 		
 		saving.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){
-				map2 = editPanel.getGame().getMap2();
-				System.out.println(map2.printBoard(map2.getHero(), map2.getOrde()));
-				editLevel.setVisible(false);
-			}
-			});
+			public void actionPerformed(ActionEvent e){map2 = editPanel.getGame().getMap2();System.out.println(map2.printBoard(map2.getHero(), map2.getOrde()));editLevel.setVisible(false);}});
 		initialFrame = new JFrame("Welcome");
 		
 		initialFrame.setContentPane(new JPanel(){
 			BufferedImage image = ImageIO.read(new File("images/world-of-warcraft-legion-release-date.jpg"));
 			
-			public void paintComponent(Graphics g){
-				super.paintComponent(g);
-				g.drawImage(image,0, 0 ,690, 690, this);
-			}
-		});
+			public void paintComponent(Graphics g){super.paintComponent(g);g.drawImage(image,0, 0 ,690, 690, this);}});
 		
-
 		JButton start = new JButton("Start Game");
 		JButton edit = new JButton("Edit Level");
 		
@@ -154,10 +123,6 @@ public class GraphicalView{
 					heroToPress.setBounds(500,0 , 100, 100);
 					heroToPress.setContentAreaFilled(false);
 					heroToPress.setFocusable(false);
-					
-					
-					
-					
 					editLevel.add(heroToPress);
 					
 					keyToPress.setIcon(key);
@@ -210,12 +175,9 @@ public class GraphicalView{
 				try {
 					panel = new GamePanel(700,700);
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				panel.setBounds(0, 0, 700,700);
-				
-			//	panel.setGame(new Game(number, name));
 				if(map2 != null){
 					Orde orde= new Orde(0);
 					 Hero heroo= new Hero();
@@ -226,41 +188,16 @@ public class GraphicalView{
 								Ogre ogre= new Ogre();
 								ogre.setI(i);
 								ogre.setJ(j);
-								if(i == map2.getMap().length-2 && j == map2.getMap()[1].length-2){
-									ogre.setWeaponI(i-1);
-									ogre.setWeaponJ(j);
-								}else if(i == 1 && j ==1){
-									ogre.setWeaponI(i);
-									ogre.setWeaponJ(j+1);
-								}else if(i == 1 && j == map2.getMap()[1].length-2){
-									ogre.setWeaponI(i+1);
-									ogre.setWeaponJ(j);
-								}else if(i == map2.getMap().length-2 && j == 1){
-									ogre.setWeaponI(i);
-									ogre.setWeaponJ(j+1);
-								}else if(i == map2.getMap().length-2 || i == 1){
-									ogre.setWeaponI(i);
-									ogre.setWeaponJ(j+1);
-								}else if(j == map2.getMap()[1].length-1 || j == 1){
-									ogre.setWeaponI(i+1);
-									ogre.setWeaponJ(j);
-								}else{
-									ogre.setWeaponI(i+1);
-									ogre.setWeaponJ(j);
-								}
-							//	System.out.println(i);
-								//System.out.println(j);
-								orde.getOrde().add(ogre);
+								if(i == map2.getMap().length-2 && j == map2.getMap()[1].length-2){ogre.setWeaponI(i-1); ogre.setWeaponJ(j);}
+								else if(i == 1 && j ==1){ogre.setWeaponI(i);ogre.setWeaponJ(j+1);}
+								else if(i == 1 && j == map2.getMap()[1].length-2){ogre.setWeaponI(i+1);ogre.setWeaponJ(j);}
+								else if(i == map2.getMap().length-2 && j == 1){ogre.setWeaponI(i);ogre.setWeaponJ(j+1);}
+								else if(i == map2.getMap().length-2 || i == 1){ogre.setWeaponI(i);ogre.setWeaponJ(j+1);}
+								else if(j == map2.getMap()[1].length-1 || j == 1){ogre.setWeaponI(i+1);ogre.setWeaponJ(j);}
+								else{ogre.setWeaponI(i+1);ogre.setWeaponJ(j);}
+							orde.getOrde().add(ogre);
 							}
-							if(map2.getMap()[i][j] == 'H'){
-								editPanel.getGame().getMap2().getMap()[i][j] = ' ';
-                                
-								  heroo.setHi(i);
-								
-								  heroo.setHj(j);
-								
-								
-							}
+							if(map2.getMap()[i][j] == 'H'){editPanel.getGame().getMap2().getMap()[i][j] = ' ';heroo.setHi(i);heroo.setHj(j);}
 						}
 					}
 				
@@ -275,10 +212,7 @@ public class GraphicalView{
 					panel.getGame().setGameOverlvl2(new GameOver(panel.getGame().getMap2().getHero(),  panel.getGame().getMap2().getOrde(), panel.getGame().getMap2()));
 					
 				}
-				else{
-					panel.setGame(new Game(number, name));
-				}
-				//System.out.println(panel.getGame().getMap2().printBoard(panel.getGame().getMap2().getHero(), panel.getGame().getOrde()));
+				else{panel.setGame(new Game(number, name));}
 				frame.getContentPane().add(panel);
 				panel.setFocusable(true);
 				panel.requestFocusInWindow();
@@ -292,9 +226,6 @@ public class GraphicalView{
 		initialFrame.setBounds(300, 25, 700, 700);
 		initialFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		initialFrame.setVisible(true);
-		
-		 
-		
-	}
+		}
 
 }
