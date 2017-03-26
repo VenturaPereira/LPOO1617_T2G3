@@ -61,7 +61,7 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 	
 	//redraws the panel, only when requested by SWING
 	public void paintComponent(Graphics g){
-		super.paintComponent(g); //limpa fundo
+	//	super.paintComponent(g); //limpa fundo
 		
 		MapGame gamemap = getGame().getCurrentMap();
 	
