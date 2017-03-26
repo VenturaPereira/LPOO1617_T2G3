@@ -380,6 +380,15 @@ public class OtherTests {
 	
 	
 	
+	@Test
+	public void setAMovement(){
+		Rookie rook = new Rookie();
+		int[][] somemoves = {{1,2}, {1,3}};
+		rook.setAddMovement(somemoves);
+		assertEquals(2, rook.getAddMovement()[0][1]);
+	}
+	
+	
 	
 	
 
