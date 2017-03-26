@@ -1,3 +1,4 @@
+
 package dkeep.test;
 
 import static org.junit.Assert.*;
@@ -368,17 +369,19 @@ public class OtherTests {
 		
 	}
 	
-	@Test 
-	public void setAMovement(){
-		int[][] addmovement = { {2,1} };
-		Rookie rook = new Rookie();
-		rook.setAddMovement(addmovement);
-		assertEquals(rook.getAddMovement(), addmovement);
-		
+	@Test
+	public void getMapa2Sizes()
+	{
+		Levels leveling = new Levels();
+		Mapa2 map = new Mapa2(leveling);
+		assertEquals(map.getSizeI(), 9);
+		assertEquals(map.getSizeJ(), 9);
 	}
+	
 	
 	
 	
 	
 
 }
+
