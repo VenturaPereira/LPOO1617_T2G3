@@ -26,7 +26,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import java.awt.Font;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class RunAsGui.
  */

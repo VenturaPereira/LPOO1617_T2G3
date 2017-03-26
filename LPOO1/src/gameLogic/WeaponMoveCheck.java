@@ -23,7 +23,7 @@ public class WeaponMoveCheck {
 	/**
 	 * Check move.
 	 *
-	 * @param dir the dir
+	 * @param dir the direction
 	 * @param map the map
 	 * @return true, if successful
 	 */

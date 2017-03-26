@@ -22,7 +22,7 @@ import gameLogic.Suspicious;
 import gameLogic.WinGame;
 import gameLogic.Game;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class OtherTests.
  */

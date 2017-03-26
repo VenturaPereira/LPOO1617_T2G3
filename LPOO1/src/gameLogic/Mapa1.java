@@ -1,6 +1,6 @@
 package gameLogic;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Mapa1.
  */

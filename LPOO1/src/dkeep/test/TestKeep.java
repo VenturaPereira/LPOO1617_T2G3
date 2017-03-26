@@ -12,7 +12,7 @@ import gameLogic.Orde;
 import gameLogic.Stun;
 import gameLogic.WinGame;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class TestKeep.
  */
