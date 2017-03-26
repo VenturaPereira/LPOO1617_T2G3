@@ -21,22 +21,25 @@ public class TestKeep {
 						 {'X','X','X','X','X'}};
 	
 	@Test
+	public void HasOgre()
+	{
+		Levels leveling = new Levels();
+	    NewMapGame maptest = new NewMapGame(keepmap, leveling);
+	    assertTrue(maptest.isHasOgre());
+	}
 	
+	@Test
 	public void heroIsKilled()
 	{
 		Levels leveling = new Levels();
 	    NewMapGame maptest = new NewMapGame(keepmap, leveling);
-	    if(maptest.isHasOgre()){
+	    
 	    	 GameOver gameOver = new GameOver(maptest.getHero(), maptest.getOrde(), maptest); 	
 	    	 assertFalse(gameOver.getGameOver(maptest));	    
 	    	 maptest.getHero().commandMove(maptest, 'd');
 	    	 assertTrue(gameOver.getGameOver(maptest));
-	    } else {
-	    	 GameOver gameOver = new GameOver(maptest.getHero(), maptest.getOrde(), maptest);
-	    	 assertFalse(gameOver.getGameOver(maptest));
-	    	 maptest.getHero().commandMove(maptest, 'd');
-	    	 assertTrue(gameOver.getGameOver(maptest));
-	    }
+	    
+	    
 	}
 	
 	

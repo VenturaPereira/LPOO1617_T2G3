@@ -27,6 +27,13 @@ public class TestDungeonGameLogic {
 			         {'X','X','X','X','X'}};
 	
 
+	@Test
+	public void hasGuard()
+	{
+		Levels leveling = new Levels();
+		NewMapGame maptest = new NewMapGame(map, leveling);
+		assertTrue(maptest.isHasGuard());
+	}
 	
 	@Test
 	public void testMoveHeroIntoFreeCell(){

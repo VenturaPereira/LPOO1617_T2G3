@@ -368,6 +368,15 @@ public class OtherTests {
 		
 	}
 	
+	@Test
+	public void getMapa2Sizes()
+	{
+		Levels leveling = new Levels();
+		Mapa2 map = new Mapa2(leveling);
+		assertEquals(map.getSizeI(), 9);
+		assertEquals(map.getSizeJ(), 9);
+	}
+	
 	
 	
 	
