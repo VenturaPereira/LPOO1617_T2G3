@@ -16,7 +16,7 @@ import org.imgscalr.Scalr;
 import gameLogic.Game;
 import gameLogic.MapGame;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class EditGame.
  */

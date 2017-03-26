@@ -22,7 +22,7 @@ import gameLogic.Stun;
 import gameLogic.Suspicious;
 
 import gameLogic.WinGame;
-// TODO: Auto-generated Javadoc
+
 
 /**
  * The Class ClientInt.

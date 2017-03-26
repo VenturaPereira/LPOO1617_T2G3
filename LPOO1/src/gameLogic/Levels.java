@@ -2,7 +2,7 @@ package gameLogic;
 
 import java.util.Vector;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class Levels.
  */

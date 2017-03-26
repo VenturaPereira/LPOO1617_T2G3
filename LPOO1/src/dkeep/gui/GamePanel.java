@@ -22,7 +22,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class GamePanel.
  */

@@ -18,7 +18,7 @@ import gameLogic.WinGame;
 
 
 
-// TODO: Auto-generated Javadoc
+
 /**
  * The Class TestDungeonGameLogic.
  */
