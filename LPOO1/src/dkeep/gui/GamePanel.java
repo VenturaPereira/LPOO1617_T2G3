@@ -188,10 +188,10 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'a');
 			if(getGame().getCurrentMap() instanceof Mapa1){
 				getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
-				}//else if(getGame().getCurrentMap() instanceof Mapa2){
-					//getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
-					//getGame().getStun().stun();
-				//}
+				}else if(getGame().getCurrentMap() instanceof Mapa2){
+					getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
+					getGame().getStun().stun();
+				}
 			break;
 		case KeyEvent.VK_RIGHT: 
 			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), 'd');  
