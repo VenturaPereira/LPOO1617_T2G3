@@ -17,6 +17,7 @@ import gameLogic.NewMapGame;
 import gameLogic.Ogre;
 import gameLogic.Orde;
 import gameLogic.Rookie;
+import gameLogic.Stun;
 import gameLogic.Suspicious;
 import gameLogic.WinGame;
 import gameLogic.Game;
@@ -520,9 +521,32 @@ public class OtherTests {
 		rook.setAddMovement(somemoves);
 		assertEquals(2, rook.getAddMovement()[0][1]);
 	}
-	
-	
-	
+	/**
+	 * Sets a guard
+	 */
+	@Test
+	public void setaspecificguard(){
+		Game game = new Game(1,"Suspicious");
+		assertTrue(game.getMap1().getGuard() instanceof Suspicious);
+	}
+	/**
+	 * Sets another guard
+	 */
+	@Test
+	public void setaspecificguardDrunken(){
+		Game game = new Game(1,"Drunken");
+		assertTrue(game.getMap1().getGuard() instanceof Drunken);
+	}
+	/**
+	 * Tests stun return
+	 */
+	@Test
+	public void testAStun(){
+		Game game = new Game(1, "Drunken");
+		Stun hi = new Stun(game.getMap2());
+		game.setStun(hi);
+		assertEquals(hi, game.getStun());
+	}
 	
 
 }

@@ -1,7 +1,5 @@
 package dkeep.gui;
 
-import javax.swing.JPanel;
-
 import org.imgscalr.Scalr;
 
 import gameLogic.Drunken;
@@ -34,6 +32,17 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 	
 	/** The game. */
 	private Game game = new Game(2,"Rookie");
+	/** The btn up. */
+	private JButton btnUp = new JButton("up");
+	
+	/** The btn down. */
+	 private JButton btnDown = new JButton("down");
+	
+	/** The btn left. */
+	private JButton btnLeft = new JButton("left");
+	
+	/** The btn right. */
+    private	JButton btnRight = new JButton("right");
 	
 	/** The grid W. */
 	private int offsetW, offsetH, gridH, gridW;
@@ -49,7 +58,26 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 	 * @param height the height
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
+	public void checkState(char direction){
+		
+		
+		
+		if(getGame().getCurrentMap() instanceof Mapa1){
+			getGame().getCurrentMap().getGuard().enemyMove(getGame().getCurrentMap());
+			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), direction);
+		
+		
+		}else if( getGame().getCurrentMap() instanceof Mapa2){
+			getGame().getCurrentMap().getOrde().moveOrde(getGame().getCurrentMap());
+			getGame().getCurrentMap().getHero().commandMove(getGame().getCurrentMap(), direction);
+			
+
+			}
+		repaint();
+	}
+	
 	public GamePanel(int width, int height) throws IOException{
+		
 		
 		addMouseListener(this);
 		addMouseMotionListener(this);
@@ -59,7 +87,34 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		offsetW = Math.round(width / gridW);
 		offsetH = Math.round(height/gridH);
 		
+		btnLeft.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {checkState('a');requestFocusInWindow();
+			}
+		});
+		btnLeft.setEnabled(true);
+		btnLeft.setBounds(750, 150, 100, 50);
+		add(btnLeft);
 		
+		btnRight.setEnabled(true);
+		btnRight.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) { checkState('d'); requestFocusInWindow();}
+		});
+		btnRight.setBounds(850, 150, 100, 50);
+		add(btnRight);
+		
+		btnDown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {checkState('s');requestFocusInWindow();}
+		});
+		btnDown.setEnabled(true);
+		btnDown.setBounds(800, 200, 100, 50);
+		add(btnDown);
+		
+		btnUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {checkState('w');requestFocusInWindow();}
+		});
+		btnUp.setEnabled(true);
+		btnUp.setBounds(800, 100, 100, 50);
+		add(btnUp);
 		this.hero = Scalr.resize(ImageIO.read(new File("images/Anduin_wrynn_Cata.png")), offsetW);
 		this.floor = Scalr.resize(ImageIO.read(new File("images/floor.jpg")), Scalr.Mode.FIT_EXACT, offsetW);
 		this.wall = Scalr.resize(ImageIO.read(new File("images/images.jpg")), Scalr.Mode.FIT_EXACT, offsetW);
@@ -84,7 +139,7 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 	 */
 	//redraws the panel, only when requested by SWING
 	public void paintComponent(Graphics g){
-	//	super.paintComponent(g); //limpa fundo
+		super.paintComponent(g); //limpa fundo
 		
 		MapGame gamemap = getGame().getCurrentMap();
 	

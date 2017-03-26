@@ -51,17 +51,6 @@ public class GraphicalView{
 	/** The to add. */
 	private char toAdd;
 	
-	/** The btn up. */
-	private JButton btnUp = new JButton("up");
-	
-	/** The btn down. */
-	private JButton btnDown = new JButton("down");
-	
-	/** The btn left. */
-	private JButton btnLeft = new JButton("left");
-	
-	/** The btn right. */
-	private JButton btnRight = new JButton("right");
 	
 	/** The hero to press. */
 	private JButton heroToPress = new JButton();
@@ -119,24 +108,7 @@ public class GraphicalView{
 	 *
 	 * @param direction the direction
 	 */
-	public void checkState(char direction){
 	
-			
-				
-				if(panel.getGame().getCurrentMap() instanceof Mapa1){
-					panel.getGame().getCurrentMap().getGuard().enemyMove(panel.getGame().getCurrentMap());
-					panel.getGame().getCurrentMap().getHero().commandMove(panel.getGame().getCurrentMap(), direction);
-				
-				
-				}else if( panel.getGame().getCurrentMap() instanceof Mapa2){
-					panel.getGame().getCurrentMap().getOrde().moveOrde(panel.getGame().getCurrentMap());
-					panel.getGame().getCurrentMap().getHero().commandMove(panel.getGame().getCurrentMap(), direction);
-					
-
-					}
-				panel.repaint();
-			}
-			
 	
 
 	
@@ -243,34 +215,8 @@ public class GraphicalView{
 				 number = Integer.parseInt(JOptionPane.showInputDialog(infoNext, "Choose the number of Ogres.", "Number of Ogres?", JOptionPane.WARNING_MESSAGE));
 				}}
 				frame = new JFrame();
-				btnLeft.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {checkState('a');panel.requestFocusInWindow();
-					}
-				});
-				btnLeft.setEnabled(true);
-				btnLeft.setBounds(750, 150, 100, 50);
-				frame.getContentPane().add(btnLeft);
 				
-				btnRight.setEnabled(true);
-				btnRight.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) { checkState('d'); panel.requestFocusInWindow();}
-				});
-				btnRight.setBounds(850, 150, 100, 50);
-				frame.getContentPane().add(btnRight);
 				
-				btnDown.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {checkState('s');panel.requestFocusInWindow();}
-				});
-				btnDown.setEnabled(true);
-				btnDown.setBounds(800, 200, 100, 50);
-				frame.getContentPane().add(btnDown);
-				
-				btnUp.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {checkState('w');panel.requestFocusInWindow();}
-				});
-				btnUp.setEnabled(true);
-				btnUp.setBounds(800, 100, 100, 50);
-				frame.getContentPane().add(btnUp);
 				frame.setTitle("World of Warcraft : Legion");
 				frame.setBounds(100, 100, 450, 300);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -284,6 +230,7 @@ public class GraphicalView{
 					e1.printStackTrace();
 				}
 				panel.setBounds(0, 0, 1000,1000);
+				
 				if(map2 != null){
 					Orde orde= new Orde(0);
 					 Hero heroo= new Hero();
@@ -319,7 +266,9 @@ public class GraphicalView{
 					
 				}
 				else{panel.setGame(new Game(number, name));}
+				
 				frame.getContentPane().add(panel);
+				
 				System.out.println(panel.getGame().getMap2().printBoard(panel.getGame().getMap2().getHero(), (panel.getGame().getMap2().getOrde())));
 				panel.setFocusable(true);
 				panel.requestFocusInWindow();
