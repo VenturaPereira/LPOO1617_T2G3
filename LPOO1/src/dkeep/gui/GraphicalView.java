@@ -164,9 +164,10 @@ public class GraphicalView{
 				String name = (String)JOptionPane.showInputDialog(frame, "Choose the Guard", "What Guard?",JOptionPane.QUESTION_MESSAGE, null, guards, null);
 				JFrame infoNext  = new JFrame("info");
 				int number = 0;
-				while(number ==0&& number > 5 && clicked == false ){
+				if(clicked == false ){
+				while((number == 0 || number > 5)){
 				 number = Integer.parseInt(JOptionPane.showInputDialog(infoNext, "Choose the number of Ogres.", "Number of Ogres?", JOptionPane.WARNING_MESSAGE));
-				}
+				}}
 				frame = new JFrame();
 				frame.setTitle("World of Warcraft : Legion");
 				frame.setBounds(100, 100, 450, 300);
@@ -217,6 +218,7 @@ public class GraphicalView{
 				}
 				else{panel.setGame(new Game(number, name));}
 				frame.getContentPane().add(panel);
+				System.out.println(panel.getGame().getMap2().printBoard(panel.getGame().getMap2().getHero(), (panel.getGame().getMap2().getOrde())));
 				panel.setFocusable(true);
 				panel.requestFocusInWindow();
 				initialFrame.setVisible(false);

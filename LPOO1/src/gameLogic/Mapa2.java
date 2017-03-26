@@ -69,7 +69,7 @@ public class Mapa2 extends MapGame {
 		for (int i = 0; i < nextLevelBoard.length; i++) {
 		    for (int j = 0; j < nextLevelBoard[i].length; j++) {
 		    	if(i == hx && j == hy){
-		    		if(hx == 1 && hy == 7 || hero.getPickedKey())
+		    		if(hx == 1 && hy == 7 || hero.getPickedKey() || ((nextLevelBoard[i][j] == 'k') && hx == i && j == hy))
 		    		{pickKey() ;mapa = mapa + "K|"; j++;}
 		    		else
 		    		{mapa = mapa + "A|"; j++;}
