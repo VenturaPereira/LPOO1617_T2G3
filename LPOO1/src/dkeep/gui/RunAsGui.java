@@ -26,20 +26,49 @@ import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import java.awt.Font;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RunAsGui.
+ */
 public class RunAsGui {
     
+	/** The frame. */
 	private JFrame frame;
+	
+	/** The leveling. */
 	private Levels leveling;
+	
+	/** The lost. */
 	public boolean lost = false;
+	
+	/** The btn new game. */
 	JButton btnNewGame = new JButton("New Game");
+	
+	/** The btn right. */
 	JButton btnRight = new JButton("Right");
+	
+	/** The lbl press new game. */
 	JLabel lblPressNewGame = new JLabel("Press New Game to play");
+	
+	/** The btn left. */
 	JButton btnLeft = new JButton("Left");
+	
+	/** The lbl ent. */
 	JLabel lblEnt = new JLabel("Number Of Ogres");
+	
+	/** The text pane. */
 	JTextPane textPane = new JTextPane();
+	
+	/** The btn exit. */
 	JButton btnExit = new JButton("Exit");
+	
+	/** The btn down. */
 	JButton btnDown = new JButton("Down");
+	
+	/** The btn up. */
 	JButton btnUp = new JButton("Up");
+	
+	/** The text area. */
 	JTextArea textArea = new JTextArea();
 
 
@@ -51,6 +80,8 @@ public class RunAsGui {
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -67,6 +98,11 @@ public class RunAsGui {
 	
 	
 	
+	/**
+	 * Check state.
+	 *
+	 * @param direction the direction
+	 */
 	public void checkState(char direction){
 		for(int i =0; i < leveling.getLevels().size(); i++){
 			if(leveling.getLevels().get(i).getRunning()){
@@ -238,10 +274,20 @@ public class RunAsGui {
 	}
 
 	
+	/**
+	 * Gets the maps.
+	 *
+	 * @return the maps
+	 */
 	public Levels getMaps() {
 		return leveling;
 	}
 
+	/**
+	 * Sets the maps.
+	 *
+	 * @param maps the new maps
+	 */
 	public void setMaps(Levels maps) {
 		this.leveling = maps;
 	}

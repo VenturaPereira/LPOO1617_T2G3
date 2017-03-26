@@ -2,14 +2,24 @@ package gameLogic;
 
 import java.util.Random;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Suspicious.
+ */
 public class Suspicious extends Guard{
 
+	/**
+	 * Instantiates a new suspicious.
+	 */
 	public Suspicious(){
 		setI(super.getI());
 		setJ(super.getJ());
 		setSleeping(false);
 	}
 
+	/* (non-Javadoc)
+	 * @see gameLogic.Guard#enemyMove(gameLogic.MapGame)
+	 */
 	@Override
 	public void enemyMove(MapGame map) {
 		Random rnd = new Random();

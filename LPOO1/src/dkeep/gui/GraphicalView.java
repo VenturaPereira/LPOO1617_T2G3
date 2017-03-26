@@ -30,27 +30,67 @@ import gameLogic.Ogre;
 import gameLogic.Orde;
 import gameLogic.WinGame;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GraphicalView.
+ */
 public class GraphicalView{
 
+	/** The edit level. */
 	private JFrame frame, initialFrame, editLevel;
+	
+	/** The panel. */
 	private GamePanel panel;
+	
+	/** The edit panel. */
 	private EditGame editPanel = new EditGame(500,500);
+	
+	/** The door. */
 	private ImageIcon hero, wall, key, ogre, door;
+	
+	/** The to add. */
 	private char toAdd;
+	
+	/** The btn up. */
 	private JButton btnUp = new JButton("up");
+	
+	/** The btn down. */
 	private JButton btnDown = new JButton("down");
+	
+	/** The btn left. */
 	private JButton btnLeft = new JButton("left");
+	
+	/** The btn right. */
 	private JButton btnRight = new JButton("right");
+	
+	/** The hero to press. */
 	private JButton heroToPress = new JButton();
+	
+	/** The key to press. */
 	private JButton keyToPress = new JButton();
+    
+    /** The ogre to press. */
     private JButton ogreToPress = new JButton();
+    
+    /** The door to press. */
     private JButton doorToPress = new JButton();
+    
+    /** The wall to press. */
     private JButton wallToPress = new JButton();
+    
+    /** The saving. */
     private JButton saving = new JButton("Save");
+    
+    /** The map 2. */
     private Mapa2 map2 = null;
+    
+    /** The clicked. */
     private boolean clicked = false;
+	
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -67,7 +107,8 @@ public class GraphicalView{
 
 	/**
 	 * Create the application.
-	 * @throws IOException 
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	public GraphicalView() throws IOException {
 		initialize();
@@ -75,7 +116,8 @@ public class GraphicalView{
 
 	/**
 	 * Initialize the contents of the frame.
-	 * @throws IOException 
+	 *
+	 * @param direction the direction
 	 */
 	public void checkState(char direction){
 	
@@ -98,6 +140,11 @@ public class GraphicalView{
 	
 
 	
+	/**
+	 * Initialize.
+	 *
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void initialize() throws IOException {
 	
 		heroToPress.addActionListener(new ActionListener() {

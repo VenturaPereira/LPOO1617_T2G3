@@ -1,7 +1,14 @@
 package gameLogic;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Rookie.
+ */
 public class Rookie extends Guard{
 
+	/**
+	 * Instantiates a new rookie.
+	 */
 	public Rookie() {
 		setI(super.getI());
 		setJ(super.getJ());
@@ -9,6 +16,9 @@ public class Rookie extends Guard{
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see gameLogic.Guard#enemyMove(gameLogic.MapGame)
+	 */
 	@Override
 	public void enemyMove(MapGame map) {
        int index = getIndex();

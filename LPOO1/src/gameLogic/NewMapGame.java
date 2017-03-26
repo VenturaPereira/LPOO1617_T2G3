@@ -2,16 +2,37 @@ package gameLogic;
 
 import java.util.Vector;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewMapGame.
+ */
 public class NewMapGame extends MapGame {
 
+	/** The map. */
 	private char[][] map;
+	
+	/** The orde. */
 	private Orde orde;
+	
+	/** The hero. */
 	private Hero hero;
+	
+	/** The guard. */
 	private Enemy guard;
+	
+	/** The has ogre. */
 	private boolean hasOgre = false;
+	
+	/** The has guard. */
 	private boolean hasGuard = false;
 	
 	
+	/**
+	 * Instantiates a new new map game.
+	 *
+	 * @param map the map
+	 * @param level the level
+	 */
 	public NewMapGame(char[][] map, Levels level){
 		this.setMap(new char[map.length][map[0].length]);
 		for(int i = 0; i < map.length; i++){
@@ -40,6 +61,9 @@ public class NewMapGame extends MapGame {
 		}this.levels=level; this.levels.addLevel(this);
 	}
 	
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#setDoors()
+	 */
 	public void setDoors(){
 		for(int i =0; i < getMap().length;i++){
 			for(int j=0; j < getMap()[i].length; j++){
@@ -50,6 +74,9 @@ public class NewMapGame extends MapGame {
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#printBoard(gameLogic.Hero, gameLogic.Enemy)
+	 */
 	@Override
 	public String printBoard(Hero hero, Enemy guard) {
 	  int hi = this.getHero().getHi();
@@ -87,6 +114,9 @@ public class NewMapGame extends MapGame {
 		
 
 
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#getMap()
+	 */
 	@Override
 	public char[][] getMap() {
 		return map;
@@ -94,38 +124,73 @@ public class NewMapGame extends MapGame {
 
 
 
+	/**
+	 * Sets the map.
+	 *
+	 * @param map the new map
+	 */
 	public void setMap(char[][] map) {
 		this.map = map;
 	}
 
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#getOrde()
+	 */
 	public Orde getOrde() {
 		return orde;
 	}
 	
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#setOrde(gameLogic.Orde)
+	 */
 	public void setOrde(Orde orde) {this.orde = orde;}
 	
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#getHero()
+	 */
 	public Hero getHero() {return hero;}
 
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#setHero(gameLogic.Hero)
+	 */
 	public void setHero(Hero hero) {this.hero = hero;}
 
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#getGuard()
+	 */
 	public Enemy getGuard() {return guard;}
 
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#setGuard(gameLogic.Enemy)
+	 */
 	public void setGuard(Enemy guard) {
 		this.guard = guard;
 	}
 
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#isHasOgre()
+	 */
 	public boolean isHasOgre() {
 		return hasOgre;
 	}
 
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#setHasOgre(boolean)
+	 */
 	public void setHasOgre(boolean hasOgre) {
 		this.hasOgre = hasOgre;
 	}
 
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#isHasGuard()
+	 */
 	public boolean isHasGuard() {
 		return hasGuard;
 	}
 
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#setHasGuard(boolean)
+	 */
 	public void setHasGuard(boolean hasGuard) {
 		this.hasGuard = hasGuard;
 	}

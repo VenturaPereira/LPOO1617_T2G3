@@ -1,8 +1,13 @@
 package gameLogic;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Mapa1.
+ */
 public class Mapa1 extends MapGame {
 	
 	
+	/** The board. */
 	private char board[][] = {{WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL, WALL}, 
 			{WALL, BLANK, BLANK, BLANK,BLANK, BLANK, WALL,BLANK, BLANK,WALL},
 			{WALL, WALL, WALL, BLANK, WALL, WALL, WALL, BLANK, BLANK, WALL},
@@ -15,6 +20,11 @@ public class Mapa1 extends MapGame {
 			{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}};
 	
 	
+	/**
+	 * Instantiates a new mapa 1.
+	 *
+	 * @param level the level
+	 */
 	public Mapa1(Levels level){	
 		this.levels=level;
 		this.levels.addLevel(this);
@@ -26,14 +36,24 @@ public class Mapa1 extends MapGame {
 		this.setGuard(guard);
 	}
 	
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#getMap()
+	 */
 	public char[][] getMap(){
 		return board;
 	}
+	
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#setDoors()
+	 */
 	public void setDoors(){
 		board[5][0]= STAIRS;
 		board[6][0]=STAIRS;
 	}
 	
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#printBoard(gameLogic.Hero, gameLogic.Enemy)
+	 */
 	public String printBoard(Hero hero, Enemy guard){
 	
 	String mapa = "";

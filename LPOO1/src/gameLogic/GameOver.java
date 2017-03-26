@@ -1,12 +1,31 @@
 package gameLogic;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GameOver.
+ */
 public class GameOver {
+	
+	/** The hero. */
 	private Hero hero;
+	
+	/** The guard. */
 	private Enemy guard;
+	
+	/** The orde. */
 	private Orde orde;
+	
+	/** The map. */
 	private MapGame map;
 
 	
+	/**
+	 * Instantiates a new game over.
+	 *
+	 * @param hero the hero
+	 * @param guard the guard
+	 * @param map the map
+	 */
 	public GameOver(Hero hero, Enemy guard, MapGame map){
 		this.hero=hero;
 		this.guard=guard;
@@ -14,6 +33,13 @@ public class GameOver {
 		
 	}
 	
+	/**
+	 * Instantiates a new game over.
+	 *
+	 * @param hero the hero
+	 * @param orde the orde
+	 * @param map the map
+	 */
 	public GameOver(Hero hero, Orde orde, MapGame map)
 	{
 		this.hero = hero;
@@ -22,6 +48,12 @@ public class GameOver {
 	}
 	
 	
+	/**
+	 * Gets the game over.
+	 *
+	 * @param map the map
+	 * @return the game over
+	 */
 	public boolean getGameOver(MapGame map) 
 	{
 		if(map instanceof Mapa1)

@@ -22,14 +22,33 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GamePanel.
+ */
 public class GamePanel extends JPanel  implements MouseListener, MouseMotionListener, KeyListener{
+   
+   /** The y 2. */
    //coordenadas do "bounding rectangle" do eclipse
 	private int x1 = 0, y1 = 0, x2 =0, y2=0;
+	
+	/** The game. */
 	private Game game = new Game(2,"Rookie");
+	
+	/** The grid W. */
 	private int offsetW, offsetH, gridH, gridW;
+	
+	/** The not pulled lever. */
 	private BufferedImage win, stunnedOgre, suspicious, defeat, pickedHero, key, weapon, guard, hero, sleepyGuard, ogre, wall ,floor, door, openDoor, pulledLever, notPulledLever;
 	//construtor que adiciona listeners para o rato e teclado
 	
+	/**
+	 * Instantiates a new game panel.
+	 *
+	 * @param width the width
+	 * @param height the height
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public GamePanel(int width, int height) throws IOException{
 		
 		addMouseListener(this);
@@ -60,6 +79,9 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		this.win = Scalr.resize(ImageIO.read(new File("images/win1.png")), Scalr.Mode.FIT_TO_WIDTH, 600, 600);
 	}
 	
+	/* (non-Javadoc)
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+	 */
 	//redraws the panel, only when requested by SWING
 	public void paintComponent(Graphics g){
 	//	super.paintComponent(g); //limpa fundo
@@ -181,6 +203,9 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 
@@ -226,12 +251,21 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		repaint();
 		}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
+	 */
 	@Override
 	public void keyReleased(KeyEvent e) {}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+	 */
 	@Override
 	public void keyTyped(KeyEvent e) {}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseMotionListener#mouseDragged(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -241,18 +275,33 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseMotionListener#mouseMoved(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseMoved(MouseEvent arg0) {}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent arg0) {}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -261,16 +310,29 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 		repaint();
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Gets the game.
+	 *
+	 * @return the game
+	 */
 	public Game getGame() {
 		return game;
 	}
 
+	/**
+	 * Sets the game.
+	 *
+	 * @param game the new game
+	 */
 	public void setGame(Game game) {
 		this.game = game;
 	}

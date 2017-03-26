@@ -1,15 +1,28 @@
 package gameLogic;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Stun.
+ */
 public class Stun {
 	
 	
+	/** The map. */
 	private MapGame map;
 	
+	/**
+	 * Instantiates a new stun.
+	 *
+	 * @param map the map
+	 */
 	public Stun(MapGame map)
 	{
 		this.map = map;
 	}
 	
+	/**
+	 * Stun.
+	 */
 	public void stun()
 	{
 		for(int k = 0; k < this.map.getOrde().getOrde().size(); k++)

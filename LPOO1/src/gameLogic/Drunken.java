@@ -2,9 +2,16 @@ package gameLogic;
 
 import java.util.Random;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Drunken.
+ */
 public class Drunken extends Guard {
    
 	
+	/**
+	 * Instantiates a new drunken.
+	 */
 	public Drunken(){
 		setI(super.getI());
 		setJ(super.getJ());
@@ -12,6 +19,9 @@ public class Drunken extends Guard {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see gameLogic.Guard#enemyMove(gameLogic.MapGame)
+	 */
 	@Override
 	public void enemyMove(MapGame map) {
 		Random rnd = new Random();

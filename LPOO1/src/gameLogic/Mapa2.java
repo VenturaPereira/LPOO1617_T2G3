@@ -1,8 +1,13 @@
 package gameLogic;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Mapa2.
+ */
 public class Mapa2 extends MapGame {
 	
-	 private char nextLevelBoard[][] = {{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}, 
+	 /** The next level board. */
+ 	private char nextLevelBoard[][] = {{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}, 
 			{DOOR, BLANK, BLANK, BLANK, BLANK,BLANK,BLANK,KEY, WALL},
 			{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
 			{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
@@ -12,7 +17,12 @@ public class Mapa2 extends MapGame {
 			{WALL, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, WALL},
 			{WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL,WALL}};
 	
-	 public Mapa2(Levels level){
+	 /**
+ 	 * Instantiates a new mapa 2.
+ 	 *
+ 	 * @param level the level
+ 	 */
+ 	public Mapa2(Levels level){
 		 this.levels= level;
 		 this.levels.addLevel(this);
 		 Hero hero = new Hero();
@@ -22,7 +32,12 @@ public class Mapa2 extends MapGame {
 		
 	 }
 	 
-	 public void setMap(char[][] newBoard){
+	 /**
+ 	 * Sets the map.
+ 	 *
+ 	 * @param newBoard the new map
+ 	 */
+ 	public void setMap(char[][] newBoard){
 		 for(int i = 0; i < newBoard.length; i++){
 			 for(int j= 0; j < newBoard[0].length;j++){
 				 if(i == 0){
@@ -42,15 +57,24 @@ public class Mapa2 extends MapGame {
 		 this.nextLevelBoard = newBoard;
 		 }
 	
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#getMap()
+	 */
 	public char[][] getMap(){
 		return nextLevelBoard;
 	}
 	
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#getSizeI()
+	 */
 	public int getSizeI()
 	{
 		return nextLevelBoard.length;
 	}
 	
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#getSizeJ()
+	 */
 	public int getSizeJ()
 	{
 		return nextLevelBoard[0].length;
@@ -58,6 +82,9 @@ public class Mapa2 extends MapGame {
 	
 	
 	
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#printBoard(gameLogic.Hero, gameLogic.Enemy)
+	 */
 	@Override
 	public String printBoard(Hero hero, Enemy ord){
 		String mapa= "";
@@ -116,6 +143,9 @@ public class Mapa2 extends MapGame {
 
 	
 
+	/* (non-Javadoc)
+	 * @see gameLogic.MapGame#setDoors()
+	 */
 	@Override
 	public void setDoors() {
 		nextLevelBoard[1][0]=STAIRS;

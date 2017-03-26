@@ -21,13 +21,20 @@ import gameLogic.Suspicious;
 import gameLogic.WinGame;
 import gameLogic.Game;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OtherTests.
+ */
 public class OtherTests {
 	
 	
+	/** The map 1. */
 	String map1 = "X|X|X|X|X|X|X|X|X|X| \nX|H| | | | |X| |R|X| \nX|X|X| |X|X|X| | |X| \nX| |I| |I| |X| | |X| \nX|X|X| |X|X|X| | |X| \nI| | | | | | | | |X| \nI| | | | | | | | |X| \nX|X|X| |X|X|X|X| |X| \nX| |I| |I| |X|K| |X| \nX|X|X|X|X|X|X|X|X|X| \n";
 	
+	/** The map 2. */
 	String map2 = "X|X|X|X|X|X|X|X|X|\nI| | | |0|*| |k|X|\nX| | | | | | | |X|\nX| | | | | | | |X|\nX| | | | | | | |X|\nX| | | | | | | |X|\nX| | | | | | | |X|\nX|A| | | | | | |X|\nX|X|X|X|X|X|X|X|X|\n";
 	
+	/** The next level board. */
 	char nextLevelBoard[][] = {{'X','X','X','X','X','X','X','X','X'}, 
 				{'I', ' ', ' ', ' ', ' ',' ',' ','K', 'X'},
 				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
@@ -38,14 +45,19 @@ public class OtherTests {
 				{'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 				{'X','X','X','X','X','X','X','X','X'}};
 	
+	/** The keepmap. */
 	char [][] keepmap = {{'X','X','X','X','X'},
 			 {'X','H',' ','0','X'},
 			 {'I',' ',' ',' ','X'},
 			 {'I','K',' ',' ','X'},
 			 {'X','X','X','X','X'}};
 	
+	/** The map 3. */
 	String map3 = "X|X|X|X|X|\nI| | | |X|\nI|K| | |X|\nX|X|X|X|X|";
 	
+	/**
+	 * Test hero vs wall.
+	 */
 	@Test
 	public void testHeroVsWall(){
 		Levels leveling = new Levels();
@@ -56,6 +68,9 @@ public class OtherTests {
 		
 	}
 	
+	/**
+	 * Guard moves.
+	 */
 	@Test
 	public void guardMoves(){
 		Levels leveling = new Levels();
@@ -65,6 +80,9 @@ public class OtherTests {
 		assertEquals(1, guard.getI());
 	}
 	
+	/**
+	 * New game.
+	 */
 	@Test
 	public void newGame()
 	{
@@ -83,6 +101,9 @@ public class OtherTests {
 	}
 	
 	
+	/**
+	 * Prints the map 1.
+	 */
 	@Test
 	public void printMap1()
 	{
@@ -97,6 +118,9 @@ public class OtherTests {
 		assertEquals(map.printBoard(hero, guard),map1);
 	}
 	
+	/**
+	 * Hero gets caught by drunken.
+	 */
 	@Test
 	public void heroGetsCaughtByDrunken()
 	{
@@ -114,6 +138,44 @@ public class OtherTests {
 		assertFalse(gameOver.getGameOver(map));
 	}
 	
+	/**
+	 * Suspicious moves.
+	 */
+	@Test
+	public void suspiciousMoves()
+	{
+		Levels leveling = new Levels();
+		Mapa1 map = new Mapa1(leveling);
+		Enemy guard = new Suspicious();
+		map.setGuard(guard);
+		GameOver gameOver = new GameOver(map.getHero(), guard, map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		
+		
+		assertFalse(gameOver.getGameOver(map));
+		
+	}
+	
+	/**
+	 * Hero gets caught.
+	 */
 	@Test
 	public void heroGetsCaught()
 	{
@@ -140,6 +202,9 @@ public class OtherTests {
 		assertTrue(gameOver.getGameOver(map));
 	}
 	
+	/**
+	 * Fails to leave.
+	 */
 	@Test
 	public void failsToLeave(){
 		Levels leveling = new Levels();
@@ -160,6 +225,9 @@ public class OtherTests {
 		assertEquals(1, map.getHero().getHj());	
 	}
 	
+	/**
+	 * Arrives door.
+	 */
 	@Test
 	public void arrivesDoor() {
 		Levels leveling = new Levels();
@@ -197,6 +265,9 @@ public class OtherTests {
 	
 	}
 	
+	/**
+	 * Wins game.
+	 */
 	@Test
 	public void winsGame()
 	{
@@ -233,6 +304,9 @@ public class OtherTests {
 		assertTrue(winGame.getWin());
 	}
 	
+	/**
+	 * Enters keep.
+	 */
 	@Test
 	public void entersKeep()
 	{
@@ -269,6 +343,9 @@ public class OtherTests {
 		assertTrue(map2.getRunning());
 	}
 	
+	/**
+	 * Prints the map 2.
+	 */
 	@Test
 	public void printMap2()
 	{
@@ -281,6 +358,9 @@ public class OtherTests {
 		
 	}
 	
+	/**
+	 * Fails to leave 2.
+	 */
 	@Test
 	public void failsToLeave2()
 	{
@@ -298,6 +378,9 @@ public class OtherTests {
 		assertEquals(1, map.getHero().getHj());	
 	}
 	
+	/**
+	 * Arrives door 2.
+	 */
 	@Test
 	public void arrivesDoor2()
 	{
@@ -322,7 +405,7 @@ public class OtherTests {
 		map.getHero().commandMove(map, 'a');
 		map.getHero().commandMove(map, 'a');
 		map.getHero().commandMove(map, 'a');
-		assertEquals(map.getMap()[1][0], 'I');
+		assertEquals(map.getMap()[1][0], 'S');
 		
 		
 	}
@@ -330,6 +413,9 @@ public class OtherTests {
 
 	
 
+	/**
+	 * Hero is killed.
+	 */
 	@Test
 	public void heroIsKilled()
 	{
@@ -349,6 +435,9 @@ public class OtherTests {
 		assertTrue(gameOver.getGameOver(map));
 	}
 	
+	/**
+	 * Sets the mapa 2.
+	 */
 	@Test
 	public void setMapa2()
 	{
@@ -359,6 +448,9 @@ public class OtherTests {
 		assertTrue(lmao);
 	}
 	
+	/**
+	 * Prints the new map game.
+	 */
 	@Test
 	public void printNewMapGame()
 	{
@@ -369,6 +461,11 @@ public class OtherTests {
 		
 	}
 	
+	/**
+	 * Gets the mapa 2 sizes.
+	 *
+	 * @return the mapa 2 sizes
+	 */
 	@Test
 	public void getMapa2Sizes()
 	{
@@ -378,8 +475,44 @@ public class OtherTests {
 		assertEquals(map.getSizeJ(), 9);
 	}
 	
+	/**
+	 * Ogre moves A lot.
+	 */
+	@Test
+	public void ogreMovesALot()
+	{
+		Levels leveling = new Levels();
+		Mapa2 map = new Mapa2(leveling);
+		Orde orde = new Orde(1);
+		map.setOrde(orde);
+		GameOver gameOver = new GameOver(map.getHero(), map.getOrde(), map);
+		
+		map.getOrde().moveOrde(map);
+		map.getOrde().moveOrde(map);
+		map.getOrde().moveOrde(map);
+		map.getOrde().moveOrde(map);
+		
+		assertFalse(gameOver.getGameOver(map));
+	}
+	
+	/**
+	 * Picks key.
+	 */
+	@Test
+	public void picksKey()
+	{
+		Levels leveling = new Levels();
+		Mapa2 map = new Mapa2(leveling);
+		map.pickKey();
+		assertTrue(map.getHero().getPickedKey());
+		assertEquals(map.getMap()[1][7], ' ');
+	}
 	
 	
+	
+	/**
+	 * Sets the A movement.
+	 */
 	@Test
 	public void setAMovement(){
 		Rookie rook = new Rookie();

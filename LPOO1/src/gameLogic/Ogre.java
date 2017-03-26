@@ -2,12 +2,27 @@ package gameLogic;
 
 import java.util.Random;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Ogre.
+ */
 public class Ogre extends Enemy {
+	
+	/** The w. */
 	WeaponMoveCheck w = new WeaponMoveCheck(this);
+	
+	/** The weapon I. */
 	private int weaponI;
+	
+	/** The weapon J. */
 	private int weaponJ;
+	
+	/** The stunned. */
 	private int stunned;
 	
+	/**
+	 * Instantiates a new ogre.
+	 */
 	public Ogre()
 	{
 		setI(1);
@@ -17,22 +32,47 @@ public class Ogre extends Enemy {
 		this.stunned = 0;
 	}
 
+	/**
+	 * Sets the weapon I.
+	 *
+	 * @param i the new weapon I
+	 */
 	public void setWeaponI(int i ){
 		this.weaponI = i;
 	}
+	
+	/**
+	 * Sets the weapon J.
+	 *
+	 * @param j the new weapon J
+	 */
 	public void setWeaponJ(int j ){
 		this.weaponJ = j;
 	}
+	
+	/**
+	 * Gets the weapon I.
+	 *
+	 * @return the weapon I
+	 */
 	public int getWeaponI()
 	{
 		return this.weaponI;
 	}
 	
+	/**
+	 * Gets the weapon J.
+	 *
+	 * @return the weapon J
+	 */
 	public int getWeaponJ()
 	{
 		return this.weaponJ;
 	}
 	
+	/* (non-Javadoc)
+	 * @see gameLogic.Enemy#enemyMove(gameLogic.MapGame)
+	 */
 	public void enemyMove(MapGame map){
 		if(stunned > 0)
 		{stun(stunned-1);return;}
@@ -63,12 +103,23 @@ public class Ogre extends Enemy {
 		}
 	}
 	
+	/**
+	 * Aux.
+	 *
+	 * @param i the i
+	 * @param j the j
+	 */
 	public void aux(int i, int j)
 	{
 		this.weaponI = getI()+i;
 		this.weaponJ = getJ()+j;
 	}
 	
+	/**
+	 * Ogre attack.
+	 *
+	 * @param map the map
+	 */
 	public void ogreAttack(MapGame map)
 	{
 		if(stunned > 0){stun(stunned-1);return;}
@@ -91,11 +142,21 @@ public class Ogre extends Enemy {
 		}
 	}
 	
+	/**
+	 * Gets the stunned.
+	 *
+	 * @return the stunned
+	 */
 	public int getStunned()
 	{
 		return this.stunned;
 	}
 	
+	/**
+	 * Stun.
+	 *
+	 * @param i the i
+	 */
 	public void stun(int i)
 	{
 		this.stunned = i;
