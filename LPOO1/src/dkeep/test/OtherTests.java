@@ -113,6 +113,37 @@ public class OtherTests {
 
 		assertFalse(gameOver.getGameOver(map));
 	}
+	@Test
+	public void suspiciousMoves()
+	{
+		Levels leveling = new Levels();
+		Mapa1 map = new Mapa1(leveling);
+		Enemy guard = new Suspicious();
+		map.setGuard(guard);
+		GameOver gameOver = new GameOver(map.getHero(), guard, map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		map.getGuard().enemyMove(map);
+		
+		
+		assertFalse(gameOver.getGameOver(map));
+		
+	}
 	
 	@Test
 	public void heroGetsCaught()
@@ -376,6 +407,29 @@ public class OtherTests {
 		Mapa2 map = new Mapa2(leveling);
 		assertEquals(map.getSizeI(), 9);
 		assertEquals(map.getSizeJ(), 9);
+	}
+	
+	@Test
+	public void ogreMovesALot()
+	{
+		Levels leveling = new Levels();
+		Mapa2 map = new Mapa2(leveling);
+		Orde orde = new Orde(1);
+		map.setOrde(orde);
+		GameOver gameOver = new GameOver(map.getHero(), map.getOrde(), map);
+		
+		map.getOrde().moveOrde(map);
+		map.getOrde().moveOrde(map);
+		map.getOrde().moveOrde(map);
+		map.getOrde().moveOrde(map);
+		
+		assertFalse(gameOver.getGameOver(map));
+	}
+	
+	@Test
+	public void picksKey()
+	{
+		
 	}
 	
 	
