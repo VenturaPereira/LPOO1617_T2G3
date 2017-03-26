@@ -20,6 +20,10 @@ public abstract class Character {
 					}
 				  return true;}
 		} else if(map instanceof Mapa2){
+			if(map.getMap()[di][dj] == 'k'){
+				map.pickKey();
+				return true;
+			}
 			if(map.getMap()[di][dj] == 'X'){
 				return false;
 			}else if(map.getMap()[di][dj] == 'I'){

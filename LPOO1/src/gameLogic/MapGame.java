@@ -62,7 +62,7 @@ public abstract class MapGame {
 		
 		for (int i = 0; i < getMap().length; i++) {
 		    for (int j = 0; j < getMap().length; j++) {
-		    	if(getMap()[i][j] == KEY)
+		    	if(getMap()[i][j] == KEY || getMap()[i][j] == 'k')
 		    	{
 		    		getMap()[i][j] = BLANK;
 		    	}

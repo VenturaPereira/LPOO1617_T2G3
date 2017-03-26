@@ -24,9 +24,11 @@ import org.imgscalr.Scalr;
 import gameLogic.Game;
 import gameLogic.GameOver;
 import gameLogic.Hero;
+import gameLogic.Mapa1;
 import gameLogic.Mapa2;
 import gameLogic.Ogre;
 import gameLogic.Orde;
+import gameLogic.WinGame;
 
 public class GraphicalView{
 
@@ -35,6 +37,10 @@ public class GraphicalView{
 	private EditGame editPanel = new EditGame(500,500);
 	private ImageIcon hero, wall, key, ogre, door;
 	private char toAdd;
+	private JButton btnUp = new JButton("up");
+	private JButton btnDown = new JButton("down");
+	private JButton btnLeft = new JButton("left");
+	private JButton btnRight = new JButton("right");
 	private JButton heroToPress = new JButton();
 	private JButton keyToPress = new JButton();
     private JButton ogreToPress = new JButton();
@@ -71,8 +77,29 @@ public class GraphicalView{
 	 * Initialize the contents of the frame.
 	 * @throws IOException 
 	 */
+	public void checkState(char direction){
+	
+			
+				
+				if(panel.getGame().getCurrentMap() instanceof Mapa1){
+					panel.getGame().getCurrentMap().getGuard().enemyMove(panel.getGame().getCurrentMap());
+					panel.getGame().getCurrentMap().getHero().commandMove(panel.getGame().getCurrentMap(), direction);
+				
+				
+				}else if( panel.getGame().getCurrentMap() instanceof Mapa2){
+					panel.getGame().getCurrentMap().getOrde().moveOrde(panel.getGame().getCurrentMap());
+					panel.getGame().getCurrentMap().getHero().commandMove(panel.getGame().getCurrentMap(), direction);
+					
+
+					}
+				panel.repaint();
+			}
+			
+	
+
+	
 	private void initialize() throws IOException {
-		
+	
 		heroToPress.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){toAdd= 'H';editPanel.setToAdd(toAdd);}});
 		keyToPress.addActionListener(new ActionListener() {
@@ -97,7 +124,7 @@ public class GraphicalView{
 		
 		edit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				final String[] mapSizes = {"5", "6", "7" ,"8" ,"9" , "10" , "11" , "12"};
+				final String[] mapSizes = {"5", "6", "7" ,"8" ,"9" , "10"};
 				int number = Integer.parseInt((String)(JOptionPane.showInputDialog(editLevel, "Choose the squared map sizes", "Size?", JOptionPane.QUESTION_MESSAGE, null ,mapSizes, null)));
                 char newmap[][] = new char[number+1][number+1];
                 editPanel.getGame().getMap2().setMap(newmap);
@@ -106,7 +133,7 @@ public class GraphicalView{
 				editLevel.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				editLevel.setVisible(true);
 				editLevel.getContentPane().setLayout(null);
-				editLevel.setBounds(300, 25, 700, 525);
+				editLevel.setBounds(300, 25, 1000, 1000);
 				editLevel.setResizable(false);
 				hero = new ImageIcon("images/Anduin_wrynn_Cata.png");
 				hero = new ImageIcon(hero.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
@@ -120,39 +147,39 @@ public class GraphicalView{
 				door = new ImageIcon(door.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
 			
 					heroToPress.setIcon(hero);
-					heroToPress.setBounds(500,0 , 100, 100);
+					heroToPress.setBounds(800,0 , 100, 100);
 					heroToPress.setContentAreaFilled(false);
 					heroToPress.setFocusable(false);
 					editLevel.add(heroToPress);
 					
 					keyToPress.setIcon(key);
-					keyToPress.setBounds(600, 0 , 100, 100);
+					keyToPress.setBounds(900, 0 , 100, 100);
 					keyToPress.setContentAreaFilled(false);
 					keyToPress.setFocusable(false);	
 					editLevel.add(keyToPress);
 					
 					ogreToPress.setIcon(ogre);
-					ogreToPress.setBounds(500,100, 100, 100);
+					ogreToPress.setBounds(800,100, 100, 100);
 					ogreToPress.setContentAreaFilled(false);
 					ogreToPress.setFocusable(false);
 					editLevel.add(ogreToPress);
 					
 					doorToPress.setIcon(door);
-					doorToPress.setBounds(600,100, 100, 100);
+					doorToPress.setBounds(900,100, 100, 100);
 					doorToPress.setContentAreaFilled(false);
 					doorToPress.setFocusable(false);
 					editLevel.add(doorToPress);
 					
 					wallToPress.setIcon(wall);
-					wallToPress.setBounds(500,200, 100, 100);
+					wallToPress.setBounds(800,200, 100, 100);
 					wallToPress.setContentAreaFilled(false);
 					wallToPress.setFocusable(false);
 					editLevel.add(wallToPress);
 					
-					saving.setBounds(500, 350, 100,50);
+					saving.setBounds(900, 350, 100,50);
 	
 					editLevel.add(saving);
-				editPanel.setBounds(0, 0, 700,700);
+				editPanel.setBounds(0, 0, 1000,1000);
 				editLevel.getContentPane().add(editPanel);
 				
 				
@@ -164,23 +191,52 @@ public class GraphicalView{
 				String name = (String)JOptionPane.showInputDialog(frame, "Choose the Guard", "What Guard?",JOptionPane.QUESTION_MESSAGE, null, guards, null);
 				JFrame infoNext  = new JFrame("info");
 				int number = 0;
-				while(number ==0&& number > 5 && clicked == false ){
+				if(clicked == false ){
+				while((number == 0 || number > 5)){
 				 number = Integer.parseInt(JOptionPane.showInputDialog(infoNext, "Choose the number of Ogres.", "Number of Ogres?", JOptionPane.WARNING_MESSAGE));
-				}
+				}}
 				frame = new JFrame();
+				btnLeft.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {checkState('a');
+					}
+				});
+				btnLeft.setEnabled(true);
+				btnLeft.setBounds(750, 150, 100, 50);
+				frame.getContentPane().add(btnLeft);
+				
+				btnRight.setEnabled(true);
+				btnRight.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {checkState('d');}
+				});
+				btnRight.setBounds(850, 150, 100, 50);
+				frame.getContentPane().add(btnRight);
+				
+				btnDown.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {checkState('s');}
+				});
+				btnDown.setEnabled(true);
+				btnDown.setBounds(800, 200, 100, 50);
+				frame.getContentPane().add(btnDown);
+				
+				btnUp.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {checkState('w');}
+				});
+				btnUp.setEnabled(true);
+				btnUp.setBounds(800, 100, 100, 50);
+				frame.getContentPane().add(btnUp);
 				frame.setTitle("World of Warcraft : Legion");
 				frame.setBounds(100, 100, 450, 300);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(false);
 				frame.getContentPane().setLayout(null);
-				frame.setBounds(300, 25, 700, 700);
+				frame.setBounds(300, 25, 1000, 1000);
 				frame.setResizable(false);
 				try {
-					panel = new GamePanel(700,700);
+					panel = new GamePanel(600,600);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				panel.setBounds(0, 0, 700,700);
+				panel.setBounds(0, 0, 1000,1000);
 				if(map2 != null){
 					Orde orde= new Orde(0);
 					 Hero heroo= new Hero();
@@ -217,6 +273,7 @@ public class GraphicalView{
 				}
 				else{panel.setGame(new Game(number, name));}
 				frame.getContentPane().add(panel);
+				System.out.println(panel.getGame().getMap2().printBoard(panel.getGame().getMap2().getHero(), (panel.getGame().getMap2().getOrde())));
 				panel.setFocusable(true);
 				panel.requestFocusInWindow();
 				initialFrame.setVisible(false);
