@@ -31,6 +31,7 @@ public class GamePanel extends JPanel  implements MouseListener, MouseMotionList
 	//construtor que adiciona listeners para o rato e teclado
 	
 	public GamePanel(int width, int height) throws IOException{
+		
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		addKeyListener(this);

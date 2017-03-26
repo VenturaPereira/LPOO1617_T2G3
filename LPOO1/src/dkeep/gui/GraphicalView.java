@@ -197,7 +197,7 @@ public class GraphicalView{
 				}}
 				frame = new JFrame();
 				btnLeft.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {checkState('a');
+					public void actionPerformed(ActionEvent e) {checkState('a');panel.requestFocusInWindow();
 					}
 				});
 				btnLeft.setEnabled(true);
@@ -206,20 +206,20 @@ public class GraphicalView{
 				
 				btnRight.setEnabled(true);
 				btnRight.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {checkState('d');}
+					public void actionPerformed(ActionEvent e) { checkState('d'); panel.requestFocusInWindow();}
 				});
 				btnRight.setBounds(850, 150, 100, 50);
 				frame.getContentPane().add(btnRight);
 				
 				btnDown.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {checkState('s');}
+					public void actionPerformed(ActionEvent arg0) {checkState('s');panel.requestFocusInWindow();}
 				});
 				btnDown.setEnabled(true);
 				btnDown.setBounds(800, 200, 100, 50);
 				frame.getContentPane().add(btnDown);
 				
 				btnUp.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {checkState('w');}
+					public void actionPerformed(ActionEvent e) {checkState('w');panel.requestFocusInWindow();}
 				});
 				btnUp.setEnabled(true);
 				btnUp.setBounds(800, 100, 100, 50);
