@@ -12,14 +12,22 @@ import gameLogic.Orde;
 import gameLogic.Stun;
 import gameLogic.WinGame;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestKeep.
+ */
 public class TestKeep {
 	
+	/** The keepmap. */
 	char [][] keepmap = {{'X','X','X','X','X'},
 						 {'X','H',' ','0','X'},
 						 {'I',' ',' ',' ','X'},
 						 {'I','K',' ',' ','X'},
 						 {'X','X','X','X','X'}};
 	
+	/**
+	 * Checks for ogre.
+	 */
 	@Test
 	public void HasOgre()
 	{
@@ -28,6 +36,9 @@ public class TestKeep {
 	    assertTrue(maptest.isHasOgre());
 	}
 	
+	/**
+	 * Hero is killed.
+	 */
 	@Test
 	public void heroIsKilled()
 	{
@@ -43,6 +54,11 @@ public class TestKeep {
 	}
 	
 	
+	/**
+	 * Gets the s key.
+	 *
+	 * @return the s key
+	 */
 	@Test
 	public void getsKey()
 	{
@@ -54,6 +70,9 @@ public class TestKeep {
 		}
 	}
 	
+	/**
+	 * Hero cant open door.
+	 */
 	@Test
 	public void heroCantOpenDoor()
 	{
@@ -68,6 +87,9 @@ public class TestKeep {
 		assertTrue(maptest.getMap()[2][0] == 'I');
 	}
 	
+	/**
+	 * Hero can open door.
+	 */
 	@Test
 	public void heroCanOpenDoor()
 	{
@@ -82,6 +104,9 @@ public class TestKeep {
 		
 	}
 	
+	/**
+	 * Hero wins.
+	 */
 	@Test
 	public void heroWins()
 	{
@@ -98,6 +123,9 @@ public class TestKeep {
 			
 	}
 	
+	/**
+	 * Ogre kills hero.
+	 */
 	@Test(timeout=1000)
 	public void ogreKillsHero()
 	{
@@ -121,6 +149,9 @@ public class TestKeep {
 	
 	
 	
+	/**
+	 * Hero coordenates.
+	 */
 	@Test
 	public void heroCoordenates()
 	{
@@ -137,6 +168,9 @@ public class TestKeep {
 	}
 	
 	
+	/**
+	 * Ogre coordenates.
+	 */
 	@Test
 	public void ogreCoordenates()
 	{
@@ -156,6 +190,9 @@ public class TestKeep {
 		assertTrue(yup);
 	}
 	
+	/**
+	 * Stun ogre.
+	 */
 	@Test
 	public void stunOgre()
 	{

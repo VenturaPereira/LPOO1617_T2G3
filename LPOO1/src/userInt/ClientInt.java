@@ -22,8 +22,20 @@ import gameLogic.Stun;
 import gameLogic.Suspicious;
 
 import gameLogic.WinGame;
+// TODO: Auto-generated Javadoc
+
+/**
+ * The Class ClientInt.
+ */
 public class ClientInt{
 	
+	/**
+	 * Decisions next lvl.
+	 *
+	 * @param map the map
+	 * @param hero the hero
+	 * @param orde the orde
+	 */
 	public static void decisionsNextLvl(MapGame map, Hero hero, Orde orde){
 		Mapa2 map2 = (Mapa2)map;
 
@@ -69,6 +81,15 @@ public class ClientInt{
 		{msg.victoryMsgMap2();}
 	}
 
+	/**
+	 * Decisions.
+	 *
+	 * @param hero the hero
+	 * @param map the map
+	 * @param guard the guard
+	 * @param game the game
+	 * @param win the win
+	 */
 	public static void decisions(Hero hero, MapGame map, Enemy guard, GameOver game, WinGame win) {
 		Mapa1 map1= (Mapa1)map;
 		Message msg = new Message();
@@ -113,6 +134,11 @@ public class ClientInt{
 	
 	
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		

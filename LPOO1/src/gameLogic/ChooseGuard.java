@@ -2,15 +2,30 @@ package gameLogic;
 
 import java.util.Random;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChooseGuard.
+ */
 public class ChooseGuard {
   
+	/** The guard. */
 	private Enemy guard;
 	
+	/**
+	 * Instantiates a new choose guard.
+	 *
+	 * @param guard the guard
+	 */
 	public ChooseGuard(Enemy guard){
 		this.guard=guard;
 	}
 	
 	
+	/**
+	 * Sets the guard.
+	 *
+	 * @return the enemy
+	 */
 	public Enemy setGuard(){
 
 		Random rnd = new Random();

@@ -18,8 +18,13 @@ import gameLogic.WinGame;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestDungeonGameLogic.
+ */
 public class TestDungeonGameLogic {
 
+	/** The map. */
 	char [][] map = {{'X','X','X','X','X'},
 			         {'X','H',' ','G','X'},
 			         {'I',' ',' ',' ','X'},
@@ -27,6 +32,9 @@ public class TestDungeonGameLogic {
 			         {'X','X','X','X','X'}};
 	
 
+	/**
+	 * Checks for guard.
+	 */
 	@Test
 	public void hasGuard()
 	{
@@ -35,6 +43,9 @@ public class TestDungeonGameLogic {
 		assertTrue(maptest.isHasGuard());
 	}
 	
+	/**
+	 * Test move hero into free cell.
+	 */
 	@Test
 	public void testMoveHeroIntoFreeCell(){
 		Levels leveling = new Levels();
@@ -47,6 +58,9 @@ public class TestDungeonGameLogic {
 		
 	}
 	
+	/**
+	 * Test hero is captured by guard.
+	 */
 	@Test
 	public void testHeroIsCapturedByGuard(){
 		
@@ -60,6 +74,9 @@ public class TestDungeonGameLogic {
 	    
 	}
 	
+	/**
+	 * Test hero vs wall.
+	 */
 	@Test
 	public void testHeroVsWall(){
 		Levels leveling = new Levels();
@@ -70,6 +87,9 @@ public class TestDungeonGameLogic {
 		
 	}
 	
+	/**
+	 * Test lever working.
+	 */
 	@Test
 	public void testLeverWorking(){
 		Levels leveling = new Levels();
@@ -80,6 +100,9 @@ public class TestDungeonGameLogic {
 		assertEquals(maptest.getMap()[3][0],'S');	
 	}
 	
+	/**
+	 * Fails to leave.
+	 */
 	@Test
 	public void failsToLeave(){
 		Levels leveling = new Levels();
@@ -92,6 +115,9 @@ public class TestDungeonGameLogic {
 	}
 	
 	
+	/**
+	 * Arrives door.
+	 */
 	@Test
 	public void arrivesDoor(){
 		Levels leveling = new Levels();
@@ -103,6 +129,9 @@ public class TestDungeonGameLogic {
 		assertTrue(maptest.isArrived());
 	}
 	
+	/**
+	 * Enters the keep.
+	 */
 	@Test
 	public void entersTheKeep(){
 		Levels leveling = new Levels();
@@ -115,6 +144,9 @@ public class TestDungeonGameLogic {
 	}
 	
 
+	/**
+	 * Wins game.
+	 */
 	@Test
 	public void winsGame(){
 		Levels leveling = new Levels();
@@ -128,6 +160,9 @@ public class TestDungeonGameLogic {
 	}
 	
 	
+	/**
+	 * Guard is sleeping.
+	 */
 	@Test
 	public void guardIsSleeping()
 	{
@@ -141,6 +176,9 @@ public class TestDungeonGameLogic {
 		assertFalse(gameOver.getGameOver(maptest));
 	}
 	
+	/**
+	 * Guard moves.
+	 */
 	@Test
 	public void guardMoves()
 	{

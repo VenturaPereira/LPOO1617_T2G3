@@ -1,10 +1,22 @@
 package gameLogic;
 
+
+/**
+ * The Class Character.
+ */
 public abstract class Character {
 	
 	
 	
 	
+	/**
+	 * Move.
+	 *
+	 * @param map the map
+	 * @param di the i position of the character
+	 * @param dj the j position of the character
+	 * @return true, if the character can move
+	 */
 	public boolean move(MapGame map, int di, int dj){
 		
 		if(map instanceof Mapa1 ){
