@@ -1,0 +1,12 @@
+
+SamuraiGame.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+samurai_walk
+  rotate: false
+  xy: 1, 1
+  size: 459, 314
+  orig: 459, 314
+  offset: 0, 0
+  index: -1
