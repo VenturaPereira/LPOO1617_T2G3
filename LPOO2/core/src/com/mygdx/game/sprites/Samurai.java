@@ -1,33 +1,116 @@
 package com.mygdx.game.sprites;
 
+import java.util.ArrayList;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.EdgeShape;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.screens.PlayScreen;
 
 public class Samurai extends Sprite{
+	public enum State{WALKING, STANDING, ATTACKING};
+	public State currentState;
+	public State previousState;
 	public World world;
 	public Body b2body;
 	private TextureRegion standing;
+	private Animation samuraiWalk;
+	private Animation samuraiAttack;
+	private float stateTimer;
+	private boolean walkingRight;
 	
 	public Samurai(World world, PlayScreen screen){
 		super(screen.getAtlas().findRegion("samurai_walk"));
 		this.world = world;
+		currentState = State.STANDING;
+		previousState = State.STANDING;
+		stateTimer = 0;
+		walkingRight = true;
+		
+		Array<TextureRegion> frames = new Array<TextureRegion>();
+		frames.add(new TextureRegion(getTexture(), 170, 190, 78, 155));
+		frames.add(new TextureRegion(getTexture(), 253, 190, 78, 155));
+		frames.add(new TextureRegion(getTexture(), 336, 190, 78, 155));
+		frames.add(new TextureRegion(getTexture(), 0, 190, 78, 155));
+		samuraiWalk = new Animation(0.1f, frames);
+		frames.clear();
+		
+		frames.add(new TextureRegion(getTexture(), 0, 5, 63, 160));
+		frames.add(new TextureRegion(getTexture(), 65, 5, 110, 160));
+		frames.add(new TextureRegion(getTexture(), 182, 5, 110, 160));
+		frames.add(new TextureRegion(getTexture(), 298, 5, 110, 160));
+		samuraiAttack = new Animation(0.1f, frames);
+		frames.clear();
+
+
+
+
+		
 		defineSamurai();
-		standing = new TextureRegion(getTexture(), 0, 0, 85, 145);
+		standing = new TextureRegion(getTexture(), 92, 183, 78, 157);
 		setBounds(0,0,85/MyGdxGame.PPM, 145/MyGdxGame.PPM);
 		setRegion(standing);
 	}
 	
 	public void update(float dt){
 		setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y-getHeight()/8);
+		setRegion(getFrame(dt));
 	}
 	
+	public TextureRegion getFrame(float dt) {
+		currentState = getState();
+		
+		TextureRegion region;
+		switch(currentState){
+		case WALKING:
+			region = (TextureRegion) samuraiWalk.getKeyFrame(stateTimer, true);
+			break;
+		case ATTACKING:
+			region = (TextureRegion) samuraiAttack.getKeyFrame(stateTimer);
+			break;
+		case STANDING:
+		default:
+			region = standing;
+			break;
+		}
+		
+		if((b2body.getLinearVelocity().x < 0 || !walkingRight) && !region.isFlipX()){
+			region.flip(true, false);
+			walkingRight = false;
+		}
+		else if((b2body.getLinearVelocity().x > 0 || walkingRight) && region.isFlipX()){
+			region.flip(true, false);
+			walkingRight = true;
+		}
+		
+		stateTimer = currentState == previousState ? stateTimer +dt : 0;
+		previousState = currentState;
+		return region;
+		
+	}
+
+	public State getState() {
+		if(b2body.getLinearVelocity().x != 0)
+			return State.WALKING;
+		else if(Gdx.input.isButtonPressed(Input.Buttons.LEFT))
+			return State.ATTACKING;
+		else
+			return State.STANDING;
+	}
+
 	public void defineSamurai(){
 		BodyDef bdef  = new BodyDef();
 		bdef.position.set(50/MyGdxGame.PPM, 150/MyGdxGame.PPM);
@@ -40,6 +123,26 @@ public class Samurai extends Sprite{
 		
 		fdef.shape = shape;
 		b2body.createFixture(fdef);
+	
+		
+	}
+	
+	public void attacks() {
+		FixtureDef fdef = new FixtureDef();
+		EdgeShape katana = new EdgeShape();
+		katana.set(new Vector2(70/MyGdxGame.PPM, -50/MyGdxGame.PPM), new Vector2(70/MyGdxGame.PPM, 50/MyGdxGame.PPM));
+		fdef.shape = katana;
+		fdef.isSensor = true;
+		
+		
+		b2body.createFixture(fdef).setUserData("katana");
+		
+	}
+	
+	public void endsAttack() {
+		Array<Fixture> fixtures = b2body.getFixtureList();
+		Fixture bodyFixture = fixtures.get(1);
+		b2body.destroyFixture(bodyFixture);
 		
 	}
 }

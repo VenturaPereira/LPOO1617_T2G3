@@ -1,4 +1,6 @@
 package com.mygdx.game.screens;
+import java.util.concurrent.TimeUnit;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -18,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.Samurai;
 import com.mygdx.game.tools.B2WorldCreator;
+import com.mygdx.game.tools.WorldContactListener;
 
 public class PlayScreen implements Screen{
 	
@@ -54,6 +57,8 @@ public class PlayScreen implements Screen{
 		
 		character = new Samurai(world,this);
 		
+		world.setContactListener(new WorldContactListener());
+		
 	}
 	
 	public TextureAtlas getAtlas(){
@@ -66,14 +71,18 @@ public class PlayScreen implements Screen{
 		
 	}
 	
-	public void handleInput(float dt){
+	public void handleInput(float dt) {
 		if(Gdx.input.isKeyJustPressed(Input.Keys.W))
 			character.b2body.applyLinearImpulse(new Vector2(0, 4f), character.b2body.getWorldCenter(), true);
 		else if(Gdx.input.isKeyPressed(Input.Keys.D) && character.b2body.getLinearVelocity().x <= 2)
 			character.b2body.applyLinearImpulse(new Vector2(0.1f, 0), character.b2body.getWorldCenter(), true);
 		else if(Gdx.input.isKeyPressed(Input.Keys.A) && character.b2body.getLinearVelocity().x >= -2)
 			character.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), character.b2body.getWorldCenter(), true);	
-				
+		else if(Gdx.input.isButtonPressed(Input.Buttons.LEFT))
+			character.attacks();
+		/*else if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT))
+			character.endsAttack();*/
+			
 	}
 	
 	public void update(float dt){
