@@ -6,7 +6,7 @@ Ventura de Sousa Pereira - up201404690
 # Final Project Intermediate Check-Point
 
 
- ![alt text](https://cloud.githubusercontent.com/assets/22820323/25565706/55ee223c-2dc4-11e7-9cfa-8c62d3ffc61e.png)
+ ![alt text](https://cloud.githubusercontent.com/assets/22820323/25566756/c47b5fb8-2dd7-11e7-8e1d-1ee314a41776.png)
 
 ## SamuraiGame Class
 
