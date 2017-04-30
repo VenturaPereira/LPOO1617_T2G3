@@ -90,7 +90,7 @@ This is an abstract class for the bosses in the game. Like the enemies, bosses h
 
 #### Game Window
  - Link to Settings Menu
- - Health 
+ - Health bar
 
 ### GUI Mock-ups
 
@@ -100,4 +100,13 @@ This is an abstract class for the bosses in the game. Like the enemies, bosses h
 ![alt_text](https://cloud.githubusercontent.com/assets/22820323/25567211/b775514e-2de0-11e7-87a5-a88722fd3579.png)
 
 
+## Test Design
 
+- Meele collisions
+- Projectile collisions
+- Saving progress
+- Killing enemies
+- Killing bosses
+- Bosses attacking pattern according to their health bar
+- Game Over
+- Transitions between levels
