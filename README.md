@@ -78,6 +78,10 @@ This is an abstract class for the bosses in the game. Like the enemies, bosses h
 
 ## GUI Design
 
+-Title Screen
+-Settings Menu
+-Game Window
+
 ### GUI Mock-ups
 
 ![alt_text](https://cloud.githubusercontent.com/assets/22820323/25567194/5941882c-2de0-11e7-9e6c-98a0e88872a5.png)
