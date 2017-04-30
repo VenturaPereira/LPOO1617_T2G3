@@ -66,7 +66,7 @@ This is an abstract class for the bosses in the game. Like the enemies, bosses h
 
 ### Game sequence
 
-![alt text](https://cloud.githubusercontent.com/assets/22820323/25566896/b8518df4-2dda-11e7-84d4-73a22c285c37.png)
+![alt text](https://cloud.githubusercontent.com/assets/22820323/25568043/6ba35fa6-2df2-11e7-81a3-286c95709c32.png)
 
 
 ### Samurai state diagram
