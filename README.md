@@ -59,3 +59,11 @@ This is an abstract class for the various enemies in the game. All of them have 
 ### Boss Class
 
 This is an abstract class for the bosses in the game. Like the enemies, bosses have sprites, animations and body, but they also have some extra features as health bar, weak spots and attacking patterns.
+
+
+
+## Behaviour aspects design
+
+### Game sequence
+
+![alt text](https://cloud.githubusercontent.com/assets/22820323/25566896/b8518df4-2dda-11e7-84d4-73a22c285c37.png)
