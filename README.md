@@ -18,7 +18,7 @@ This package contains all the game's logic and physics engines.
 
 ### Physics Class
 
-This class contains all the 2D physics in the game: it creates bodies and physic worlds. It handles collisions, impulses, forces (ex: gravity) and shapes. This physics engine is based on the libgdx extension, Box2D.
+This class contains all the 2D physics in the game: it creates bodies and physic worlds. It handles collisions (implements a WorldContactListener from the libgdx library), impulses, forces (ex: gravity) and shapes. This physics engine is based on the libgdx extension, Box2D. 
 
 ### Logic Class
 
@@ -26,4 +26,14 @@ This class contains all the 2D physics in the game: it creates bodies and physic
 
 ### KeyboardInput Class
 
-This class handles all the input made by the user. 
+This class handles all the input made by the user, triggering animations and manipulating the physics world.
+
+## Screens Package
+
+### Screen Class
+
+This is a abstract class that represents a screen of the game. It renders the background and all the layout of the screen. A screen will use a ScreenAdapter from the libgdx library.
+
+#### PlayScreenClass
+
+This is a abstract class that represents a level of the game. A playscreen will use a ScreenAdapter from the libgdx library  
