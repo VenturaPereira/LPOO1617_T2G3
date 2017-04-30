@@ -73,3 +73,17 @@ This is an abstract class for the bosses in the game. Like the enemies, bosses h
 
 ![alt_text](https://cloud.githubusercontent.com/assets/22820323/25567052/708c3e3a-2ddd-11e7-9e23-2c097ce1a927.png)
 
+
+
+
+## GUI Design
+
+### GUI Mock-ups
+
+![alt_text](https://cloud.githubusercontent.com/assets/22820323/25567194/5941882c-2de0-11e7-9e6c-98a0e88872a5.png)
+![alt_text](https://cloud.githubusercontent.com/assets/22820323/25567198/695fe8ac-2de0-11e7-83a3-ddd9109046b4.png)
+![alt_text](https://cloud.githubusercontent.com/assets/22820323/25567206/ac0750b4-2de0-11e7-8b86-2b7479946982.png)
+![alt_text](https://cloud.githubusercontent.com/assets/22820323/25567211/b775514e-2de0-11e7-87a5-a88722fd3579.png)
+
+
+
