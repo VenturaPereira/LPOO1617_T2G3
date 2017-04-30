@@ -18,7 +18,7 @@ This package contains all the game's logic and physics engines.
 
 ### Physics Class
 
-This class contains all the 2D physics in the game: it creates bodies and physic worlds. It handles collisions (implements a WorldContactListener from the libgdx library), impulses, forces (ex: gravity) and shapes. This physics engine is based on the libgdx extension, Box2D. 
+This class contains all the 2D physics in the game: it creates bodies and physic worlds. It handles collisions (implements a ContactListener from the libgdx library), impulses, forces (ex: gravity) and shapes. This physics engine is based on the libgdx extension, Box2D. 
 
 ### Logic Class
 
@@ -74,7 +74,27 @@ This is an abstract class for the bosses in the game. Like the enemies, bosses h
 ![alt_text](https://cloud.githubusercontent.com/assets/22820323/25567052/708c3e3a-2ddd-11e7-9e23-2c097ce1a927.png)
 
 
+## Design patterns
 
+### Singleton
+
+The Engine Package and the main class are singletons. The SamuraiGame, Engine and GameController will be easily accessed
+
+### State
+
+The Samurai Class will use a State depending on the user input.
+
+### Update Method
+
+The update method will be used because most of the objects are independent from one another and there's several objects running at the same time. This will enable the game to run smoother.
+
+### Template
+
+The template pattern is already used by libgdx. Therefore, the SamuraiGame class extends Game. The main loop is the same in every game. It runs until the user wants to quit, it handles input, updates the models and renders the displayed frame.
+
+### Observer
+
+The observer pattern will be used to check for collisions. The physics engine will use a ContactListener from the libgdx library.
 
 ## GUI Design
 
@@ -108,5 +128,7 @@ This is an abstract class for the bosses in the game. Like the enemies, bosses h
 - Killing enemies
 - Killing bosses
 - Bosses attacking pattern according to their health bar
+- Checking bosses weak spots
 - Game Over
 - Transitions between levels
+
