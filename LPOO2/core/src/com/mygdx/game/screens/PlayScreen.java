@@ -43,12 +43,12 @@ public class PlayScreen implements Screen{
 		atlas = new TextureAtlas("SamuraiGame.pack");
 		this.game = game;
 		gamecam = new OrthographicCamera();
-		gamePort = new FitViewport(1200/ MyGdxGame.PPM, 620/MyGdxGame.PPM,gamecam);
+		gamePort = new FitViewport(1200/ MyGdxGame.PPM, 800/MyGdxGame.PPM,gamecam);
 		mapLoader = new TmxMapLoader();
 		map = mapLoader.load("first_level_background.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map, 1/MyGdxGame.PPM);
 		
-		gamecam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2, 0);
+		gamecam.position.set(gamePort.getWorldWidth()/4, gamePort.getWorldHeight()/2, 0);
 		
 		world = new World(new Vector2(0,-10), true);
 		b2dr = new Box2DDebugRenderer();
@@ -72,14 +72,21 @@ public class PlayScreen implements Screen{
 	}
 	
 	public void handleInput(float dt) {
-		if(Gdx.input.isKeyJustPressed(Input.Keys.W))
+		if(Gdx.input.isKeyJustPressed(Input.Keys.W)){
 			character.b2body.applyLinearImpulse(new Vector2(0, 4f), character.b2body.getWorldCenter(), true);
-		else if(Gdx.input.isKeyPressed(Input.Keys.D) && character.b2body.getLinearVelocity().x <= 2)
+		}
+	
+		else if(Gdx.input.isKeyPressed(Input.Keys.D) && character.b2body.getLinearVelocity().x <= 2){
 			character.b2body.applyLinearImpulse(new Vector2(0.1f, 0), character.b2body.getWorldCenter(), true);
-		else if(Gdx.input.isKeyPressed(Input.Keys.A) && character.b2body.getLinearVelocity().x >= -2)
-			character.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), character.b2body.getWorldCenter(), true);	
-		else if(Gdx.input.isButtonPressed(Input.Buttons.LEFT))
-			character.attacks();
+		}
+		else if(Gdx.input.isKeyPressed(Input.Keys.A) && character.b2body.getLinearVelocity().x >= -2){
+			character.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), character.b2body.getWorldCenter(), true);
+		}	
+
+			
+		
+		
+			
 		/*else if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT))
 			character.endsAttack();*/
 			

@@ -31,6 +31,7 @@ public class Samurai extends Sprite{
 	private Animation samuraiAttack;
 	private float stateTimer;
 	private boolean walkingRight;
+
 	
 	public Samurai(World world, PlayScreen screen){
 		super(screen.getAtlas().findRegion("samurai_walk"));
@@ -41,10 +42,10 @@ public class Samurai extends Sprite{
 		walkingRight = true;
 		
 		Array<TextureRegion> frames = new Array<TextureRegion>();
-		frames.add(new TextureRegion(getTexture(), 170, 190, 78, 155));
-		frames.add(new TextureRegion(getTexture(), 253, 190, 78, 155));
-		frames.add(new TextureRegion(getTexture(), 336, 190, 78, 155));
-		frames.add(new TextureRegion(getTexture(), 0, 190, 78, 155));
+		frames.add(new TextureRegion(getTexture(), 170, 180, 78, 160));
+		frames.add(new TextureRegion(getTexture(), 253, 180, 78, 160));
+		frames.add(new TextureRegion(getTexture(), 336, 180, 78, 160));
+		frames.add(new TextureRegion(getTexture(), 0, 180, 78, 160));
 		samuraiWalk = new Animation(0.1f, frames);
 		frames.clear();
 		
@@ -56,9 +57,6 @@ public class Samurai extends Sprite{
 		frames.clear();
 
 
-
-
-		
 		defineSamurai();
 		standing = new TextureRegion(getTexture(), 92, 183, 78, 157);
 		setBounds(0,0,85/MyGdxGame.PPM, 145/MyGdxGame.PPM);
@@ -117,32 +115,32 @@ public class Samurai extends Sprite{
 		bdef.type = BodyDef.BodyType.DynamicBody;
 		b2body = world.createBody(bdef);
 		
-		FixtureDef fdef = new FixtureDef();
+		FixtureDef fdef1 = new FixtureDef();
 		CircleShape shape = new CircleShape();
 		shape.setRadius(15/MyGdxGame.PPM);
 		
-		fdef.shape = shape;
-		b2body.createFixture(fdef);
-	
-		
+		fdef1.shape = shape;
+		b2body.createFixture(fdef1);
+
+        FixtureDef fdef2 = new FixtureDef();
+        EdgeShape katanaLeft = new EdgeShape();
+
+        katanaLeft.set(new Vector2(48/MyGdxGame.PPM, -20/MyGdxGame.PPM), new Vector2(48/MyGdxGame.PPM, 100/MyGdxGame.PPM));
+        fdef2.shape = katanaLeft;
+        fdef2.isSensor = true;
+
+        b2body.createFixture(fdef2).setUserData("katana");
+
+        FixtureDef fdef3 = new FixtureDef();
+        EdgeShape katanaRight = new EdgeShape();
+
+        katanaRight.set(new Vector2(-48/MyGdxGame.PPM, -20/MyGdxGame.PPM), new Vector2(-48/MyGdxGame.PPM, 100/MyGdxGame.PPM));
+        fdef3.shape = katanaRight;
+        fdef3.isSensor = true;
+
+        b2body.createFixture(fdef3).setUserData("katana");
+
 	}
+
 	
-	public void attacks() {
-		FixtureDef fdef = new FixtureDef();
-		EdgeShape katana = new EdgeShape();
-		katana.set(new Vector2(70/MyGdxGame.PPM, -50/MyGdxGame.PPM), new Vector2(70/MyGdxGame.PPM, 50/MyGdxGame.PPM));
-		fdef.shape = katana;
-		fdef.isSensor = true;
-		
-		
-		b2body.createFixture(fdef).setUserData("katana");
-		
-	}
-	
-	public void endsAttack() {
-		Array<Fixture> fixtures = b2body.getFixtureList();
-		Fixture bodyFixture = fixtures.get(1);
-		b2body.destroyFixture(bodyFixture);
-		
-	}
 }
