@@ -1,5 +1,6 @@
 package com.mygdx.game.sprites;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.math.Vector2;
@@ -21,7 +22,8 @@ public class FireBall extends Enemy {
     private Animation walkAnimation;
     private Array<TextureRegion> frames;
     private Samurai samurai;
-    private Vector2 velocity;
+    private float timeToShoot;
+
 
     public FireBall(PlayScreen screen, float x, float y) {
 
@@ -30,7 +32,7 @@ public class FireBall extends Enemy {
         for(int i = 0; i < 5; i++){
             frames.add(new TextureRegion(screen.getEnemiesAtlas().findRegion("flame_sprite"), i*141, 10, 142, 100));
         }
-
+timeToShoot = 10;
         for(int i = 0; i < 5; i++){
             frames.get(i).flip(true, false);
         }
@@ -42,14 +44,16 @@ public class FireBall extends Enemy {
 
     public void update(float dt){
         stateTime += dt;
+        b2body.setLinearVelocity(velocity);
         setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2);
         setRegion((TextureRegion) walkAnimation.getKeyFrame(stateTime, true));
+
     }
 
     @Override
     protected void defineEnemy() {
         BodyDef bdef  = new BodyDef();
-        bdef.position.set(50/ MyGdxGame.PPM, 150/MyGdxGame.PPM);
+        bdef.position.set(1000/MyGdxGame.PPM, 200/MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -61,5 +65,13 @@ public class FireBall extends Enemy {
 
         fdef1.shape = shape;
         b2body.createFixture(fdef1);
+    }
+
+    public float getTimeToShoot() {
+        return timeToShoot;
+    }
+
+    public void setTimeToShoot(float timeToShoot) {
+        this.timeToShoot = timeToShoot;
     }
 }

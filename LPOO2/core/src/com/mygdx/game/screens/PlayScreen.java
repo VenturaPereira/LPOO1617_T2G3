@@ -1,4 +1,5 @@
 package com.mygdx.game.screens;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import com.badlogic.gdx.Gdx;
@@ -30,7 +31,9 @@ public class PlayScreen implements Screen{
 	private TextureAtlas enemiesAtlas;
 	private OrthographicCamera gamecam;
 	private Viewport gamePort;
-	
+	private ArrayList<FireBall> fireBalls = new ArrayList<FireBall>();
+
+
 	private TmxMapLoader mapLoader;
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;
@@ -41,6 +44,8 @@ public class PlayScreen implements Screen{
 	
 	private Samurai character;
 	private FireBall fireBall;
+
+	int i = 0;
 
 	public PlayScreen(MyGdxGame game) {
 		samuraiAtlas = new TextureAtlas("SamuraiGame.pack");
@@ -60,7 +65,11 @@ public class PlayScreen implements Screen{
 		new B2WorldCreator(this);
 		
 		character = new Samurai(world,this);
-		fireBall = new FireBall(this, .32f, 0.32f);
+
+		//fireBall = new FireBall(this, .32f, 0.32f);
+		rainingFire();
+
+
 		
 		world.setContactListener(new WorldContactListener());
 		
@@ -104,7 +113,8 @@ public class PlayScreen implements Screen{
 		
 		world.step(1/60f, 6, 2);
 		character.update(dt);
-		fireBall.update(dt);
+		//fireBall.update(dt);
+		updateFireballs(dt);
 		gamecam.position.x = character.b2body.getPosition().x;
 		gamecam.update();
 		renderer.setView(gamecam);
@@ -124,7 +134,8 @@ public class PlayScreen implements Screen{
 		game.batch.setProjectionMatrix(gamecam.combined);
 		game.batch.begin();
 		character.draw(game.batch);
-		fireBall.draw(game.batch);
+		//fireBall.draw(game.batch);
+		drawFireballs();
 		game.batch.end();
 		
 		//game.batch.setProjectionMatrix(gamecam.combined);;
@@ -172,6 +183,25 @@ public class PlayScreen implements Screen{
 		world.dispose();
 		b2dr.dispose();
 		
+	}
+
+	public void rainingFire(){
+		for(int i = 0; i < 10; i++) {
+			fireBall = new FireBall(this, .32f, 0.32f);
+			fireBalls.add(fireBall);
+		}
+	}
+
+	public void drawFireballs(){
+		for(int i = 0; i < fireBalls.size(); i++){
+			fireBalls.get(i).draw(game.batch);
+		}
+	}
+
+	public void updateFireballs(float dt){
+		for(int i = 0; i < fireBalls.size(); i++) {
+			fireBalls.get(i).update(dt);
+		}
 	}
 
 }
