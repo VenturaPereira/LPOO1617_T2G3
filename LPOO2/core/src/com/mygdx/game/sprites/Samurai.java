@@ -15,6 +15,7 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.EdgeShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
@@ -34,7 +35,7 @@ public class Samurai extends Sprite{
 
 	
 	public Samurai(World world, PlayScreen screen){
-		super(screen.getAtlas().findRegion("samurai_walk"));
+		super(screen.getSamuraiAtlas().findRegion("samurai_walk"));
 		this.world = world;
 		currentState = State.STANDING;
 		previousState = State.STANDING;
@@ -49,10 +50,10 @@ public class Samurai extends Sprite{
 		samuraiWalk = new Animation(0.1f, frames);
 		frames.clear();
 		
-		frames.add(new TextureRegion(getTexture(), 0, 5, 63, 160));
-		frames.add(new TextureRegion(getTexture(), 65, 5, 110, 160));
-		frames.add(new TextureRegion(getTexture(), 182, 5, 110, 160));
-		frames.add(new TextureRegion(getTexture(), 298, 5, 110, 160));
+		frames.add(new TextureRegion(getTexture(), 0, 5, 60, 160));
+		frames.add(new TextureRegion(getTexture(), 78, 30, 95, 140));
+		frames.add(new TextureRegion(getTexture(), 182, 30, 95, 140));
+		frames.add(new TextureRegion(getTexture(), 298, 30, 95, 140));
 		samuraiAttack = new Animation(0.1f, frames);
 		frames.clear();
 
@@ -64,7 +65,7 @@ public class Samurai extends Sprite{
 	}
 	
 	public void update(float dt){
-		setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y-getHeight()/8);
+		setPosition(b2body.getPosition().x - getWidth()/1.7f, b2body.getPosition().y-getHeight()/2.3f);
 		setRegion(getFrame(dt));
 	}
 	
@@ -116,8 +117,10 @@ public class Samurai extends Sprite{
 		b2body = world.createBody(bdef);
 		
 		FixtureDef fdef1 = new FixtureDef();
-		CircleShape shape = new CircleShape();
-		shape.setRadius(15/MyGdxGame.PPM);
+		//CircleShape shape = new CircleShape();
+		PolygonShape shape = new PolygonShape();
+		shape.setAsBox(20/MyGdxGame.PPM, 60/MyGdxGame.PPM);
+		fdef1.filter.categoryBits = MyGdxGame.SAMURAI_BIT;
 		
 		fdef1.shape = shape;
 		b2body.createFixture(fdef1);

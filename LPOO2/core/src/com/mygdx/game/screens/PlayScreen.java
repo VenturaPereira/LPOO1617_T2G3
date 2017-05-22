@@ -18,6 +18,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.*;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.sprites.FireBall;
 import com.mygdx.game.sprites.Samurai;
 import com.mygdx.game.tools.B2WorldCreator;
 import com.mygdx.game.tools.WorldContactListener;
@@ -25,7 +26,8 @@ import com.mygdx.game.tools.WorldContactListener;
 public class PlayScreen implements Screen{
 	
 	private MyGdxGame game;
-	private TextureAtlas atlas;
+	private TextureAtlas samuraiAtlas;
+	private TextureAtlas enemiesAtlas;
 	private OrthographicCamera gamecam;
 	private Viewport gamePort;
 	
@@ -38,9 +40,11 @@ public class PlayScreen implements Screen{
 	private Box2DDebugRenderer b2dr;
 	
 	private Samurai character;
-	
+	private FireBall fireBall;
+
 	public PlayScreen(MyGdxGame game) {
-		atlas = new TextureAtlas("SamuraiGame.pack");
+		samuraiAtlas = new TextureAtlas("SamuraiGame.pack");
+		enemiesAtlas = new TextureAtlas("Enemies.pack");
 		this.game = game;
 		gamecam = new OrthographicCamera();
 		gamePort = new FitViewport(1200/ MyGdxGame.PPM, 800/MyGdxGame.PPM,gamecam);
@@ -53,18 +57,21 @@ public class PlayScreen implements Screen{
 		world = new World(new Vector2(0,-10), true);
 		b2dr = new Box2DDebugRenderer();
 		
-		new B2WorldCreator(world, map);
+		new B2WorldCreator(this);
 		
 		character = new Samurai(world,this);
+		fireBall = new FireBall(this, .32f, 0.32f);
 		
 		world.setContactListener(new WorldContactListener());
 		
 	}
 	
-	public TextureAtlas getAtlas(){
-		return atlas;
+	public TextureAtlas getSamuraiAtlas(){
+		return samuraiAtlas;
 	}
-	
+
+	public TextureAtlas getEnemiesAtlas(){return enemiesAtlas;};
+
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
@@ -97,6 +104,7 @@ public class PlayScreen implements Screen{
 		
 		world.step(1/60f, 6, 2);
 		character.update(dt);
+		fireBall.update(dt);
 		gamecam.position.x = character.b2body.getPosition().x;
 		gamecam.update();
 		renderer.setView(gamecam);
@@ -116,6 +124,7 @@ public class PlayScreen implements Screen{
 		game.batch.setProjectionMatrix(gamecam.combined);
 		game.batch.begin();
 		character.draw(game.batch);
+		fireBall.draw(game.batch);
 		game.batch.end();
 		
 		//game.batch.setProjectionMatrix(gamecam.combined);;
@@ -129,7 +138,15 @@ public class PlayScreen implements Screen{
 		gamePort.update(width, height);
 	}
 
-	@Override
+    public TiledMap getMap() {
+        return map;
+    }
+
+    public World getWorld(){
+        return world;
+    }
+
+    @Override
 	public void pause() {
 		// TODO Auto-generated method stub
 		
