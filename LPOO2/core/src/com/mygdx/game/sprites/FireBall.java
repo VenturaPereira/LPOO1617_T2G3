@@ -3,6 +3,7 @@ package com.mygdx.game.sprites;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.CircleShape;
@@ -10,6 +11,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.screens.PlayScreen;
+
+import java.util.Random;
 
 /**
  * Created by Luís on 16/05/2017.
@@ -25,9 +28,9 @@ public class FireBall extends Enemy {
     private float timeToShoot;
 
 
-    public FireBall(PlayScreen screen, float x, float y) {
+    public FireBall(PlayScreen screen, float x, float y, int distance) {
 
-        super(screen, x, y);
+        super(screen, x, y, distance);
         frames = new Array<TextureRegion>();
         for(int i = 0; i < 5; i++){
             frames.add(new TextureRegion(screen.getEnemiesAtlas().findRegion("flame_sprite"), i*141, 10, 142, 100));
@@ -53,7 +56,7 @@ timeToShoot = 10;
     @Override
     protected void defineEnemy() {
         BodyDef bdef  = new BodyDef();
-        bdef.position.set(1000/MyGdxGame.PPM, 200/MyGdxGame.PPM);
+        bdef.position.set(distance/MyGdxGame.PPM, randomHeightBetween(50, 400)/MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
 
@@ -67,11 +70,12 @@ timeToShoot = 10;
         b2body.createFixture(fdef1);
     }
 
-    public float getTimeToShoot() {
-        return timeToShoot;
+    public int randomHeightBetween(int min, int max){
+        Random r = new Random();
+
+        return r.nextInt(max-min) + min;
     }
 
-    public void setTimeToShoot(float timeToShoot) {
-        this.timeToShoot = timeToShoot;
-    }
+
+
 }

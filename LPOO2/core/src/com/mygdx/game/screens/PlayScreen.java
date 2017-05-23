@@ -186,9 +186,14 @@ public class PlayScreen implements Screen{
 	}
 
 	public void rainingFire(){
-		for(int i = 0; i < 10; i++) {
-			fireBall = new FireBall(this, .32f, 0.32f);
+
+		int height = 1000;
+
+		for(int i = 0; i < 300; i++) {
+			fireBall = new FireBall(this, .32f, 0.32f, height);
 			fireBalls.add(fireBall);
+			if(height < 100000)
+				height += 500;
 		}
 	}
 
