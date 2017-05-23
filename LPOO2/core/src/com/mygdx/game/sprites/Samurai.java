@@ -22,7 +22,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.screens.PlayScreen;
 
 public class Samurai extends Sprite{
-	public enum State{WALKING, STANDING, ATTACKING};
+	public enum State{WALKING, STANDING, ATTACKING, JUMPING};
 	public State currentState;
 	public State previousState;
 	public World world;
@@ -80,6 +80,9 @@ public class Samurai extends Sprite{
 		case ATTACKING:
 			region = (TextureRegion) samuraiAttack.getKeyFrame(stateTimer);
 			break;
+			case JUMPING:
+				region = standing;
+				break;
 		case STANDING:
 		default:
 			region = standing;
@@ -102,10 +105,13 @@ public class Samurai extends Sprite{
 	}
 
 	public State getState() {
-		if(b2body.getLinearVelocity().x != 0)
-			return State.WALKING;
-		else if(Gdx.input.isButtonPressed(Input.Buttons.LEFT))
+
+		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) || this.previousState == State.JUMPING && Gdx.input.isButtonPressed(Input.Buttons.LEFT) )
 			return State.ATTACKING;
+		else if(b2body.getLinearVelocity().y !=0)
+			return State.JUMPING;
+		else if(b2body.getLinearVelocity().x != 0)
+			return State.WALKING;
 		else
 			return State.STANDING;
 	}
