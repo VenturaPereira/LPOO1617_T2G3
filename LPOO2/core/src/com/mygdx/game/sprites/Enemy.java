@@ -23,11 +23,12 @@ public abstract class Enemy extends Sprite{
       this.screen = screen;
       this.distance = distance;
       setPosition(x,y);
-        defineEnemy();
+      defineEnemy();
       velocity = new Vector2(-3,.1f);
     }
 
     protected abstract void defineEnemy();
+    public abstract void hit();
 
 
 }

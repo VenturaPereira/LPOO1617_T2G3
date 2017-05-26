@@ -198,14 +198,18 @@ public class PlayScreen implements Screen{
 	}
 
 	public void drawFireballs(){
-		for(int i = 0; i < fireBalls.size(); i++){
-			fireBalls.get(i).draw(game.batch);
+		for(int i = 0; i < fireBalls.size(); i++) {
+			if (!fireBalls.get(i).getDestroyed()) {
+				fireBalls.get(i).draw(game.batch);
+			}
 		}
 	}
 
 	public void updateFireballs(float dt){
 		for(int i = 0; i < fireBalls.size(); i++) {
-			fireBalls.get(i).update(dt);
+			if (!fireBalls.get(i).getDestroyed()) {
+				fireBalls.get(i).update(dt);
+			}
 		}
 	}
 

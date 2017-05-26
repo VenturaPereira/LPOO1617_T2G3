@@ -26,6 +26,8 @@ public class FireBall extends Enemy {
     private Array<TextureRegion> frames;
     private Samurai samurai;
     private float timeToShoot;
+    private boolean setToDestroy;
+    private boolean destroyed;
 
 
     public FireBall(PlayScreen screen, float x, float y, int distance) {
@@ -43,14 +45,26 @@ timeToShoot = 10;
         walkAnimation = new Animation(0.1f, frames);
         stateTime = 0;
         setBounds(getX(), getY(), 142 / MyGdxGame.PPM, 100/MyGdxGame.PPM);
+        setToDestroy=false;
+        destroyed=false;
     }
 
     public void update(float dt){
         stateTime += dt;
-        b2body.setLinearVelocity(velocity);
-        setPosition(b2body.getPosition().x - getWidth()/2, b2body.getPosition().y - getHeight()/2);
-        setRegion((TextureRegion) walkAnimation.getKeyFrame(stateTime, true));
-
+        if(setToDestroy && !destroyed){
+            world.destroyBody((b2body));
+            destroyed=true;
+        } else if(!destroyed) {
+            b2body.setLinearVelocity(velocity);
+            setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+            setRegion((TextureRegion) walkAnimation.getKeyFrame(stateTime, true));
+        }
+    }
+    public boolean getSetToDestroy(){
+        return setToDestroy;
+    }
+    public boolean getDestroyed(){
+        return destroyed;
     }
 
     @Override
@@ -67,7 +81,13 @@ timeToShoot = 10;
         fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.ENEMY_BIT | MyGdxGame.SAMURAI_BIT ;
 
         fdef1.shape = shape;
-        b2body.createFixture(fdef1);
+        b2body.createFixture(fdef1).setUserData(this);
+    }
+
+    @Override
+    public void hit() {
+       setToDestroy = true;
+        System.out.print("riiip");
     }
 
     public int randomHeightBetween(int min, int max){

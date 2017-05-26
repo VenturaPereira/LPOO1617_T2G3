@@ -8,7 +8,10 @@ import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 
+import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.sprites.Enemy;
 import com.mygdx.game.sprites.InteractiveTileObject;
+import com.mygdx.game.sprites.Samurai;
 
 public class WorldContactListener implements ContactListener{
 
@@ -17,6 +20,7 @@ public class WorldContactListener implements ContactListener{
 		Fixture fixA = contact.getFixtureA();
 		Fixture fixB = contact.getFixtureB();
 		System.out.println("contact");
+		int cDef= fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 		if(fixA.getUserData() == "katana" || fixB.getUserData() == "katana"){
 			Fixture katana = fixA.getUserData() == "katana" ? fixA : fixB;
 			Fixture object = katana == fixA ? fixB : fixA;
@@ -24,6 +28,17 @@ public class WorldContactListener implements ContactListener{
 			if(object.getUserData() != null && object.getUserData() instanceof InteractiveTileObject) {
 				((InteractiveTileObject)object.getUserData()).onKatanaHit();
 			}
+		}
+
+		switch (cDef){
+			case MyGdxGame.ENEMY_BIT | MyGdxGame.SAMURAI_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT){
+					((Enemy)fixA.getUserData()).hit();
+					System.out.print("i enter here");
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT){
+					((Enemy)fixB.getUserData()).hit();
+					System.out.print("i enter here2");
+				}
 		}
 	}
 

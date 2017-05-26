@@ -126,11 +126,11 @@ public class Samurai extends Sprite{
 		//CircleShape shape = new CircleShape();
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(20/MyGdxGame.PPM, 60/MyGdxGame.PPM);
-		//fdef1.isSensor = true;
-		fdef1.filter.categoryBits = MyGdxGame.SAMURAI_BIT | MyGdxGame.GROUND_BIT | MyGdxGame.ENEMY_BIT| MyGdxGame.WALL_BIT;
+		fdef1.filter.categoryBits = MyGdxGame.SAMURAI_BIT;
+		fdef1.filter.maskBits = MyGdxGame.SAMURAI_BIT | MyGdxGame.GROUND_BIT | MyGdxGame.ENEMY_BIT| MyGdxGame.WALL_BIT;
 
 		fdef1.shape = shape;
-		b2body.createFixture(fdef1).setUserData("Samurai");
+		b2body.createFixture(fdef1).setUserData(this);
 
         FixtureDef fdef2 = new FixtureDef();
         EdgeShape katanaLeft = new EdgeShape();
