@@ -56,7 +56,7 @@ public class PlayScreen implements Screen{
 		this.game = game;
 		gamecam = new OrthographicCamera();
 		gamePort = new FitViewport(1200/ MyGdxGame.PPM, 800/MyGdxGame.PPM,gamecam);
-		hud = new Hud(game.batch);
+
 		mapLoader = new TmxMapLoader();
 		map = mapLoader.load("first_level_background.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map, 1/MyGdxGame.PPM);
@@ -69,7 +69,7 @@ public class PlayScreen implements Screen{
 		new B2WorldCreator(this);
 		
 		character = new Samurai(world,this);
-
+		hud = new Hud(game.batch, character);
 		//fireBall = new FireBall(this, .32f, 0.32f);
 		rainingFire();
 
@@ -117,10 +117,12 @@ public class PlayScreen implements Screen{
 		
 		world.step(1/60f, 6, 2);
 		character.update(dt);
+		hud.update();
 		updateFireballs(dt);
 		gamecam.position.x = character.b2body.getPosition().x;
 		gamecam.update();
 		renderer.setView(gamecam);
+		//System.out.print(character.getHitpoints());
 	}
 	
 	@Override

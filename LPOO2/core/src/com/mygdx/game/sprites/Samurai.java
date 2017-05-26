@@ -32,14 +32,18 @@ public class Samurai extends Sprite{
 	private Animation samuraiAttack;
 	private float stateTimer;
 	private boolean walkingRight;
+	private int hitpoints;
 
-	
+
+
+
 	public Samurai(World world, PlayScreen screen){
 		super(screen.getSamuraiAtlas().findRegion("samurai_walk"));
 		this.world = world;
 		currentState = State.STANDING;
 		previousState = State.STANDING;
 		stateTimer = 0;
+		hitpoints = 100;
 		walkingRight = true;
 		
 		Array<TextureRegion> frames = new Array<TextureRegion>();
@@ -67,6 +71,17 @@ public class Samurai extends Sprite{
 	public void update(float dt){
 		setPosition(b2body.getPosition().x - getWidth()/1.7f, b2body.getPosition().y-getHeight()/2.3f);
 		setRegion(getFrame(dt));
+
+	}
+	public void hpLoss(){
+		if(hitpoints-25 <=0){
+			hitpoints=0;
+		}else {
+			hitpoints = hitpoints - 25;
+		}
+	}
+	public int getHitpoints() {
+		return hitpoints;
 	}
 	
 	public TextureRegion getFrame(float dt) {
@@ -151,6 +166,8 @@ public class Samurai extends Sprite{
         b2body.createFixture(fdef3).setUserData("katana");
 
 	}
+
+
 
 	
 }
