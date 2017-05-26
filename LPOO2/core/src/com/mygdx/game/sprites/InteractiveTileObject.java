@@ -36,6 +36,9 @@ public abstract class InteractiveTileObject {
 
 		shape.setAsBox((bounds.getWidth()/2)/MyGdxGame.PPM, (bounds.getHeight()/2)/MyGdxGame.PPM);
 		fdef.shape = shape;
+		fdef.filter.categoryBits = MyGdxGame.GROUND_BIT;
+		fdef.filter.maskBits = MyGdxGame.ENEMY_BIT;
+		body.setUserData(this);
 		fixture=body.createFixture(fdef);
 	}
 	

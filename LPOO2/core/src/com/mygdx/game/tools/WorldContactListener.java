@@ -39,6 +39,15 @@ public class WorldContactListener implements ContactListener{
 					((Enemy)fixB.getUserData()).hit();
 					System.out.print("i enter here2");
 				}
+				break;
+			case MyGdxGame.WALL_BIT | MyGdxGame.ENEMY_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT){
+					((Enemy)fixA.getUserData()).hit();
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT) {
+					((Enemy) fixB.getUserData()).hit();
+
+				}
+				break;
 		}
 	}
 
