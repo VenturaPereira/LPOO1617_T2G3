@@ -19,6 +19,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.viewport.*;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.scenes.Hud;
 import com.mygdx.game.sprites.FireBall;
 import com.mygdx.game.sprites.Samurai;
 import com.mygdx.game.tools.B2WorldCreator;
@@ -33,6 +34,8 @@ public class PlayScreen implements Screen{
 	private Viewport gamePort;
 	private ArrayList<FireBall> fireBalls = new ArrayList<FireBall>();
 
+
+	private Hud hud;
 
 	private TmxMapLoader mapLoader;
 	private TiledMap map;
@@ -53,11 +56,12 @@ public class PlayScreen implements Screen{
 		this.game = game;
 		gamecam = new OrthographicCamera();
 		gamePort = new FitViewport(1200/ MyGdxGame.PPM, 800/MyGdxGame.PPM,gamecam);
+		hud = new Hud(game.batch);
 		mapLoader = new TmxMapLoader();
 		map = mapLoader.load("first_level_background.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map, 1/MyGdxGame.PPM);
 		
-		gamecam.position.set(gamePort.getWorldWidth()/4, gamePort.getWorldHeight()/2, 0);
+		gamecam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2, 0);
 		
 		world = new World(new Vector2(0,-10), true);
 		b2dr = new Box2DDebugRenderer();
@@ -113,7 +117,6 @@ public class PlayScreen implements Screen{
 		
 		world.step(1/60f, 6, 2);
 		character.update(dt);
-		//fireBall.update(dt);
 		updateFireballs(dt);
 		gamecam.position.x = character.b2body.getPosition().x;
 		gamecam.update();
@@ -126,9 +129,10 @@ public class PlayScreen implements Screen{
 		update(delta);
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		
+
 		renderer.render();
-		
+		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+		hud.stage.draw();
 		b2dr.render(world, gamecam.combined);
 		
 		game.batch.setProjectionMatrix(gamecam.combined);
