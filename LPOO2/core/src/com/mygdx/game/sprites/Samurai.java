@@ -78,7 +78,7 @@ public class Samurai extends Sprite{
 			region = (TextureRegion) samuraiWalk.getKeyFrame(stateTimer, true);
 			break;
 		case ATTACKING:
-			region = (TextureRegion) samuraiAttack.getKeyFrame(stateTimer);
+			region = (TextureRegion) samuraiAttack.getKeyFrame(stateTimer, true);
 			break;
 			case JUMPING:
 				region = standing;

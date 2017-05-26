@@ -37,7 +37,7 @@ public class FireBall extends Enemy {
         for(int i = 0; i < 5; i++){
             frames.add(new TextureRegion(screen.getEnemiesAtlas().findRegion("flame_sprite"), i*141, 10, 142, 100));
         }
-timeToShoot = 10;
+
         for(int i = 0; i < 5; i++){
             frames.get(i).flip(true, false);
         }
@@ -63,6 +63,7 @@ timeToShoot = 10;
     public boolean getSetToDestroy(){
         return setToDestroy;
     }
+
     public boolean getDestroyed(){
         return destroyed;
     }
@@ -87,7 +88,7 @@ timeToShoot = 10;
     @Override
     public void hit() {
        setToDestroy = true;
-        System.out.print("riiip");
+        //System.out.print("riiip");
     }
 
     public int randomHeightBetween(int min, int max){

@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.viewport.*;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.FireBall;
+import com.mygdx.game.sprites.FireBoss;
 import com.mygdx.game.sprites.Samurai;
 import com.mygdx.game.tools.B2WorldCreator;
 import com.mygdx.game.tools.WorldContactListener;
@@ -29,6 +30,7 @@ public class PlayScreen implements Screen{
 	private MyGdxGame game;
 	private TextureAtlas samuraiAtlas;
 	private TextureAtlas enemiesAtlas;
+    private TextureAtlas firebossAtlas;
 	private OrthographicCamera gamecam;
 	private Viewport gamePort;
 	private ArrayList<FireBall> fireBalls = new ArrayList<FireBall>();
@@ -44,13 +46,15 @@ public class PlayScreen implements Screen{
 	
 	private Samurai character;
 	private FireBall fireBall;
+	private FireBoss fireBoss;
 
 	int i = 0;
 
 	public PlayScreen(MyGdxGame game) {
 		samuraiAtlas = new TextureAtlas("SamuraiGame.pack");
 		enemiesAtlas = new TextureAtlas("Enemies.pack");
-		this.game = game;
+		firebossAtlas = new TextureAtlas("FireBoss.pack");
+        this.game = game;
 		gamecam = new OrthographicCamera();
 		gamePort = new FitViewport(1200/ MyGdxGame.PPM, 800/MyGdxGame.PPM,gamecam);
 		mapLoader = new TmxMapLoader();
@@ -65,7 +69,7 @@ public class PlayScreen implements Screen{
 		new B2WorldCreator(this);
 		
 		character = new Samurai(world,this);
-
+		fireBoss = new FireBoss(this);
 		//fireBall = new FireBall(this, .32f, 0.32f);
 		rainingFire();
 
@@ -81,6 +85,7 @@ public class PlayScreen implements Screen{
 
 	public TextureAtlas getEnemiesAtlas(){return enemiesAtlas;};
 
+    public TextureAtlas getFirebossAtlas(){return firebossAtlas;};
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
@@ -115,6 +120,7 @@ public class PlayScreen implements Screen{
 		character.update(dt);
 		//fireBall.update(dt);
 		updateFireballs(dt);
+        fireBoss.update(dt);
 		gamecam.position.x = character.b2body.getPosition().x;
 		gamecam.update();
 		renderer.setView(gamecam);
@@ -135,6 +141,7 @@ public class PlayScreen implements Screen{
 		game.batch.begin();
 		character.draw(game.batch);
 		//fireBall.draw(game.batch);
+        fireBoss.draw(game.batch);
 		drawFireballs();
 		game.batch.end();
 		
@@ -187,13 +194,13 @@ public class PlayScreen implements Screen{
 
 	public void rainingFire(){
 
-		int height = 1000;
+		int height = 700;
 
-		for(int i = 0; i < 300; i++) {
+		for(int i = 0; i < 200; i++) {
 			fireBall = new FireBall(this, .32f, 0.32f, height);
 			fireBalls.add(fireBall);
 			if(height < 100000)
-				height += 500;
+				height += 400;
 		}
 	}
 
