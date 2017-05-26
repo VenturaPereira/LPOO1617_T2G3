@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -26,7 +27,10 @@ import com.mygdx.game.tools.B2WorldCreator;
 import com.mygdx.game.tools.WorldContactListener;
 
 public class PlayScreen implements Screen{
-	
+
+	private Texture gameOver;
+	private SpriteBatch batch;
+
 	private MyGdxGame game;
 	private TextureAtlas samuraiAtlas;
 	private TextureAtlas enemiesAtlas;
@@ -36,7 +40,6 @@ public class PlayScreen implements Screen{
 
 
 	private Hud hud;
-
 	private TmxMapLoader mapLoader;
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;
@@ -56,7 +59,8 @@ public class PlayScreen implements Screen{
 		this.game = game;
 		gamecam = new OrthographicCamera();
 		gamePort = new FitViewport(1200/ MyGdxGame.PPM, 800/MyGdxGame.PPM,gamecam);
-
+        gameOver=new Texture(Gdx.files.internal("gameover.png"));
+		batch= new SpriteBatch();
 		mapLoader = new TmxMapLoader();
 		map = mapLoader.load("first_level_background.tmx");
 		renderer = new OrthogonalTiledMapRenderer(map, 1/MyGdxGame.PPM);
@@ -128,21 +132,29 @@ public class PlayScreen implements Screen{
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
-		update(delta);
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		if(character.getHitpoints() !=0) {
+			update(delta);
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		renderer.render();
-		game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-		hud.stage.draw();
-		b2dr.render(world, gamecam.combined);
-		
-		game.batch.setProjectionMatrix(gamecam.combined);
-		game.batch.begin();
-		character.draw(game.batch);
-		//fireBall.draw(game.batch);
-		drawFireballs();
-		game.batch.end();
+			renderer.render();
+			game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
+			hud.stage.draw();
+			b2dr.render(world, gamecam.combined);
+
+			game.batch.setProjectionMatrix(gamecam.combined);
+			game.batch.begin();
+			character.draw(game.batch);
+			//fireBall.draw(game.batch);
+			drawFireballs();
+			game.batch.end();
+		} else if(character.getHitpoints() ==0){
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            batch.begin();
+			batch.draw(gameOver,10,10);
+			batch.end();
+		}
 		
 		//game.batch.setProjectionMatrix(gamecam.combined);;
 		
