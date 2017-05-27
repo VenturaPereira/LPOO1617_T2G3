@@ -79,7 +79,7 @@ public class FireBall extends Enemy {
         CircleShape shape = new CircleShape();
         shape.setRadius(25/MyGdxGame.PPM);
         fdef1.filter.categoryBits = MyGdxGame.ENEMY_BIT;
-        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.ENEMY_BIT | MyGdxGame.SAMURAI_BIT ;
+        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.ENEMY_BIT | MyGdxGame.SAMURAI_BIT | MyGdxGame.BULLET_BIT;
 
         fdef1.shape = shape;
         b2body.createFixture(fdef1).setUserData(this);

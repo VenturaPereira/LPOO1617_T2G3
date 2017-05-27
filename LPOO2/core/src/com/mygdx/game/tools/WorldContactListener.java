@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.sprites.BlueBullet;
 import com.mygdx.game.sprites.Enemy;
 import com.mygdx.game.sprites.InteractiveTileObject;
 import com.mygdx.game.sprites.Samurai;
@@ -37,17 +38,29 @@ public class WorldContactListener implements ContactListener{
 					((Samurai)fixA.getUserData()).hpLoss();
 
 					System.out.print("i enter here");
-				} else if(fixB.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT){
-					((Enemy)fixB.getUserData()).hit();
-					((Samurai)fixA.getUserData()).hpLoss();
+				} else {
+					if (fixB.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT) {
+						((Enemy) fixB.getUserData()).hit();
+						((Samurai) fixA.getUserData()).hpLoss();
 
-					System.out.print("i enter here2");
+						System.out.print("i enter here2");
+					}
 				}
 				break;
 			case MyGdxGame.WALL_BIT | MyGdxGame.ENEMY_BIT:
 				if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT){
 					((Enemy)fixA.getUserData()).hit();
 				} else if(fixB.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT) {
+					((Enemy) fixB.getUserData()).hit();
+
+				}
+				break;
+			case MyGdxGame.BULLET_BIT | MyGdxGame.ENEMY_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT){
+					((Enemy)fixA.getUserData()).hit();
+					((BlueBullet)fixB.getUserData()).hit();
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT) {
+					((BlueBullet)fixA.getUserData()).hit();
 					((Enemy) fixB.getUserData()).hit();
 
 				}

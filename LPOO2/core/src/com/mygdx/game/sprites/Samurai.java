@@ -121,7 +121,11 @@ public class Samurai extends Sprite{
 
 	public State getState() {
 
-		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) || this.previousState == State.JUMPING && Gdx.input.isButtonPressed(Input.Buttons.LEFT) )
+
+		if(Gdx.input.isKeyPressed(Input.Keys.P)){
+			return State.ATTACKING;
+		}
+		else if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) || this.previousState == State.JUMPING && Gdx.input.isButtonPressed(Input.Buttons.LEFT) )
 			return State.ATTACKING;
 		else if(b2body.getLinearVelocity().y !=0)
 			return State.JUMPING;
