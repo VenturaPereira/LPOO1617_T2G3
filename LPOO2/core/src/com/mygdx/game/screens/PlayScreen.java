@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -43,6 +44,7 @@ public class PlayScreen implements Screen{
 	private OrthographicCamera gamecam;
 	private Viewport gamePort;
 
+	private Music music;
 
 	private Hud hud;
 	private TmxMapLoader mapLoader;
@@ -95,7 +97,9 @@ public class PlayScreen implements Screen{
 
 
 		world.setContactListener(new WorldContactListener());
-
+		music = MyGdxGame.manager.get("music/final_countdown.ogg",Music.class);
+		music.setLooping(true);
+		music.play();
 	}
 
 	public TextureAtlas getSamuraiAtlas(){
