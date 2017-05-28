@@ -3,6 +3,8 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -23,13 +25,14 @@ public class MyGdxGame extends Game {
 	public static final short BULLET_BIT = 16;
 	public static final short FIREBOSS_BIT = 32;
 
-
+    public static AssetManager manager;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-
-		//setScreen(new PlayScreen(this));
+		manager = new AssetManager();
+		manager.load("music/final_countdown.ogg", Music.class);
+        manager.finishLoading();
 		setScreen(new StartMenu(this));
 	}
 	
@@ -37,6 +40,7 @@ public class MyGdxGame extends Game {
 	@Override
 	public void render () {
 		super.render();
+		manager.update();
 	}
 	
 	
