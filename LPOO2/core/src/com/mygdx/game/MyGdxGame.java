@@ -20,6 +20,7 @@ public class MyGdxGame extends Game {
 	public static final short WALL_BIT = 4;
 	public static final short ENEMY_BIT = 8;
 	public static final short BULLET_BIT = 16;
+	public static final short FIREBOSS_BIT = 32;
 
 
 	

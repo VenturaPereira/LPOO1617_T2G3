@@ -25,14 +25,12 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.scenes.Hud;
 import com.mygdx.game.sprites.BlueBullet;
 import com.mygdx.game.sprites.FireBall;
+import com.mygdx.game.sprites.FireBoss;
 import com.mygdx.game.sprites.Samurai;
 import com.mygdx.game.tools.B2WorldCreator;
 import com.mygdx.game.tools.WorldContactListener;
 
 public class PlayScreen implements Screen{
-
-	public static final long FIRE_RATE = 200000000000L;
-
 
 	private Texture gameOver;
 	private SpriteBatch batch;
@@ -58,6 +56,7 @@ public class PlayScreen implements Screen{
 	private Samurai character;
 	private FireBall fireBall;
 	private BlueBullet blueBullet;
+	private FireBoss fireBoss;
 	private ArrayList<FireBall> fireBalls = new ArrayList<FireBall>();
 	private List<BlueBullet> blueBullets = new ArrayList<>();
 
@@ -85,7 +84,7 @@ public class PlayScreen implements Screen{
 		new B2WorldCreator(this);
 
 		character = new Samurai(world,this);
-
+		fireBoss = new FireBoss(this);
 
 
 		hud = new Hud(game.batch, character);
@@ -154,6 +153,32 @@ public class PlayScreen implements Screen{
 
 		fireDelay -= dt;
 
+		if(Gdx.input.isKeyPressed(Input.Keys.P) && Gdx.input.isKeyPressed(Input.Keys.D)){
+			if(fireDelay <= 0){
+				shoot(0);
+				fireDelay += 0.3f;
+			}
+		}
+		else if(Gdx.input.isKeyPressed(Input.Keys.P) &&  Gdx.input.isKeyPressed(Input.Keys.A)){
+			if(fireDelay <= 0){
+				shoot(1);
+				fireDelay += 0.3f;
+			}
+		}
+		else if(Gdx.input.isKeyPressed(Input.Keys.P)){
+			if(character.isWalkingRight()){
+				if(fireDelay <= 0){
+					shoot(0);
+					fireDelay += 0.3f;
+				}
+			}
+			else if(!character.isWalkingRight()){
+				if(fireDelay <= 0){
+					shoot(1);
+					fireDelay += 0.3f;
+				}
+			}
+		}
 		if(Gdx.input.isKeyJustPressed(Input.Keys.W)){
 			character.b2body.applyLinearImpulse(new Vector2(0, 4f), character.b2body.getWorldCenter(), true);
 		}
@@ -165,12 +190,6 @@ public class PlayScreen implements Screen{
 			character.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), character.b2body.getWorldCenter(), true);
 		}
 
-		else if(Gdx.input.isKeyPressed(Input.Keys.P)){
-			if(fireDelay <= 0){
-				shoot(0);
-				fireDelay += 0.3f;
-			}
-		}
 
 
 
@@ -187,6 +206,7 @@ public class PlayScreen implements Screen{
 
 		world.step(1/60f, 6, 2);
 		character.update(dt);
+		fireBoss.update(dt);
 		hud.update();
 		updateFireballs(dt);
 		updateBullets(dt);
@@ -212,6 +232,7 @@ public class PlayScreen implements Screen{
 			game.batch.setProjectionMatrix(gamecam.combined);
 			game.batch.begin();
 			character.draw(game.batch);
+			fireBoss.draw(game.batch);
 			//fireBall.draw(game.batch);
 			drawFireballs();
 			drawBullets();

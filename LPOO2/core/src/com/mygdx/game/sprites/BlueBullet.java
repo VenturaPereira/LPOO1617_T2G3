@@ -54,7 +54,7 @@ public class BlueBullet extends Sprite{
         CircleShape shape = new CircleShape();
         shape.setRadius(15/MyGdxGame.PPM);
         fdef1.filter.categoryBits = MyGdxGame.BULLET_BIT;
-        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.ENEMY_BIT | MyGdxGame.BULLET_BIT;
+        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.ENEMY_BIT | MyGdxGame.BULLET_BIT | MyGdxGame.FIREBOSS_BIT;
 
         fdef1.shape = shape;
         body.createFixture(fdef1).setUserData(this);
@@ -83,4 +83,5 @@ public class BlueBullet extends Sprite{
     public boolean isDestroyed() {
         return destroyed;
     }
+
 }

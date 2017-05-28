@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.BlueBullet;
 import com.mygdx.game.sprites.Enemy;
+import com.mygdx.game.sprites.FireBoss;
 import com.mygdx.game.sprites.InteractiveTileObject;
 import com.mygdx.game.sprites.Samurai;
 
@@ -62,9 +63,21 @@ public class WorldContactListener implements ContactListener{
 				} else if(fixB.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT) {
 					((BlueBullet)fixA.getUserData()).hit();
 					((Enemy) fixB.getUserData()).hit();
-
 				}
 				break;
+			case MyGdxGame.WALL_BIT | MyGdxGame.FIREBOSS_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.WALL_BIT){
+					((FireBoss) fixB.getUserData()).reverseVelocity();
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.WALL_BIT) {
+					((FireBoss) fixA.getUserData()).reverseVelocity();
+				}
+				break;
+			case MyGdxGame.BULLET_BIT | MyGdxGame.FIREBOSS_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.FIREBOSS_BIT){
+					((BlueBullet)fixB.getUserData()).hit();
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.FIREBOSS_BIT) {
+					((BlueBullet)fixA.getUserData()).hit();
+				}
 		}
 	}
 

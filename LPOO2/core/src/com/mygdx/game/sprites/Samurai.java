@@ -146,7 +146,7 @@ public class Samurai extends Sprite{
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(20/MyGdxGame.PPM, 60/MyGdxGame.PPM);
 		fdef1.filter.categoryBits = MyGdxGame.SAMURAI_BIT;
-		fdef1.filter.maskBits = MyGdxGame.SAMURAI_BIT | MyGdxGame.GROUND_BIT | MyGdxGame.ENEMY_BIT| MyGdxGame.WALL_BIT;
+		fdef1.filter.maskBits = MyGdxGame.SAMURAI_BIT | MyGdxGame.GROUND_BIT | MyGdxGame.ENEMY_BIT| MyGdxGame.WALL_BIT | MyGdxGame.FIREBOSS_BIT;
 
 		fdef1.shape = shape;
 		b2body.createFixture(fdef1).setUserData(this);
@@ -171,7 +171,7 @@ public class Samurai extends Sprite{
 
 	}
 
-
-
-	
+	public boolean isWalkingRight() {
+		return walkingRight;
+	}
 }
