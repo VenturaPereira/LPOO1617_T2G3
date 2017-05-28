@@ -56,8 +56,8 @@ public class Hud {
     public void update(){
       life=this.character.getHitpoints();
         scoreLabel.setText(String.format("%03d",life));
-
     }
+
 
 
 }
