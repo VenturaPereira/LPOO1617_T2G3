@@ -180,7 +180,9 @@ public class PlayScreen implements Screen{
 			}
 		}
 		if(Gdx.input.isKeyJustPressed(Input.Keys.W)){
-			character.b2body.applyLinearImpulse(new Vector2(0, 4f), character.b2body.getWorldCenter(), true);
+			if(character.getY() < 3) {
+				character.b2body.applyLinearImpulse(new Vector2(0, 5f), character.b2body.getWorldCenter(), true);
+			}
 		}
 
 		else if(Gdx.input.isKeyPressed(Input.Keys.D) && character.b2body.getLinearVelocity().x <= 2){
