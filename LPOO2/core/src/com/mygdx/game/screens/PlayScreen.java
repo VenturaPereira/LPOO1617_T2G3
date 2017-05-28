@@ -29,6 +29,7 @@ import com.mygdx.game.sprites.FireBall;
 import com.mygdx.game.sprites.FireBoss;
 import com.mygdx.game.sprites.Samurai;
 import com.mygdx.game.tools.B2WorldCreator;
+import com.mygdx.game.tools.Trigger;
 import com.mygdx.game.tools.WorldContactListener;
 
 public class PlayScreen implements Screen{
@@ -61,6 +62,7 @@ public class PlayScreen implements Screen{
 	private FireBoss fireBoss;
 	private ArrayList<FireBall> fireBalls = new ArrayList<FireBall>();
 	private List<BlueBullet> blueBullets = new ArrayList<>();
+	private Trigger trigger;
 
 	private float fireDelay;
 
@@ -87,6 +89,7 @@ public class PlayScreen implements Screen{
 
 		character = new Samurai(world,this);
 		fireBoss = new FireBoss(this);
+		trigger = new Trigger(this, 2300f, 150f);
 
 
 		hud = new Hud(game.batch, character);
@@ -120,6 +123,9 @@ public class PlayScreen implements Screen{
 		return character;
 	}
 
+	public FireBoss getFireBoss() {
+		return fireBoss;
+	}
 
 	public void shoot(int i){
 
@@ -216,6 +222,7 @@ public class PlayScreen implements Screen{
 		hud.update();
 		updateFireballs(dt);
 		updateBullets(dt);
+		updateTrigger(dt);
 		gamecam.position.x = character.b2body.getPosition().x;
 		gamecam.update();
 		renderer.setView(gamecam);
@@ -341,6 +348,12 @@ public class PlayScreen implements Screen{
 		for(int i = 0; i < blueBullets.size(); i++){
 			if(!blueBullets.get(i).isDestroyed())
 				blueBullets.get(i).update(dt);
+		}
+	}
+
+	public void updateTrigger(float dt){
+		if(!trigger.isDestroyed()){
+			trigger.update(dt);
 		}
 	}
 

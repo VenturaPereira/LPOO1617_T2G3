@@ -78,6 +78,14 @@ public class WorldContactListener implements ContactListener{
 				} else if(fixB.getFilterData().categoryBits == MyGdxGame.FIREBOSS_BIT) {
 					((BlueBullet)fixA.getUserData()).hit();
 				}
+			case MyGdxGame.TRIGGER_BIT | MyGdxGame.SAMURAI_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT){
+					((Trigger)fixB.getUserData()).hit();
+					((Trigger)fixB.getUserData()).startFireboss();
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT) {
+					((Trigger)fixA.getUserData()).hit();
+					((Trigger)fixA.getUserData()).startFireboss();
+				}
 		}
 	}
 

@@ -23,20 +23,25 @@ public class FireBoss extends Boss{
     Body body;
     private Array<TextureRegion> frames;
     private Animation idleAnimation;
+    private Animation runningAnimation;
     private float stateTime;
     private Vector2 velocity;
+    private boolean stage1;
 
     public FireBoss(PlayScreen screen){
         super(screen);
         frames = new Array<TextureRegion>();
         frames.add(new TextureRegion(screen.getFirebossAtlas().findRegion("fire_boss_spritesheet"), 3, 1, 40, 53));
         frames.add(new TextureRegion(screen.getFirebossAtlas().findRegion("fire_boss_spritesheet"), 40, 1, 40, 53));
-
         idleAnimation = new Animation(0.8f, frames);
+        frames.clear();
+
+
         stateTime = 0;
         setBounds(0, 0, 252/MyGdxGame.PPM, 300/MyGdxGame.PPM);
 
         velocity = new Vector2(-4,0);
+        stage1 = false;
 
 
     }
@@ -45,13 +50,14 @@ public class FireBoss extends Boss{
         stateTime += dt;
         setPosition(body.getPosition().x - getWidth()/1.7f, body.getPosition().y-getHeight()/2f);
         setRegion((TextureRegion) idleAnimation.getKeyFrame(stateTime, true));
-        body.setLinearVelocity(velocity);
+        if(stage1)
+            body.setLinearVelocity(velocity);
     }
 
     @Override
     protected void defineBoss() {
         BodyDef bdef  = new BodyDef();
-        bdef.position.set(2050/ MyGdxGame.PPM, 150/MyGdxGame.PPM);
+        bdef.position.set(2500/ MyGdxGame.PPM, 150/MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(bdef);
 
@@ -69,5 +75,7 @@ public class FireBoss extends Boss{
         velocity.x = -velocity.x;
     }
 
-
+    public void setStage1(boolean stage1) {
+        this.stage1 = stage1;
+    }
 }
