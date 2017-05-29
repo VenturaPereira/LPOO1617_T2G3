@@ -137,10 +137,10 @@ public class PlayScreen implements Screen{
 		Vector2 velocity = new Vector2();
 
 		if(i == 0){
-			velocity = new Vector2(3.5f,0);
+			velocity = new Vector2(4.5f,0);
 		}
 		else if(i == 1){
-			velocity = new Vector2(-3,0);
+			velocity = new Vector2(-5,0);
 		}
 		else if(i == 2){
 			velocity = new Vector2(0,2);
