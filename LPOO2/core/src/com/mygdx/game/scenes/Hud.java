@@ -21,7 +21,7 @@ public class Hud {
     private Viewport viewport;
     private Integer life;
     private Samurai character;
-
+    private Table table;
     Label scoreLabel;
     Label level;
     Label world;
@@ -34,7 +34,7 @@ public class Hud {
         stage = new Stage(viewport, sb);
 
 
-        Table table = new Table();
+        this.table = new Table();
         table.top();
         table.setFillParent(true);
         scoreLabel=new Label(String.format("%03d",life), new Label.LabelStyle(new BitmapFont(), Color.WHITE));

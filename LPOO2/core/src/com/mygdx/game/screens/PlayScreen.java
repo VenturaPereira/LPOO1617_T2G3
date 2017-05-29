@@ -24,6 +24,7 @@ import com.badlogic.gdx.utils.viewport.*;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.scenes.Hud;
+import com.mygdx.game.scenes.HudBoss;
 import com.mygdx.game.sprites.BlueBullet;
 import com.mygdx.game.sprites.FireBall;
 import com.mygdx.game.sprites.FireBoss;
@@ -48,6 +49,7 @@ public class PlayScreen implements Screen{
 	private Music music;
 
 	private Hud hud;
+	private HudBoss hudBoss;
 	private TmxMapLoader mapLoader;
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;
@@ -93,6 +95,7 @@ public class PlayScreen implements Screen{
 
 
 		hud = new Hud(game.batch, character);
+		hudBoss= new HudBoss(game.batch, character,fireBoss);
 		//fireBall = new FireBall(this, .32f, 0.32f);
 		rainingFire();
 
@@ -219,7 +222,13 @@ public class PlayScreen implements Screen{
 		world.step(1/60f, 6, 2);
 		character.update(dt);
 		fireBoss.update(dt);
-		hud.update();
+		if(!fireBoss.getActivated()) {
+			hud.update();
+		}else if(fireBoss.getActivated()){
+
+			hudBoss.update();
+		}
+
 		updateFireballs(dt);
 		updateBullets(dt);
 		updateTrigger(dt);
@@ -239,7 +248,12 @@ public class PlayScreen implements Screen{
 
 			renderer.render();
 			game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
-			hud.stage.draw();
+			if(!fireBoss.getActivated()) {
+				hud.stage.draw();
+			}else if(fireBoss.getActivated()){
+				hud.stage.dispose();
+				hudBoss.stage.draw();
+			}
 			b2dr.render(world, gamecam.combined);
 
 			game.batch.setProjectionMatrix(gamecam.combined);
