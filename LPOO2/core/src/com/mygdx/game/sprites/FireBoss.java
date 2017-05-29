@@ -27,7 +27,8 @@ public class FireBoss extends Boss{
     private float stateTime;
     private Vector2 velocity;
     private boolean stage1;
-
+    private int bossHp;
+    private boolean activated;
     public FireBoss(PlayScreen screen){
         super(screen);
         frames = new Array<TextureRegion>();
@@ -42,8 +43,15 @@ public class FireBoss extends Boss{
 
         velocity = new Vector2(-4,0);
         stage1 = false;
+        activated=false;
+        bossHp=300;
 
-
+    }
+    public void setActivated(boolean bool){
+        this.activated=bool;
+    }
+    public boolean getActivated(){
+        return activated;
     }
 
     public void update(float dt){
@@ -77,5 +85,9 @@ public class FireBoss extends Boss{
 
     public void setStage1(boolean stage1) {
         this.stage1 = stage1;
+    }
+
+    public int getBossHp() {
+        return bossHp;
     }
 }

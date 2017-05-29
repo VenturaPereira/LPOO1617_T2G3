@@ -70,6 +70,7 @@ public class Trigger{
     }
 
     public void startFireboss(){
+        fireBoss.setActivated(true);
         fireBoss.setStage1(true);
     }
 }
