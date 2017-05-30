@@ -25,6 +25,7 @@ public class MyGdxGame extends Game {
 	public static final short BULLET_BIT = 16;
 	public static final short FIREBOSS_BIT = 32;
 	public static final short TRIGGER_BIT = 64;
+	public static final short FIREBOSS_HEAD_BIT = 128;
 
     public static AssetManager manager;
 	

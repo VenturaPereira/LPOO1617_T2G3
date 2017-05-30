@@ -30,7 +30,7 @@ public class FireBall extends Enemy {
     private boolean destroyed;
 
 
-    public FireBall(PlayScreen screen, float x, float y, int distance) {
+    public FireBall(PlayScreen screen, float x, float y, float distance) {
 
         super(screen, x, y, distance);
         frames = new Array<TextureRegion>();
@@ -71,15 +71,16 @@ public class FireBall extends Enemy {
     @Override
     protected void defineEnemy() {
         BodyDef bdef  = new BodyDef();
-        bdef.position.set(distance/MyGdxGame.PPM, randomHeightBetween(50, 400)/MyGdxGame.PPM);
+        bdef.position.set(distance/MyGdxGame.PPM, randomHeightBetween(50, 500)/MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
+        b2body.isBullet();
 
         FixtureDef fdef1 = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(25/MyGdxGame.PPM);
         fdef1.filter.categoryBits = MyGdxGame.ENEMY_BIT;
-        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.ENEMY_BIT | MyGdxGame.SAMURAI_BIT | MyGdxGame.BULLET_BIT;
+        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.ENEMY_BIT | MyGdxGame.SAMURAI_BIT | MyGdxGame.BULLET_BIT;
 
         fdef1.shape = shape;
         b2body.createFixture(fdef1).setUserData(this);

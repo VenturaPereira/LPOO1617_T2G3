@@ -21,7 +21,6 @@ public class WorldContactListener implements ContactListener{
 	public void beginContact(Contact contact) {
 		Fixture fixA = contact.getFixtureA();
 		Fixture fixB = contact.getFixtureB();
-		System.out.println("contact");
 		int cDef= fixA.getFilterData().categoryBits | fixB.getFilterData().categoryBits;
 		if(fixA.getUserData() == "katana" || fixB.getUserData() == "katana"){
 			Fixture katana = fixA.getUserData() == "katana" ? fixA : fixB;
@@ -36,15 +35,11 @@ public class WorldContactListener implements ContactListener{
 			case MyGdxGame.ENEMY_BIT | MyGdxGame.SAMURAI_BIT:
 				if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT){
 					((Enemy)fixA.getUserData()).hit();
-					((Samurai)fixA.getUserData()).hpLoss();
-
-					System.out.print("i enter here");
+					((Samurai)fixA.getUserData()).hpLoss(10);
 				} else {
 					if (fixB.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT) {
 						((Enemy) fixB.getUserData()).hit();
-						((Samurai) fixA.getUserData()).hpLoss();
-
-						System.out.print("i enter here2");
+						((Samurai) fixA.getUserData()).hpLoss(10);
 					}
 				}
 				break;
@@ -85,8 +80,15 @@ public class WorldContactListener implements ContactListener{
 					((Trigger)fixB.getUserData()).startFireboss();
 				} else if(fixB.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT) {
 					((Trigger)fixA.getUserData()).hit();
-
 					((Trigger)fixA.getUserData()).startFireboss();
+				}
+			case MyGdxGame.FIREBOSS_HEAD_BIT | MyGdxGame.BULLET_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.FIREBOSS_HEAD_BIT){
+					((FireBoss)fixA.getUserData()).damage(10);
+					((BlueBullet)fixB.getUserData()).hit();
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.FIREBOSS_HEAD_BIT) {
+					((FireBoss)fixB.getUserData()).damage(10);
+					((BlueBullet)fixA.getUserData()).hit();
 				}
 		}
 	}

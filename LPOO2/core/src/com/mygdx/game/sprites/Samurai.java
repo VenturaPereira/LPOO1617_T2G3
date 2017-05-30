@@ -73,11 +73,11 @@ public class Samurai extends Sprite{
 		setRegion(getFrame(dt));
 
 	}
-	public void hpLoss(){
-		if(hitpoints-25 <=0){
+	public void hpLoss(int h){
+		if(hitpoints-h <=0){
 			hitpoints=0;
 		}else {
-			hitpoints = hitpoints - 25;
+			hitpoints = hitpoints - h;
 		}
 	}
 	public int getHitpoints() {
@@ -146,7 +146,7 @@ public class Samurai extends Sprite{
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(20/MyGdxGame.PPM, 60/MyGdxGame.PPM);
 		fdef1.filter.categoryBits = MyGdxGame.SAMURAI_BIT;
-		fdef1.filter.maskBits = MyGdxGame.SAMURAI_BIT | MyGdxGame.GROUND_BIT | MyGdxGame.ENEMY_BIT| MyGdxGame.WALL_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.TRIGGER_BIT;
+		fdef1.filter.maskBits = MyGdxGame.SAMURAI_BIT | MyGdxGame.GROUND_BIT | MyGdxGame.ENEMY_BIT| MyGdxGame.WALL_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.TRIGGER_BIT | MyGdxGame.FIREBOSS_HEAD_BIT;
 
 		fdef1.shape = shape;
 		b2body.createFixture(fdef1).setUserData(this);

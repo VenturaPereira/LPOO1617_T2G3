@@ -16,15 +16,15 @@ public abstract class Enemy extends Sprite{
     protected PlayScreen screen;
     public Body b2body;
     public Vector2 velocity;
-    public int distance;
+    public float distance;
 
-    public Enemy(PlayScreen screen, float x, float y, int distance){
+    public Enemy(PlayScreen screen, float x, float y, float distance){
       this.world = screen.getWorld();
       this.screen = screen;
       this.distance = distance;
       setPosition(x,y);
       defineEnemy();
-      velocity = new Vector2(-3,.1f);
+      velocity = new Vector2(-3,0);
     }
 
     protected abstract void defineEnemy();

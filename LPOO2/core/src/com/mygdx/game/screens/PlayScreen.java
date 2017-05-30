@@ -60,13 +60,17 @@ public class PlayScreen implements Screen{
 
 	private Samurai character;
 	private FireBall fireBall;
+	private FireBall fireBall1;
+	private FireBall fireBall2;
 	private BlueBullet blueBullet;
 	private FireBoss fireBoss;
 	private ArrayList<FireBall> fireBalls = new ArrayList<FireBall>();
+	private ArrayList<FireBall> bossFireBalls = new ArrayList<FireBall>();
 	private List<BlueBullet> blueBullets = new ArrayList<>();
 	private Trigger trigger;
 
 	private float fireDelay;
+	private float ballDelay;
 
 	public PlayScreen(MyGdxGame game) {
 		samuraiAtlas = new TextureAtlas("SamuraiGame.pack");
@@ -75,6 +79,7 @@ public class PlayScreen implements Screen{
 		blueBulletAtlas = new TextureAtlas("BlueBullet.pack");
 		this.game = game;
 		gamecam = new OrthographicCamera();
+		gamecam.zoom += 0.7f;
 		gamePort = new FitViewport(1200/ MyGdxGame.PPM, 800/MyGdxGame.PPM,gamecam);
 		gameOver=new Texture(Gdx.files.internal("gameover.png"));
 		batch= new SpriteBatch();
@@ -92,12 +97,15 @@ public class PlayScreen implements Screen{
 		character = new Samurai(world,this);
 		fireBoss = new FireBoss(this);
 		trigger = new Trigger(this, 2300f, 150f);
-
+		fireBalls = new ArrayList<FireBall>();
 
 		hud = new Hud(game.batch, character);
 		hudBoss= new HudBoss(game.batch, character,fireBoss);
+		fireDelay = 0;
+		ballDelay = 0;
 		//fireBall = new FireBall(this, .32f, 0.32f);
-		rainingFire();
+
+
 
 
 
@@ -135,7 +143,6 @@ public class PlayScreen implements Screen{
 
 		BlueBullet blueBullet = new BlueBullet(this);
 
-
 		blueBullets.add(blueBullet);
 		Vector2 velocity = new Vector2();
 
@@ -165,30 +172,29 @@ public class PlayScreen implements Screen{
 	public void handleInput(float dt) {
 
 		fireDelay -= dt;
-
 		if(Gdx.input.isKeyPressed(Input.Keys.P) && Gdx.input.isKeyPressed(Input.Keys.D)){
 			if(fireDelay <= 0){
 				shoot(0);
-				fireDelay += 0.3f;
+				fireDelay = 0.3f;
 			}
 		}
 		else if(Gdx.input.isKeyPressed(Input.Keys.P) &&  Gdx.input.isKeyPressed(Input.Keys.A)){
 			if(fireDelay <= 0){
 				shoot(1);
-				fireDelay += 0.3f;
+				fireDelay = 0.3f;
 			}
 		}
 		else if(Gdx.input.isKeyPressed(Input.Keys.P)){
 			if(character.isWalkingRight()){
 				if(fireDelay <= 0){
 					shoot(0);
-					fireDelay += 0.3f;
+					fireDelay = 0.3f;
 				}
 			}
 			else if(!character.isWalkingRight()){
 				if(fireDelay <= 0){
 					shoot(1);
-					fireDelay += 0.3f;
+					fireDelay = 0.3f;
 				}
 			}
 		}
@@ -217,11 +223,16 @@ public class PlayScreen implements Screen{
 	}
 
 	public void update(float dt){
+
+		//fireBalls.add(fireBall);
 		handleInput(dt);
 
 		world.step(1/60f, 6, 2);
 		character.update(dt);
-		fireBoss.update(dt);
+		if(!fireBoss.isDefeated()){
+			fireBoss.update(dt);
+		}
+
 		if(!fireBoss.getActivated()) {
 			hud.update();
 		}else if(fireBoss.getActivated()){
@@ -229,6 +240,21 @@ public class PlayScreen implements Screen{
 			hudBoss.update();
 		}
 
+		ballDelay -= dt;
+		if(fireBoss.isStage2()) {
+			if (ballDelay <= 0) {
+				shootFireball();
+				ballDelay = 2.1f;
+			}
+		}
+		else if(fireBoss.isStage3()){
+			if (ballDelay <= 0) {
+				shootFireball();
+				shootFireball();
+				shootFireball();
+				ballDelay = 3f;
+			}
+		}
 		updateFireballs(dt);
 		updateBullets(dt);
 		updateTrigger(dt);
@@ -259,7 +285,11 @@ public class PlayScreen implements Screen{
 			game.batch.setProjectionMatrix(gamecam.combined);
 			game.batch.begin();
 			character.draw(game.batch);
-			fireBoss.draw(game.batch);
+			if(!fireBoss.isDefeated())
+				fireBoss.draw(game.batch);
+			if(fireBoss.isStage2()){
+				drawBossFireballs();
+			}
 			//fireBall.draw(game.batch);
 			drawFireballs();
 			drawBullets();
@@ -319,16 +349,10 @@ public class PlayScreen implements Screen{
 
 	}
 
-	public void rainingFire(){
-
-		int height = 1000;
-
-		for(int i = 0; i < 300; i++) {
-			fireBall = new FireBall(this, .32f, 0.32f, height);
-			fireBalls.add(fireBall);
-			if(height < 100000)
-				height += 500;
-		}
+	public void shootFireball(){
+		int height = 3800;
+		fireBall = new FireBall(this, .32f, 0.32f, height);
+		fireBalls.add(fireBall);
 	}
 
 
@@ -351,23 +375,57 @@ public class PlayScreen implements Screen{
 	}
 
 	public void updateFireballs(float dt){
-		for(int i = 0; i < fireBalls.size(); i++) {
-			if (!fireBalls.get(i).getDestroyed()) {
-				fireBalls.get(i).update(dt);
+		if(!fireBalls.isEmpty()) {
+			for (int i = 0; i < fireBalls.size(); i++) {
+				if (!fireBalls.get(i).getDestroyed()) {
+					fireBalls.get(i).update(dt);
+				}
 			}
 		}
 	}
 
 	public void updateBullets(float dt){
-		for(int i = 0; i < blueBullets.size(); i++){
-			if(!blueBullets.get(i).isDestroyed())
-				blueBullets.get(i).update(dt);
+
+		if(!blueBullets.isEmpty()) {
+			for (int i = 0; i < blueBullets.size(); i++) {
+				if (!blueBullets.get(i).isDestroyed())
+					blueBullets.get(i).update(dt);
+			}
 		}
 	}
 
 	public void updateTrigger(float dt){
 		if(!trigger.isDestroyed()){
 			trigger.update(dt);
+		}
+	}
+
+
+	public void bossFireballs(){
+		for(int i = 0; i < 10; i++) {
+			if(i < 5){
+				bossFireBalls.add(fireBall1);
+			}
+			else if(i >= 5){
+				fireBall2.b2body.setLinearVelocity(new Vector2(3,0));
+				bossFireBalls.add(fireBall2);
+			}
+		}
+	}
+
+	public void updateBossFireballs(float dt){
+		for(int i = 0; i < bossFireBalls.size(); i++) {
+			if (!bossFireBalls.get(i).getDestroyed()) {
+				bossFireBalls.get(i).update(dt);
+			}
+		}
+	}
+
+	public void drawBossFireballs(){
+		for(int i = 0; i < bossFireBalls.size(); i++) {
+			if (!bossFireBalls.get(i).getDestroyed()) {
+				bossFireBalls.get(i).draw(game.batch);
+			}
 		}
 	}
 
