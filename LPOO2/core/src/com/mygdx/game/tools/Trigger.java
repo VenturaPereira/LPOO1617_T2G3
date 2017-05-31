@@ -47,7 +47,7 @@ public class Trigger{
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(10/MyGdxGame.PPM, 10/MyGdxGame.PPM);
         fdef1.filter.categoryBits = MyGdxGame.TRIGGER_BIT;
-        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.ENEMY_BIT | MyGdxGame.SAMURAI_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.BULLET_BIT | MyGdxGame.TRIGGER_BIT;
+        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.FIREBALL_BIT | MyGdxGame.SAMURAI_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.BULLET_BIT | MyGdxGame.TRIGGER_BIT;
 
         fdef1.shape = shape;
         body.createFixture(fdef1).setUserData(this);

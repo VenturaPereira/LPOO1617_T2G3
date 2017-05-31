@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.BlueBullet;
 import com.mygdx.game.sprites.Enemy;
+import com.mygdx.game.sprites.FireBall;
 import com.mygdx.game.sprites.FireBoss;
 import com.mygdx.game.sprites.InteractiveTileObject;
 import com.mygdx.game.sprites.Samurai;
@@ -32,32 +33,32 @@ public class WorldContactListener implements ContactListener{
 		}
 
 		switch (cDef){
-			case MyGdxGame.ENEMY_BIT | MyGdxGame.SAMURAI_BIT:
-				if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT){
-					((Enemy)fixA.getUserData()).hit();
+			case MyGdxGame.FIREBALL_BIT | MyGdxGame.SAMURAI_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT){
+					((FireBall)fixA.getUserData()).hit();
 					((Samurai)fixA.getUserData()).hpLoss(10);
 				} else {
-					if (fixB.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT) {
-						((Enemy) fixB.getUserData()).hit();
+					if (fixB.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT) {
+						((FireBall) fixB.getUserData()).hit();
 						((Samurai) fixA.getUserData()).hpLoss(10);
 					}
 				}
 				break;
-			case MyGdxGame.WALL_BIT | MyGdxGame.ENEMY_BIT:
-				if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT){
-					((Enemy)fixA.getUserData()).hit();
-				} else if(fixB.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT) {
-					((Enemy) fixB.getUserData()).hit();
+			case MyGdxGame.WALL_BIT | MyGdxGame.FIREBALL_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT){
+					((FireBall)fixA.getUserData()).hit();
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT) {
+					((FireBall) fixB.getUserData()).hit();
 
 				}
 				break;
-			case MyGdxGame.BULLET_BIT | MyGdxGame.ENEMY_BIT:
-				if(fixA.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT){
-					((Enemy)fixA.getUserData()).hit();
+			case MyGdxGame.BULLET_BIT | MyGdxGame.FIREBALL_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT){
+					((FireBall)fixA.getUserData()).hit();
 					((BlueBullet)fixB.getUserData()).hit();
-				} else if(fixB.getFilterData().categoryBits == MyGdxGame.ENEMY_BIT) {
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT) {
 					((BlueBullet)fixA.getUserData()).hit();
-					((Enemy) fixB.getUserData()).hit();
+					((FireBall) fixB.getUserData()).hit();
 				}
 				break;
 			case MyGdxGame.WALL_BIT | MyGdxGame.FIREBOSS_BIT:
@@ -84,10 +85,10 @@ public class WorldContactListener implements ContactListener{
 				}
 			case MyGdxGame.FIREBOSS_HEAD_BIT | MyGdxGame.BULLET_BIT:
 				if(fixA.getFilterData().categoryBits == MyGdxGame.FIREBOSS_HEAD_BIT){
-					((FireBoss)fixA.getUserData()).damage(10);
+					((FireBoss)fixA.getUserData()).damage(100);
 					((BlueBullet)fixB.getUserData()).hit();
 				} else if(fixB.getFilterData().categoryBits == MyGdxGame.FIREBOSS_HEAD_BIT) {
-					((FireBoss)fixB.getUserData()).damage(10);
+					((FireBoss)fixB.getUserData()).damage(100);
 					((BlueBullet)fixA.getUserData()).hit();
 				}
 		}
@@ -109,5 +110,6 @@ public class WorldContactListener implements ContactListener{
 		// TODO Auto-generated method stub
 		
 	}
+
 	
 }

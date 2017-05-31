@@ -24,8 +24,6 @@ public class FireBall extends Enemy {
     private float stateTime;
     private Animation walkAnimation;
     private Array<TextureRegion> frames;
-    private Samurai samurai;
-    private float timeToShoot;
     private boolean setToDestroy;
     private boolean destroyed;
 
@@ -79,8 +77,8 @@ public class FireBall extends Enemy {
         FixtureDef fdef1 = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(25/MyGdxGame.PPM);
-        fdef1.filter.categoryBits = MyGdxGame.ENEMY_BIT;
-        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.ENEMY_BIT | MyGdxGame.SAMURAI_BIT | MyGdxGame.BULLET_BIT;
+        fdef1.filter.categoryBits = MyGdxGame.FIREBALL_BIT;
+        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.FIREBALL_BIT | MyGdxGame.SAMURAI_BIT | MyGdxGame.BULLET_BIT;
 
         fdef1.shape = shape;
         b2body.createFixture(fdef1).setUserData(this);
@@ -92,10 +90,9 @@ public class FireBall extends Enemy {
         //System.out.print("riiip");
     }
 
+    @Override
     public int randomHeightBetween(int min, int max){
-        Random r = new Random();
-
-        return r.nextInt(max-min) + min;
+       return super.randomHeightBetween(min, max);
     }
 
 

@@ -6,6 +6,8 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.screens.PlayScreen;
 
+import java.util.Random;
+
 /**
  * Created by Luís on 16/05/2017.
  */
@@ -29,6 +31,12 @@ public abstract class Enemy extends Sprite{
 
     protected abstract void defineEnemy();
     public abstract void hit();
+
+    public int randomHeightBetween(int min, int max){
+        Random r = new Random();
+
+        return r.nextInt(max-min) + min;
+    }
 
 
 }

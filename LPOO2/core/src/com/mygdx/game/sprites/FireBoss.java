@@ -110,10 +110,13 @@ public class FireBoss extends Boss{
             stage3 = false;
             body.setLinearVelocity(new Vector2(0, 0));
             setRegion((TextureRegion) defeatedAnimation.getKeyFrame(stateTime, false));
+            defeated = true;
           /*  if(delta <= -2f) {
                 world.destroyBody(body);
                 defeated = true;
-            }*/
+
+
+         }*/
         }
     }
 

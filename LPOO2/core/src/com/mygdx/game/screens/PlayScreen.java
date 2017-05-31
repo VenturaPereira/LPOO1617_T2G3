@@ -25,6 +25,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.scenes.Hud;
 import com.mygdx.game.scenes.HudBoss;
+import com.mygdx.game.sprites.Bat;
 import com.mygdx.game.sprites.BlueBullet;
 import com.mygdx.game.sprites.FireBall;
 import com.mygdx.game.sprites.FireBoss;
@@ -42,6 +43,7 @@ public class PlayScreen implements Screen{
 	private TextureAtlas samuraiAtlas;
 	private TextureAtlas enemiesAtlas;
 	private TextureAtlas firebossAtlas;
+	private TextureAtlas batAtlas;
 	private TextureAtlas blueBulletAtlas;
 	private OrthographicCamera gamecam;
 	private Viewport gamePort;
@@ -60,13 +62,13 @@ public class PlayScreen implements Screen{
 
 	private Samurai character;
 	private FireBall fireBall;
-	private FireBall fireBall1;
-	private FireBall fireBall2;
+	private Bat bat;
 	private BlueBullet blueBullet;
 	private FireBoss fireBoss;
 	private ArrayList<FireBall> fireBalls = new ArrayList<FireBall>();
 	private ArrayList<FireBall> bossFireBalls = new ArrayList<FireBall>();
 	private List<BlueBullet> blueBullets = new ArrayList<>();
+	private ArrayList<Bat> bats = new ArrayList<Bat>();
 	private Trigger trigger;
 
 	private float fireDelay;
@@ -77,9 +79,10 @@ public class PlayScreen implements Screen{
 		enemiesAtlas = new TextureAtlas("Enemies.pack");
 		firebossAtlas = new TextureAtlas("FireBoss.pack");
 		blueBulletAtlas = new TextureAtlas("BlueBullet.pack");
+		batAtlas = new TextureAtlas("Bat.pack");
 		this.game = game;
 		gamecam = new OrthographicCamera();
-		gamecam.zoom += 0.7f;
+		gamecam.zoom += 0.5f;
 		gamePort = new FitViewport(1200/ MyGdxGame.PPM, 800/MyGdxGame.PPM,gamecam);
 		gameOver=new Texture(Gdx.files.internal("gameover.png"));
 		batch= new SpriteBatch();
@@ -98,15 +101,13 @@ public class PlayScreen implements Screen{
 		fireBoss = new FireBoss(this);
 		trigger = new Trigger(this, 2300f, 150f);
 		fireBalls = new ArrayList<FireBall>();
+		bats = new ArrayList<Bat>();
 
 		hud = new Hud(game.batch, character);
 		hudBoss= new HudBoss(game.batch, character,fireBoss);
 		fireDelay = 0;
 		ballDelay = 0;
 		//fireBall = new FireBall(this, .32f, 0.32f);
-
-
-
 
 
 
@@ -124,6 +125,10 @@ public class PlayScreen implements Screen{
 
 	public TextureAtlas getFirebossAtlas() {
 		return firebossAtlas;
+	}
+
+	public TextureAtlas getBatAtlas() {
+		return batAtlas;
 	}
 
 	public TextureAtlas getBlueBullet() {
@@ -211,12 +216,6 @@ public class PlayScreen implements Screen{
 			character.b2body.applyLinearImpulse(new Vector2(-0.1f, 0), character.b2body.getWorldCenter(), true);
 		}
 
-
-
-
-
-
-
 		/*else if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT))
 			character.endsAttack();*/
 
@@ -252,9 +251,17 @@ public class PlayScreen implements Screen{
 				shootFireball();
 				shootFireball();
 				shootFireball();
+				shootFireball();
 				ballDelay = 3f;
 			}
 		}
+		else if(fireBoss.isDefeated()){
+			if(ballDelay <= 0) {
+				createBat();
+				ballDelay = 3f;
+			}
+		}
+		updateBats(dt);
 		updateFireballs(dt);
 		updateBullets(dt);
 		updateTrigger(dt);
@@ -293,6 +300,7 @@ public class PlayScreen implements Screen{
 			//fireBall.draw(game.batch);
 			drawFireballs();
 			drawBullets();
+			drawBats();
 			game.batch.end();
 		} else if(character.getHitpoints() ==0){
 			Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -355,6 +363,19 @@ public class PlayScreen implements Screen{
 		fireBalls.add(fireBall);
 	}
 
+	public void createBat(){
+		int height = 5050;
+		bat = new Bat(this, .32f, 0.32f, height);
+		bats.add(bat);
+	}
+
+	public void drawBats(){
+		if(!bats.isEmpty()) {
+			for (int i = 0; i < bats.size(); i++) {
+				bats.get(i).draw(game.batch);
+			}
+		}
+	}
 
 	public void drawFireballs(){
 		for(int i = 0; i < fireBalls.size(); i++) {
@@ -400,23 +421,10 @@ public class PlayScreen implements Screen{
 		}
 	}
 
-
-	public void bossFireballs(){
-		for(int i = 0; i < 10; i++) {
-			if(i < 5){
-				bossFireBalls.add(fireBall1);
-			}
-			else if(i >= 5){
-				fireBall2.b2body.setLinearVelocity(new Vector2(3,0));
-				bossFireBalls.add(fireBall2);
-			}
-		}
-	}
-
-	public void updateBossFireballs(float dt){
-		for(int i = 0; i < bossFireBalls.size(); i++) {
-			if (!bossFireBalls.get(i).getDestroyed()) {
-				bossFireBalls.get(i).update(dt);
+	public void updateBats(float dt){
+		if(!bats.isEmpty()) {
+			for (int i = 0; i < bats.size(); i++) {
+				bats.get(i).update(dt);
 			}
 		}
 	}
