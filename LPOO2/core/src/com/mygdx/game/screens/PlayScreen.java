@@ -203,6 +203,11 @@ public class PlayScreen implements Screen{
 				}
 			}
 		}
+		if (Gdx.input.isKeyPressed(Input.Keys.E)) {
+			game.setScreen(new PauseScreen(this,(MyGdxGame) game));
+			music.stop();
+            //dispose();
+		}
 		if(Gdx.input.isKeyJustPressed(Input.Keys.W)){
 			if(character.getY() < 3) {
 				character.b2body.applyLinearImpulse(new Vector2(0, 5f), character.b2body.getWorldCenter(), true);
@@ -306,7 +311,7 @@ public class PlayScreen implements Screen{
 			Gdx.gl.glClearColor(0, 0, 0, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			batch.begin();
-			batch.draw(gameOver,10,10);
+			batch.draw(gameOver,10,10,1200,600);
 			batch.end();
 		}
 
@@ -320,7 +325,9 @@ public class PlayScreen implements Screen{
 		// TODO Auto-generated method stub
 		gamePort.update(width, height);
 	}
-
+    public  Music getMusic(){
+		return music;
+	}
 	public TiledMap getMap() {
 		return map;
 	}

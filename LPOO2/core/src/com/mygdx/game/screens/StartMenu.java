@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
@@ -26,7 +27,7 @@ import static com.mygdx.game.MyGdxGame.PPM;
 
 public class StartMenu implements Screen{
 
-    private Viewport viewport;
+    private FillViewport viewport;
     private Stage stage;
     private Texture start;
    private SpriteBatch batch;
@@ -34,7 +35,7 @@ public class StartMenu implements Screen{
 
     public StartMenu(Game game){
         this.game=game;
-        viewport=new FitViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
+        viewport=new FillViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, ((MyGdxGame) game).batch);
         start=new Texture(Gdx.files.internal("main_menu_image.jpg"));
         batch= new SpriteBatch();
@@ -70,7 +71,7 @@ public class StartMenu implements Screen{
             Gdx.gl.glClearColor(0, 0, 0, 1);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             batch.begin();
-            batch.draw(start, MyGdxGame.V_WIDTH/PPM, MyGdxGame.V_HEIGHT/PPM);
+            batch.draw(start,0,-200, MyGdxGame.V_WIDTH/PPM*300, MyGdxGame.V_HEIGHT/PPM*475);
             batch.end();
             stage.draw();
 
