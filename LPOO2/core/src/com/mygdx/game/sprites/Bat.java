@@ -80,26 +80,29 @@ public class Bat extends Enemy implements aiInterface {
     public void move(Samurai samurai) {
         float x= samurai.b2body.getPosition().x;
         float y= samurai.b2body.getPosition().y;
+        System.out.print("hero" +x);
+        System.out.print("my"+b2body.getPosition().x);
         if(x != this.getX() ){
             if(b2body.getPosition().x < x && b2body.getPosition().y >= y){
-                setPosition((b2body.getPosition().x - getWidth() / 2)+0.05f, (b2body.getPosition().y - getHeight() / 2) - 0.05f);
+                setPosition((b2body.getPosition().x - getWidth() / 1.7f)+0.05f, (b2body.getPosition().y - getHeight() / 2.3f) - 0.05f);
                 b2body.setLinearVelocity(batCounterVelocity);
             }else if(b2body.getPosition().x > x && b2body.getPosition().y >= y){
-                setPosition((b2body.getPosition().x - getWidth() / 2)-0.05f, (b2body.getPosition().y - getHeight() / 2)-0.05f);
+                setPosition((b2body.getPosition().x - getWidth() / 1.7f)-0.05f, (b2body.getPosition().y - getHeight() / 2.3f)-0.05f);
                 b2body.setLinearVelocity(batVelocity);
             } else if(b2body.getPosition().x == x && b2body.getPosition().y == y){
-                setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
+                setPosition(b2body.getPosition().x - getWidth() / 1.7f, b2body.getPosition().y - getHeight() / 2.3f);
                 b2body.setLinearVelocity(new Vector2(0,0));
             }
             else if(b2body.getPosition().x == x && b2body.getPosition().y < y){
                 System.out.print("sdaffaggr");
-                setPosition(b2body.getPosition().x - getWidth() / 2, (b2body.getPosition().y - getHeight() / 2)+0.05f);
+
+                setPosition(b2body.getPosition().x - getWidth() / 1.7f, (b2body.getPosition().y - getHeight() / 2.3f)+0.05f);
                 b2body.setLinearVelocity(new Vector2(0,2));
             } else if(b2body.getPosition().x < x && b2body.getPosition().y < y){
-                setPosition((b2body.getPosition().x - getWidth() / 2)+0.05f, (b2body.getPosition().y - getHeight() / 2)+0.05f);
+                setPosition((b2body.getPosition().x - getWidth() / 1.7f)+0.05f, (b2body.getPosition().y - getHeight() / 2.3f)+0.05f);
                 b2body.setLinearVelocity(batCounterVelocity);
             }else if(b2body.getPosition().x > x && b2body.getPosition().y < y){
-                setPosition((b2body.getPosition().x - getWidth() / 2)-0.05f, (b2body.getPosition().y - getHeight() / 2)+0.05f);
+                setPosition((b2body.getPosition().x - getWidth() / 1.7f)-0.05f, (b2body.getPosition().y - getHeight() / 2.3f)+0.05f);
                 b2body.setLinearVelocity(batVelocity);
             }
 

@@ -47,7 +47,15 @@ public class WorldContactListener implements ContactListener{
 					}
 				}
 				break;
-
+			case MyGdxGame.WALL_BIT | MyGdxGame.SAMURAI_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT){
+					((Samurai)fixA.getUserData()).setCounter(0);
+				} else {
+					if (fixB.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT) {
+						((Samurai)fixB.getUserData()).setCounter(0);
+					}
+				}
+				break;
 			case MyGdxGame.FIREBALL_BIT | MyGdxGame.SAMURAI_BIT:
 				if(fixA.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT){
 					((FireBall)fixA.getUserData()).hit();
