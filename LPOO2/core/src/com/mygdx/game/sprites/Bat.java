@@ -93,17 +93,17 @@ public class Bat extends Enemy implements aiInterface {
                 setPosition(b2body.getPosition().x - getWidth() / 1.7f, b2body.getPosition().y - getHeight() / 2.3f);
                 b2body.setLinearVelocity(new Vector2(0,0));
             }
-            else if(b2body.getPosition().x == x && b2body.getPosition().y < y){
+            else if( b2body.getPosition().y < y){
                 System.out.print("sdaffaggr");
 
                 setPosition(b2body.getPosition().x - getWidth() / 1.7f, (b2body.getPosition().y - getHeight() / 2.3f)+0.05f);
                 b2body.setLinearVelocity(new Vector2(0,2));
             } else if(b2body.getPosition().x < x && b2body.getPosition().y < y){
                 setPosition((b2body.getPosition().x - getWidth() / 1.7f)+0.05f, (b2body.getPosition().y - getHeight() / 2.3f)+0.05f);
-                b2body.setLinearVelocity(batCounterVelocity);
+                b2body.setLinearVelocity(new Vector2(2,2));
             }else if(b2body.getPosition().x > x && b2body.getPosition().y < y){
                 setPosition((b2body.getPosition().x - getWidth() / 1.7f)-0.05f, (b2body.getPosition().y - getHeight() / 2.3f)+0.05f);
-                b2body.setLinearVelocity(batVelocity);
+                b2body.setLinearVelocity(new Vector2(-2,2));
             }
 
         }
