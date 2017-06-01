@@ -137,7 +137,7 @@ public class Samurai extends Sprite{
 
 	public void defineSamurai(){
 		BodyDef bdef  = new BodyDef();
-		bdef.position.set(7500/MyGdxGame.PPM, 150/MyGdxGame.PPM);
+		bdef.position.set(500/MyGdxGame.PPM, 150/MyGdxGame.PPM);
 		bdef.type = BodyDef.BodyType.DynamicBody;
 		b2body = world.createBody(bdef);
 		

@@ -78,6 +78,7 @@ public class BlueBullet extends Sprite{
 
     public void hit() {
         setToDestroy = true;
+        System.out.print(setToDestroy);
     }
 
     public boolean isDestroyed() {

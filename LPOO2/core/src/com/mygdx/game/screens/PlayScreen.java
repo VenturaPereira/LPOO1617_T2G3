@@ -73,6 +73,7 @@ public class PlayScreen implements Screen{
 	private List<BlueBullet> blueBullets = new ArrayList<>();
 	private ArrayList<Bat> bats = new ArrayList<Bat>();
 	private Trigger trigger;
+	private Filter f;
 
 	private float fireDelay;
 	private float ballDelay;
@@ -242,8 +243,7 @@ public class PlayScreen implements Screen{
 
 		world.step(1/60f, 6, 2);
 		character.update(dt);
-		System.out.println(character.b2body.getPosition().x);
-		System.out.println(mageBoss.body.getPosition().x);
+
 		if(!fireBoss.isDefeated()){
 			fireBoss.update(dt);
 		}
@@ -309,11 +309,19 @@ public class PlayScreen implements Screen{
 			game.batch.setProjectionMatrix(gamecam.combined);
 			game.batch.begin();
 			character.draw(game.batch);
-			if(!fireBoss.isDefeated())
-				fireBoss.draw(game.batch);
+			fireBoss.draw(game.batch);
+			if(fireBoss.isDefeated()){
+			f = new Filter();
+			f.categoryBits= MyGdxGame.FIREBOSS_BIT;
+			f.maskBits=  MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.BULLET_BIT | MyGdxGame.FIREBOSS_HEAD_BIT;
+			for(int i=0; i < fireBoss.body.getFixtureList().size; i++){
+				fireBoss.body.getFixtureList().get(i).setFilterData(f);
+
+			}}
 			if(fireBoss.isStage2()){
 				drawBossFireballs();
 			}
+
 			mageBoss.draw(game.batch);
 			//fireBall.draw(game.batch);
 			drawFireballs();
@@ -410,6 +418,7 @@ public class PlayScreen implements Screen{
 		if(!blueBullets.isEmpty()) {
 			for (int i = 0; i < blueBullets.size(); i++) {
 				if(!blueBullets.get(i).isDestroyed())
+
 					blueBullets.get(i).draw(game.batch);
 			}
 		}

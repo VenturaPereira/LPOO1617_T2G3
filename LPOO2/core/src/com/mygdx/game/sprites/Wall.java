@@ -13,6 +13,7 @@ public class Wall extends InteractiveTileObject{
 	public Wall(World world, TiledMap map, Rectangle bounds){
 		super(world, map, bounds);
 		fixture.setUserData(this);
+
 	}
 	
 	@Override
