@@ -175,6 +175,7 @@ public class PlayScreen implements Screen{
 		}
 
 		blueBullet.body.setLinearVelocity(velocity);
+        blueBullet.body.setGravityScale(0);
 
 	}
 
@@ -271,8 +272,9 @@ public class PlayScreen implements Screen{
 				ballDelay = 3f;
 			}
 		}
-		else if(fireBoss.isDefeated()){
-			if(ballDelay <= 0) {
+		if(fireBoss.isDefeated()){
+			System.out.print(ballDelay);
+			if(ballDelay <= 1) {
 				createBat();
 				ballDelay = 3f;
 			}

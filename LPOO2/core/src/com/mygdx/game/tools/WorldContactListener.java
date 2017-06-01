@@ -106,7 +106,7 @@ public class WorldContactListener implements ContactListener{
 					((BlueBullet)fixA.getUserData()).hit();
 				}
 				break;
-			case MyGdxGame.BULLET_BIT | MyGdxGame.WALL_BIT:
+			case  MyGdxGame.BULLET_BIT | MyGdxGame.WALL_BIT:
 				System.out.print("i cant");
 				if(fixA.getFilterData().categoryBits == MyGdxGame.BULLET_BIT){
 					((BlueBullet)fixA.getUserData()).hit();

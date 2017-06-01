@@ -47,14 +47,15 @@ public class BlueBullet extends Sprite{
     public void defineBullet() {
         BodyDef bdef  = new BodyDef();
         bdef.position.set(samurai.b2body.getPosition().x + 0.6f, samurai.b2body.getPosition().y);
-        bdef.type = BodyDef.BodyType.KinematicBody;
+        bdef.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(bdef);
+
 
         FixtureDef fdef1 = new FixtureDef();
         CircleShape shape = new CircleShape();
         shape.setRadius(15/MyGdxGame.PPM);
         fdef1.filter.categoryBits = MyGdxGame.BULLET_BIT;
-        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.FIREBALL_BIT | MyGdxGame.BULLET_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.FIREBOSS_HEAD_BIT | MyGdxGame.MAGEBOSS_BIT;
+        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.FIREBALL_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.FIREBOSS_HEAD_BIT | MyGdxGame.MAGEBOSS_BIT;
 
         fdef1.shape = shape;
         body.createFixture(fdef1).setUserData(this);
