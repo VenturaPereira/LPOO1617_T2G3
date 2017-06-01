@@ -29,6 +29,7 @@ import com.mygdx.game.sprites.Bat;
 import com.mygdx.game.sprites.BlueBullet;
 import com.mygdx.game.sprites.FireBall;
 import com.mygdx.game.sprites.FireBoss;
+import com.mygdx.game.sprites.MageBoss;
 import com.mygdx.game.sprites.Samurai;
 import com.mygdx.game.tools.B2WorldCreator;
 import com.mygdx.game.tools.Trigger;
@@ -45,6 +46,7 @@ public class PlayScreen implements Screen{
 	private TextureAtlas firebossAtlas;
 	private TextureAtlas batAtlas;
 	private TextureAtlas blueBulletAtlas;
+	private TextureAtlas magebossAtlas;
 	private OrthographicCamera gamecam;
 	private Viewport gamePort;
 
@@ -65,6 +67,7 @@ public class PlayScreen implements Screen{
 	private Bat bat;
 	private BlueBullet blueBullet;
 	private FireBoss fireBoss;
+	private MageBoss mageBoss;
 	private ArrayList<FireBall> fireBalls = new ArrayList<FireBall>();
 	private ArrayList<FireBall> bossFireBalls = new ArrayList<FireBall>();
 	private List<BlueBullet> blueBullets = new ArrayList<>();
@@ -78,13 +81,14 @@ public class PlayScreen implements Screen{
 		samuraiAtlas = new TextureAtlas("SamuraiGame.pack");
 		enemiesAtlas = new TextureAtlas("Enemies.pack");
 		firebossAtlas = new TextureAtlas("FireBoss.pack");
+		magebossAtlas = new TextureAtlas("Mage Boss.pack");
 		blueBulletAtlas = new TextureAtlas("BlueBullet.pack");
 		batAtlas = new TextureAtlas("Bat.pack");
 		this.game = game;
 		gamecam = new OrthographicCamera();
 		gamecam.zoom += 0.5f;
 		gamePort = new FitViewport(1200/ MyGdxGame.PPM, 800/MyGdxGame.PPM,gamecam);
-		gameOver=new Texture(Gdx.files.internal("gameover.png"));
+		gameOver=new Texture(Gdx.files.internal("game_over.jpg"));
 		batch= new SpriteBatch();
 		mapLoader = new TmxMapLoader();
 		map = mapLoader.load("first_level_background.tmx");
@@ -99,6 +103,7 @@ public class PlayScreen implements Screen{
 
 		character = new Samurai(world,this);
 		fireBoss = new FireBoss(this);
+		mageBoss = new MageBoss(this);
 		trigger = new Trigger(this, 2300f, 150f);
 		fireBalls = new ArrayList<FireBall>();
 		bats = new ArrayList<Bat>();
@@ -141,6 +146,10 @@ public class PlayScreen implements Screen{
 
 	public FireBoss getFireBoss() {
 		return fireBoss;
+	}
+
+	public TextureAtlas getMagebossAtlas() {
+		return magebossAtlas;
 	}
 
 	public void shoot(int i){
@@ -233,6 +242,8 @@ public class PlayScreen implements Screen{
 
 		world.step(1/60f, 6, 2);
 		character.update(dt);
+		System.out.println(character.b2body.getPosition().x);
+		System.out.println(mageBoss.body.getPosition().x);
 		if(!fireBoss.isDefeated()){
 			fireBoss.update(dt);
 		}
@@ -266,6 +277,7 @@ public class PlayScreen implements Screen{
 				ballDelay = 3f;
 			}
 		}
+		mageBoss.update(dt);
 		updateBats(dt);
 		updateFireballs(dt);
 		updateBullets(dt);
@@ -302,6 +314,7 @@ public class PlayScreen implements Screen{
 			if(fireBoss.isStage2()){
 				drawBossFireballs();
 			}
+			mageBoss.draw(game.batch);
 			//fireBall.draw(game.batch);
 			drawFireballs();
 			drawBullets();

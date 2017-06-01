@@ -137,7 +137,7 @@ public class Samurai extends Sprite{
 
 	public void defineSamurai(){
 		BodyDef bdef  = new BodyDef();
-		bdef.position.set(50/MyGdxGame.PPM, 150/MyGdxGame.PPM);
+		bdef.position.set(7500/MyGdxGame.PPM, 150/MyGdxGame.PPM);
 		bdef.type = BodyDef.BodyType.DynamicBody;
 		b2body = world.createBody(bdef);
 		
@@ -146,7 +146,7 @@ public class Samurai extends Sprite{
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(20/MyGdxGame.PPM, 60/MyGdxGame.PPM);
 		fdef1.filter.categoryBits = MyGdxGame.SAMURAI_BIT;
-		fdef1.filter.maskBits = MyGdxGame.SAMURAI_BIT | MyGdxGame.GROUND_BIT | MyGdxGame.FIREBALL_BIT| MyGdxGame.WALL_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.TRIGGER_BIT | MyGdxGame.FIREBOSS_HEAD_BIT;
+		fdef1.filter.maskBits = MyGdxGame.SAMURAI_BIT | MyGdxGame.GROUND_BIT | MyGdxGame.FIREBALL_BIT| MyGdxGame.WALL_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.TRIGGER_BIT | MyGdxGame.FIREBOSS_HEAD_BIT | MyGdxGame.MAGEBOSS_BIT;
 
 		fdef1.shape = shape;
 		b2body.createFixture(fdef1).setUserData(this);

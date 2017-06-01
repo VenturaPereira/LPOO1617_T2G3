@@ -14,6 +14,7 @@ public abstract class Boss extends Sprite{
     protected PlayScreen screen;
 
 
+
     public Boss(PlayScreen screen){
         this.world = screen.getWorld();
         this.screen = screen;
@@ -21,5 +22,9 @@ public abstract class Boss extends Sprite{
     }
 
     protected abstract void defineBoss();
+
+
+
+
 
 }
