@@ -30,12 +30,24 @@ public class WorldContactListener implements ContactListener{
 
 			if(object.getUserData() != null && object.getUserData() instanceof InteractiveTileObject) {
 				((InteractiveTileObject)object.getUserData()).onKatanaHit();
+				System.out.print("hi");
 			}
 		}
 
 
 
 		switch (cDef){
+
+			case MyGdxGame.GROUND_BIT | MyGdxGame.SAMURAI_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT){
+					((Samurai)fixA.getUserData()).setCounter(0);
+				} else {
+					if (fixB.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT) {
+						((Samurai)fixB.getUserData()).setCounter(0);
+					}
+				}
+				break;
+
 			case MyGdxGame.FIREBALL_BIT | MyGdxGame.SAMURAI_BIT:
 				if(fixA.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT){
 					((FireBall)fixA.getUserData()).hit();

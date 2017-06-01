@@ -220,8 +220,9 @@ public class PlayScreen implements Screen{
             //dispose();
 		}
 		if(Gdx.input.isKeyJustPressed(Input.Keys.W)){
-			if(character.getY() < 3) {
+			if(character.getY() < 3 && character.getCounter()==0 || character.getY() <3 && character.getCounter()%2!=0) {
 				character.b2body.applyLinearImpulse(new Vector2(0, 5f), character.b2body.getWorldCenter(), true);
+				character.setCounter(character.getCounter()+1);
 			}
 		}
 
