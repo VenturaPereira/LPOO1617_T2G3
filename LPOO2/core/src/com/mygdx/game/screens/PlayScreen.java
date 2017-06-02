@@ -229,8 +229,9 @@ public class PlayScreen implements Screen{
             //dispose();
 		}
 		if(Gdx.input.isKeyJustPressed(Input.Keys.W)){
-			if(character.getY() < 3) {
+			if(character.getY() < 3 && character.getCounter()==0 || character.getY() <3 && character.getCounter()%2!=0) {
 				character.b2body.applyLinearImpulse(new Vector2(0, 5f), character.b2body.getWorldCenter(), true);
+				character.setCounter(character.getCounter()+1);
 			}
 		}
 
@@ -288,7 +289,7 @@ public class PlayScreen implements Screen{
 			}
 		}
 		if(fireBoss.isDefeated()){
-			System.out.print(ballDelay);
+
 			if(ballDelay <= 1) {
 				createBat();
 				ballDelay = 3f;
@@ -332,7 +333,7 @@ public class PlayScreen implements Screen{
 			if(fireBoss.isDefeated()){
 			f = new Filter();
 			f.categoryBits= MyGdxGame.FIREBOSS_BIT;
-			f.maskBits=  MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.BULLET_BIT | MyGdxGame.FIREBOSS_HEAD_BIT;
+			f.maskBits=  MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.FIREBOSS_HEAD_BIT;
 			for(int i=0; i < fireBoss.body.getFixtureList().size; i++){
 				fireBoss.body.getFixtureList().get(i).setFilterData(f);
 

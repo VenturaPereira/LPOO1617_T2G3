@@ -22,6 +22,16 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.screens.PlayScreen;
 
 public class Samurai extends Sprite{
+
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
+
 	public enum State{WALKING, STANDING, ATTACKING, JUMPING};
 	public State currentState;
 	public State previousState;
@@ -33,7 +43,7 @@ public class Samurai extends Sprite{
 	private float stateTimer;
 	private boolean walkingRight;
 	private int hitpoints;
-
+    private  int counter=0;
 
 
 
