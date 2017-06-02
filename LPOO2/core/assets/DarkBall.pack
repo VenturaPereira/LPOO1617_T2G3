@@ -1,0 +1,12 @@
+
+DarkBall.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+darkball
+  rotate: false
+  xy: 1, 1
+  size: 112, 119
+  orig: 112, 119
+  offset: 0, 0
+  index: -1

@@ -24,6 +24,7 @@ public class MageBoss extends Boss {
     private Animation idleAnimation;
     private float stateTime;
     private boolean teleporting;
+    private boolean crossed;
 
 
     public MageBoss(PlayScreen screen){
@@ -33,15 +34,14 @@ public class MageBoss extends Boss {
             frames.add(new TextureRegion(screen.getMagebossAtlas().findRegion("Mage Boss"), i * 65, 8, 65, 78));
         }
 
-        for(int i = 0; i < frames.size; i++) {
-            frames.get(i).flip(true, false);
-        }
+        flip();
 
-        idleAnimation = new Animation(0.2f, frames);
+        idleAnimation= new Animation(0.2f, frames);
 
         stateTime = 0;
         setBounds(0, 0, 65*2.3f/ MyGdxGame.PPM, 78*2.3f/MyGdxGame.PPM);
         teleporting = false;
+        crossed = false;
     }
 
 
@@ -53,11 +53,15 @@ public class MageBoss extends Boss {
         setRegion((TextureRegion) idleAnimation.getKeyFrame(stateTime, true));
         if(teleporting){
             if(samuraiX < body.getPosition().x){
-                body.setTransform(samuraiX - 0.8f, samuraiY, 0);
+                body.setTransform(samuraiX - 2f, samuraiY, 0);
+                flip();
+            }
+            else if(samuraiX > body.getPosition().x){
+                body.setTransform(samuraiX + 2f, samuraiY, 0);
+                flip();
             }
             teleporting = false;
         }
-
 
     }
 
@@ -83,6 +87,10 @@ public class MageBoss extends Boss {
        teleporting = true;
     }
 
-
+    public void flip(){
+        for(int i = 0; i < frames.size; i++) {
+            frames.get(i).flip(true, false);
+        }
+    }
 
 }
