@@ -20,7 +20,7 @@ public class DarkBall extends Enemy {
     private Array<TextureRegion> frames;
     private boolean setToDestroy;
     private boolean destroyed;
-    private float height;
+    public float height;
     private MageBoss mageBoss;
 
 
@@ -42,11 +42,13 @@ public class DarkBall extends Enemy {
 
     public void update(float dt){
         stateTime += dt;
+
         if(setToDestroy && !destroyed){
             world.destroyBody((b2body));
             destroyed=true;
         } else if(!destroyed) {
-            b2body.setLinearVelocity(velocity);
+
+            b2body.setGravityScale(0);
             setPosition(b2body.getPosition().x - getWidth() / 2, b2body.getPosition().y - getHeight() / 2);
             setRegion((TextureRegion) walkAnimation.getKeyFrame(stateTime, true));
         }
@@ -62,7 +64,7 @@ public class DarkBall extends Enemy {
     @Override
     protected void defineEnemy() {
         BodyDef bdef  = new BodyDef();
-        bdef.position.set(distance/MyGdxGame.PPM , height/MyGdxGame.PPM);
+        bdef.position.set(distance/MyGdxGame.PPM , 150/MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
         //b2body.isBullet();
@@ -71,7 +73,7 @@ public class DarkBall extends Enemy {
         CircleShape shape = new CircleShape();
         shape.setRadius(25/MyGdxGame.PPM);
         fdef1.filter.categoryBits = MyGdxGame.DARKBALL_BIT;
-        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.SAMURAI_BIT | MyGdxGame.BULLET_BIT | MyGdxGame.DARKBALL_BIT;
+        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.SAMURAI_BIT | MyGdxGame.BULLET_BIT;
 
         fdef1.shape = shape;
         b2body.createFixture(fdef1).setUserData(this);

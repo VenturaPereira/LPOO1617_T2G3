@@ -49,6 +49,7 @@ public class PlayScreen implements Screen{
 	private TextureAtlas blueBulletAtlas;
 	private TextureAtlas magebossAtlas;
 	private TextureAtlas darkballAtlas;
+	private TextureAtlas healthAtlas;
 	private OrthographicCamera gamecam;
 	private Viewport gamePort;
 
@@ -76,7 +77,8 @@ public class PlayScreen implements Screen{
 	private ArrayList<FireBall> bossFireBalls = new ArrayList<FireBall>();
 	private List<BlueBullet> blueBullets = new ArrayList<>();
 	private ArrayList<Bat> bats = new ArrayList<Bat>();
-	private Trigger trigger;
+	private Trigger trigger1, trigger2;
+	private ArrayList<Trigger> triggers;
 	private Filter f;
 
 	private float fireDelay;
@@ -90,9 +92,10 @@ public class PlayScreen implements Screen{
 		blueBulletAtlas = new TextureAtlas("BlueBullet.pack");
 		darkballAtlas = new TextureAtlas("DarkBall.pack");
 		batAtlas = new TextureAtlas("Bat.pack");
+		healthAtlas = new TextureAtlas("HealthItem.pack");
 		this.game = game;
 		gamecam = new OrthographicCamera();
-		gamecam.zoom += 0.5f;
+		gamecam.zoom += 0.3f;
 		gamePort = new FitViewport(1200/ MyGdxGame.PPM, 800/MyGdxGame.PPM,gamecam);
 		gameOver=new Texture(Gdx.files.internal("game_over.jpg"));
 		batch= new SpriteBatch();
@@ -110,9 +113,13 @@ public class PlayScreen implements Screen{
 		character = new Samurai(world,this);
 		fireBoss = new FireBoss(this);
 		mageBoss = new MageBoss(this);
-		trigger = new Trigger(this, 2300f, 150f);
+		trigger1 = new Trigger(this, 2300f, 150f);
+		trigger2 = new Trigger(this, 7500f, 150f);
 		fireBalls = new ArrayList<FireBall>();
 		darkBalls = new ArrayList<DarkBall>();
+		triggers = new ArrayList<Trigger>();
+		triggers.add(trigger1);
+		triggers.add(trigger2);
 		bats = new ArrayList<Bat>();
 
 		hud = new Hud(game.batch, character);
@@ -154,6 +161,10 @@ public class PlayScreen implements Screen{
 		return darkballAtlas;
 	}
 
+	public TextureAtlas getHealthAtlas() {
+		return healthAtlas;
+	}
+
 	public Samurai getSamurai() {
 		return character;
 	}
@@ -177,7 +188,7 @@ public class PlayScreen implements Screen{
 			velocity = new Vector2(-5,0);
 		}
 		else if(i == 2){
-			velocity = new Vector2(0,2);
+			velocity = new Vector2(0,5);
 		}
 		else if(i == 3){
 			velocity = new Vector2(0,-2);
@@ -206,6 +217,12 @@ public class PlayScreen implements Screen{
 		else if(Gdx.input.isKeyPressed(Input.Keys.P) &&  Gdx.input.isKeyPressed(Input.Keys.A)){
 			if(fireDelay <= 0){
 				shoot(1);
+				fireDelay = 0.3f;
+			}
+		}
+		else if(Gdx.input.isKeyPressed(Input.Keys.P) &&  Gdx.input.isKeyPressed(Input.Keys.W)){
+			if(fireDelay <= 0){
+				shoot(2);
 				fireDelay = 0.3f;
 			}
 		}
@@ -268,10 +285,7 @@ public class PlayScreen implements Screen{
 
 		ballDelay -= dt;
 
-		if(ballDelay <= 0){
-			shootDarkballs();
-			ballDelay = 2f;
-		}
+
 
 		if(fireBoss.isStage2()) {
 			if (ballDelay <= 0) {
@@ -288,19 +302,28 @@ public class PlayScreen implements Screen{
 				ballDelay = 3f;
 			}
 		}
-		if(fireBoss.isDefeated()){
-
+		if(fireBoss.isDefeated() && !mageBoss.isStage1()){
 			if(ballDelay <= 1) {
 				createBat();
+				shootDarkballs();
+				ballDelay = 5f;
+			}
+		}
+
+
+		if(mageBoss.isStage1()){
+			if(ballDelay <= 1) {
+				shootDarkballs();
 				ballDelay = 3f;
 			}
-
 		}
+
+
 		mageBoss.update(dt);
 		updateBats(dt);
 		updateFireballs(dt);
 		updateBullets(dt);
-		updateTrigger(dt);
+		updateTriggers(dt);
 		updateDarkballs(dt);
 		gamecam.position.x = character.b2body.getPosition().x;
 		gamecam.update();
@@ -413,11 +436,27 @@ public class PlayScreen implements Screen{
 	}
 
 	public void shootDarkballs(){
-		System.out.println(mageBoss.body.getPosition().x* MyGdxGame.PPM);
-		System.out.println(mageBoss.body.getPosition().y* MyGdxGame.PPM);
-		darkBall = new DarkBall(this, .32f, 0.32f, mageBoss.body.getPosition().x * MyGdxGame.PPM, mageBoss.body.getPosition().y * MyGdxGame.PPM + 100);
+
+		float samuraiX = character.b2body.getPosition().x;
+		float magebossX = mageBoss.body.getPosition().x;
+
+
+		if(mageBoss.isStage1()) {
+			darkBall = new DarkBall(this, .32f, 0.32f, mageBoss.body.getPosition().x * MyGdxGame.PPM, 150);
+
+			if (samuraiX < magebossX)
+				darkBall.b2body.setLinearVelocity(new Vector2(-3, 0));
+			else if (samuraiX > magebossX)
+				darkBall.b2body.setLinearVelocity(new Vector2(3, 0));
+		}
+		else if(!mageBoss.isStage1()){
+			darkBall = new DarkBall(this, .32f, 0.32f, character.b2body.getPosition().x * MyGdxGame.PPM + 5f, 150);
+			darkBall.b2body.setLinearVelocity(0, 2);
+			darkBall.b2body.setGravityScale(1);
+		}
 		darkBalls.add(darkBall);
 	}
+
 
 	public void createBat(){
 		int height = 5050;
@@ -428,7 +467,8 @@ public class PlayScreen implements Screen{
 	public void drawBats(){
 		if(!bats.isEmpty()) {
 			for (int i = 0; i < bats.size(); i++) {
-				bats.get(i).draw(game.batch);
+				if(!bats.get(i).isDestroyed())
+					bats.get(i).draw(game.batch);
 			}
 		}
 	}
@@ -472,16 +512,19 @@ public class PlayScreen implements Screen{
 		}
 	}
 
-	public void updateTrigger(float dt){
-		if(!trigger.isDestroyed()){
-			trigger.update(dt);
+	public void updateTriggers(float dt){
+		for(int i = 0; i < triggers.size(); i++) {
+			if (!triggers.get(i).isDestroyed()) {
+				triggers.get(i).update(dt);
+			}
 		}
 	}
 
 	public void updateBats(float dt){
 		if(!bats.isEmpty()) {
 			for (int i = 0; i < bats.size(); i++) {
-				bats.get(i).update(dt);
+				if(!bats.get(i).isDestroyed())
+					bats.get(i).update(dt);
 			}
 		}
 	}

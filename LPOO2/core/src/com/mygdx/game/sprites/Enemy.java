@@ -21,6 +21,8 @@ public abstract class Enemy extends Sprite{
     public float distance;
     public Vector2 counterVelocity;
     public Vector2 batVelocity, batCounterVelocity;
+
+
     public Enemy(PlayScreen screen, float x, float y, float distance){
       this.world = screen.getWorld();
       this.screen = screen;

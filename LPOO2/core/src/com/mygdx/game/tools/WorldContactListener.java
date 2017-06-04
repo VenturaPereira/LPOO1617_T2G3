@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.sprites.Bat;
 import com.mygdx.game.sprites.BlueBullet;
 import com.mygdx.game.sprites.Enemy;
 import com.mygdx.game.sprites.FireBall;
@@ -35,16 +36,13 @@ public class WorldContactListener implements ContactListener{
 		}
 
 
-
 		switch (cDef){
-
 			case MyGdxGame.GROUND_BIT | MyGdxGame.SAMURAI_BIT:
 				if(fixA.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT){
 					((Samurai)fixA.getUserData()).setCounter(0);
-				} else {
-					if (fixB.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT) {
+				}
+				else if (fixB.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT) {
 						((Samurai)fixB.getUserData()).setCounter(0);
-					}
 				}
 				break;
 			case MyGdxGame.WALL_BIT | MyGdxGame.SAMURAI_BIT:
@@ -72,7 +70,6 @@ public class WorldContactListener implements ContactListener{
 					((FireBall)fixA.getUserData()).hit();
 				} else if(fixB.getFilterData().categoryBits == MyGdxGame.FIREBALL_BIT) {
 					((FireBall) fixB.getUserData()).hit();
-
 				}
 				break;
 			case MyGdxGame.BULLET_BIT | MyGdxGame.FIREBALL_BIT:
@@ -101,11 +98,12 @@ public class WorldContactListener implements ContactListener{
 			case MyGdxGame.TRIGGER_BIT | MyGdxGame.SAMURAI_BIT:
 				if(fixA.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT){
 					((Trigger)fixB.getUserData()).hit();
-
 					((Trigger)fixB.getUserData()).startFireboss();
+					((Trigger)fixB.getUserData()).startMageboss();
 				} else if(fixB.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT) {
 					((Trigger)fixA.getUserData()).hit();
 					((Trigger)fixA.getUserData()).startFireboss();
+					((Trigger)fixB.getUserData()).startMageboss();
 				}
 				break;
 			case MyGdxGame.FIREBOSS_HEAD_BIT | MyGdxGame.BULLET_BIT:
@@ -120,20 +118,40 @@ public class WorldContactListener implements ContactListener{
 			case MyGdxGame.MAGEBOSS_BIT | MyGdxGame.BULLET_BIT:
 				if(fixA.getFilterData().categoryBits == MyGdxGame.MAGEBOSS_BIT){
 					((MageBoss)fixA.getUserData()).teleport();
+					((MageBoss)fixA.getUserData()).damage(10);
 					((BlueBullet)fixB.getUserData()).hit();
 				} else if(fixB.getFilterData().categoryBits == MyGdxGame.MAGEBOSS_BIT) {
 					((MageBoss)fixB.getUserData()).teleport();
+					((MageBoss)fixB.getUserData()).damage(10);
 					((BlueBullet)fixA.getUserData()).hit();
 				}
 				break;
 			case  MyGdxGame.BULLET_BIT | MyGdxGame.WALL_BIT:
-				System.out.print("i cant");
 				if(fixA.getFilterData().categoryBits == MyGdxGame.BULLET_BIT){
 					((BlueBullet)fixA.getUserData()).hit();
 				} else if(fixB.getFilterData().categoryBits == MyGdxGame.BULLET_BIT) {
 					((BlueBullet) fixB.getUserData()).hit();
 				}
 				break;
+			case  MyGdxGame.BAT_BIT | MyGdxGame.SAMURAI_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.BAT_BIT){
+					((Bat)fixA.getUserData()).hit();
+					((Samurai)fixB.getUserData()).hpLoss(10);
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.BAT_BIT) {
+					((Samurai)fixA.getUserData()).hpLoss(10);
+					((Bat) fixB.getUserData()).hit();
+				}
+				break;
+			case  MyGdxGame.BAT_BIT | MyGdxGame.BULLET_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.BAT_BIT){
+					((Bat)fixA.getUserData()).hit();
+					((BlueBullet)fixB.getUserData()).hit();
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.BAT_BIT) {
+					((BlueBullet)fixA.getUserData()).hit();
+					((Bat) fixB.getUserData()).hit();
+				}
+				break;
+
 
 		}
 	}

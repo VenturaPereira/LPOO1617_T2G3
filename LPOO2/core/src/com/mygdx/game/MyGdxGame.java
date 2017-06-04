@@ -29,6 +29,7 @@ public class MyGdxGame extends Game {
 	public static final short BAT_BIT = 256;
 	public static final short MAGEBOSS_BIT = 512;
 	public static final short DARKBALL_BIT = 1024;
+	public static final short ITEM_BIT = 2048;
 
     public static AssetManager manager;
 	

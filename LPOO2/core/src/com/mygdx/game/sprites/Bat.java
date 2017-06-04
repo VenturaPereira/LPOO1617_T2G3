@@ -23,6 +23,8 @@ public class Bat extends Enemy implements aiInterface {
     private float stateTime;
     private Animation flyingAnimation;
     private Array<TextureRegion> frames;
+    private boolean setToDestroy;
+    private boolean destroyed;
 
 
     public Bat(PlayScreen screen, float x, float y, float distance){
@@ -43,9 +45,14 @@ public class Bat extends Enemy implements aiInterface {
 
     public void update(float dt) {
         stateTime += dt;
-         move(super.screen.getSamurai());
-        setRegion((TextureRegion) flyingAnimation.getKeyFrame(stateTime, true));
-
+        if(setToDestroy && !destroyed){
+            world.destroyBody(b2body);
+            destroyed = true;
+        }
+        else if(!destroyed) {
+            move(super.screen.getSamurai());
+            setRegion((TextureRegion) flyingAnimation.getKeyFrame(stateTime, true));
+        }
     }
 
     @Override
@@ -54,7 +61,6 @@ public class Bat extends Enemy implements aiInterface {
         bdef.position.set(distance/MyGdxGame.PPM, randomHeightBetween(50, 500)/MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         b2body = world.createBody(bdef);
-
 
         FixtureDef fdef1 = new FixtureDef();
         CircleShape shape = new CircleShape();
@@ -71,17 +77,11 @@ public class Bat extends Enemy implements aiInterface {
         return super.randomHeightBetween(min, max);
     }
 
-    @Override
-    public void hit() {
-
-    }
 
     @Override
     public void move(Samurai samurai) {
         float x= samurai.b2body.getPosition().x;
         float y= samurai.b2body.getPosition().y;
-        System.out.print("hero" +x);
-        System.out.print("my"+b2body.getPosition().x);
         if(x != this.getX() ){
             if(b2body.getPosition().x < x && b2body.getPosition().y >= y){
                 setPosition((b2body.getPosition().x - getWidth() / 1.7f)+0.05f, (b2body.getPosition().y - getHeight() / 2.3f) - 0.05f);
@@ -94,8 +94,6 @@ public class Bat extends Enemy implements aiInterface {
                 b2body.setLinearVelocity(new Vector2(0,0));
             }
             else if( b2body.getPosition().y < y){
-                System.out.print("sdaffaggr");
-
                 setPosition(b2body.getPosition().x - getWidth() / 1.7f, (b2body.getPosition().y - getHeight() / 2.3f)+0.05f);
                 b2body.setLinearVelocity(new Vector2(0,2));
             } else if(b2body.getPosition().x < x && b2body.getPosition().y < y){
@@ -108,5 +106,14 @@ public class Bat extends Enemy implements aiInterface {
 
         }
 
+    }
+
+    @Override
+    public void hit() {
+        setToDestroy = true;
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
     }
 }

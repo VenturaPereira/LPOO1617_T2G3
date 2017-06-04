@@ -57,9 +57,6 @@ public class FireBall extends Enemy{
             setRegion((TextureRegion) walkAnimation.getKeyFrame(stateTime, true));
         }
     }
-    public boolean getSetToDestroy(){
-        return setToDestroy;
-    }
 
     public boolean getDestroyed(){
         return destroyed;
@@ -86,7 +83,6 @@ public class FireBall extends Enemy{
     @Override
     public void hit() {
        setToDestroy = true;
-        //System.out.print("riiip");
     }
 
     @Override

@@ -24,7 +24,8 @@ public class MageBoss extends Boss {
     private Animation idleAnimation;
     private float stateTime;
     private boolean teleporting;
-    private boolean crossed;
+    private boolean stage1;
+    private int hp;
 
 
     public MageBoss(PlayScreen screen){
@@ -41,7 +42,8 @@ public class MageBoss extends Boss {
         stateTime = 0;
         setBounds(0, 0, 65*2.3f/ MyGdxGame.PPM, 78*2.3f/MyGdxGame.PPM);
         teleporting = false;
-        crossed = false;
+        stage1 = false;
+        hp = 500;
     }
 
 
@@ -61,6 +63,9 @@ public class MageBoss extends Boss {
                 flip();
             }
             teleporting = false;
+        }
+        if(hp <= 400){
+            stage1 = false;
         }
 
     }
@@ -84,7 +89,7 @@ public class MageBoss extends Boss {
     }
 
     public void teleport(){
-       teleporting = true;
+       if(stage1)teleporting = true;
     }
 
     public void flip(){
@@ -93,4 +98,25 @@ public class MageBoss extends Boss {
         }
     }
 
+    public void damage(int damage) {
+        if(stage1) {
+            if (hp >= damage) {
+                hp -= damage;
+            } else
+                hp = 0;
+
+        }
+    }
+
+    public void setStage1(boolean stage1) {
+        this.stage1 = stage1;
+    }
+
+    public boolean isStage1() {
+        return stage1;
+    }
+
+    public int getHp() {
+        return hp;
+    }
 }

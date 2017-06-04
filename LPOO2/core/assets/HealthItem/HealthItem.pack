@@ -1,0 +1,12 @@
+
+HealthItem.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Pixel_heart_icon
+  rotate: false
+  xy: 1, 1
+  size: 568, 506
+  orig: 568, 506
+  offset: 0, 0
+  index: -1

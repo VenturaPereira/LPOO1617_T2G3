@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.screens.PlayScreen;
 import com.mygdx.game.sprites.FireBoss;
+import com.mygdx.game.sprites.MageBoss;
 
 /**
  * Created by Luís on 28/05/2017.
@@ -24,6 +25,7 @@ public class Trigger{
     private boolean destroyed;
     float stateTime;
     FireBoss fireBoss;
+    MageBoss mageBoss;
 
     public Trigger(PlayScreen screen, float x, float y) {
         this.x = x;
@@ -31,6 +33,7 @@ public class Trigger{
         this.screen = screen;
         this.world = screen.getWorld();
         this.fireBoss = screen.getFireBoss();
+        this.mageBoss = screen.getMageBoss();
         setToDestroy = false;
         destroyed = false;
         stateTime = 0;
@@ -70,7 +73,15 @@ public class Trigger{
     }
 
     public void startFireboss(){
-        fireBoss.setActivated(true);
-        fireBoss.setStage1(true);
+        if(!fireBoss.isDefeated()) {
+            fireBoss.setActivated(true);
+            fireBoss.setStage1(true);
+        }
+    }
+
+    public void startMageboss(){
+        if(fireBoss.isDefeated()){
+            mageBoss.setStage1(true);
+        }
     }
 }
