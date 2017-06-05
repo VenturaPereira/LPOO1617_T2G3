@@ -81,7 +81,9 @@ public class Trigger{
 
     public void startMageboss(){
         if(fireBoss.isDefeated()){
+            mageBoss.setActivated(true);
             mageBoss.setStage1(true);
+
         }
     }
 }

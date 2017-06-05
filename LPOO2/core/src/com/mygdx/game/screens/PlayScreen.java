@@ -57,6 +57,8 @@ public class PlayScreen implements Screen{
 
 	private Hud hud;
 	private HudBoss hudBoss;
+	private HudBoss hudSecondBoss;
+	private Hud hudNew;
 	private TmxMapLoader mapLoader;
 	private TiledMap map;
 	private OrthogonalTiledMapRenderer renderer;
@@ -122,9 +124,15 @@ public class PlayScreen implements Screen{
 		triggers.add(trigger2);
 		bats = new ArrayList<Bat>();
 
-		hud = new Hud(game.batch, character);
+		hud = new Hud(game.batch, character,1);
 		hudBoss= new HudBoss(game.batch, character,fireBoss);
+        hudSecondBoss= new HudBoss(game.batch, character, mageBoss);
+		hudNew = new Hud(game.batch, character,2);
 		fireDelay = 0;
+
+
+
+
 		ballDelay = 0;
 		//fireBall = new FireBall(this, .32f, 0.32f);
 
@@ -275,12 +283,21 @@ public class PlayScreen implements Screen{
 		if(!fireBoss.isDefeated()){
 			fireBoss.update(dt);
 		}
+		if(mageBoss.getBossHp() != 0){
+
+			mageBoss.update(dt);
+		}
 
 		if(!fireBoss.getActivated()) {
 			hud.update();
-		}else if(fireBoss.getActivated()){
-
+		}else if(fireBoss.getActivated() && !fireBoss.isDefeated()){
 			hudBoss.update();
+
+		}
+		else if(fireBoss.isDefeated() && !mageBoss.isActivated()){
+			hudNew.update();
+		} else if(mageBoss.isActivated()){
+			hudSecondBoss.update();
 		}
 
 		ballDelay -= dt;
@@ -343,9 +360,18 @@ public class PlayScreen implements Screen{
 			game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
 			if(!fireBoss.getActivated()) {
 				hud.stage.draw();
-			}else if(fireBoss.getActivated()){
+
+			}else if(fireBoss.getActivated() && !fireBoss.isDefeated()){
 				hud.stage.dispose();
 				hudBoss.stage.draw();
+
+			}else if(fireBoss.isDefeated() && !mageBoss.isActivated() ){
+				hudBoss.stage.dispose();
+				//System.out.print("sada");
+				hudNew.stage.draw();
+			}else if(mageBoss.isActivated()){
+				hudNew.stage.dispose();
+				hudSecondBoss.stage.draw();
 			}
 			b2dr.render(world, gamecam.combined);
 

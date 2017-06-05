@@ -22,8 +22,8 @@ public abstract class Boss extends Sprite{
     }
 
     protected abstract void defineBoss();
-
-
+    public abstract int getBossHp();
+    public abstract void damage(int damage);
 
 
 

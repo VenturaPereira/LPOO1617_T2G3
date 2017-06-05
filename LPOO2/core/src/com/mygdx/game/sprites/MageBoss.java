@@ -26,6 +26,7 @@ public class MageBoss extends Boss {
     private boolean teleporting;
     private boolean stage1;
     private int hp;
+    private boolean activated;
 
 
     public MageBoss(PlayScreen screen){
@@ -43,6 +44,7 @@ public class MageBoss extends Boss {
         setBounds(0, 0, 65*2.3f/ MyGdxGame.PPM, 78*2.3f/MyGdxGame.PPM);
         teleporting = false;
         stage1 = false;
+        activated=false;
         hp = 500;
     }
 
@@ -116,7 +118,15 @@ public class MageBoss extends Boss {
         return stage1;
     }
 
-    public int getHp() {
+    public int getBossHp() {
         return hp;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 }
