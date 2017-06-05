@@ -21,6 +21,8 @@ public class HealthItem extends Sprite{
     private float y;
     PlayScreen screen;
     World world;
+    float stateTime;
+    private boolean setToDestroy, destroyed;
 
     public HealthItem(PlayScreen screen, float x, float y){
         super(screen.getHealthAtlas().findRegion("Pixel_heart_icon"));
@@ -28,13 +30,22 @@ public class HealthItem extends Sprite{
         this.world = screen.getWorld();
         this.x = x;
         this.y = y;
+        stateTime = 0;
+        setBounds(getX(), getY(), 57 / MyGdxGame.PPM, 51/MyGdxGame.PPM);
         setRegion(new TextureRegion(getTexture(), 0, 0, 570, 510));
         defineItemBody();
 
     }
 
     public void update(float dt){
-
+        stateTime += dt;
+        if(setToDestroy && !destroyed) {
+            world.destroyBody(body);
+            destroyed = true;
+        }
+        else if(!destroyed){
+            setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
+        }
     }
 
     public void defineItemBody(){
@@ -47,9 +58,17 @@ public class HealthItem extends Sprite{
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(20/MyGdxGame.PPM, 20/MyGdxGame.PPM);
         fdef1.filter.categoryBits = MyGdxGame.ITEM_BIT;
-        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.FIREBALL_BIT | MyGdxGame.SAMURAI_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.BULLET_BIT | MyGdxGame.ITEM_BIT;
+        fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT |MyGdxGame.SAMURAI_BIT;
 
         fdef1.shape = shape;
         body.createFixture(fdef1).setUserData(this);
+    }
+
+    public void hit(){
+        setToDestroy = true;
+    }
+
+    public boolean isDestroyed() {
+        return destroyed;
     }
 }

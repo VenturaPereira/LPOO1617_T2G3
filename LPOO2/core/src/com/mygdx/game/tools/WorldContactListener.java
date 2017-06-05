@@ -11,9 +11,11 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.Bat;
 import com.mygdx.game.sprites.BlueBullet;
+import com.mygdx.game.sprites.DarkBall;
 import com.mygdx.game.sprites.Enemy;
 import com.mygdx.game.sprites.FireBall;
 import com.mygdx.game.sprites.FireBoss;
+import com.mygdx.game.sprites.HealthItem;
 import com.mygdx.game.sprites.InteractiveTileObject;
 import com.mygdx.game.sprites.MageBoss;
 import com.mygdx.game.sprites.Samurai;
@@ -149,6 +151,33 @@ public class WorldContactListener implements ContactListener{
 				} else if(fixB.getFilterData().categoryBits == MyGdxGame.BAT_BIT) {
 					((BlueBullet)fixA.getUserData()).hit();
 					((Bat) fixB.getUserData()).hit();
+				}
+				break;
+			case MyGdxGame.ITEM_BIT | MyGdxGame.SAMURAI_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.ITEM_BIT){
+					((HealthItem)fixA.getUserData()).hit();
+					((Samurai)fixB.getUserData()).heal();
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.ITEM_BIT) {
+					((Samurai)fixA.getUserData()).heal();
+					((HealthItem) fixB.getUserData()).hit();
+				}
+				break;
+			case MyGdxGame.BULLET_BIT | MyGdxGame.DARKBALL_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.BULLET_BIT){
+					((BlueBullet)fixA.getUserData()).hit();
+					((DarkBall)fixB.getUserData()).hit();
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.BULLET_BIT) {
+					((DarkBall)fixA.getUserData()).hit();
+					((BlueBullet) fixB.getUserData()).hit();
+				}
+				break;
+			case MyGdxGame.SAMURAI_BIT | MyGdxGame.DARKBALL_BIT:
+				if(fixA.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT){
+					((Samurai)fixA.getUserData()).hpLoss(10);
+					((DarkBall)fixB.getUserData()).hit();
+				} else if(fixB.getFilterData().categoryBits == MyGdxGame.SAMURAI_BIT) {
+					((DarkBall)fixA.getUserData()).hit();
+					((Samurai) fixB.getUserData()).hpLoss(10);
 				}
 				break;
 
