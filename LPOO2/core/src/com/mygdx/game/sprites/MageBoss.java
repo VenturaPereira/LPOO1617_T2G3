@@ -24,7 +24,7 @@ public class MageBoss extends Boss {
     private Animation idleAnimation;
     private float stateTime;
     private boolean teleporting;
-    private boolean stage1, stage2;
+    private boolean stage1, stage2,activated;
     private int hp;
 
 
@@ -44,6 +44,7 @@ public class MageBoss extends Boss {
         teleporting = false;
         stage1 = false;
         stage2 = false;
+        activated=false;
         hp = 500;
     }
 
@@ -120,7 +121,15 @@ public class MageBoss extends Boss {
         return stage1;
     }
 
-    public int getHp() {
+    public int getBossHp() {
         return hp;
+    }
+
+    public boolean isActivated() {
+        return activated;
+    }
+
+    public void setActivated(boolean activated) {
+        this.activated = activated;
     }
 }
