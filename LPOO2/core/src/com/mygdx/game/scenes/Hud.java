@@ -20,6 +20,7 @@ public class Hud {
     public Stage stage;
     private Viewport viewport;
     private Integer life;
+    private Integer leveld;
     private Samurai character;
     private Table table;
     Label scoreLabel;
@@ -27,9 +28,10 @@ public class Hud {
     Label world;
     Label samurai;
 
-    public Hud(SpriteBatch sb, Samurai character){
+    public Hud(SpriteBatch sb, Samurai character, int leveld){
         this.character= character;
         life = character.getHitpoints();
+        this.leveld=leveld;
         viewport = new FitViewport(MyGdxGame.V_WIDTH*2, MyGdxGame.V_HEIGHT*2, new OrthographicCamera());
         stage = new Stage(viewport, sb);
 
@@ -38,7 +40,7 @@ public class Hud {
         table.top();
         table.setFillParent(true);
         scoreLabel=new Label(String.format("%03d",life), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        level=new Label("1", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        level=new Label(String.format("%01d",this.leveld), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         world=new Label("Level", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         samurai= new Label("HP", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
@@ -52,7 +54,9 @@ public class Hud {
         stage.addActor(table);
     }
 
-
+   public void setLeveld(int level){
+       this.leveld=level;
+   }
     public void update(){
       life=this.character.getHitpoints();
         scoreLabel.setText(String.format("%03d",life));
