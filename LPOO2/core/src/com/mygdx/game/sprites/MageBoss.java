@@ -24,7 +24,7 @@ public class MageBoss extends Boss {
     private Animation idleAnimation;
     private float stateTime;
     private boolean teleporting;
-    private boolean stage1;
+    private boolean stage1, stage2;
     private int hp;
 
 
@@ -43,6 +43,7 @@ public class MageBoss extends Boss {
         setBounds(0, 0, 65*2.3f/ MyGdxGame.PPM, 78*2.3f/MyGdxGame.PPM);
         teleporting = false;
         stage1 = false;
+        stage2 = false;
         hp = 500;
     }
 
@@ -66,6 +67,9 @@ public class MageBoss extends Boss {
         }
         if(hp <= 400){
             stage1 = false;
+            stage2 = true;
+            body.setTransform(8000/MyGdxGame.PPM, 500/MyGdxGame.PPM, 0);
+            body.setGravityScale(0);
         }
 
     }
