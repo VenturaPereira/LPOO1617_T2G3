@@ -76,8 +76,11 @@ public class BlueBullet extends Sprite{
         this.velocity = velocity;
     }
     */
-
+    public void setSetToDestroy(boolean b){
+        setToDestroy=b;
+    }
     public void hit() {
+
         setToDestroy = true;
         System.out.print(setToDestroy);
     }
