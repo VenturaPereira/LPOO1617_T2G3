@@ -30,11 +30,13 @@ import com.mygdx.game.sprites.BlueBullet;
 import com.mygdx.game.sprites.DarkBall;
 import com.mygdx.game.sprites.FireBall;
 import com.mygdx.game.sprites.FireBoss;
+import com.mygdx.game.sprites.HealthItem;
 import com.mygdx.game.sprites.MageBoss;
 import com.mygdx.game.sprites.Samurai;
 import com.mygdx.game.tools.B2WorldCreator;
 import com.mygdx.game.tools.Trigger;
 import com.mygdx.game.tools.WorldContactListener;
+
 
 public class PlayScreen implements Screen{
 
@@ -67,6 +69,7 @@ public class PlayScreen implements Screen{
 	private World world;
 	private Box2DDebugRenderer b2dr;
 
+	private HealthItem item;
 	private Samurai character;
 	private FireBall fireBall;
 	private DarkBall darkBall;
@@ -123,6 +126,7 @@ public class PlayScreen implements Screen{
 		triggers.add(trigger1);
 		triggers.add(trigger2);
 		bats = new ArrayList<Bat>();
+		item = new HealthItem(this, 5000f, 150f);
 
 		hud = new Hud(game.batch, character,1);
 		hudBoss= new HudBoss(game.batch, character,fireBoss);
@@ -258,6 +262,10 @@ public class PlayScreen implements Screen{
 				character.b2body.applyLinearImpulse(new Vector2(0, 5f), character.b2body.getWorldCenter(), true);
 				character.setCounter(character.getCounter()+1);
 			}
+			else if(character.getY() < 3 && character.getCounter()==0 || character.getY() <3 && character.getCounter()%2!=0){
+				character.b2body.applyLinearImpulse(new Vector2(0, 5f), character.b2body.getWorldCenter(), true);
+				character.setCounter(character.getCounter()+1);
+			}
 		}
 
 		else if(Gdx.input.isKeyPressed(Input.Keys.D) && character.b2body.getLinearVelocity().x <= 2){
@@ -319,16 +327,29 @@ public class PlayScreen implements Screen{
 				ballDelay = 3f;
 			}
 		}
-		if(fireBoss.isDefeated() && !mageBoss.isStage1()){
+		if(fireBoss.isDefeated() && !mageBoss.isActivated()){
 			if(ballDelay <= 1) {
 				createBat();
-				shootDarkballs();
+				//shootDarkballs();
 				ballDelay = 5f;
 			}
 		}
 
 
 		if(mageBoss.isStage1()){
+			if(ballDelay <= 1) {
+				shootDarkballs();
+				ballDelay = 2f;
+			}
+		}
+		if(mageBoss.isStage2()){
+			if(ballDelay <= 1) {
+				shootDarkballs();
+				ballDelay = 3f;
+			}
+		}
+
+		if(mageBoss.isStage3()){
 			if(ballDelay <= 1) {
 				shootDarkballs();
 				ballDelay = 3f;
@@ -342,6 +363,7 @@ public class PlayScreen implements Screen{
 		updateBullets(dt);
 		updateTriggers(dt);
 		updateDarkballs(dt);
+		updateItem(dt);
 		gamecam.position.x = character.b2body.getPosition().x;
 		gamecam.update();
 		renderer.setView(gamecam);
@@ -397,6 +419,7 @@ public class PlayScreen implements Screen{
 			drawBullets();
 			drawBats();
 			drawDarkballs();
+			drawItem();
 			game.batch.end();
 		} else if(character.getHitpoints() ==0){
 			Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -474,13 +497,31 @@ public class PlayScreen implements Screen{
 				darkBall.b2body.setLinearVelocity(new Vector2(-3, 0));
 			else if (samuraiX > magebossX)
 				darkBall.b2body.setLinearVelocity(new Vector2(3, 0));
+
+			darkBalls.add(darkBall);
 		}
-		else if(!mageBoss.isStage1()){
+		else if(mageBoss.isStage2()){
 			darkBall = new DarkBall(this, .32f, 0.32f, character.b2body.getPosition().x * MyGdxGame.PPM + 5f, 150);
 			darkBall.b2body.setLinearVelocity(0, 2);
-			darkBall.b2body.setGravityScale(1);
+			darkBalls.add(darkBall);
 		}
-		darkBalls.add(darkBall);
+		else if(mageBoss.isStage3()){
+			DarkBall darkBall1 = new DarkBall(this, .32f, 0.32f, mageBoss.body.getPosition().x * MyGdxGame.PPM , 150);
+			DarkBall darkBall2 = new DarkBall(this, .32f, 0.32f, mageBoss.body.getPosition().x * MyGdxGame.PPM , 150);
+			DarkBall darkBall3 = new DarkBall(this, .32f, 0.32f, mageBoss.body.getPosition().x * MyGdxGame.PPM , 150);
+			DarkBall darkBall4 = new DarkBall(this, .32f, 0.32f, mageBoss.body.getPosition().x * MyGdxGame.PPM , 150);
+
+			darkBall1.b2body.setLinearVelocity(-2,0);
+			darkBall2.b2body.setLinearVelocity(-2,2);
+			darkBall3.b2body.setLinearVelocity(2,2);
+			darkBall4.b2body.setLinearVelocity(2,0);
+
+			darkBalls.add(darkBall1);
+			darkBalls.add(darkBall2);
+			darkBalls.add(darkBall3);
+			darkBalls.add(darkBall4);
+		}
+
 	}
 
 
@@ -565,6 +606,11 @@ public class PlayScreen implements Screen{
 		}
 	}
 
+	public void updateItem(float dt){
+		if(!item.isDestroyed())
+			item.update(dt);
+	}
+
 	public void drawBossFireballs(){
 		for(int i = 0; i < bossFireBalls.size(); i++) {
 			if (!bossFireBalls.get(i).getDestroyed()) {
@@ -580,4 +626,10 @@ public class PlayScreen implements Screen{
 			}
 		}
 	}
+
+	public void drawItem(){
+		if(!item.isDestroyed())
+			item.draw(game.batch);
+	}
+
 }
