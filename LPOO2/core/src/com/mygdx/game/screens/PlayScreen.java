@@ -356,7 +356,6 @@ public class PlayScreen implements Screen{
 			}
 		}
 
-
 		mageBoss.update(dt);
 		updateBats(dt);
 		updateFireballs(dt);
