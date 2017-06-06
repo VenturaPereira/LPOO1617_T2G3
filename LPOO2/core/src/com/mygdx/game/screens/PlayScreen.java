@@ -41,6 +41,7 @@ import com.mygdx.game.tools.WorldContactListener;
 public class PlayScreen implements Screen{
 
 	private Texture gameOver;
+	private Texture endGame;
 	private SpriteBatch batch;
 
 	private MyGdxGame game;
@@ -103,6 +104,7 @@ public class PlayScreen implements Screen{
 		gamecam.zoom += 0.3f;
 		gamePort = new FitViewport(1200/ MyGdxGame.PPM, 800/MyGdxGame.PPM,gamecam);
 		gameOver=new Texture(Gdx.files.internal("game_over.jpg"));
+		endGame= new Texture(Gdx.files.internal("end_game.jpg"));
 		batch= new SpriteBatch();
 		mapLoader = new TmxMapLoader();
 		map = mapLoader.load("first_level_background.tmx");
@@ -111,8 +113,9 @@ public class PlayScreen implements Screen{
 		gamecam.position.set(gamePort.getWorldWidth()/2, gamePort.getWorldHeight()/2, 0);
 
 		world = new World(new Vector2(0,-10), true);
-		b2dr = new Box2DDebugRenderer();
 
+		b2dr = new Box2DDebugRenderer();
+        b2dr.setDrawBodies(false);
 		new B2WorldCreator(this);
 
 		character = new Samurai(world,this);
@@ -223,32 +226,32 @@ public class PlayScreen implements Screen{
 		if(Gdx.input.isKeyPressed(Input.Keys.P) && Gdx.input.isKeyPressed(Input.Keys.D)){
 			if(fireDelay <= 0){
 				shoot(0);
-				fireDelay = 0.3f;
+				fireDelay = 0.7f;
 			}
 		}
 		else if(Gdx.input.isKeyPressed(Input.Keys.P) &&  Gdx.input.isKeyPressed(Input.Keys.A)){
 			if(fireDelay <= 0){
 				shoot(1);
-				fireDelay = 0.3f;
+				fireDelay = 0.7f;
 			}
 		}
 		else if(Gdx.input.isKeyPressed(Input.Keys.P) &&  Gdx.input.isKeyPressed(Input.Keys.W)){
 			if(fireDelay <= 0){
 				shoot(2);
-				fireDelay = 0.3f;
+				fireDelay = 0.7f;
 			}
 		}
 		else if(Gdx.input.isKeyPressed(Input.Keys.P)){
 			if(character.isWalkingRight()){
 				if(fireDelay <= 0){
 					shoot(0);
-					fireDelay = 0.3f;
+					fireDelay = 0.7f;
 				}
 			}
 			else if(!character.isWalkingRight()){
 				if(fireDelay <= 0){
 					shoot(1);
-					fireDelay = 0.3f;
+					fireDelay = 0.7f;
 				}
 			}
 		}
@@ -352,7 +355,7 @@ public class PlayScreen implements Screen{
 		if(mageBoss.isStage3()){
 			if(ballDelay <= 1) {
 				shootDarkballs();
-				ballDelay = 3f;
+				ballDelay = 2.5f;
 			}
 		}
 
@@ -373,7 +376,7 @@ public class PlayScreen implements Screen{
 	@Override
 	public void render(float delta) {
 		// TODO Auto-generated method stub
-		if(character.getHitpoints() !=0) {
+		if(character.getHitpoints() !=0 && mageBoss.getBossHp() !=0) {
 			update(delta);
 			Gdx.gl.glClearColor(0, 0, 0, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -409,6 +412,7 @@ public class PlayScreen implements Screen{
 				fireBoss.body.getFixtureList().get(i).setFilterData(f);
 
 			}}
+
 			if(fireBoss.isStage2()){
 				drawBossFireballs();
 			}
@@ -427,6 +431,13 @@ public class PlayScreen implements Screen{
 			batch.begin();
 			batch.draw(gameOver,10,10,1200,600);
 			batch.end();
+		} else if(mageBoss.getBossHp() ==0){
+			Gdx.gl.glClearColor(0, 0, 0, 1);
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+			batch.begin();
+			batch.draw(endGame,10,10,1200,600);
+			batch.end();
+
 		}
 
 		//game.batch.setProjectionMatrix(gamecam.combined);;
@@ -511,10 +522,10 @@ public class PlayScreen implements Screen{
 			DarkBall darkBall3 = new DarkBall(this, .32f, 0.32f, mageBoss.body.getPosition().x * MyGdxGame.PPM , 150);
 			DarkBall darkBall4 = new DarkBall(this, .32f, 0.32f, mageBoss.body.getPosition().x * MyGdxGame.PPM , 150);
 
-			darkBall1.b2body.setLinearVelocity(-2,0);
-			darkBall2.b2body.setLinearVelocity(-2,2);
-			darkBall3.b2body.setLinearVelocity(2,2);
-			darkBall4.b2body.setLinearVelocity(2,0);
+			darkBall1.b2body.setLinearVelocity(-3,0);
+			darkBall2.b2body.setLinearVelocity(-3,3);
+			darkBall3.b2body.setLinearVelocity(3,3);
+			darkBall4.b2body.setLinearVelocity(3,0);
 
 			darkBalls.add(darkBall1);
 			darkBalls.add(darkBall2);
