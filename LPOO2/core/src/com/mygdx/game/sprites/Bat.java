@@ -26,7 +26,13 @@ public class Bat extends Enemy implements aiInterface {
     private boolean setToDestroy;
     private boolean destroyed;
 
-
+    /**
+     * Bat constructor
+     * @param screen
+     * @param x
+     * @param y
+     * @param distance
+     */
     public Bat(PlayScreen screen, float x, float y, float distance){
         super(screen, x, y, distance);
         frames = new Array<TextureRegion>();
@@ -43,6 +49,10 @@ public class Bat extends Enemy implements aiInterface {
 
     }
 
+    /**
+     * Bat update method
+     * @param dt - delta time
+     */
     public void update(float dt) {
         stateTime += dt;
         if(setToDestroy && !destroyed){
@@ -55,6 +65,9 @@ public class Bat extends Enemy implements aiInterface {
         }
     }
 
+    /**
+     * Defines the body of the this enemy
+     */
     @Override
     protected void defineEnemy() {
         BodyDef bdef  = new BodyDef();
@@ -77,7 +90,10 @@ public class Bat extends Enemy implements aiInterface {
         return super.randomHeightBetween(min, max);
     }
 
-
+    /**
+     * Makes the bat move towards the samurai
+     * @param samurai
+     */
     @Override
     public void move(Samurai samurai) {
         float x= samurai.b2body.getPosition().x;
@@ -108,11 +124,18 @@ public class Bat extends Enemy implements aiInterface {
 
     }
 
+    /**
+     * If the bats hits the samurai, it gets set to be destroyed
+     */
     @Override
     public void hit() {
         setToDestroy = true;
     }
 
+    /**
+     * Checks if the bat is destroyed
+     * @return destroyed boolean
+     */
     public boolean isDestroyed() {
         return destroyed;
     }

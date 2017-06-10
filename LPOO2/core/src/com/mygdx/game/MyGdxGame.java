@@ -14,10 +14,17 @@ import com.mygdx.game.screens.StartMenu;
 
 public class MyGdxGame extends Game {
 	public SpriteBatch batch;
+
+	/**
+	 * Dimension constants
+	 */
 	public static final int V_WIDTH = 400;
 	public static final int V_HEIGHT = 208;
 	public static final float PPM = 100;
 
+	/**
+	 * Collision bits
+	 */
 	public static final short GROUND_BIT = 1;
 	public static final short SAMURAI_BIT = 2;
 	public static final short WALL_BIT = 4;
@@ -30,9 +37,13 @@ public class MyGdxGame extends Game {
 	public static final short MAGEBOSS_BIT = 512;
 	public static final short DARKBALL_BIT = 1024;
 	public static final short ITEM_BIT = 2048;
+	public static final short OBSTACLE_BIT = 4096;
 
     public static AssetManager manager;
-	
+
+	/**
+	 * Create method
+	 */
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -41,8 +52,10 @@ public class MyGdxGame extends Game {
         manager.finishLoading();
 		setScreen(new StartMenu(this));
 	}
-	
-	
+
+	/**
+	 * Render method
+	 */
 	@Override
 	public void render () {
 		super.render();

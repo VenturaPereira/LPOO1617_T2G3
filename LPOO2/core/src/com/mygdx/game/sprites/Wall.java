@@ -10,12 +10,22 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.mygdx.game.MyGdxGame;
 
 public class Wall extends InteractiveTileObject{
+
+	/**
+	 * Wall constructor
+	 * @param world
+	 * @param map
+	 * @param bounds
+	 */
 	public Wall(World world, TiledMap map, Rectangle bounds){
 		super(world, map, bounds);
 		fixture.setUserData(this);
 
 	}
-	
+
+	/**
+	 * Checks if the katana hits the wall (not used)
+	 */
 	@Override
 	public void onKatanaHit() {
 		Gdx.app.log("Wall", "Collision");

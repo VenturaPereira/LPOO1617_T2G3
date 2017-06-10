@@ -24,13 +24,7 @@ import com.mygdx.game.screens.PlayScreen;
 public class Samurai extends Sprite{
 
 
-	public int getCounter() {
-		return counter;
-	}
 
-	public void setCounter(int counter) {
-		this.counter = counter;
-	}
 
 	public enum State{WALKING, STANDING, ATTACKING, JUMPING};
 	public State currentState;
@@ -46,10 +40,13 @@ public class Samurai extends Sprite{
     private  int counter=0;
 
 
-
-	public Samurai(World world, PlayScreen screen){
+	/**
+	 * Samurai constructor
+	 * @param screen
+	 */
+	public Samurai(PlayScreen screen){
 		super(screen.getSamuraiAtlas().findRegion("samurai_walk"));
-		this.world = world;
+		this.world = screen.getWorld();
 		currentState = State.STANDING;
 		previousState = State.STANDING;
 		stateTimer = 0;
@@ -77,12 +74,21 @@ public class Samurai extends Sprite{
 		setBounds(0,0,85/MyGdxGame.PPM, 145/MyGdxGame.PPM);
 		setRegion(standing);
 	}
-	
+
+	/**
+	 * Samurai update method
+	 * @param dt
+	 */
 	public void update(float dt){
 		setPosition(b2body.getPosition().x - getWidth()/1.7f, b2body.getPosition().y-getHeight()/2.3f);
 		setRegion(getFrame(dt));
 
 	}
+
+	/**
+	 * Decreases the samurai's health by h
+	 * @param h
+	 */
 	public void hpLoss(int h){
 		if(hitpoints-h <=0){
 			hitpoints=0;
@@ -90,10 +96,20 @@ public class Samurai extends Sprite{
 			hitpoints = hitpoints - h;
 		}
 	}
+
+	/**
+	 * Gets the samurai's health points
+	 * @return samurai health points
+	 */
 	public int getHitpoints() {
 		return hitpoints;
 	}
-	
+
+	/**
+	 * Gets the frame of the animation, depending on the state of the samurai
+	 * @param dt
+	 * @return the frame of the animation
+	 */
 	public TextureRegion getFrame(float dt) {
 		currentState = getState();
 		
@@ -129,13 +145,12 @@ public class Samurai extends Sprite{
 		
 	}
 
+	/**
+	 * Gets the state of the samurai
+	 * @return state of the samurai
+	 */
 	public State getState() {
-
-
-		if(Gdx.input.isKeyPressed(Input.Keys.P)){
-			return State.ATTACKING;
-		}
-		else if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) || this.previousState == State.JUMPING && Gdx.input.isButtonPressed(Input.Buttons.LEFT) )
+		if(Gdx.input.isKeyPressed(Input.Keys.P))
 			return State.ATTACKING;
 		else if(b2body.getLinearVelocity().y !=0)
 			return State.JUMPING;
@@ -145,6 +160,9 @@ public class Samurai extends Sprite{
 			return State.STANDING;
 	}
 
+	/**
+	 * Defines the body of the samurai
+	 */
 	public void defineSamurai(){
 		BodyDef bdef  = new BodyDef();
 		bdef.position.set(300/MyGdxGame.PPM, 150/MyGdxGame.PPM);
@@ -156,7 +174,7 @@ public class Samurai extends Sprite{
 		PolygonShape shape = new PolygonShape();
 		shape.setAsBox(20/MyGdxGame.PPM, 60/MyGdxGame.PPM);
 		fdef1.filter.categoryBits = MyGdxGame.SAMURAI_BIT;
-		fdef1.filter.maskBits = MyGdxGame.SAMURAI_BIT | MyGdxGame.GROUND_BIT | MyGdxGame.FIREBALL_BIT| MyGdxGame.WALL_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.TRIGGER_BIT | MyGdxGame.FIREBOSS_HEAD_BIT | MyGdxGame.BAT_BIT | MyGdxGame.DARKBALL_BIT | MyGdxGame.ITEM_BIT;
+		fdef1.filter.maskBits = MyGdxGame.OBSTACLE_BIT | MyGdxGame.SAMURAI_BIT | MyGdxGame.GROUND_BIT | MyGdxGame.FIREBALL_BIT| MyGdxGame.WALL_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.TRIGGER_BIT | MyGdxGame.FIREBOSS_HEAD_BIT | MyGdxGame.BAT_BIT | MyGdxGame.DARKBALL_BIT | MyGdxGame.ITEM_BIT;
 
 		fdef1.shape = shape;
 		b2body.createFixture(fdef1).setUserData(this);
@@ -181,11 +199,34 @@ public class Samurai extends Sprite{
 
 	}
 
+	/**
+	 * Checks if the samurai is walking to his right
+	 * @return isWalkingRight boolean
+	 */
 	public boolean isWalkingRight() {
 		return walkingRight;
 	}
 
+	/**
+	 * Increases the samurai health points by 100
+	 */
 	public void heal(){
 		hitpoints += 100;
+	}
+
+	/**
+	 * Gets the counter
+	 * @return counter number
+	 */
+	public int getCounter() {
+		return counter;
+	}
+
+	/**
+	 * Sets the counter
+	 * @param counter
+	 */
+	public void setCounter(int counter) {
+		this.counter = counter;
 	}
 }

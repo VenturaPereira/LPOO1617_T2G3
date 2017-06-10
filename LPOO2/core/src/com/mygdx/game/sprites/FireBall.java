@@ -26,7 +26,14 @@ public class FireBall extends Enemy{
     private boolean setToDestroy;
     private boolean destroyed;
 
-
+    /**
+     *
+     * FireBall constructor
+     * @param screen
+     * @param x
+     * @param y
+     * @param distance
+     */
     public FireBall(PlayScreen screen, float x, float y, float distance) {
 
         super(screen, x, y, distance);
@@ -46,6 +53,10 @@ public class FireBall extends Enemy{
         destroyed=false;
     }
 
+    /**
+     * FireBall update constructor
+     * @param dt
+     */
     public void update(float dt){
         stateTime += dt;
         if(setToDestroy && !destroyed){
@@ -58,10 +69,17 @@ public class FireBall extends Enemy{
         }
     }
 
+    /**
+     * Checks if the fire ball is destroyed
+     * @return - destroyed boolean
+     */
     public boolean getDestroyed(){
         return destroyed;
     }
 
+    /**
+     * Defines the fire ball body
+     */
     @Override
     protected void defineEnemy() {
         BodyDef bdef  = new BodyDef();
@@ -80,11 +98,21 @@ public class FireBall extends Enemy{
         b2body.createFixture(fdef1).setUserData(this);
     }
 
+    /**
+     * If the fire ball hits something it gets set to be destroyed
+     */
     @Override
     public void hit() {
        setToDestroy = true;
     }
 
+    /**
+     * Generates a random height between a minimum and a maximum value
+     *
+     * @param min
+     * @param max
+     * @return - height between min and max
+     */
     @Override
     public int randomHeightBetween(int min, int max){
        return super.randomHeightBetween(min, max);

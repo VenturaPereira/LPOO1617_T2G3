@@ -27,6 +27,12 @@ public class Trigger{
     FireBoss fireBoss;
     MageBoss mageBoss;
 
+    /**
+     * Trigger constructor
+     * @param screen
+     * @param x
+     * @param y
+     */
     public Trigger(PlayScreen screen, float x, float y) {
         this.x = x;
         this.y = y;
@@ -40,6 +46,9 @@ public class Trigger{
         defineTriggerBody();
     }
 
+    /**
+     * Defines the trigger body
+     */
     public void defineTriggerBody(){
         BodyDef bdef  = new BodyDef();
         bdef.position.set(x/ MyGdxGame.PPM, y/MyGdxGame.PPM);
@@ -48,7 +57,7 @@ public class Trigger{
 
         FixtureDef fdef1 = new FixtureDef();
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(10/MyGdxGame.PPM, 10/MyGdxGame.PPM);
+        shape.setAsBox(10/MyGdxGame.PPM, 200/MyGdxGame.PPM);
         fdef1.filter.categoryBits = MyGdxGame.TRIGGER_BIT;
         fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT | MyGdxGame.FIREBALL_BIT | MyGdxGame.SAMURAI_BIT | MyGdxGame.FIREBOSS_BIT | MyGdxGame.BULLET_BIT | MyGdxGame.TRIGGER_BIT;
 
@@ -56,6 +65,10 @@ public class Trigger{
         body.createFixture(fdef1).setUserData(this);
     }
 
+    /**
+     * Trigger update method
+     * @param dt
+     */
     public void update(float dt){
         stateTime += dt;
         if(setToDestroy && !destroyed) {
@@ -64,14 +77,24 @@ public class Trigger{
         }
     }
 
+    /**
+     * If the samurai hits the trigger, it gets set to be destroyed
+     */
     public void hit(){
         setToDestroy = true;
     }
 
+    /**
+     * Checks if the trigger is destroyed
+     * @return
+     */
     public boolean isDestroyed() {
         return destroyed;
     }
 
+    /**
+     * Activates fire boss
+     */
     public void startFireboss(){
         if(!fireBoss.isDefeated()) {
             fireBoss.setActivated(true);
@@ -79,6 +102,9 @@ public class Trigger{
         }
     }
 
+    /**
+     * Activates mage boss
+     */
     public void startMageboss(){
         if(fireBoss.isDefeated()){
             mageBoss.setActivated(true);

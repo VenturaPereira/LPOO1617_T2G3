@@ -22,6 +22,10 @@ import com.mygdx.game.sprites.Samurai;
 
 public class WorldContactListener implements ContactListener{
 
+	/**
+	 * Checks the collisions between entities
+	 * @param contact
+	 */
 	@Override
 	public void beginContact(Contact contact) {
 		Fixture fixA = contact.getFixtureA();
@@ -110,10 +114,10 @@ public class WorldContactListener implements ContactListener{
 				break;
 			case MyGdxGame.FIREBOSS_HEAD_BIT | MyGdxGame.BULLET_BIT:
 				if(fixA.getFilterData().categoryBits == MyGdxGame.FIREBOSS_HEAD_BIT){
-					((FireBoss)fixA.getUserData()).damage(20);
+					((FireBoss)fixA.getUserData()).damage(15);
 					((BlueBullet)fixB.getUserData()).hit();
 				} else if(fixB.getFilterData().categoryBits == MyGdxGame.FIREBOSS_HEAD_BIT) {
-					((FireBoss)fixB.getUserData()).damage(20);
+					((FireBoss)fixB.getUserData()).damage(15);
 					((BlueBullet)fixA.getUserData()).hit();
 				}
 				break;

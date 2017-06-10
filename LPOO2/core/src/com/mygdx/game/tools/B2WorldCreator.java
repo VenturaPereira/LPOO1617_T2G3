@@ -13,6 +13,11 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.screens.PlayScreen;
 
 public class B2WorldCreator {
+
+	/**
+	 * Box 2D world contructor
+	 * @param screen
+	 */
 	public B2WorldCreator(PlayScreen screen){
 		World world = screen.getWorld();
 		TiledMap map = screen.getMap();

@@ -1,0 +1,12 @@
+
+Obstacle.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+block_rock
+  rotate: false
+  xy: 1, 1
+  size: 176, 225
+  orig: 176, 225
+  offset: 0, 0
+  index: -1

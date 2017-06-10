@@ -22,7 +22,13 @@ public abstract class Enemy extends Sprite{
     public Vector2 counterVelocity;
     public Vector2 batVelocity, batCounterVelocity;
 
-
+    /**
+     * Enemy constructor
+     * @param screen
+     * @param x
+     * @param y
+     * @param distance
+     */
     public Enemy(PlayScreen screen, float x, float y, float distance){
       this.world = screen.getWorld();
       this.screen = screen;
@@ -35,9 +41,19 @@ public abstract class Enemy extends Sprite{
       batCounterVelocity = new Vector2(2,0);
     }
 
+    /**
+     * Defines the body of the enemy
+     */
     protected abstract void defineEnemy();
     public abstract void hit();
 
+    /**
+     * Generates a random height between a minimum and a maximum value
+     *
+     * @param min - minimum height
+     * @param max - maximum height
+     * @return - a height between min and  max
+     */
     public int randomHeightBetween(int min, int max){
         Random r = new Random();
 

@@ -24,7 +24,14 @@ public class DarkBall extends Enemy {
     public float height;
     private MageBoss mageBoss;
 
-
+    /**
+     * DarkBall constructor
+     * @param screen
+     * @param x
+     * @param y
+     * @param distance
+     * @param height
+     */
     public DarkBall(PlayScreen screen, float x, float y, float distance, float height) {
 
         super(screen, x, y, distance);
@@ -41,6 +48,10 @@ public class DarkBall extends Enemy {
         this.mageBoss = screen.getMageBoss();
     }
 
+    /**
+     * DarkBall update constructor
+     * @param dt
+     */
     public void update(float dt){
         stateTime += dt;
 
@@ -54,14 +65,19 @@ public class DarkBall extends Enemy {
             setRegion((TextureRegion) walkAnimation.getKeyFrame(stateTime, true));
         }
     }
-    public boolean getSetToDestroy(){
-        return setToDestroy;
-    }
 
+
+    /**
+     * Checks if the dark ball is destroyed
+     * @return destroyed boolean
+     */
     public boolean getDestroyed(){
         return destroyed;
     }
 
+    /**
+     * Defines the dark ball body
+     */
     @Override
     protected void defineEnemy() {
         BodyDef bdef  = new BodyDef();
@@ -80,6 +96,9 @@ public class DarkBall extends Enemy {
         b2body.createFixture(fdef1).setUserData(this);
     }
 
+    /**
+     * If the dark ball hits something gets set to be destroyed
+     */
     @Override
     public void hit() {
 
@@ -87,6 +106,5 @@ public class DarkBall extends Enemy {
 
     }
 
-        //System.out.print("riiip");
 
 }

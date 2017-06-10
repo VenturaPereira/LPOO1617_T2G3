@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FillViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -20,62 +21,70 @@ import com.mygdx.game.MyGdxGame;
 
 import static com.mygdx.game.MyGdxGame.PPM;
 
-
 /**
- * Created by Ventura on 28/05/2017.
+ * Created by Luís on 07/06/2017.
  */
 
-public class StartMenu implements Screen{
+public class HintsScreen implements Screen{
 
-    private FillViewport viewport;
+    private Viewport viewport;
     private Stage stage;
-    private Texture start;
-   private SpriteBatch batch;
+    private Texture hints;
+    private SpriteBatch batch;
     private Game game;
+    private PauseScreen pauseScreen;
+    private OrthographicCamera gamecam;
 
-    public StartMenu(Game game){
-        this.game=game;
-        viewport=new FillViewport(MyGdxGame.V_WIDTH, MyGdxGame.V_HEIGHT, new OrthographicCamera());
+    /**
+     * The hints screen constructor
+     *
+     * @param pause
+     * @param game
+     */
+    public HintsScreen(PauseScreen pause, Game game) {
+        this.game = game;
+        this.pauseScreen = pause;
+        this.gamecam = new OrthographicCamera();
+        viewport = new FillViewport(1600/ MyGdxGame.PPM, 800/MyGdxGame.PPM,gamecam);
         stage = new Stage(viewport, ((MyGdxGame) game).batch);
-        start=new Texture(Gdx.files.internal("main_menu_image.jpg"));
-        batch= new SpriteBatch();
-        Label.LabelStyle font = new Label.LabelStyle(new BitmapFont(), Color.WHITE);
-        Table table = new Table();
-        table.center();
-        table.setFillParent(true);
-        table.row();
-        Label playGame = new Label("Press to play",font);
-        table.row();
-        table.add(playGame).expandX().padTop(3f);
-        stage.addActor(table);
-
-
+        hints = new Texture(Gdx.files.internal("hint_menu_image.jpg"));
+        batch = new SpriteBatch();
     }
+
+
     @Override
     public void show() {
 
     }
 
+    /**
+     * Hints screen render
+     * @param delta
+     */
     @Override
     public void render(float delta) {
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-          Gdx.app.exit();
+            Gdx.app.exit();
         }
-        if (Gdx.input.justTouched()) {
-            game.setScreen(new PlayScreen((MyGdxGame) game));
-            dispose();
-        }
+       if(Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+           game.setScreen(pauseScreen);
+       }
 
-            Gdx.gl.glClearColor(0, 0, 0, 1);
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            batch.begin();
-            batch.draw(start,0,-200, MyGdxGame.V_WIDTH/PPM*300, MyGdxGame.V_HEIGHT/PPM*475);
-            batch.end();
-            stage.draw();
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        batch.draw(hints,0,-200, MyGdxGame.V_WIDTH/PPM*300, MyGdxGame.V_HEIGHT/PPM*475);
+        batch.end();
+        stage.draw();
 
 
     }
 
+    /**
+     * Resize method.
+     * @param width
+     * @param height
+     */
     @Override
     public void resize(int width, int height) {
         viewport.update(width, height);
@@ -98,6 +107,6 @@ public class StartMenu implements Screen{
 
     @Override
     public void dispose() {
-       stage.dispose();
+
     }
 }

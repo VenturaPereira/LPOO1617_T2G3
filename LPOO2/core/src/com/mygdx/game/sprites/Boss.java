@@ -14,15 +14,31 @@ public abstract class Boss extends Sprite{
     protected PlayScreen screen;
 
 
-
+    /**
+     * Boss constructor
+     * @param screen
+     */
     public Boss(PlayScreen screen){
         this.world = screen.getWorld();
         this.screen = screen;
         defineBoss();
     }
 
+    /**
+     * Defines the body of the boss
+     */
     protected abstract void defineBoss();
+
+    /**
+     * Gets the health points of the boss
+     * @return boss health points
+     */
     public abstract int getBossHp();
+
+    /**
+     * Inflicts a certain damage to the boss
+     * @param damage
+     */
     public abstract void damage(int damage);
 
 

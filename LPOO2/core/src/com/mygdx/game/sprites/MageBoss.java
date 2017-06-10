@@ -28,7 +28,10 @@ public class MageBoss extends Boss {
     private boolean stage1, stage2,stage3, activated;
     private int hp;
 
-
+    /**
+     * Mage Boss constructor
+     * @param screen
+     */
     public MageBoss(PlayScreen screen){
         super(screen);
         furious = new TextureRegion(screen.getMagebossAtlas().findRegion("Mage Boss"), 7, 184, 73, 77);
@@ -36,12 +39,7 @@ public class MageBoss extends Boss {
         for(int i = 0; i < 4; i++) {
             frames.add(new TextureRegion(screen.getMagebossAtlas().findRegion("Mage Boss"), i * 65, 8, 65, 78));
         }
-
         flip();
-
-
-
-
         idleAnimation= new Animation(0.2f, frames);
 
         frames2 = new Array<TextureRegion>();
@@ -59,7 +57,10 @@ public class MageBoss extends Boss {
         hp = 500;
     }
 
-
+    /**
+     * MageBoss update method
+     * @param dt
+     */
     public void update(float dt){
         stateTime += dt;
         float samuraiX = screen.getSamurai().b2body.getPosition().x;
@@ -97,6 +98,10 @@ public class MageBoss extends Boss {
 
     }
 
+
+    /**
+     * Defines the mage boss body
+     */
     @Override
     protected void defineBoss() {
         BodyDef bdef  = new BodyDef();
@@ -115,16 +120,26 @@ public class MageBoss extends Boss {
 
     }
 
+    /**
+     * Sets teleporting to true when the mage boss is in stage 1
+     */
     public void teleport(){
        if(stage1)teleporting = true;
     }
 
+    /**
+     * Flips the mage boss sprite
+     */
     public void flip(){
         for(int i = 0; i < frames.size; i++) {
             frames.get(i).flip(true, false);
         }
     }
 
+    /**
+     * Inflicts a certain damage to the mage boss
+     * @param damage
+     */
     public void damage(int damage) {
         if(activated) {
             if (hp >= damage) {
@@ -135,30 +150,58 @@ public class MageBoss extends Boss {
         }
     }
 
+    /**
+     * Sets the mage boss to be in stage 1
+     * @param stage1
+     */
     public void setStage1(boolean stage1) {
         this.stage1 = stage1;
     }
 
+    /**
+     * Checks if the mage boss is in sttage 1
+     * @return stage1 boolean
+     */
     public boolean isStage1() {
         return stage1;
     }
 
+    /**
+     * Checks if the mage boss is in stage 2
+     * @return stage2 boolean
+     */
     public boolean isStage2() {
         return stage2;
     }
 
+    /**
+     * Checks if the mage boss is in stage 3
+     * @return stage3 boolean
+     */
     public boolean isStage3() {
         return stage3;
     }
 
+    /**
+     * Gets the mage boss health points
+     * @return boss health points
+     */
     public int getBossHp() {
         return hp;
     }
 
+    /**
+     * Checks if the mage boss is activated
+     * @return activated boolean
+     */
     public boolean isActivated() {
         return activated;
     }
 
+    /**
+     * Activates and deactivates the mage boss
+     * @param activated
+     */
     public void setActivated(boolean activated) {
         this.activated = activated;
     }

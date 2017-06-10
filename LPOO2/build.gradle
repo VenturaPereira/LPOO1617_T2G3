@@ -98,3 +98,14 @@ project(":core") {
 tasks.eclipse.doLast {
     delete ".project"
 }
+
+task deleteJar(type: Delete) {
+    delete 'libs/samuraigame.jar'
+}
+
+task createJar(type: Copy) {
+    from('core/build/tmp/')
+    into('libs/jars/')
+    include('classes.jar')
+    rename('classes.jar', 'samuraigame.jar')
+}

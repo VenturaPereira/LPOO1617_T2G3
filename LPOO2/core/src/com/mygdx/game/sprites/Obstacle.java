@@ -11,81 +11,75 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.screens.PlayScreen;
 
 /**
- * Created by Luís on 02/06/2017.
+ * Created by Luís on 07/06/2017.
  */
 
-public class HealthItem extends Sprite{
-
+public class Obstacle extends Sprite{
     public Body body;
     private float x;
     private float y;
     PlayScreen screen;
     World world;
     float stateTime;
-    private boolean setToDestroy, destroyed;
+    private boolean destroyed;
 
     /**
-     * HealthItem constructor
+     * Obstacle constructor
      * @param screen
      * @param x
      * @param y
      */
-    public HealthItem(PlayScreen screen, float x, float y){
-        super(screen.getHealthAtlas().findRegion("Pixel_heart_icon"));
+    public Obstacle(PlayScreen screen, float x, float y){
+        super(screen.getObstacleAtlas().findRegion("block_rock"));
         this.screen = screen;
         this.world = screen.getWorld();
         this.x = x;
         this.y = y;
         stateTime = 0;
-        setBounds(getX(), getY(), 57 / MyGdxGame.PPM, 51/MyGdxGame.PPM);
-        setRegion(new TextureRegion(getTexture(), 0, 0, 570, 510));
-        defineItemBody();
+        setBounds(getX(), getY(), 58 / MyGdxGame.PPM, 73/MyGdxGame.PPM);
+        setRegion(new TextureRegion(getTexture(), 2, 6, 173, 218));
+        defineBody();
 
     }
 
     /**
-     * HealthItem update method
+     * Obstacle update method
      * @param dt
      */
     public void update(float dt){
         stateTime += dt;
-        if(setToDestroy && !destroyed) {
+        if(screen.getFireBoss().isDefeated() && !destroyed) {
             world.destroyBody(body);
             destroyed = true;
         }
         else if(!destroyed){
-            setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
+            setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2.3f);
         }
     }
 
     /**
-     * Defines the health item body
+     * Defines the body of the obstacle
      */
-    public void defineItemBody(){
+    public void defineBody(){
         BodyDef bdef  = new BodyDef();
         bdef.position.set(x/ MyGdxGame.PPM, y/MyGdxGame.PPM);
-        bdef.type = BodyDef.BodyType.DynamicBody;
+        bdef.type = BodyDef.BodyType.StaticBody;
         body = world.createBody(bdef);
 
         FixtureDef fdef1 = new FixtureDef();
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(20/MyGdxGame.PPM, 20/MyGdxGame.PPM);
-        fdef1.filter.categoryBits = MyGdxGame.ITEM_BIT;
+        fdef1.filter.categoryBits = MyGdxGame.OBSTACLE_BIT;
         fdef1.filter.maskBits = MyGdxGame.GROUND_BIT | MyGdxGame.WALL_BIT |MyGdxGame.SAMURAI_BIT;
 
         fdef1.shape = shape;
+        fdef1.friction = 1.0f;
+        fdef1.density = 0.9f;
         body.createFixture(fdef1).setUserData(this);
     }
 
     /**
-     * If the samurai hits the health item, it is set to be destroyed
-     */
-    public void hit(){
-        setToDestroy = true;
-    }
-
-    /**
-     * Checks if the health item is destroyed
+     * Checks if the obstacle is destroyed
      * @return destroyed boolean
      */
     public boolean isDestroyed() {

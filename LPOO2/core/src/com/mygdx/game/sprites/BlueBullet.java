@@ -26,7 +26,10 @@ public class BlueBullet extends Sprite{
     private boolean setToDestroy;
     private boolean destroyed;
 
-
+    /**
+     * BlueBullet constructor
+     * @param screen
+     */
     public BlueBullet(PlayScreen screen){
         super(screen.getBlueBullet().findRegion("blueBullet"));
         stateTime = 0;
@@ -43,7 +46,9 @@ public class BlueBullet extends Sprite{
 
     }
 
-
+    /**
+     * Defines the bullet body
+     */
     public void defineBullet() {
         BodyDef bdef  = new BodyDef();
         bdef.position.set(samurai.b2body.getPosition().x, samurai.b2body.getPosition().y);
@@ -61,6 +66,10 @@ public class BlueBullet extends Sprite{
         body.createFixture(fdef1).setUserData(this);
     }
 
+    /**
+     * BlueBullet update method
+     * @param dt
+     */
     public void update(float dt){
         stateTime += dt;
         if(setToDestroy && !destroyed) {
@@ -71,20 +80,19 @@ public class BlueBullet extends Sprite{
             setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
     }
 
-    /*
-    public void setVelocity(Vector2 velocity) {
-        this.velocity = velocity;
-    }
-    */
-    public void setSetToDestroy(boolean b){
-        setToDestroy=b;
-    }
+
+    /**
+     * The bullet hits something and gets set to be destroyed
+     */
     public void hit() {
 
         setToDestroy = true;
-        System.out.print(setToDestroy);
     }
 
+    /**
+     * Checks if the bullet is destroyed
+     * @return destroyed boolean
+     */
     public boolean isDestroyed() {
         return destroyed;
     }

@@ -19,7 +19,13 @@ public abstract class InteractiveTileObject {
 	protected Body body;
 	
 	protected Fixture fixture;
-	
+
+	/**
+	 * InteractiveTileObject constructor
+	 * @param world
+	 * @param map
+	 * @param bounds
+	 */
 	public InteractiveTileObject(World world, TiledMap map, Rectangle bounds){
 		this.world = world;
 		this.map = map;
@@ -41,7 +47,10 @@ public abstract class InteractiveTileObject {
 		body.setUserData(this);
 		fixture=body.createFixture(fdef);
 	}
-	
+
+	/**
+	 * Checks if the katana hits the object (not used)
+	 */
 	public abstract void onKatanaHit();
 	
 

@@ -41,6 +41,10 @@ public class FireBoss extends Boss{
     private FireBall fireBall1, fireBall2;
     private ArrayList<FireBall> fireBalls;
 
+    /**
+     * FireBoss constructor
+     * @param screen
+     */
     public FireBoss(PlayScreen screen){
         super(screen);
         frames = new Array<TextureRegion>();
@@ -75,13 +79,27 @@ public class FireBoss extends Boss{
         bossHp=300;
 
     }
+
+    /**
+     * Activates and deactivates the fire boss
+     * @param bool
+     */
     public void setActivated(boolean bool){
         this.activated=bool;
     }
+
+    /**
+     * Checks if the boss is activated
+     * @return activated boolean
+     */
     public boolean getActivated(){
         return activated;
     }
 
+    /**
+     * FireBoss update method
+     * @param dt
+     */
     public void update(float dt){
         stateTime += dt;
         delta -= dt;
@@ -112,20 +130,16 @@ public class FireBoss extends Boss{
             body.setLinearVelocity(new Vector2(0, 0));
             setRegion((TextureRegion) defeatedAnimation.getKeyFrame(stateTime, false));
             defeated = true;
-
-          /*  if(delta <= -2f) {
-                world.destroyBody(body);
-                defeated = true;
-
-
-         }*/
         }
     }
 
+    /**
+     * Defines the fire boss body
+     */
     @Override
     protected void defineBoss() {
         BodyDef bdef  = new BodyDef();
-        bdef.position.set(2700/ MyGdxGame.PPM, 150/MyGdxGame.PPM);
+        bdef.position.set(2800/ MyGdxGame.PPM, 150/MyGdxGame.PPM);
         bdef.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(bdef);
 
@@ -155,6 +169,9 @@ public class FireBoss extends Boss{
         body.createFixture(fdef2).setUserData(this);
     }
 
+    /**
+     * Reverses the fire boss velocity
+     */
     public void reverseVelocity(){
         if(stage1 || stage2) {
             velocity.x = -velocity.x;
@@ -164,14 +181,27 @@ public class FireBoss extends Boss{
         }
     }
 
+    /**
+     * Sets the fire boss to stage1
+     * @param stage1
+     */
     public void setStage1(boolean stage1) {
         this.stage1 = stage1;
     }
 
+    /**
+     * Gets the fire boss health pointa
+     * @return - boss health points
+     */
     public int getBossHp() {
         return bossHp;
     }
 
+
+    /**
+     * Inflicts a certain damage to the fire boss
+     * @param damage
+     */
     public void damage(int damage) {
         if(stage1 || stage2 || stage3) {
             if (bossHp >= damage) {
@@ -182,19 +212,26 @@ public class FireBoss extends Boss{
         }
     }
 
-
-    public boolean isStage1() {
-        return stage1;
-    }
-
+    /**
+     * Checks if the fire boss is in stage 2
+     * @return stage2 boolean
+     */
     public boolean isStage2() {
         return stage2;
     }
 
+    /**
+     * Checks if the fire boss is in stage 3
+     * @return stage3 boolean
+     */
     public boolean isStage3(){
         return stage3;
     }
 
+    /**
+     * Checks if the boss is defeated
+     * @return defeated boolean
+     */
     public boolean isDefeated() {
         return defeated;
     }
