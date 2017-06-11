@@ -209,11 +209,14 @@ Ventura Pereira (50%)
 
 ### User Manual:
 
+This will appear when you run it. Use your mouse to click on it and start.
 ![image](https://user-images.githubusercontent.com/22984170/27007375-48ab4104-4e49-11e7-85ac-577604bfd2af.png)
 
-
+You'll be redirected to the screen!
 ![image](https://user-images.githubusercontent.com/22984170/27007394-f0448ccc-4e49-11e7-83e5-b60017500539.png)
 
-
+To pause, press 'E' and you'll go to here
 ![image](https://user-images.githubusercontent.com/22984170/27007397-130e404a-4e4a-11e7-956b-8af1dc465b67.png)
 
+If you desire some tips to overcome your opponents, press the middle button
+![image](https://user-images.githubusercontent.com/22984170/27007401-2483374a-4e4a-11e7-9f16-f1d05bde506f.png)
