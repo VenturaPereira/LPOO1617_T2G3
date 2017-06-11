@@ -172,13 +172,13 @@ We decided to use fragments, in order to ensure the smoothness and good function
 
 ### Design Patterns:
 
-#### -Strategy:
+#### Strategy:
  Our AI is implemented through this method. Both our bosses inherit the class Boss. This class has a move function, that varies depending on which type of boss is activated.
 
-#### -Singleton:
+#### Singleton:
  We have a class that creates the game, our instances. Only one instance of it can exist.
 
-#### -State:
+#### State:
  Our bosses and our hero have states that alter their behavior accordingly.
 
 
@@ -187,7 +187,7 @@ We decided to use fragments, in order to ensure the smoothness and good function
 During this project we had some difficulties.
 In the early stages of development, we had some troubles getting used to the new library. Trying to implement the necessary requirements, we came across some challenges, such as the way collisions(the physics) were supposed to work, how to associate a fixture to it's sprite. 
 Eventually this all led to some troubles trying to compose the MVC structure - we believe we haven't been keen on doing so.
-Furthermore, we had some issues trying to construct a competetive game due to the choice of it's category. Being a platform based game, we came across doubts whether was it competitibe enough or not.
+Furthermore, we had some issues trying to construct a competetive game due to the choice of it's category. Being a platform based game, we came across doubts whether was it competitive enough or not.
 Lastly, due the MVC difficulties it was hard for us to run tests, as our view is somewhat connected to our model.
 
 ### Lessons learned:
