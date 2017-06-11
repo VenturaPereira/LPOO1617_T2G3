@@ -208,3 +208,5 @@ Ventura Pereira (50%)
 -AI
 
 ### User Manual:
+
+![image](https://user-images.githubusercontent.com/22984170/27007375-48ab4104-4e49-11e7-85ac-577604bfd2af.png)
