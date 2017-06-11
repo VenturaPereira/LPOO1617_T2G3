@@ -201,16 +201,18 @@ Nonetheless, we also comprehend the need and how to get used to new working envi
 
 87 hours, approximated.
 
-### Distribuição de tarefas:
+### Task Management
 
 Luís Correia (50%)
--Implementação de sprites
--Fisica
--Documentação
+- Sprite implementation
+- Physics logic
+- Box2d implementation
+- Javadoc
 Ventura Pereira (50%)
--Screens
--Fisica
--AI
+- Screens
+- Physics world
+- AI
+- READ.ME
 
 ### User Manual:
 
