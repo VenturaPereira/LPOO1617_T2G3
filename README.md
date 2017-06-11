@@ -214,3 +214,6 @@ Ventura Pereira (50%)
 
 ![image](https://user-images.githubusercontent.com/22984170/27007394-f0448ccc-4e49-11e7-83e5-b60017500539.png)
 
+
+![image](https://user-images.githubusercontent.com/22984170/27007397-130e404a-4e4a-11e7-956b-8af1dc465b67.png)
+
