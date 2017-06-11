@@ -113,7 +113,6 @@ public class PauseScreen implements Screen {
             public void clicked(InputEvent e, float x, float y) {
                 game.setScreen(hintsScreen);
                 screen.getMusic().play();
-                dispose();
             }
         });
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -159,6 +158,8 @@ public class PauseScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        pauseTexture.dispose();
+        quit.dispose();
+        this.stage.dispose();
     }
 }
