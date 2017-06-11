@@ -158,6 +158,11 @@ To play/run our game it's only necessary to execute the jar.
 
 ## Development documentation:
 
+### UML:
+
+
+![image](https://user-images.githubusercontent.com/22984170/27007535-76933da6-4e4e-11e7-993b-ed6dab08503f.png)
+
 
 ### Relevant decisions:
 
