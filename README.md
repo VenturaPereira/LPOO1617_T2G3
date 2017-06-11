@@ -132,3 +132,79 @@ The observer pattern will be used to check for collisions. The physics engine wi
 - Game Over
 - Transitions between levels
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Final Delivery 
+Setup/Installation:
+
+Our project uses libgdx's library, being generated throught it.
+However, even though, in our executable, one of our components (music) is fully functional, in the compilation of the project, if in other computers but the one who implemented it, an error appears- which doesn't stop it from running.
+To play/run our game it's only necessary to execute the jar.
+
+
+
+##Development documentation:
+
+
+###Relevant decisions:
+
+We decided to use fragments, in order to ensure the smoothness and good function of the game.
+
+
+
+###Design Patterns:
+
+####-Strategy:
+ Our AI is implemented through this method. Both our bosses inherit the class Boss. This class has a move function, that varies depending on which type of boss is activated.
+
+####-Singleton:
+ We have a class that creates the game, our instances. Only one instance of it can exist.
+
+####-State:
+ Our bosses and our hero have states that alter their behavior accordingly.
+
+
+###Major difficulties:
+
+During this project we had some difficulties.
+In the early stages of development, we had some troubles getting used to the new library. Trying to implement the necessary requirements, we came across some challenges, such as the way collisions(the physics) were supposed to work, how to associate a fixture to it's sprite. 
+Eventually this all led to some troubles trying to compose the MVC structure - we believe we haven't been keen on doing so.
+Furthermore, we had some issues trying to construct a competetive game due to the choice of it's category. Being a platform based game, we came across doubts whether was it competitibe enough or not.
+Lastly, due the MVC difficulties it was hard for us to run tests, as our view is somewhat connected to our model.
+
+###Lessons learned:
+
+We believe that the biggest lesson we learned was about planning.
+
+Even though we managed to create the game we wanted through good planning, we are convicted that we should improve our pre-development effeciency. Specially when it comes to the clear separation of a game's/program's components - Model , viewer,  controller.
+Nonetheless, we also comprehend the need and how to get used to new working enviroments.
+
+###Time spent:
+
+87 hours, approximated.
+
+###Distribuição de tarefas:
+
+Luís Correia (50%)
+-Implementação de sprites
+-Fisica
+-Documentação
+Ventura Pereira (50%)
+-Screens
+-Fisica
+-AI
+
+###User Manual:
